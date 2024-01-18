@@ -1,0 +1,41 @@
+{
+  "name": "e-commerce_app",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "homepage": "http://valeriavolunterio.github.io/e-commerce_app",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "deploy": "gh-pages -d web-build",
+    "predeploy": "expo export:web"
+  },
+  "dependencies": {
+    "@expo/webpack-config": "^19.0.1",
+    "@react-native-async-storage/async-storage": "1.18.2",
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-navigation/bottom-tabs": "^6.5.7",
+    "@react-navigation/native": "^6.1.6",
+    "@react-navigation/stack": "^6.3.16",
+    "@rneui/base": "^4.0.0-rc.7",
+    "@rneui/themed": "^4.0.0-rc.7",
+    "expo": "^49.0.21",
+    "expo-status-bar": "~1.6.0",
+    "react": "18.2.0",
+    "react-dom": "^18.2.0",
+    "react-native": "0.72.6",
+    "react-native-gesture-handler": "~2.12.0",
+    "react-native-reanimated": "~3.3.0",
+    "react-native-safe-area-context": "4.6.3",
+    "react-native-screens": "~3.22.0",
+    "react-native-vector-icons": "^9.2.0",
+    "react-native-web": "~0.19.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "babel-plugin-react-native-web": "^0.19.4",
+    "gh-pages": "^5.0.0"
+  },
+  "private": false
+}
