@@ -22,7 +22,12 @@ const HomeStack = () => {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Park" component={ParkScreen} />
       <Stack.Screen name="SafetyGuide" component={SafetyGuideScreen} />
-      <Stack.Screen name="Saves" component={SavesScreen} />
+      {/* add conditional for fave, bookmarked, or recently viewed */}
+      <Stack.Screen
+        name="Saves"
+        component={SavesScreen}
+        options={{ title: "Saves" }}
+      />
       <Stack.Screen name="Alerts" component={AlertsScreen} />
       <Stack.Screen name="News" component={NewsScreen} />
       <Stack.Screen name="Events" component={EventsScreen} />
