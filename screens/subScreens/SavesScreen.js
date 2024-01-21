@@ -56,7 +56,7 @@ const savedParks = [
 ];
 
 const ParkList = ({ data }) => {
-  const renderPark = ({ item: park }) => (
+  const renderParkCard = ({ item: park }) => (
     <View>
       <Image source={park.imageUrl} style={{ width: 100, height: 100 }} />
       <Text>{park.name}</Text>
@@ -73,7 +73,7 @@ const ParkList = ({ data }) => {
   return (
     <FlatList
       data={data}
-      renderItem={renderPark}
+      renderItem={renderParkCard}
       keyExtractor={(park) => park.id.toString()}
     />
   );
