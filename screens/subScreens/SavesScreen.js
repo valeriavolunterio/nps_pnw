@@ -8,8 +8,6 @@ import {
   Pressable,
   FlatList,
 } from "react-native";
-import { Button, ButtonGroup } from "@rneui/themed";
-import { render } from "react-dom";
 // import { styles } from "../../App";
 
 const styles = StyleSheet.create({
