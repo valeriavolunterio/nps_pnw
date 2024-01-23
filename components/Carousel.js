@@ -1,82 +1,37 @@
-import React, { Component } from 'react';
-import { Text, View, Dimensions, StyleSheet } from 'react-native';
+// CarouselComponent.js
+import React from 'react';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import Carousel from 'react-native-reanimated-carousel';
 
-import Carousel from 'react-native-snap-carousel'; // Version can be specified in package.json
 
-import { scrollInterpolator, animatedStyles } from './utils/animations';
-
-const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
-
-const DATA = [];
-for (let i = 0; i < 10; i++) {
-  DATA.push(i)
+function CarouselComponent() {
+  const width = Dimensions.get('window').width;
+  return (
+      <View style={{ flex: 1 }}>
+          <Carousel
+              loop
+              width={width}
+              height={width / 2}
+              autoPlay={true}
+              data={[...new Array(6).keys()]}
+              scrollAnimationDuration={1000}
+              onSnapToItem={(index) => ('current index:', index)}
+              renderItem={({ index }) => (
+                  <View
+                      style={{
+                          flex: 1,
+                          borderWidth: 1,
+                          justifyContent: 'center',
+                      }}
+                  >
+                      <Text style={{ textAlign: 'center', fontSize: 30 }}>
+                          {index}
+                      </Text>
+                  </View>
+              )}
+          />
+      </View>
+  );
 }
 
-export default class App extends Component {
-  
-  state = {
-    index: 0
-  }
-
-  constructor(props) {
-    super(props);
-    this._renderItem = this._renderItem.bind(this)
-  }
-
-  _renderItem({ item }) {
-    return (
-      <View style={styles.itemContainer}>
-        <Text style={styles.itemLabel}>{`Item ${item}`}</Text>
-      </View>
-    );
-  }
-  
-  render() {
-    return (
-      <View>
-        <myCarousel
-          ref={(c) => this.carousel = c}
-          data={DATA}
-          renderItem={this._renderItem}
-          sliderWidth={SLIDER_WIDTH}
-          itemWidth={ITEM_WIDTH}
-          containerCustomStyle={styles.carouselContainer}
-          inactiveSlideShift={0}
-          onSnapToItem={(index) => this.setState({ index })}
-          scrollInterpolator={scrollInterpolator}
-          slideInterpolatedStyle={animatedStyles}
-          useScrollView={true}          
-        />
-        <Text style={styles.counter}
-        >
-          {this.state.index}
-        </Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  carouselContainer: {
-    marginTop: 50
-  },
-  itemContainer: {
-    width: ITEM_WIDTH,
-    height: ITEM_HEIGHT,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'dodgerblue'
-  },
-  itemLabel: {
-    color: 'white',
-    fontSize: 24
-  },
-  counter: {
-    marginTop: 25,
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'center'
-  }
-});
+export default CarouselComponent;

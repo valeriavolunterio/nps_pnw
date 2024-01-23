@@ -4,6 +4,7 @@ import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 import Svg, { Polygon } from "react-native-svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useFonts } from "expo-font";
 
 const styles = StyleSheet.create({
   container: {
@@ -31,10 +32,13 @@ const styles = StyleSheet.create({
   titleHeaderText: {
     color: Colors.black,
     fontSize: 22,
+    fontFamily: "Stoke-Regular",
   },
   subHeaderText: {
     color: Colors.red,
     fontSize: 16,
+    fontFamily: "OpenSans-SemiBold",
+    fontWeight: "bold",
   },
 
   carouselContainer: {
@@ -51,6 +55,7 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     alignSelf: "center",
     backgroundColor: Colors.baseTeal,
+    backgroundColor: Colors.baseTeal,
     padding: 20,
     borderRadius: 5,
     marginBottom: 20,
@@ -59,6 +64,7 @@ const styles = StyleSheet.create({
   safetyGuideButtonText: {
     color: "white",
     fontSize: 16,
+    fontFamily: "ButtonFont",
     textAlign: "center",
   },
   buttonContainer: {
@@ -79,6 +85,17 @@ const styles = StyleSheet.create({
 });
 
 const HomeScreen = ({ route, navigation }) => {
+  const [fontsLoaded] = useFonts({
+    "Stoke-Regular": require("../assets/fonts/Stoke-Regular.ttf"),
+    "OpenSans-SemiBold": require("../assets/fonts/OpenSans-SemiBold.ttf"),
+    ButtonFont: require("../assets/fonts/MPLUS1p-Bold.ttf"),
+  });
+
+  // Check if fonts are loaded before rendering the component
+  if (!fontsLoaded) {
+    return null; //return a loading indicator here
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
