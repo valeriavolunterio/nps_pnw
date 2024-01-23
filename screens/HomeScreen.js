@@ -50,16 +50,16 @@ const styles = StyleSheet.create({
   safetyGuideButton: {
     alignItems: "stretch",
     alignSelf: "center",
-    backgroundColor: Colors.baseTeal, 
+    backgroundColor: Colors.baseTeal,
     padding: 20,
     borderRadius: 5,
     marginBottom: 20,
     width: "90%",
   },
   safetyGuideButtonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    textAlign: "center"
+    textAlign: "center",
   },
   buttonContainer: {
     flex: 1,
@@ -93,10 +93,18 @@ const HomeScreen = ({ route, navigation }) => {
       </View>
 
       <TouchableOpacity
-      style={styles.safetyGuideButton}
-        onPress={() => navigation.navigate("SafetyGuide")} >
-          <Ionicons name="ios-glasses" size={24} color={Colors.darkTeal} style={styles.icon} />
-          <Text style={styles.safetyGuideButtonText}>Pacific Northwest Safety Guide</Text>
+        style={styles.safetyGuideButton}
+        onPress={() => navigation.navigate("SafetyGuide")}
+      >
+        <Ionicons
+          name="ios-glasses"
+          size={24}
+          color={Colors.darkTeal}
+          style={styles.icon}
+        />
+        <Text style={styles.safetyGuideButtonText}>
+          Pacific Northwest Safety Guide
+        </Text>
       </TouchableOpacity>
 
       <View style={styles.row}>

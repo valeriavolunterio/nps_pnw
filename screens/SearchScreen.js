@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
-import { StyleSheet, SafeAreaView, Button } from "react-native";
+import { View, Text, Button } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 2,
     backgroundColor: "#FFF9F5",
+    justifyContent: undefined,
   },
   itemContainer: {
     flex: 1 / 2,
@@ -15,6 +16,9 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: "#eee",
     borderRadius: 5,
+  },
+  title: {
+    textAlign: "center",
   },
 });
 
