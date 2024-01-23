@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, SafeAreaView, Button } from "react-native";
+import { StyleSheet, SafeAreaView, Button, View, Text } from "react-native";
+import { Colors } from "../styles/Colors.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,11 +16,34 @@ const styles = StyleSheet.create({
     backgroundColor: "#eee",
     borderRadius: 5,
   },
+  headerContainer: {
+    padding: 10,
+    alignSelf: "flex-start",
+  },
+  subHeaderContainer: {
+    paddingTop: 1,
+    paddingLeft: 10,
+    alignSelf: "flex-start",
+  },
+  titleHeaderText: {
+    color: Colors.black,
+    fontSize: 22,
+  },
+  subHeaderText: {
+    color: Colors.red,
+    fontSize: 16,
+  },
 });
 
 const HomeScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.headerContainer}>
+        <Text style={styles.titleHeaderText}>Pacific Northwest</Text>
+      </View>
+      <View style={styles.subHeaderContainer}>
+        <Text style={styles.subHeaderText}>National Park Service</Text>
+      </View>
       <Button
         title="Go to Park Screen"
         onPress={() => navigation.navigate("Park")}
@@ -45,6 +69,7 @@ const HomeScreen = ({ route, navigation }) => {
         title="Go to Events Screen"
         onPress={() => navigation.navigate("Events")}
       />
+
     </SafeAreaView>
   );
 };
