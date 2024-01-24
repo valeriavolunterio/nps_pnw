@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, SafeAreaView, Button, View, Text } from "react-native";
+import { StyleSheet, ScrollView, Button, View, Text, } from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 import Svg, { Polygon } from "react-native-svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
+
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF9F5",
   },
   itemContainer: {
-    flex: 1 / 2,
+    flex: 1,
     justifyContent: "space-between",
     marginVertical: 10,
     marginHorizontal: 10,
@@ -82,14 +83,44 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
+  alertContainer: {
+    flex: 1,
+    justifyContent: "space-between",
+    marginVertical: 10,
+    marginHorizontal: 10,
+    padding: 20,
+    backgroundColor: Colors.lightOffWhite,
+    borderRadius: 5,
+    elevation: 5, // Add elevation for drop shadow
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  alertHeaderText: {
+    fontFamily: "MPLUS1-Regular",
+    fontSize: 18,
+    color: Colors.black,
+    marginBottom: 20,
+  },
 });
+
+
 
 const HomeScreen = ({ route, navigation }) => {
   const [fontsLoaded] = useFonts({
     "Stoke-Regular": require("../assets/fonts/Stoke-Regular.ttf"),
     "OpenSans-SemiBold": require("../assets/fonts/OpenSans-SemiBold.ttf"),
     ButtonFont: require("../assets/fonts/MPLUS1p-Bold.ttf"),
+    "MPLUS1-Regular": require("../assets/fonts/MPLUS1-Regular.ttf"),
+
+
+    
   });
+
+  const [activeAlerts, setActiveAlerts] = useState([]); // State for active alerts
+
+  
 
   // Check if fonts are loaded before rendering the component
   if (!fontsLoaded) {
@@ -97,7 +128,7 @@ const HomeScreen = ({ route, navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.titleHeaderText}>Pacific Northwest</Text>
       </View>
@@ -105,10 +136,14 @@ const HomeScreen = ({ route, navigation }) => {
         <Text style={styles.subHeaderText}>National Park Service</Text>
       </View>
 
+
+    {/* Carousel Section */}
       <View style={styles.carouselContainer}>
         <Text style={styles.carouselText}>Carousel</Text>
       </View>
 
+
+    {/* PNW Safety Guide Button */}
       <TouchableOpacity
         style={styles.safetyGuideButton}
         onPress={() => navigation.navigate("SafetyGuide")}
@@ -124,6 +159,7 @@ const HomeScreen = ({ route, navigation }) => {
         </Text>
       </TouchableOpacity>
 
+      {/* Icon Grid Section */}
       <View style={styles.row}>
         <View style={styles.iconContainer}>
           <Ionicons
@@ -177,36 +213,79 @@ const HomeScreen = ({ route, navigation }) => {
           />
         </View>
       </View>
-    </SafeAreaView>
+      
+      {/* Active Alerts Section */}
+    <View style={styles.alertContainer}>
+      <Text style={styles.alertHeaderText}>Active Alerts</Text>
+      {activeAlerts.length === 0 ? (
+        <Text>No active alerts at the moment.</Text>
+      ) : (
+        <FlatList
+          data={activeAlerts}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View>
+              {/* Display alert information here */}
+              <Text>{item.title}</Text>
+              <Text>{item.park}</Text>
+              <Text>{item.description}</Text>
+            </View>
+          )}
+        />
+      )}
+    </View>
 
-    //Old buttons to different screens
+     {/* PNW News Section */}
+     <View style={styles.alertContainer}>
+      <Text style={styles.alertHeaderText}>Pacific Northwest News</Text>
+      {activeAlerts.length === 0 ? (
+        <Text>News</Text>
+      ) : (
+        <FlatList
+          data={pnwNews}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View>
+              {/* Display alert information here */}
+              <Text>{item.title}</Text>
+              <Text>{item.park}</Text>
+              <Text>{item.description}</Text>
+            </View>
+          )}
+        />
+      )}
+    </View>
+
+{/* PNW Events Section */}
+     <View style={styles.alertContainer}>
+      <Text style={styles.alertHeaderText}>Events in the Area</Text>
+      {activeAlerts.length === 0 ? (
+        <Text>Events</Text>
+      ) : (
+        <FlatList
+          data={pnwNews}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View>
+              {/* Display alert information here */}
+              <Text>{item.title}</Text>
+              <Text>{item.park}</Text>
+              <Text>{item.description}</Text>
+            </View>
+          )}
+        />
+      )}
+    </View>
+
+    </ScrollView>
+
+    //Go to Park button
     /* 
         <Button
           title="Go to Park Screen"
           onPress={() => navigation.navigate("Park")}
         />
-        <Button
-          title="Go to Safety Guide Screen"
-          onPress={() => navigation.navigate("SafetyGuide")}
-        />
-        
-        <Button
-          // Favorites, Bookmarks, Recents
-          title="Go to Saves Screen"
-          onPress={() => navigation.navigate("Saves")}
-        />
-        <Button
-          title="Go to Alerts Screen"
-          onPress={() => navigation.navigate("Alerts")}
-        />
-        <Button
-          title="Go to News Screen"
-          onPress={() => navigation.navigate("News")}
-        />
-        <Button
-          title="Go to Events Screen"
-          onPress={() => navigation.navigate("Events")}
-        />*/
+       */
   );
 };
 
