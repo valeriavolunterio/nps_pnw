@@ -9,7 +9,7 @@ import {
   Pressable,
   Image,
 } from "react-native";
-// import Badge from "../components/Badge";
+
 import UnscannedBadge1 from "../assets/SVG/badges/UnscannedBadge1.jsx";
 import UnscannedOlympic from "../assets/SVG/badges/UnscannedOlympic.jsx";
 import ScannedOlympic from "../assets/SVG/badges/ScannedOlympic.jsx";
@@ -43,7 +43,7 @@ const badgesData = [
   {
     id: 1,
     name: "Olympic",
-    scannedSource: ScannedOlympic,
+    scannedSource: UnscannedBadge1,
     unscannedSource: UnscannedOlympic,
   },
   {
@@ -102,6 +102,17 @@ const PassportScreen = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View>
+        {/* user info */}
+        <Pressable>
+          <View>{/* photo containter */}</View>
+        </Pressable>
+        <View>
+          <Text>{user.name}</Text>
+          <Text>Exploring National Parks since {user.date}</Text>
+          {/* {Socials} */}
+        </View>
+      </View>
       <Button
         title="Go to Passport Edit Screen"
         onPress={() => navigation.navigate("PassportEdit")}
@@ -117,6 +128,9 @@ const PassportScreen = ({ route, navigation }) => {
           />
         ))}
       </ScrollView>
+      <Pressable>
+        <Text>Add Park</Text>
+      </Pressable>
     </SafeAreaView>
   );
 };
