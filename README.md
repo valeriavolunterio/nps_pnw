@@ -1,7 +1,7 @@
 # e-commerce_app
 
 Link to GitHub page of app:
-https://valeriavolunterio.github.io/e-commerce_app/
+https://github.com/valeriavolunterio/nps_pnw
 
 DESCRIPTION
 
