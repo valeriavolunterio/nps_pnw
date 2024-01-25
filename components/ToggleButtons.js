@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-const ToggleButton = ({ type, color, buttonSize }) => {
-  const [isToggled, setIsToggled] = useState(false);
+const ToggleButton = ({
+  type,
+  color,
+  buttonSize,
+  toggleState,
+  handlePress,
+}) => {
+  const [isToggled, setIsToggled] = useState(toggleState);
 
   const handleToggle = () => {
-    setIsToggled(!isToggled);
+    toggleState ? setIsToggled(!isToggled) : null;
+    handlePress();
   };
 
   const iconType = (type) => {
@@ -14,7 +21,7 @@ const ToggleButton = ({ type, color, buttonSize }) => {
       case "favorite":
         return isToggled ? "star" : "star-outline";
       case "bookmark":
-        return isToggled ? "bookmark-outline" : "bookmark";
+        return isToggled ? "bookmark" : "bookmark-outline";
       case "share":
         return "share-social";
       case "edit":
