@@ -10,10 +10,19 @@ The primary objective of this project is to redesign the National Park Service (
 
 SCREENS
 
-Home/Listing Screen: Displays a list of products available for purchase. Products can be filtered through the search bar. Each product displays its name, price, and image. There is conditional formatting for discounted items as well.
+The redesigned National Parks app offers a seamless and user-friendly experience for outdoor enthusiasts. The home page serves as a hub, featuring a carousel preview and quick access buttons to the Pacific Northwest Safety Guide, Favorites, Bookmarks, Recents, Alerts, News, and Events. Active alerts, Pacific Northwest news, and upcoming events in the area are prominently displayed.
 
-Product Screen: Displays the details of a selected product, including its name, price, image, and description.
-Sell Item Screen: Includes a form component to collect information about the item the user wants to sell, such as name, description, price, and photos. It also has a checkbox to automatically add a 20% discount.
+The Safety Guide section provides crucial information for outdoor enthusiasts, including guidelines for dealing with tides, wildlife safety, and specific details about bears. The app encourages responsible behavior to minimize encounters with wildlife and ensure a safe experience in the Pacific Northwest parks.
+
+The Bookmarks section allows users to filter between parks and places, displaying recently added bookmarks and favorites. Each place is presented with a detailed overview, including seasonal information, visitor center details, amenity icons, and experience icons. Users can easily access and manage their bookmarked and favorite locations.
+
+The Park section offers in-depth information about chosen parks, including upcoming events, active alerts, park highlights, and essential details for planning a visit. Users can favorite, bookmark, share, and view the park on the map directly from this section.
+
+The Passport feature adds a social and sharable aspect to the app, allowing users to collect park badges. The Passport page includes a profile display, social media icons, and the ability to edit the profile. Users can add park badges by scanning QR codes at the parks.
+
+The Events, News, and Alerts sections provide real-time information about events, news, and alerts in the Pacific Northwest parks. Users can filter content based on their favorite parks, ensuring they receive relevant and timely updates.
+
+The Settings page offers additional features, including audio description and tours for accessibility, privacy policy, information about the NPS, and app-related details. Users can customize visual modes with options like dark mode and high contrast.
 
 
 COMPONENTS
@@ -75,7 +84,7 @@ Use Cases, Testing plan,How will you know your project is complete?, What testin
 a diagram showing how content will be organized and distributed throughout the site, Content Inventory, inventory of necessary site content and media needed for future development
 LoFi Prototype (Adobe XD/Figma/Approved platform) functional click-through prototype placeholder content.
 
-Milestone 3: Develop Phase
+Milestone 3: Develop Phase Included:
 HiFi Prototype (Adobe XD/Figma/Approved platform)
 Complete states , Testing Mitigation Report,Applied testing plan from MileStone2, Report problems discovered in testing, Final Page Tables, The  text of the site is presented without styling, Final Strategy Guide, include a section with recommendations for going from Adobe XD HiFi Prototype to a distributable app or website, Final Style Guide, Final Visual Design Guide,Final Site Map
 
