@@ -8,7 +8,9 @@ import {
   Pressable,
   FlatList,
 } from "react-native";
+//import ToggleSwitch from "../../components/Switch";
 // import { styles } from "../../App";
+import SlideSwitch from "../../components/SlideSwitch";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,6 +24,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginVertical: 10,
     width: "100%", // Adjust width as needed
+  },
+  slider: {
+    flex: 1,
+    alignItems: "center",
   },
 });
 
@@ -80,6 +86,9 @@ const ParkList = ({ data }) => {
 const SavesScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.slider}>
+        <SlideSwitch />
+      </View>
       {/* <Toggle> */}
       {/* Sort Container */}
       <View>
