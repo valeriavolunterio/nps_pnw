@@ -16,7 +16,6 @@ const SafetyGuideScreen = ({ route, navigation }) => {
         </Text>
       </View>
       <View>
-        {" "}
         <Text>Tides and Your Safety</Text>
         <Text>
           Always carry a tide table, topographic map, and keep track of the time
