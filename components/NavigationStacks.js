@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 const HomeStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="HomeStack" component={HomeScreen} />
       <Stack.Screen name="Park" component={ParkScreen} />
       <Stack.Screen name="SafetyGuide" component={SafetyGuideScreen} />
       {/* add conditional for fave, bookmarked, or recently viewed */}
@@ -38,7 +38,7 @@ const HomeStack = () => {
 const MapStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Map" component={MapScreen} />
+      <Stack.Screen name="MapStack" component={MapScreen} />
       <Stack.Screen name="Park" component={ParkScreen} />
     </Stack.Navigator>
   );
@@ -47,7 +47,7 @@ const MapStack = () => {
 const SearchStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Search" component={SearchScreen} />
+      <Stack.Screen name="SearchStack" component={SearchScreen} />
       <Stack.Screen name="Park" component={ParkScreen} />
     </Stack.Navigator>
   );
@@ -56,7 +56,7 @@ const SearchStack = () => {
 const PassportStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Passport" component={PassportScreen} />
+      <Stack.Screen name="PassportStack" component={PassportScreen} />
       <Stack.Screen name="PassportEdit" component={PassportEditScreen} />
     </Stack.Navigator>
   );
