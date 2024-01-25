@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Pressable, SafeAreaView, Text } from "react-native";
+import { Pressable, SafeAreaView, View, Text } from "react-native";
 import { Button, ButtonGroup } from "@rneui/themed";
 // import { styles } from "../../App";
 

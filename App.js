@@ -35,7 +35,7 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
-          name="Home"
+          name="HomeStack"
           component={HomeStack}
           initialParams={{}}
           options={{
@@ -46,7 +46,7 @@ export default function App() {
           }}
         />
         <Tab.Screen
-          name="Map"
+          name="MapStack"
           component={MapStack}
           initialParams={{}}
           options={{
@@ -57,7 +57,7 @@ export default function App() {
           }}
         />
         <Tab.Screen
-          name="Search"
+          name="SearchStack"
           component={SearchStack}
           initialParams={{}}
           options={{
@@ -72,7 +72,7 @@ export default function App() {
           }}
         />
         <Tab.Screen
-          name="Passport"
+          name="PassportStack"
           component={PassportStack}
           initialParams={{}}
           options={{

@@ -19,6 +19,26 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
   },
+  userCard: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginVertical: 10,
+    padding: 10,
+    backgroundColor: Colors.lightOffWhite,
+    borderRadius: 5,
+    elevation: 5, // Add elevation for drop shadow
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  userImg: {
+    width: "30%",
+  },
+  userInfo: {
+    width: "65%",
+    marginLeft: 20,
+  },
   title: {
     fontSize: 24,
     fontWeight: "bold",
@@ -83,39 +103,14 @@ const badgesData = [
 
 const Badge = ({ visited, onPress, Scanned, Unscanned }) => {
   const BadgeComponent = visited ? Scanned : Unscanned;
-  const [aspectRatio, setAspectRatio] = useState(1);
 
-  useEffect(() => {
-    const updateAspectRatio = async () => {
-      try {
-        const { width, height } = await getImageSize(BadgeComponent);
-        const calculatedAspectRatio = width / height;
-        setAspectRatio(calculatedAspectRatio);
-      } catch (error) {
-        console.error("Error fetching image size:", error);
-      }
-    };
-
-    updateAspectRatio();
-  }, [BadgeComponent]);
-
-  const getImageSize = async (url) => {
-    return new Promise((resolve, reject) => {
-      Image.getSize(
-        url,
-        (width, height) => resolve({ width, height }),
-        (error) => reject(error)
-      );
-    });
-  };
   return (
     <Pressable onPress={onPress}>
       <View style={styles.badgeContainer}>
         <Image
           source={BadgeComponent}
           style={{
-            width: 100,
-            aspectRatio: aspectRatio,
+            resizeMode: "contain",
           }}
         />
       </View>
@@ -136,27 +131,34 @@ const PassportScreen = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <View>
-          <Pressable onPress={() => navigation.navigate("PassportEdit")}>
+      <View style={styles.userCard}>
+        <View style={styles.userImg}>
+          <Pressable
+            style={{
+              aspectRatio: 1,
+            }}
+            onPress={() => navigation.navigate("PassportEdit")}
+          >
             <Image
               source={require("../assets/userPlaceholder.jpg")}
               style={{
-                width: 120,
-                height: 120,
+                width: "100%",
+                height: "100%",
                 borderRadius: 100,
                 borderColor: Colors.white,
                 borderWidth: 6,
               }}
             />
-            <ToggleButton
-              type="edit"
-              color={Colors.darkGreen}
-              buttonSize={42}
-              toggleState={false}
-              handlePress={() => navigation.navigate("PassportEdit")}
-            />
           </Pressable>
+          <ToggleButton
+            type="edit"
+            color={Colors.darkGreen}
+            buttonSize={42}
+            toggleState={false}
+            handlePress={() => navigation.navigate("PassportEdit")}
+          />
+        </View>
+        <View style={styles.userInfo}>
           <Text>{user.name}</Text>
           <Text>Exploring National Parks since {user.date}</Text>
           {/* {Socials} */}
