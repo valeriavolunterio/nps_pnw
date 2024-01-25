@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Svg, { Polygon } from "react-native-svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
+import SwipeCarousel from "../components/Carousel.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -38,17 +39,6 @@ const styles = StyleSheet.create({
     color: Colors.red,
     fontSize: 16,
     fontFamily: "OpenSans-SemiBold",
-    fontWeight: "bold",
-  },
-
-  carouselContainer: {
-    padding: 100,
-    justifyContent: "center",
-    alignItems: "center",
-    marginVertical: 1,
-  },
-  carouselText: {
-    fontSize: 24,
     fontWeight: "bold",
   },
   safetyGuideButton: {
@@ -114,6 +104,12 @@ const HomeScreen = ({ route, navigation }) => {
 
   const [activeAlerts, setActiveAlerts] = useState([]); // State for active alerts
 
+  const carouselData = [
+    { title: "Carousel Item 1" },
+    { title: "Carousel Item 2" },
+    { title: "Carousel Item 3" },
+  ];
+
   // Check if fonts are loaded before rendering the component
   if (!fontsLoaded) {
     return null; //return a loading indicator here
@@ -129,8 +125,8 @@ const HomeScreen = ({ route, navigation }) => {
       </View>
 
       {/* Carousel Section */}
-      <View style={styles.carouselContainer}>
-        <Text style={styles.carouselText}>Carousel</Text>
+      <View>
+        <SwipeCarousel data={carouselData} />
       </View>
 
       {/* PNW Safety Guide Button */}
