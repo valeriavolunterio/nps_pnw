@@ -1,4 +1,4 @@
-# e-commerce_app
+# NPS_app
 
 Link to GitHub page of app:
 https://github.com/valeriavolunterio/nps_pnw
@@ -56,6 +56,26 @@ AsyncStorage: Used to store the product listings. Will also add user and cart in
 
 MILESTONES
 
-Milestone 1 - Completed: Implemented Listing Screen with search bar component and discounted items filter component, Product Page Screen with product details, Sell Item Screen with form component, and AsyncStorage to store product listings.
+Milestone 1 - Discovery Phase Included:
+Statement of Work
+What is the project about?
+Who is on your team and what are their duties?
+Is the project an innovation, a redesign of something existing, or a redevelopment of an idea?
+Is it suited better as a mobile app or website?
+Include a "Funding Plan" for how are you going to pay for this.
 
-Milestone 2: Log-in and registration screens for users, implementation of a shopping cart feature. Store these items to AsyncStorage.
+Strategy Guide-guide future content creation, development, and marketing
+this should include an approach to information architecture, responsiveness, mobile experience, social media, etc.
+include a " Marketing Plan" with audience analysis, media strategy, and guidance on possible social media integration
+
+Milestone 2: Design Phase Included:
+Visual Design Guide
+Documentation of the design thinking with: Competed branding, Color scheme, Typography, Style Guide, A shorthand "one sheet" guide, Wireframes/UX Sketches, demonstration of the design system, information architecture  
+Use Cases, Testing plan,How will you know your project is complete?, What testing will be performed and how?, Proposed site architecture
+a diagram showing how content will be organized and distributed throughout the site, Content Inventory, inventory of necessary site content and media needed for future development
+LoFi Prototype (Adobe XD/Figma/Approved platform) functional click-through prototype placeholder content.
+
+Milestone 3: Develop Phase
+HiFi Prototype (Adobe XD/Figma/Approved platform)
+Complete states , Testing Mitigation Report,Applied testing plan from MileStone2, Report problems discovered in testing, Final Page Tables, The  text of the site is presented without styling, Final Strategy Guide, include a section with recommendations for going from Adobe XD HiFi Prototype to a distributable app or website, Final Style Guide, Final Visual Design Guide,Final Site Map
+
