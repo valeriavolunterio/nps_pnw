@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, ScrollView, Button, View, Text, } from "react-native";
+import { StyleSheet, ScrollView, Button, View, Text } from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 import Svg, { Polygon } from "react-native-svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 2,
-    backgroundColor: "#FFF9F5",
+    backgroundColor: Colors.offWhite,
   },
   itemContainer: {
     flex: 1,
@@ -18,7 +17,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 10,
     padding: 5,
-    backgroundColor: "#eee",
+    backgroundColor: Colors.white,
     borderRadius: 5,
   },
   headerContainer: {
@@ -63,7 +62,7 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   safetyGuideButtonText: {
-    color: "white",
+    color: Colors.white,
     fontSize: 16,
     fontFamily: "ButtonFont",
     textAlign: "center",
@@ -105,22 +104,15 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
 const HomeScreen = ({ route, navigation }) => {
   const [fontsLoaded] = useFonts({
     "Stoke-Regular": require("../assets/fonts/Stoke-Regular.ttf"),
     "OpenSans-SemiBold": require("../assets/fonts/OpenSans-SemiBold.ttf"),
     ButtonFont: require("../assets/fonts/MPLUS1p-Bold.ttf"),
     "MPLUS1-Regular": require("../assets/fonts/MPLUS1-Regular.ttf"),
-
-
-    
   });
 
   const [activeAlerts, setActiveAlerts] = useState([]); // State for active alerts
-
-  
 
   // Check if fonts are loaded before rendering the component
   if (!fontsLoaded) {
@@ -136,14 +128,12 @@ const HomeScreen = ({ route, navigation }) => {
         <Text style={styles.subHeaderText}>National Park Service</Text>
       </View>
 
-
-    {/* Carousel Section */}
+      {/* Carousel Section */}
       <View style={styles.carouselContainer}>
         <Text style={styles.carouselText}>Carousel</Text>
       </View>
 
-
-    {/* PNW Safety Guide Button */}
+      {/* PNW Safety Guide Button */}
       <TouchableOpacity
         style={styles.safetyGuideButton}
         onPress={() => navigation.navigate("SafetyGuide")}
@@ -213,70 +203,69 @@ const HomeScreen = ({ route, navigation }) => {
           />
         </View>
       </View>
-      
+
       {/* Active Alerts Section */}
-    <View style={styles.alertContainer}>
-      <Text style={styles.alertHeaderText}>Active Alerts</Text>
-      {activeAlerts.length === 0 ? (
-        <Text>No active alerts at the moment.</Text>
-      ) : (
-        <FlatList
-          data={activeAlerts}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View>
-              {/* Display alert information here */}
-              <Text>{item.title}</Text>
-              <Text>{item.park}</Text>
-              <Text>{item.description}</Text>
-            </View>
-          )}
-        />
-      )}
-    </View>
+      <View style={styles.alertContainer}>
+        <Text style={styles.alertHeaderText}>Active Alerts</Text>
+        {activeAlerts.length === 0 ? (
+          <Text>No active alerts at the moment.</Text>
+        ) : (
+          <FlatList
+            data={activeAlerts}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <View>
+                {/* Display alert information here */}
+                <Text>{item.title}</Text>
+                <Text>{item.park}</Text>
+                <Text>{item.description}</Text>
+              </View>
+            )}
+          />
+        )}
+      </View>
 
-     {/* PNW News Section */}
-     <View style={styles.alertContainer}>
-      <Text style={styles.alertHeaderText}>Pacific Northwest News</Text>
-      {activeAlerts.length === 0 ? (
-        <Text>News</Text>
-      ) : (
-        <FlatList
-          data={pnwNews}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View>
-              {/* Display alert information here */}
-              <Text>{item.title}</Text>
-              <Text>{item.park}</Text>
-              <Text>{item.description}</Text>
-            </View>
-          )}
-        />
-      )}
-    </View>
+      {/* PNW News Section */}
+      <View style={styles.alertContainer}>
+        <Text style={styles.alertHeaderText}>Pacific Northwest News</Text>
+        {activeAlerts.length === 0 ? (
+          <Text>News</Text>
+        ) : (
+          <FlatList
+            data={pnwNews}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <View>
+                {/* Display alert information here */}
+                <Text>{item.title}</Text>
+                <Text>{item.park}</Text>
+                <Text>{item.description}</Text>
+              </View>
+            )}
+          />
+        )}
+      </View>
 
-{/* PNW Events Section */}
-     <View style={styles.alertContainer}>
-      <Text style={styles.alertHeaderText}>Events in the Area</Text>
-      {activeAlerts.length === 0 ? (
-        <Text>Events</Text>
-      ) : (
-        <FlatList
-          data={pnwNews}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View>
-              {/* Display alert information here */}
-              <Text>{item.title}</Text>
-              <Text>{item.park}</Text>
-              <Text>{item.description}</Text>
-            </View>
-          )}
-        />
-      )}
-    </View>
-
+      {/* PNW Events Section */}
+      <View style={styles.alertContainer}>
+        <Text style={styles.alertHeaderText}>Events in the Area</Text>
+        {activeAlerts.length === 0 ? (
+          <Text>Events</Text>
+        ) : (
+          <FlatList
+            data={pnwNews}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <View>
+                {/* Display alert information here */}
+                <Text>{item.title}</Text>
+                <Text>{item.park}</Text>
+                <Text>{item.description}</Text>
+              </View>
+            )}
+          />
+        )}
+      </View>
     </ScrollView>
 
     //Go to Park button

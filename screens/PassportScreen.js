@@ -13,7 +13,8 @@ import {
 import UnscannedBadge1 from "../assets/SVG/badges/UnscannedBadge1.jsx";
 import UnscannedOlympic from "../assets/SVG/badges/UnscannedOlympic.jsx";
 import ScannedOlympic from "../assets/SVG/badges/ScannedOlympic.jsx";
-
+import { Colors } from "../styles/Colors.js";
+import ToggleButton from "../components/ToggleButtons.js";
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -39,6 +40,11 @@ const styles = StyleSheet.create({
   },
 });
 
+const user = {
+  name: "John Doe",
+  date: "Jan 2023",
+  photo: require("../assets/userPlaceholder.jpg"),
+};
 const badgesData = [
   {
     id: 1,
@@ -99,24 +105,33 @@ const PassportScreen = ({ route, navigation }) => {
       setVisitedBadges([...visitedBadges, badgeId]);
     }
   };
-
+  console.log(user.photo);
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        {/* user info */}
-        <Pressable>
-          <View>{/* photo containter */}</View>
-        </Pressable>
         <View>
+          <Pressable onPress={() => navigation.navigate("PassportEdit")}>
+            <Image
+              source={require("../assets/userPlaceholder.jpg")}
+              style={{
+                width: 120,
+                height: 120,
+                borderRadius: 100,
+                borderColor: Colors.white,
+                borderWidth: 6,
+              }}
+            />
+            <ToggleButton
+              type="edit"
+              color={Colors.darkGreen}
+              buttonSize={42}
+            />
+          </Pressable>
           <Text>{user.name}</Text>
           <Text>Exploring National Parks since {user.date}</Text>
           {/* {Socials} */}
         </View>
       </View>
-      <Button
-        title="Go to Passport Edit Screen"
-        onPress={() => navigation.navigate("PassportEdit")}
-      />
       <ScrollView contentContainerStyle={styles.badgesContainer}>
         {badgesData.map((badge) => (
           <Badge
