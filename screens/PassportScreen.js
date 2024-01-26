@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   userImg: {
-    width: "30%",
+    width: "35%",
   },
   userInfo: {
-    width: "65%",
+    width: "60%",
     marginLeft: 20,
   },
   title: {
@@ -150,13 +150,21 @@ const PassportScreen = ({ route, navigation }) => {
               }}
             />
           </Pressable>
-          <ToggleButton
-            type="edit"
-            color={Colors.darkGreen}
-            buttonSize={42}
-            toggleState={false}
-            handlePress={() => navigation.navigate("PassportEdit")}
-          />
+          <View
+            style={{
+              position: "absolute",
+              bottom: 0,
+              right: 0,
+            }}
+          >
+            <ToggleButton
+              type="edit"
+              color={Colors.darkGreen}
+              buttonSize={42}
+              toggleState={false}
+              handlePress={() => navigation.navigate("PassportEdit")}
+            />
+          </View>
         </View>
         <View style={styles.userInfo}>
           <Text>{user.name}</Text>
