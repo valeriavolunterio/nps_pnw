@@ -18,12 +18,15 @@ import EventsScreen from "../screens/subScreens/EventsScreen";
 import PassportEditScreen from "../screens/subScreens/PassportEditScreen";
 import SettingsScreen from "../screens/subScreens/SettingsScreen.js";
 
+import { SettingsButton } from "./SettingsButton.js";
+import { BackButton } from "./BackButton.js";
+
 const Stack = createStackNavigator();
 
 const HomeStack = () => {
   return (
     <Stack.Navigator
-      screenOptions={({ navigation, route }) => ({
+      screenOptions={() => ({
         title: "",
         headerStyle: {
           backgroundColor: Colors.offWhite,
@@ -32,28 +35,14 @@ const HomeStack = () => {
         headerTitleStyle: {
           fontWeight: "bold",
         },
-        headerRight: () => (
-          //settings button (add black circle background>)
-          <Pressable onPress={() => navigation.navigate("Settings")}>
-            <Ionicons name="ellipsis-vertical" size={24} color={Colors.white} />
-          </Pressable>
-        ),
+        headerLeft: () => <BackButton />,
+        headerRight: () => <SettingsButton />,
       })}
     >
       <Stack.Screen
         name="HomeStack"
         component={HomeScreen}
-        options={({ navigation, route }) => ({
-          headerRight: () => (
-            <Pressable onPress={() => navigation.navigate("Settings")}>
-              <Ionicons
-                name="ellipsis-vertical"
-                size={24}
-                color={Colors.darkestGray}
-              />
-            </Pressable>
-          ),
-        })}
+        options={{ headerLeft: () => null, headerTransparent: true }}
       />
       <Stack.Screen
         name="Park"
@@ -133,7 +122,7 @@ const HomeStack = () => {
 const MapStack = () => {
   return (
     <Stack.Navigator
-      screenOptions={({ navigation, route }) => ({
+      screenOptions={() => ({
         title: "",
         headerStyle: {
           backgroundColor: Colors.offWhite,
@@ -142,17 +131,15 @@ const MapStack = () => {
         headerTitleStyle: {
           fontWeight: "bold",
         },
-        headerRight: () => (
-          <Pressable onPress={() => navigation.navigate("Settings")}>
-            <Ionicons name="ellipsis-vertical" size={24} color={Colors.white} />
-          </Pressable>
-        ),
+        headerLeft: () => <BackButton />,
+        headerRight: () => <SettingsButton />,
       })}
     >
       <Stack.Screen
         name="MapStack"
         component={MapScreen}
         options={{
+          headerLeft: () => null,
           headerStyle: {
             backgroundColor: Colors.green,
           },
@@ -184,22 +171,24 @@ const MapStack = () => {
 const SearchStack = () => {
   return (
     <Stack.Navigator
-      screenOptions={({ navigation, route }) => ({
+      screenOptions={() => ({
         title: "",
         headerStyle: {
-          backgroundColor: Colors.darkTeal,
+          backgroundColor: Colors.offWhite,
         },
+        headerTintColor: Colors.white,
         headerTitleStyle: {
           fontWeight: "bold",
         },
-        headerRight: () => (
-          <Pressable onPress={() => navigation.navigate("Settings")}>
-            <Ionicons name="ellipsis-vertical" size={24} color={Colors.white} />
-          </Pressable>
-        ),
+        headerLeft: () => <BackButton />,
+        headerRight: () => <SettingsButton />,
       })}
     >
-      <Stack.Screen name="SearchStack" component={SearchScreen} />
+      <Stack.Screen
+        name="SearchStack"
+        component={SearchScreen}
+        options={{ headerLeft: () => null }}
+      />
       <Stack.Screen
         name="Park"
         component={ParkScreen}
@@ -228,26 +217,24 @@ const SearchStack = () => {
 const PassportStack = () => {
   return (
     <Stack.Navigator
-      screenOptions={({ navigation, route }) => ({
+      screenOptions={() => ({
         title: "",
         headerStyle: {
           backgroundColor: Colors.offWhite,
         },
+        headerTintColor: Colors.white,
         headerTitleStyle: {
           fontWeight: "bold",
         },
-        headerRight: () => (
-          <Pressable onPress={() => navigation.navigate("Settings")}>
-            <Ionicons
-              name="ellipsis-vertical"
-              size={24}
-              color={Colors.darkestGray}
-            />
-          </Pressable>
-        ),
+        headerLeft: () => <BackButton />,
+        headerRight: () => <SettingsButton />,
       })}
     >
-      <Stack.Screen name="PassportStack" component={PassportScreen} />
+      <Stack.Screen
+        name="PassportStack"
+        component={PassportScreen}
+        options={{ headerLeft: () => null }}
+      />
       <Stack.Screen name="PassportEdit" component={PassportEditScreen} />
       <Stack.Screen
         name="Settings"

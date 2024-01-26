@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     padding: 10,
     alignSelf: "flex-start",
+    marginTop: 90,
   },
   subHeaderContainer: {
     paddingTop: 1,

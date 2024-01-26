@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../styles/Colors.js";
 import { useNavigation } from "@react-navigation/native";
 
-export const SettingsButton = () => {
+export const BackButton = () => {
   const navigation = useNavigation();
 
   return (
@@ -16,12 +16,12 @@ export const SettingsButton = () => {
         aspectRatio: 1,
         alignContent: "center",
         justifyContent: "center",
-        marginRight: 14,
+        marginLeft: 14, // Adjust margin to align with headerRight
       }}
-      onPress={() => navigation.navigate("Settings")}
+      onPress={() => navigation.goBack()}
     >
       <Ionicons
-        name="ellipsis-vertical"
+        name="arrow-back"
         size={20}
         color={Colors.white}
         style={{
