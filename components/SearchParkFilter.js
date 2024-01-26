@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 
 const SearchParkFilterComponent = ({ onApplyFilters }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -20,62 +21,46 @@ const SearchParkFilterComponent = ({ onApplyFilters }) => {
   };
 
   return (
-    <div>
-      <h3>Search Filters</h3>
+    <ScrollView>
+      <View>
+        <Text>Search Filters</Text>
 
-      <label>
-        Search:
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </label>
+        <View>
+          <Text>Search:</Text>
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            value={searchQuery}
+            onChangeText={(text) => setSearchQuery(text)}
+          />
+        </View>
 
-      <h3>Filter by Type</h3>
-      <label>
-        <input
-          type="checkbox"
-          checked={selectedFilters.includes('National Park')}
-          onChange={() => handleCheckboxChange('National Park')}
-        />
-        National Park
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={selectedFilters.includes('National Historic Park/Site')}
-          onChange={() => handleCheckboxChange('National Historic Park/Site')}
-        />
-        National Historic Park/Site
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={selectedFilters.includes('National Recreation Area')}
-          onChange={() => handleCheckboxChange('National Recreation Area')}
-        />
-        National Recreation Area
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={selectedFilters.includes('National Reserve')}
-          onChange={() => handleCheckboxChange('National Reserve')}
-        />
-        National Reserve
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={selectedFilters.includes('National Monument')}
-          onChange={() => handleCheckboxChange('National Monument')}
-        />
-        National Monument
-      </label>
+        <Text>Filter by Type</Text>
+        {[
+          'National Park',
+          'National Historic Park/Site',
+          'National Recreation Area',
+          'National Reserve',
+          'National Monument',
+        ].map((filterType) => (
+          <View key={filterType}>
+            <TouchableOpacity onPress={() => handleCheckboxChange(filterType)}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text>{filterType}</Text>
+                <View style={{ width: 20, height: 20, borderColor: 'black', borderWidth: 1, marginLeft: 10 }}>
+                  {selectedFilters.includes(filterType) && (
+                    <View style={{ flex: 1, backgroundColor: 'black' }} />
+                  )}
+                </View>
+              </View>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </View>
 
-      <button onClick={handleApplyFilters}>Apply filters</button>
-    </div>
+      <TouchableOpacity onPress={handleApplyFilters}>
+        <Text>Apply filters</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 };
 
