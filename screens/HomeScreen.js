@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, ScrollView, Button, View, Text } from "react-native";
+import {
+  StyleSheet,
+  ScrollView,
+  Button,
+  View,
+  Text,
+  Dimensions,
+  Pressable,
+  TouchableWithoutFeedback
+} from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 import Svg, { Polygon } from "react-native-svg";
@@ -7,10 +16,21 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import SwipeCarousel from "../components/Carousel.js";
 
+const { width } = Dimensions.get("window"); // Define width here
+
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
-    backgroundColor: Colors.offWhite,
+    flex: 1,
+    backgroundColor: "#D3D8DA",
+  },
+  beigeBackground: {
+    flex: 1,
+    backgroundColor: "#FFF9F5", // Beige color
+    overflow: "hidden", // Clip overflow content
+  },
+  grayBackground: {
+    flex: 1,
+    backgroundColor: "#D3D8DA", // Gray color
   },
   itemContainer: {
     flex: 1,
@@ -73,6 +93,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
+  triangleContainer: {
+    alignItems: "center",
+    borderRadius: 10,
+  },
+  svgTriangle: {
+    flex: 1,
+    alignItems: "center",
+    elevation: 4,
+    shadowColor: "#000",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 2,
+  },
   alertContainer: {
     flex: 1,
     justifyContent: "space-between",
@@ -106,7 +139,12 @@ const HomeScreen = ({ route, navigation }) => {
   const [activeAlerts, setActiveAlerts] = useState([]); // State for active alerts
 
   const carouselData = [
-    { title: "Carousel Item 1" },
+    { 
+      miniTitle: "See Something New",
+      title: "Olympic National Park", 
+      img: "https://www.nps.gov/npgallery/GetAsset/41e9450b-1dd8-b71b-0b41-ae6ab257056e/proxy/hires?"
+  },
+    
     { title: "Carousel Item 2" },
     { title: "Carousel Item 3" },
   ];
@@ -118,159 +156,170 @@ const HomeScreen = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.titleHeaderText}>Pacific Northwest</Text>
-      </View>
-      <View style={styles.subHeaderContainer}>
-        <Text style={styles.subHeaderText}>National Park Service</Text>
-      </View>
-
-      {/* Carousel Section */}
-      <View>
-        <SwipeCarousel data={carouselData} />
-      </View>
-
-      {/* PNW Safety Guide Button */}
-      <TouchableOpacity
-        style={styles.safetyGuideButton}
-        onPress={() => navigation.navigate("SafetyGuide")}
-      >
-        <Ionicons
-          name="ios-glasses"
-          size={24}
-          color={Colors.darkTeal}
-          style={styles.icon}
-        />
-        <Text style={styles.safetyGuideButtonText}>
-          Pacific Northwest Safety Guide
-        </Text>
-      </TouchableOpacity>
-
-      {/* Icon Grid Section */}
-      <View style={styles.row}>
-        <View style={styles.iconContainer}>
-          <Ionicons
-            name="ios-star"
-            size={42}
-            color={Colors.darkTeal}
-            onPress={() => navigation.navigate("Saves")}
-          />
+      <View style={styles.beigeBackground}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.titleHeaderText}>Pacific Northwest</Text>
+        </View>
+        <View style={styles.subHeaderContainer}>
+          <Text style={styles.subHeaderText}>National Park Service</Text>
         </View>
 
-        <View style={styles.iconContainer}>
-          <Ionicons
-            name="ios-bookmark"
-            size={42}
-            color={Colors.darkTeal}
-            onPress={() => navigation.navigate("Saves")}
-          />
+        {/* Carousel Section */}
+        <View> 
+          
+          <SwipeCarousel data={carouselData} />
+          
         </View>
-        <View style={styles.iconContainer}>
+
+        {/* PNW Safety Guide Button */}
+        <TouchableOpacity
+          style={styles.safetyGuideButton}
+          onPress={() => navigation.navigate("SafetyGuide")}
+        >
           <Ionicons
-            name="ios-time"
-            size={42}
+            name="ios-glasses"
+            size={24}
             color={Colors.darkTeal}
-            onPress={() => navigation.navigate("Saves")}
+            style={styles.icon}
           />
+          <Text style={styles.safetyGuideButtonText}>
+            Pacific Northwest Safety Guide
+          </Text>
+        </TouchableOpacity>
+
+        {/* Icon Grid Section */}
+        <View style={styles.row}>
+          <View style={styles.iconContainer}>
+            <Ionicons
+              name="ios-star"
+              size={42}
+              color={Colors.darkTeal}
+              onPress={() => navigation.navigate("Saves")}
+            />
+          </View>
+
+          <View style={styles.iconContainer}>
+            <Ionicons
+              name="ios-bookmark"
+              size={42}
+              color={Colors.darkTeal}
+              onPress={() => navigation.navigate("Saves")}
+            />
+          </View>
+          <View style={styles.iconContainer}>
+            <Ionicons
+              name="ios-time"
+              size={42}
+              color={Colors.darkTeal}
+              onPress={() => navigation.navigate("Saves")}
+            />
+          </View>
+        </View>
+        <View style={styles.row}>
+          <View style={styles.iconContainer}>
+            <Ionicons
+              name="ios-warning"
+              size={42}
+              color={Colors.darkTeal}
+              onPress={() => navigation.navigate("Alerts")}
+            />
+          </View>
+          <View style={styles.iconContainer}>
+            <Ionicons
+              name="ios-newspaper"
+              size={42}
+              color={Colors.darkTeal}
+              onPress={() => navigation.navigate("News")}
+            />
+          </View>
+          <View style={styles.iconContainer}>
+            <Ionicons
+              name="ios-calendar"
+              size={42}
+              color={Colors.darkTeal}
+              onPress={() => navigation.navigate("Events")}
+            />
+          </View>
         </View>
       </View>
-      <View style={styles.row}>
-        <View style={styles.iconContainer}>
-          <Ionicons
-            name="ios-warning"
-            size={42}
-            color={Colors.darkTeal}
-            onPress={() => navigation.navigate("Alerts")}
+      <View style={styles.triangleContainer}>
+        <Svg style={styles.svgTriangle} height={width / 5} width={width}>
+          <Polygon
+            points={`0,0 ${width},0 ${width / 2},${width / 6} 0,0`}
+            fill="#FFF9F5" // Beige color
           />
-        </View>
-        <View style={styles.iconContainer}>
-          <Ionicons
-            name="ios-newspaper"
-            size={42}
-            color={Colors.darkTeal}
-            onPress={() => navigation.navigate("News")}
-          />
-        </View>
-        <View style={styles.iconContainer}>
-          <Ionicons
-            name="ios-calendar"
-            size={42}
-            color={Colors.darkTeal}
-            onPress={() => navigation.navigate("Events")}
-          />
-        </View>
+        </Svg>
       </View>
 
-      {/* Active Alerts Section */}
-      <View style={styles.alertContainer}>
-        <Text style={styles.alertHeaderText}>Active Alerts</Text>
-        {activeAlerts.length === 0 ? (
-          <Text>No active alerts at the moment.</Text>
-        ) : (
-          <FlatList
-            data={activeAlerts}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View>
-                {/* Display alert information here */}
-                <Text>{item.title}</Text>
-                <Text>{item.park}</Text>
-                <Text>{item.description}</Text>
-              </View>
-            )}
-          />
-        )}
-      </View>
+      <View style={styles.grayBackground}>
+        {/* Active Alerts Section */}
+        <View style={styles.alertContainer}>
+          <Text style={styles.alertHeaderText}>Active Alerts</Text>
+          {activeAlerts.length === 0 ? (
+            <Text>No active alerts at the moment.</Text>
+          ) : (
+            <FlatList
+              data={activeAlerts}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <View>
+                  {/* Display alert information here */}
+                  <Text>{item.title}</Text>
+                  <Text>{item.park}</Text>
+                  <Text>{item.description}</Text>
+                </View>
+              )}
+            />
+          )}
+        </View>
 
-      {/* PNW News Section */}
-      <View style={styles.alertContainer}>
-        <Text style={styles.alertHeaderText}>Pacific Northwest News</Text>
-        {activeAlerts.length === 0 ? (
-          <Text>News</Text>
-        ) : (
-          <FlatList
-            data={pnwNews}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View>
-                {/* Display alert information here */}
-                <Text>{item.title}</Text>
-                <Text>{item.park}</Text>
-                <Text>{item.description}</Text>
-              </View>
-            )}
-          />
-        )}
-      </View>
+        {/* PNW News Section */}
+        <View style={styles.alertContainer}>
+          <Text style={styles.alertHeaderText}>Pacific Northwest News</Text>
+          {activeAlerts.length === 0 ? (
+            <Text>News</Text>
+          ) : (
+            <FlatList
+              data={pnwNews}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <View>
+                  {/* Display alert information here */}
+                  <Text>{item.title}</Text>
+                  <Text>{item.park}</Text>
+                  <Text>{item.description}</Text>
+                </View>
+              )}
+            />
+          )}
+        </View>
 
-      {/* PNW Events Section */}
-      <View style={styles.alertContainer}>
-        <Text style={styles.alertHeaderText}>Events in the Area</Text>
-        {activeAlerts.length === 0 ? (
-          <Text>Events</Text>
-        ) : (
-          <FlatList
-            data={pnwNews}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View>
-                {/* Display alert information here */}
-                <Text>{item.title}</Text>
-                <Text>{item.park}</Text>
-                <Text>{item.description}</Text>
-              </View>
-            )}
-          />
-        )}
+        {/* PNW Events Section */}
+        <View style={styles.alertContainer}>
+          <Text style={styles.alertHeaderText}>Events in the Area</Text>
+          {activeAlerts.length === 0 ? (
+            <Text>Events</Text>
+          ) : (
+            <FlatList
+              data={pnwNews}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <View>
+                  {/* Display alert information here */}
+                  <Text>{item.title}</Text>
+                  <Text>{item.park}</Text>
+                  <Text>{item.description}</Text>
+                </View>
+              )}
+            />
+          )}
+        </View>
       </View>
     </ScrollView>
 
     //Go to Park button
     /* 
-        <Button
-          title="Go to Park Screen"
-          onPress={() => navigation.navigate("Park")}
-        />
+       
        */
   );
 };
