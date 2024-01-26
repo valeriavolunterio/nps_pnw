@@ -24,20 +24,18 @@ const HomeStack = () => {
   return (
     <Stack.Navigator
       screenOptions={({ navigation, route }) => ({
+        title: "",
         headerStyle: {
           backgroundColor: Colors.offWhite,
         },
-        headerTintColor: Colors.darkGray,
+        headerTintColor: Colors.white,
         headerTitleStyle: {
           fontWeight: "bold",
         },
         headerRight: () => (
+          //settings button (add black circle background>)
           <Pressable onPress={() => navigation.navigate("Settings")}>
-            <Ionicons
-              name="ellipsis-vertical"
-              size={24}
-              color={Colors.darkGray}
-            />
+            <Ionicons name="ellipsis-vertical" size={24} color={Colors.white} />
           </Pressable>
         ),
       })}
@@ -45,16 +43,89 @@ const HomeStack = () => {
       <Stack.Screen
         name="HomeStack"
         component={HomeScreen}
-        options={{ title: "" }}
+        options={({ navigation, route }) => ({
+          headerRight: () => (
+            <Pressable onPress={() => navigation.navigate("Settings")}>
+              <Ionicons
+                name="ellipsis-vertical"
+                size={24}
+                color={Colors.darkestGray}
+              />
+            </Pressable>
+          ),
+        })}
       />
-      <Stack.Screen name="Park" component={ParkScreen} />
-      <Stack.Screen name="SafetyGuide" component={SafetyGuideScreen} />
-      {/* add conditional for fave, bookmarked, or recently viewed */}
-      <Stack.Screen name="Saves" component={SavesScreen} />
-      <Stack.Screen name="Alerts" component={AlertsScreen} />
-      <Stack.Screen name="News" component={NewsScreen} />
-      <Stack.Screen name="Events" component={EventsScreen} />
-      <Stack.Screen name="Settings" component={SettingsScreen} />
+      <Stack.Screen
+        name="Park"
+        component={ParkScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.lightTeal,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="SafetyGuide"
+        component={SafetyGuideScreen}
+        options={{
+          title: "PNW Safety Guide",
+          headerStyle: {
+            backgroundColor: Colors.baseTeal,
+          },
+          headerTintColor: Colors.white,
+        }}
+      />
+      {/* add conditional for fave, bookmarked, or recently viewed bg color*/}
+      <Stack.Screen
+        name="Saves"
+        component={SavesScreen}
+        options={{
+          title: "",
+          headerStyle: {
+            backgroundColor: Colors.lightTeal,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Alerts"
+        component={AlertsScreen}
+        options={{
+          title: "Active Alerts",
+          headerStyle: {
+            backgroundColor: Colors.sepia,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="News"
+        component={NewsScreen}
+        options={{
+          title: "NPS: PNW News",
+          headerStyle: {
+            backgroundColor: Colors.baseTeal,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Events"
+        component={EventsScreen}
+        options={{
+          title: "Events in the Area",
+          headerStyle: {
+            backgroundColor: Colors.green,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -63,20 +134,49 @@ const MapStack = () => {
   return (
     <Stack.Navigator
       screenOptions={({ navigation, route }) => ({
+        title: "",
+        headerStyle: {
+          backgroundColor: Colors.offWhite,
+        },
+        headerTintColor: Colors.white,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
         headerRight: () => (
           <Pressable onPress={() => navigation.navigate("Settings")}>
-            <Ionicons
-              name="ellipsis-vertical"
-              size={24}
-              color={Colors.darkGray}
-            />
+            <Ionicons name="ellipsis-vertical" size={24} color={Colors.white} />
           </Pressable>
         ),
       })}
     >
-      <Stack.Screen name="MapStack" component={MapScreen} />
-      <Stack.Screen name="Park" component={ParkScreen} />
-      <Stack.Screen name="Settings" component={SettingsScreen} />
+      <Stack.Screen
+        name="MapStack"
+        component={MapScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.green,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Park"
+        component={ParkScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.green,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -85,20 +185,42 @@ const SearchStack = () => {
   return (
     <Stack.Navigator
       screenOptions={({ navigation, route }) => ({
+        title: "",
+        headerStyle: {
+          backgroundColor: Colors.darkTeal,
+        },
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
         headerRight: () => (
           <Pressable onPress={() => navigation.navigate("Settings")}>
-            <Ionicons
-              name="ellipsis-vertical"
-              size={24}
-              color={Colors.darkGray}
-            />
+            <Ionicons name="ellipsis-vertical" size={24} color={Colors.white} />
           </Pressable>
         ),
       })}
     >
       <Stack.Screen name="SearchStack" component={SearchScreen} />
-      <Stack.Screen name="Park" component={ParkScreen} />
-      <Stack.Screen name="Settings" component={SettingsScreen} />
+      <Stack.Screen
+        name="Park"
+        component={ParkScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.lightTeal,
+          },
+          headerRight: "",
+        }}
+      />
+      {/* <Stack.Screen name="Place" component={PlaceScreen} /> */}
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -107,12 +229,19 @@ const PassportStack = () => {
   return (
     <Stack.Navigator
       screenOptions={({ navigation, route }) => ({
+        title: "",
+        headerStyle: {
+          backgroundColor: Colors.offWhite,
+        },
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
         headerRight: () => (
           <Pressable onPress={() => navigation.navigate("Settings")}>
             <Ionicons
               name="ellipsis-vertical"
               size={24}
-              color={Colors.darkGray}
+              color={Colors.darkestGray}
             />
           </Pressable>
         ),
@@ -120,6 +249,17 @@ const PassportStack = () => {
     >
       <Stack.Screen name="PassportStack" component={PassportScreen} />
       <Stack.Screen name="PassportEdit" component={PassportEditScreen} />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          headerTintColor: Colors.white,
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
     </Stack.Navigator>
   );
 };
