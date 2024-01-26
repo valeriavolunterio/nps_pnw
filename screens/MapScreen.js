@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { StyleSheet, SafeAreaView, Button } from "react-native";
+import MapView from 'react-native-maps';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,6 +17,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#eee",
     borderRadius: 5,
   },
+  map: {
+    width: '100%',
+    height: '100%',
+  },
 });
 
 const MapScreen = ({ route, navigation }) => {
@@ -25,7 +30,12 @@ const MapScreen = ({ route, navigation }) => {
         title="Go to Park Screen"
         onPress={() => navigation.navigate("Park")}
       />
+
+<View style={styles.container}>
+      <MapView style={styles.map} />
+    </View>
     </SafeAreaView>
+    
   );
 };
 export default MapScreen;
