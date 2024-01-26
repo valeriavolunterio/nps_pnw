@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     position: "relative",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 9, // Set border radius for rounded corners
-    marginHorizontal: 20, // Adjust horizontal margin for spacing between cards
+    borderRadius: 9,
+    marginHorizontal: 20, 
     elevation: 5,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontFamily: "OpenSans-SemiBold",
     fontSize: 14,
-    textAlign: "left", // Align text to the left
-    paddingBottom: 10, // Add some top padding
+    textAlign: "left",
+    paddingBottom: 10, 
     paddingTop: 10,
   },
   title: {
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ccc",
   },
   activeDot: {
-    backgroundColor: "#2C505E", // Change color of active dot
+    backgroundColor: "#2C505E", // color of active dot
   },
 });
 
@@ -89,11 +89,10 @@ const SwipeCarousel = ({ data }) => {
   };
 
   useEffect(() => {
-    // Update activeIndex when the ScrollView scrolls
-    // This effect runs on mount and whenever activeIndex changes
+   
     const updateIndex = (event) => handleScroll(event);
     return () => {
-      // Clean up event listener
+      
     };
   }, [activeIndex]);
 
@@ -105,7 +104,7 @@ const SwipeCarousel = ({ data }) => {
         showsHorizontalScrollIndicator={false}
         style={styles.container}
         onScroll={handleScroll}
-        scrollEventThrottle={16} // Adjust scroll event throttle as needed
+        scrollEventThrottle={16} 
       >
         {data.map((item, index) => (
           <CarouselItem key={index} title={item.title} img={item.img} />
