@@ -1,5 +1,8 @@
 // AppStack.js
 import { createStackNavigator } from "@react-navigation/stack";
+import { Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "../styles/Colors.js";
 
 import HomeScreen from "../screens/HomeScreen.js";
 import MapScreen from "../screens/MapScreen.js";
@@ -13,51 +16,237 @@ import AlertsScreen from "../screens/subScreens/AlertsScreen.js";
 import NewsScreen from "../screens/subScreens/NewsScreen.js";
 import EventsScreen from "../screens/subScreens/EventsScreen";
 import PassportEditScreen from "../screens/subScreens/PassportEditScreen";
+import SettingsScreen from "../screens/subScreens/SettingsScreen.js";
+
+import { SettingsButton } from "./SettingsButton.js";
+import { BackButton } from "./BackButton.js";
 
 const Stack = createStackNavigator();
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="HomeStack" component={HomeScreen} />
-      <Stack.Screen name="Park" component={ParkScreen} />
-      <Stack.Screen name="SafetyGuide" component={SafetyGuideScreen} />
-      {/* add conditional for fave, bookmarked, or recently viewed */}
+    <Stack.Navigator
+      screenOptions={() => ({
+        title: "",
+        headerStyle: {
+          backgroundColor: Colors.offWhite,
+        },
+        headerTintColor: Colors.white,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+        headerLeft: () => <BackButton />,
+        headerRight: () => <SettingsButton />,
+      })}
+    >
+      <Stack.Screen
+        name="HomeStack"
+        component={HomeScreen}
+        options={{ headerLeft: () => null, headerTransparent: true }}
+      />
+      <Stack.Screen
+        name="Park"
+        component={ParkScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.lightTeal,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="SafetyGuide"
+        component={SafetyGuideScreen}
+        options={{
+          title: "PNW Safety Guide",
+          headerStyle: {
+            backgroundColor: Colors.baseTeal,
+          },
+          headerTintColor: Colors.white,
+        }}
+      />
+      {/* add conditional for fave, bookmarked, or recently viewed bg color*/}
       <Stack.Screen
         name="Saves"
         component={SavesScreen}
-        options={{ title: "Saves" }}
+        options={{
+          title: "",
+          headerStyle: {
+            backgroundColor: Colors.lightTeal,
+          },
+        }}
       />
-      <Stack.Screen name="Alerts" component={AlertsScreen} />
-      <Stack.Screen name="News" component={NewsScreen} />
-      <Stack.Screen name="Events" component={EventsScreen} />
+      <Stack.Screen
+        name="Alerts"
+        component={AlertsScreen}
+        options={{
+          title: "Active Alerts",
+          headerStyle: {
+            backgroundColor: Colors.sepia,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="News"
+        component={NewsScreen}
+        options={{
+          title: "NPS: PNW News",
+          headerStyle: {
+            backgroundColor: Colors.baseTeal,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Events"
+        component={EventsScreen}
+        options={{
+          title: "Events in the Area",
+          headerStyle: {
+            backgroundColor: Colors.green,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 const MapStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="MapStack" component={MapScreen} />
-      <Stack.Screen name="Park" component={ParkScreen} />
+    <Stack.Navigator
+      screenOptions={() => ({
+        title: "",
+        headerStyle: {
+          backgroundColor: Colors.offWhite,
+        },
+        headerTintColor: Colors.white,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+        headerLeft: () => <BackButton />,
+        headerRight: () => <SettingsButton />,
+      })}
+    >
+      <Stack.Screen
+        name="MapStack"
+        component={MapScreen}
+        options={{
+          headerLeft: () => null,
+          headerStyle: {
+            backgroundColor: Colors.green,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Park"
+        component={ParkScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.green,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 const SearchStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="SearchStack" component={SearchScreen} />
-      <Stack.Screen name="Park" component={ParkScreen} />
+    <Stack.Navigator
+      screenOptions={() => ({
+        title: "",
+        headerStyle: {
+          backgroundColor: Colors.offWhite,
+        },
+        headerTintColor: Colors.white,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+        headerLeft: () => <BackButton />,
+        headerRight: () => <SettingsButton />,
+      })}
+    >
+      <Stack.Screen
+        name="SearchStack"
+        component={SearchScreen}
+        options={{ headerLeft: () => null }}
+      />
+      <Stack.Screen
+        name="Park"
+        component={ParkScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.lightTeal,
+          },
+          headerRight: "",
+        }}
+      />
+      {/* <Stack.Screen name="Place" component={PlaceScreen} /> */}
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 const PassportStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="PassportStack" component={PassportScreen} />
+    <Stack.Navigator
+      screenOptions={() => ({
+        title: "",
+        headerStyle: {
+          backgroundColor: Colors.offWhite,
+        },
+        headerTintColor: Colors.white,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+        headerLeft: () => <BackButton />,
+        headerRight: () => <SettingsButton />,
+      })}
+    >
+      <Stack.Screen
+        name="PassportStack"
+        component={PassportScreen}
+        options={{ headerLeft: () => null }}
+      />
       <Stack.Screen name="PassportEdit" component={PassportEditScreen} />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          headerTintColor: Colors.white,
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
     </Stack.Navigator>
   );
 };

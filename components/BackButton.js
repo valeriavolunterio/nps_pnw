@@ -1,0 +1,35 @@
+import React, { useState } from "react";
+import { Pressable, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "../styles/Colors.js";
+import { useNavigation } from "@react-navigation/native";
+
+export const BackButton = () => {
+  const navigation = useNavigation();
+
+  return (
+    <Pressable
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.3)",
+        borderRadius: 100,
+        padding: 5,
+        aspectRatio: 1,
+        alignContent: "center",
+        justifyContent: "center",
+        marginLeft: 14, // Adjust margin to align with headerRight
+      }}
+      onPress={() => navigation.goBack()}
+    >
+      <Ionicons
+        name="arrow-back"
+        size={20}
+        color={Colors.white}
+        style={{
+          justifyContent: "center",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      />
+    </Pressable>
+  );
+};
