@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     paddingBottom: 13,
     marginRight: 55,
     fontSize: 12,
-    fontFamily: "OpenSans",
   },
   alertContainer: {
     flexDirection: "row",
@@ -119,7 +118,6 @@ const AlertsScreen = ({ route, navigation }) => {
     "OpenSans-SemiBold": require("../../assets/fonts/OpenSans-SemiBold.ttf"),
     ButtonFont: require("../../assets/fonts/MPLUS1p-Bold.ttf"),
     "MPLUS1-Regular": require("../../assets/fonts/MPLUS1-Regular.ttf"),
-    OpenSans: require("../../assets/fonts/OpenSans.ttf"),
   });
   // Check if fonts are loaded before rendering the component
   if (!fontsLoaded) {
