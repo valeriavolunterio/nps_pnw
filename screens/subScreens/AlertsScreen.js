@@ -9,6 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useFonts } from "expo-font";
 // import { styles } from "../../App";
 
 const styles = StyleSheet.create({
@@ -29,24 +30,26 @@ const styles = StyleSheet.create({
     width: "100%", // Adjust width as needed
   },
   heading: {
-    fontWeight: 600,
     fontSize: 16,
     marginTop: 20,
     color: "#616E73",
+    fontFamily: "OpenSans-SemiBold",
+    fontWeight: 600,
   },
   subHeading: {
-    fontSize: 14,
-    fontWeight: "bold",
     marginRight: 55,
     marginLeft: 8,
     paddingBottom: 10,
+    fontSize: 14,
+    fontWeight: "bold",
+    fontFamily: "OpenSans-SemiBold",
   },
   body: {
-    fontSize: 12,
     alignItems: "center",
     marginLeft: 8,
     paddingBottom: 13,
     marginRight: 55,
+    fontSize: 12,
   },
   alertContainer: {
     flexDirection: "row",
@@ -109,66 +112,76 @@ const activeAlerts = [
   },
 ];
 
-const AlertsList = ({ alerts }) => {
-  const iconMapping = {
-    Closure: { name: "ios-remove-circle", color: "rgba(186, 52, 48, 1)" },
-    Info: { name: "ios-information-circle", color: "rgba(48, 80, 163, 1)" },
-    Danger: { name: "ios-warning", color: "rgba(104, 26, 14, 1)" },
-    Caution: { name: "ios-warning", color: "rgba(224, 137, 73, 1)" },
-  };
-  // Group alerts by park
-  const alertsByPark = alerts.reduce((acc, alert) => {
-    if (!acc[alert.park]) {
-      acc[alert.park] = [];
-    }
-    acc[alert.park].push(alert);
-    return acc;
-  }, {});
+const AlertsScreen = ({ route, navigation }) => {
+  const [fontsLoaded] = useFonts({
+    "Stoke-Regular": require("../../assets/fonts/Stoke-Regular.ttf"),
+    "OpenSans-SemiBold": require("../../assets/fonts/OpenSans-SemiBold.ttf"),
+    ButtonFont: require("../../assets/fonts/MPLUS1p-Bold.ttf"),
+    "MPLUS1-Regular": require("../../assets/fonts/MPLUS1-Regular.ttf"),
+  });
+  // Check if fonts are loaded before rendering the component
+  if (!fontsLoaded) {
+    return null; //return a loading indicator here
+  }
 
-  const renderAlertItem = ({ item }) => (
-    <View styles={styles.container}>
-      <View style={styles.alertContainer}>
-        {/* display icon according to type */}
-        <View style={styles.iconContainer}>
-          <Ionicons
-            name={iconMapping[item.type].name}
-            size={30}
-            color={iconMapping[item.type].color}
-          />
-        </View>
-        {/*Text content on the right of icon */}
-        <View style={styles.textContainer}>
-          <Text style={styles.subHeading}>{item.heading}</Text>
-          <Text style={styles.body} numberOfLines={3} ellipsizeMode="tail">
-            {item.body}
-          </Text>
+  const AlertsList = ({ alerts }) => {
+    const iconMapping = {
+      Closure: { name: "ios-remove-circle", color: "rgba(186, 52, 48, 1)" },
+      Info: { name: "ios-information-circle", color: "rgba(48, 80, 163, 1)" },
+      Danger: { name: "ios-warning", color: "rgba(104, 26, 14, 1)" },
+      Caution: { name: "ios-warning", color: "rgba(224, 137, 73, 1)" },
+    };
+    // Group alerts by park
+    const alertsByPark = alerts.reduce((acc, alert) => {
+      if (!acc[alert.park]) {
+        acc[alert.park] = [];
+      }
+      acc[alert.park].push(alert);
+      return acc;
+    }, {});
+
+    const renderAlertItem = ({ item }) => (
+      <View styles={styles.container}>
+        <View style={styles.alertContainer}>
+          {/* display icon according to type */}
+          <View style={styles.iconContainer}>
+            <Ionicons
+              name={iconMapping[item.type].name}
+              size={30}
+              color={iconMapping[item.type].color}
+            />
+          </View>
+          {/*Text content on the right of icon */}
+          <View style={styles.textContainer}>
+            <Text style={styles.subHeading}>{item.heading}</Text>
+            <Text style={styles.body} numberOfLines={3} ellipsizeMode="tail">
+              {item.body}
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
-  );
+    );
 
-  const renderParkAlerts = ({ item: park }) => (
-    <View>
-      <Text style={styles.heading}>{park} National Park</Text>
-      <View style={styles.horizontalRule} />
+    const renderParkAlerts = ({ item: park }) => (
+      <View>
+        <Text style={styles.heading}>{park} National Park</Text>
+        <View style={styles.horizontalRule} />
+        <FlatList
+          data={alertsByPark[park]}
+          renderItem={renderAlertItem}
+          keyExtractor={(alert) => alert.id.toString()}
+        />
+      </View>
+    );
+
+    return (
       <FlatList
-        data={alertsByPark[park]}
-        renderItem={renderAlertItem}
-        keyExtractor={(alert) => alert.id.toString()}
+        data={Object.keys(alertsByPark)}
+        renderItem={renderParkAlerts}
+        keyExtractor={(park) => park}
       />
-    </View>
-  );
-
-  return (
-    <FlatList
-      data={Object.keys(alertsByPark)}
-      renderItem={renderParkAlerts}
-      keyExtractor={(park) => park}
-    />
-  );
-};
-
-const AlertsScreen = ({ route, navigation }) => {
+    );
+  };
   return (
     <SafeAreaView style={styles.container}>
       <AlertsList alerts={activeAlerts} />
