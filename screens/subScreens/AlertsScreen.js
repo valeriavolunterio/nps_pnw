@@ -5,7 +5,6 @@ import {
   View,
   Text,
   Image,
-  Pressable,
   FlatList,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
