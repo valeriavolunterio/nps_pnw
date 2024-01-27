@@ -3,7 +3,6 @@ import { SafeAreaView, Text, View, StyleSheet } from "react-native";
 import CustomButton from "../../components/Buttons";
 import { Colors } from "../../styles/Colors";
 import { Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 // import { styles } from "../../App";
 
@@ -11,12 +10,10 @@ const ParkScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <TouchableOpacity>
-          <CustomButton
-            onPress={() => navigation.navigate("Alerts")}
-            title="Active Alerts"
-          />
-        </TouchableOpacity>
+        <CustomButton
+          onPress={() => navigation.navigate("Alerts")}
+          title="Active Alerts"
+        />
       </View>
       <View>
         <CustomButton

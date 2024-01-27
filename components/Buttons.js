@@ -1,13 +1,22 @@
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { Pressable, Text, StyleSheet } from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
+import { useFonts } from "expo-font";
 
 const CustomButton = ({ onPress, title, icons }) => {
+  const [fontsLoaded] = useFonts({
+    ButtonFont: require("../assets/fonts/MPLUS1p-Bold.ttf"),
+  });
+  // Check if fonts are loaded before rendering the component
+  if (!fontsLoaded) {
+    return null; //return a loading indicator here
+  }
+
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <Pressable style={styles.button} onPress={onPress}>
       <Text style={styles.text}>{title}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -26,6 +35,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
+    fontFamily: "ButtonFont",
   },
 });
 

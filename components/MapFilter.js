@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'; // Assuming Ionicons is used for the filter icon
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 
 const MapFilterComponent = ({ onFilterChange }) => {
   const [filters, setFilters] = useState({
@@ -28,76 +31,42 @@ const MapFilterComponent = ({ onFilterChange }) => {
   };
 
   return (
-    <ScrollView>
-      <View>
-        <Text>Places</Text>
-        {/* Filters for Places */}
-        {['Geological', 'Historical', 'Overlook'].map((place) => (
-          <View key={place}>
-            <TouchableOpacity
-              onPress={() => handleCheckboxChange('places', place)}
-            >
-              <Text>{place}</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </View>
-
-      <View>
-        <Text>Experiences</Text>
-        {/* Filters for Experiences */}
-        {[
-          'Backcountry Hiking',
-          'Camping',
-          'Climbing',
-          'Diving',
-          'Fishing',
-          'Kayak/Canoe',
-          'Skiing',
-          'Swimming',
-          'Trails',
-          'Wildlife Viewing',
-        ].map((experience) => (
-          <View key={experience}>
-            <TouchableOpacity
-              onPress={() => handleCheckboxChange('experiences', experience)}
-            >
-              <Text>{experience}</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </View>
-
-      <View>
-        <Text>Amenities</Text>
-        {/* Filters for Amenities */}
-        {[
-          'Accessibility',
-          'Parking',
-          'Public Restrooms',
-          'Drinking Water',
-          'Food',
-          'Information',
-          'Permits and Passes',
-          'Souvenir and Supplies',
-          'Picnic Tables',
-          'Fuel',
-        ].map((amenity) => (
-          <View key={amenity}>
-            <TouchableOpacity
-              onPress={() => handleCheckboxChange('amenities', amenity)}
-            >
-              <Text>{amenity}</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </View>
-
-      <TouchableOpacity onPress={handleApplyFilters}>
-        <Text>Apply filters</Text>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.filterButton} onPress={handleApplyFilters}>
+        <Ionicons name="filter" size={24} color="white" />
+        <Text style={styles.filterButtonText}>Filters</Text>
       </TouchableOpacity>
-    </ScrollView>
+      {/* Pop-up filter component */}
+      
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    bottom: 0,
+    right: 16,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: 'rgba(80, 114, 87, 0.8)',
+    borderTopRightRadius: 9,
+    borderTopLeftRadius: 9,
+    elevation: 4,
+    shadowColor: 'black', 
+    shadowOpacity: 0.7, 
+    shadowOffset: { width: 0, height: 2 }, 
+  },
+  filterButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  filterButtonText: {
+    fontSize: 16,
+    marginLeft: 4,
+    fontWeight: 'bold',
+    color: Colors.white,
+  },
+});
 
 export default MapFilterComponent;

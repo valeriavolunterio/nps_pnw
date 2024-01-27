@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "e-commerce_app",
-    "slug": "e-commerce_app",
+    "name": "nps-pnw_app",
+    "slug": "nps-pnw_app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

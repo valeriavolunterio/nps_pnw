@@ -6,8 +6,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import SearchScreen from "./screens/SearchScreen.js";
-import PassportScreen from "./screens/PassportScreen.js";
+import { AppLoading } from "expo";
+import { useFonts } from "expo-font";
+import { Fonts } from "./styles/Fonts.js";
 
 import {
   HomeStack,
@@ -30,6 +31,17 @@ const defaultProducts = [
 export default function App() {
   // // reset AsyncStorage
   // AsyncStorage.clear();
+  const [fontsLoaded] = useFonts({
+    "Stoke-Regular": require("./assets/fonts/Stoke-Regular.ttf"),
+    "OpenSans-Regular": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "OpenSans-SemiBold": require("./assets/fonts/OpenSans-SemiBold.ttf"),
+    "MPLUS1-Regular": require("./assets/fonts/MPLUS1-Regular.ttf"),
+    "MPLUS1p-Bold": require("./assets/fonts/MPLUS1p-Bold.ttf"),
+  });
+  // Check if fonts are loaded before rendering the component
+  if (!fontsLoaded) {
+    return null; //return a loading indicator here
+  }
 
   return (
     <NavigationContainer>
