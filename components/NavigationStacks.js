@@ -66,7 +66,6 @@ const HomeStack = () => {
           headerTintColor: Colors.white,
         }}
       />
-      {/* add conditional for fave, bookmarked, or recently viewed bg color*/}
       <Stack.Screen
         name="Saves"
         component={SavesScreen}
