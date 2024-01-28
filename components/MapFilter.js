@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Assuming Ionicons is used for the filter icon
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Fonts } from '../styles/Fonts';
 
 
 const MapFilterComponent = ({ onFilterChange }) => {
