@@ -9,6 +9,7 @@ import {
   Pressable,
   Image,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import { Colors } from "../styles/Colors.js";
 import ToggleButton from "../components/ToggleButtons.js";
@@ -57,11 +58,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const user = {
+const defaultUser = {
   name: "John Doe",
   date: "Jan 2023",
   photo: require("../assets/userPlaceholder.jpg"),
+  facebook: "facebook",
+  instagram: "instagram",
+  tiktok: "tiktok",
+  youtube: "youtube",
 };
+
 const badgesData = [
   {
     id: 1,
@@ -119,6 +125,20 @@ const Badge = ({ visited, onPress, Scanned, Unscanned }) => {
 };
 
 const PassportScreen = ({ route, navigation }) => {
+  const [user, setUser] = useState({
+    name: defaultUser.name,
+    date: defaultUser.date,
+    photo: defaultUser.photo,
+    facebook: defaultUser.facebook,
+    instagram: defaultUser.instagram,
+    tiktok: defaultUser.tiktok,
+    youtube: defaultUser.youtube,
+  });
+
+  const updateUser = (updatedUser) => {
+    setUser(updatedUser);
+  };
+
   const [visitedBadges, setVisitedBadges] = useState([]);
 
   const toggleVisited = (badgeId) => {
@@ -137,10 +157,15 @@ const PassportScreen = ({ route, navigation }) => {
             style={{
               aspectRatio: 1,
             }}
-            onPress={() => navigation.navigate("PassportEdit")}
+            onPress={() =>
+              navigation.navigate("PassportEdit", {
+                user,
+                onUpdateUser: updateUser,
+              })
+            }
           >
             <Image
-              source={require("../assets/userPlaceholder.jpg")}
+              source={user.photo}
               style={{
                 width: "100%",
                 height: "100%",
@@ -162,14 +187,53 @@ const PassportScreen = ({ route, navigation }) => {
               color={Colors.darkGreen}
               buttonSize={42}
               toggleState={false}
-              handlePress={() => navigation.navigate("PassportEdit")}
+              handlePress={() =>
+                navigation.navigate("PassportEdit", {
+                  user,
+                  onUpdateUser: updateUser,
+                })
+              }
             />
           </View>
         </View>
         <View style={styles.userInfo}>
           <Text>{user.name}</Text>
           <Text>Exploring National Parks since {user.date}</Text>
-          {/* {Socials} */}
+          <View style={{ flexDirection: "row" }}>
+            {user.facebook && (
+              <Ionicons
+                name="logo-facebook"
+                size={24}
+                color={Colors.baseTeal}
+                style={{ marginRight: 5 }}
+              />
+            )}
+            {user.instagram && (
+              <Ionicons
+                name="logo-instagram"
+                size={24}
+                color={Colors.darkTeal}
+                style={{ marginRight: 5 }}
+              />
+            )}
+            {/* {user.tiktok && (
+              // tiktok not recognized
+              <Ionicons
+                name="logo-tiktok"
+                size={24}
+                color={Colors.green}
+                style={{ marginRight: 5 }}
+              />
+            )} */}
+            {user.youtube && (
+              <Ionicons
+                name="logo-youtube"
+                size={24}
+                color={Colors.sepia}
+                style={{ marginRight: 5 }}
+              />
+            )}
+          </View>
         </View>
       </View>
       <ScrollView contentContainerStyle={styles.badgesContainer}>

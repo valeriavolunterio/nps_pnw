@@ -33,7 +33,7 @@ const ToggleButton = ({
 
   return (
     <Pressable
-      onPress={handleToggle}
+      // onPress={handleToggle}
       style={[
         styles.button,
         { width: buttonSize, backgroundColor: isToggled ? color : "white" },
