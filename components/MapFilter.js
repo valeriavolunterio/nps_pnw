@@ -5,6 +5,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Fonts } from '../styles/Fonts';
 
 
+
 const MapFilterComponent = ({ onFilterChange }) => {
   const [filters, setFilters] = useState({
     parks: [],

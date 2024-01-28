@@ -13,7 +13,6 @@ import { useFonts } from "expo-font";
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     marginLeft: 23,
     flex: 1,
     overflow: "hidden",
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: "#616E73",
     fontFamily: "OpenSans-SemiBold",
-    fontWeight: 600,
+    fontWeight: "600",
   },
   subHeading: {
     marginRight: 55,
