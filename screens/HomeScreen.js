@@ -7,7 +7,7 @@ import {
   Text,
   Dimensions,
   Pressable,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
@@ -136,15 +136,19 @@ const HomeScreen = ({ route, navigation }) => {
     "MPLUS1-Regular": require("../assets/fonts/MPLUS1-Regular.ttf"),
   });
 
+  const navigateToSaves = (screenName, headerColor) => {
+    navigation.navigate("Saves", { screenName, headerColor });
+  };
+
   const [activeAlerts, setActiveAlerts] = useState([]); // State for active alerts
 
   const carouselData = [
-    { 
+    {
       miniTitle: "See Something New",
-      title: "Olympic National Park", 
-      img: "https://www.nps.gov/npgallery/GetAsset/41e9450b-1dd8-b71b-0b41-ae6ab257056e/proxy/hires?"
-  },
-    
+      title: "Olympic National Park",
+      img: "https://www.nps.gov/npgallery/GetAsset/41e9450b-1dd8-b71b-0b41-ae6ab257056e/proxy/hires?",
+    },
+
     { title: "Carousel Item 2" },
     { title: "Carousel Item 3" },
   ];
@@ -153,7 +157,6 @@ const HomeScreen = ({ route, navigation }) => {
   if (!fontsLoaded) {
     return null; //return a loading indicator here
   }
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.beigeBackground}>
@@ -165,10 +168,8 @@ const HomeScreen = ({ route, navigation }) => {
         </View>
 
         {/* Carousel Section */}
-        <View> 
-          
+        <View>
           <SwipeCarousel data={carouselData} />
-          
         </View>
 
         {/* PNW Safety Guide Button */}
@@ -194,7 +195,7 @@ const HomeScreen = ({ route, navigation }) => {
               name="ios-star"
               size={42}
               color={Colors.darkTeal}
-              onPress={() => navigation.navigate("Saves")}
+              onPress={() => navigateToSaves("Favorites", Colors.sepia)}
             />
           </View>
 
@@ -203,7 +204,7 @@ const HomeScreen = ({ route, navigation }) => {
               name="ios-bookmark"
               size={42}
               color={Colors.darkTeal}
-              onPress={() => navigation.navigate("Saves")}
+              onPress={() => navigateToSaves("Bookmarks", Colors.baseTeal)}
             />
           </View>
           <View style={styles.iconContainer}>
@@ -211,7 +212,7 @@ const HomeScreen = ({ route, navigation }) => {
               name="ios-time"
               size={42}
               color={Colors.darkTeal}
-              onPress={() => navigation.navigate("Saves")}
+              onPress={() => navigateToSaves("Recently Viewed", Colors.green)}
             />
           </View>
         </View>

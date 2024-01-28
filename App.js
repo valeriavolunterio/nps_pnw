@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { AppLoading } from "expo";
 import { useFonts } from "expo-font";
-import { Fonts } from "./styles/Fonts.js"; // Update the path accordingly
+import { Fonts } from "./styles/Fonts.js";
 
 import {
   HomeStack,
@@ -33,7 +33,7 @@ export default function App() {
   // AsyncStorage.clear();
   const [fontsLoaded] = useFonts({
     "Stoke-Regular": require("./assets/fonts/Stoke-Regular.ttf"),
-    "OpenSand-Regular": require("./assets/fonts/OpenSans.ttf"),
+    "OpenSans-Regular": require("./assets/fonts/OpenSans-Regular.ttf"),
     "OpenSans-SemiBold": require("./assets/fonts/OpenSans-SemiBold.ttf"),
     "MPLUS1-Regular": require("./assets/fonts/MPLUS1-Regular.ttf"),
     "MPLUS1p-Bold": require("./assets/fonts/MPLUS1p-Bold.ttf"),
