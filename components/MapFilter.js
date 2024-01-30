@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Modal, Pressable,} from 'react-native';
 import { CheckBox } from '@rneui/themed';
-import { Ionicons } from '@expo/vector-icons'; // Assuming Ionicons is used for the filter icon
+import { Ionicons } from '@expo/vector-icons'; 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Fonts } from '../styles/Fonts';
 
@@ -50,9 +50,9 @@ const MapFilterComponent = ({ onFilterChange }) => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeButton}>
+            <Pressable onPress={() => setModalVisible(false)} style={styles.closeButton}>
               <Ionicons name="close" size={24} color="black" />
-            </TouchableOpacity>
+            </Pressable>
             <ScrollView>
               
               <CheckBox
