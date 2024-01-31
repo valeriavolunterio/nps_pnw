@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, TextInput, Switch, Text, Button } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import { View, TextInput, Switch, Text, Button, StyleSheet } from 'react-native';
+//import { SearchBar } from 'react-native-elements';
 
 const SearchScreen = () => {
   const [searchText, setSearchText] = useState('');
