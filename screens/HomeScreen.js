@@ -168,11 +168,11 @@ const HomeScreen = ({ route, navigation }) => {
 
         {/* Carousel Section */}
         <View>
-          <SwipeCarousel data={carouselData} />
+          <SwipeCarousel data={carouselData} navigation={navigation}/>
         </View>
 
         {/* PNW Safety Guide Button */}
-        <TouchableOpacity
+        <Pressable
           style={styles.safetyGuideButton}
           onPress={() => navigation.navigate("SafetyGuide")}
         >
@@ -185,7 +185,7 @@ const HomeScreen = ({ route, navigation }) => {
           <Text style={styles.safetyGuideButtonText}>
             Pacific Northwest Safety Guide
           </Text>
-        </TouchableOpacity>
+        </Pressable>
 
         {/* Icon Grid Section */}
         <View style={styles.row}>

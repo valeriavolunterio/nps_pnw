@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet, View, Text, Dimensions, Image } from "react-native";
+import { ScrollView, StyleSheet, View, Text, Dimensions, Image, Pressable } from "react-native";
 
 const { width } = Dimensions.get("window");
 
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     position: "absolute",
     bottom: 0,
-    backgroundColor: "rgba(0,0,0,0.5)", // Background with 50% opacity
+    backgroundColor: "rgba(0,0,0,0.6)", 
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderBottomLeftRadius: 9,
@@ -65,21 +65,26 @@ const styles = StyleSheet.create({
   },
 });
 
-const CarouselItem = ({ title, img }) => (
-    <View style={[styles.item, { backgroundColor: "rgba(0,0,0,0.5)" }]}>
+
+
+const CarouselItem = ({ title, img, navigation}) => (
+  <>
+  <Pressable onPress={() => navigation.navigate("Park")}>
+  <View style={[styles.item, { backgroundColor: "rgba(0,0,0,0.5)" }]}>
+
     <Image source={{ uri: img }} style={{ width: "100%", height: "100%", borderRadius: 9 }} />
     <View style={styles.titleContainer}>
-    <Text style={styles.miniTitle}>See something new</Text>
+      <Text style={styles.miniTitle}>See something new</Text>
       <Text style={styles.title}>{title}</Text>
     </View>
-  </View>
+  </View></Pressable></>
 );
 
 const Dot = ({ active }) => (
   <View style={[styles.dot, active && styles.activeDot]} />
 );
 
-const SwipeCarousel = ({ data }) => {
+const SwipeCarousel = ({ data, navigation }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleScroll = (event) => {
@@ -107,8 +112,9 @@ const SwipeCarousel = ({ data }) => {
         scrollEventThrottle={16} 
       >
         {data.map((item, index) => (
-          <CarouselItem key={index} title={item.title} img={item.img} />
-        ))}
+  <CarouselItem key={index} title={item.title} img={item.img} navigation={navigation} />
+))}
+
       </ScrollView>
       <View style={styles.paginationContainer}>
         {data.map((item, index) => (
