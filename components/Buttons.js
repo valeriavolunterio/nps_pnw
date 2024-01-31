@@ -6,22 +6,6 @@ import { useFonts } from "expo-font";
 
 import { SVGIcons } from "./SVGIcons.js";
 
-const CustomButtonComponent = ({ onPress, title, icons }) => {
-  const [fontsLoaded] = useFonts({
-    ButtonFont: require("../assets/fonts/MPLUS1p-Bold.ttf"),
-  });
-  // Check if fonts are loaded before rendering the component
-  if (!fontsLoaded) {
-    return null; //return a loading indicator here
-  }
-
-  return (
-    <Pressable style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>{title}</Text>
-    </Pressable>
-  );
-};
-
 const styles = StyleSheet.create({
   button: {
     alignItems: "stretch",
@@ -41,30 +25,41 @@ const styles = StyleSheet.create({
   },
 });
 
+const CustomButtonComponent = ({ icon, title, onPress }) => {
+  const [fontsLoaded] = useFonts({
+    ButtonFont: require("../assets/fonts/MPLUS1p-Bold.ttf"),
+  });
+  // Check if fonts are loaded before rendering the component
+  if (!fontsLoaded) {
+    return null; //return a loading indicator here
+  }
+
+  return (
+    <Pressable style={styles.button} onPress={onPress}>
+      {icon}
+      <Text style={styles.text}>{title}</Text>
+    </Pressable>
+  );
+};
+
 export const CustomButtons = {
-  safetyGuide: CustomButtonComponent(
-    (icon = SVGIcons.buttons.safetyGuide),
-    (title = "Pacific Northwest Safety Guide"),
-    ...props
+  safetyGuide: (
+    <CustomButtonComponent
+      icon={SVGIcons.buttons.safetyGuide}
+      title="Pacific Northwest Safety Guide"
+    />
   ),
-  safetyGuide: CustomButtonComponent(
-    (icon = SVGIcons.buttons.safetyGuide),
-    (title = "Pacific Northwest Safety Guide"),
-    ...props
+  alerts: (
+    <CustomButtonComponent icon={SVGIcons.buttons.alerts} title="Alerts" />
   ),
-  safetyGuide: CustomButtonComponent(
-    (icon = SVGIcons.buttons.safetyGuide),
-    (title = "Pacific Northwest Safety Guide"),
-    ...props
+  knowBefore: (
+    <CustomButtonComponent
+      icon={SVGIcons.buttons.knowBefore}
+      title="Know Before"
+    />
   ),
-  safetyGuide: CustomButtonComponent(
-    (icon = SVGIcons.buttons.safetyGuide),
-    (title = "Pacific Northwest Safety Guide"),
-    ...props
-  ),
-  safetyGuide: CustomButtonComponent(
-    (icon = SVGIcons.buttons.safetyGuide),
-    (title = "Pacific Northwest Safety Guide"),
-    ...props
+  place: <CustomButtonComponent icon={SVGIcons.buttons.place} title="Place" />,
+  parkInfo: (
+    <CustomButtonComponent icon={SVGIcons.buttons.parkInfo} title="Park Info" />
   ),
 };
