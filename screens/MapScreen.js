@@ -91,10 +91,6 @@ const MapScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Button
-        title="Go to Park Screen"
-        onPress={() => navigation.navigate("Park")}
-      />
       <MapView style={styles.map}>
         {nationalParksData.map((park) => (
           <Marker key={park.id} coordinate={park.coordinate} title={park.name}>

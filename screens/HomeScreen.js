@@ -16,7 +16,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import SwipeCarousel from "../components/Carousel.js";
 
-const { width } = Dimensions.get("window"); // Define width here
+const { width } = Dimensions.get("window"); 
 
 const styles = StyleSheet.create({
   container: {
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
   },
   beigeBackground: {
     flex: 1,
-    backgroundColor: "#FFF9F5", // Beige color
-    overflow: "hidden", // Clip overflow content
+    backgroundColor: "#FFF9F5", 
+    overflow: "hidden", 
   },
   grayBackground: {
     flex: 1,
@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
   safetyGuideButton: {
     alignItems: "stretch",
     alignSelf: "center",
-    backgroundColor: Colors.baseTeal,
     backgroundColor: Colors.baseTeal,
     padding: 20,
     borderRadius: 5,
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: Colors.lightOffWhite,
     borderRadius: 5,
-    elevation: 5, // Add elevation for drop shadow
+    elevation: 5, 
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.3,
@@ -169,11 +168,11 @@ const HomeScreen = ({ route, navigation }) => {
 
         {/* Carousel Section */}
         <View>
-          <SwipeCarousel data={carouselData} />
+          <SwipeCarousel data={carouselData} navigation={navigation}/>
         </View>
 
         {/* PNW Safety Guide Button */}
-        <TouchableOpacity
+        <Pressable
           style={styles.safetyGuideButton}
           onPress={() => navigation.navigate("SafetyGuide")}
         >
@@ -186,7 +185,7 @@ const HomeScreen = ({ route, navigation }) => {
           <Text style={styles.safetyGuideButtonText}>
             Pacific Northwest Safety Guide
           </Text>
-        </TouchableOpacity>
+        </Pressable>
 
         {/* Icon Grid Section */}
         <View style={styles.row}>
