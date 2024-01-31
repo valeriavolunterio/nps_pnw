@@ -16,7 +16,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import SwipeCarousel from "../components/Carousel.js";
 
-const { width } = Dimensions.get("window"); // Define width here
+const { width } = Dimensions.get("window"); 
 
 const styles = StyleSheet.create({
   container: {
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
   },
   beigeBackground: {
     flex: 1,
-    backgroundColor: "#FFF9F5", // Beige color
-    overflow: "hidden", // Clip overflow content
+    backgroundColor: "#FFF9F5", 
+    overflow: "hidden", 
   },
   grayBackground: {
     flex: 1,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: Colors.lightOffWhite,
     borderRadius: 5,
-    elevation: 5, // Add elevation for drop shadow
+    elevation: 5, 
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.3,
