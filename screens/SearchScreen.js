@@ -8,11 +8,27 @@ const SearchScreen = () => {
   const [showPlaces, setShowPlaces] = useState(false);
 
   const handleSearch = () => {
-    // Implement your search logic here based on searchText, showParks, and showPlaces
-    console.log('Search for:', searchText);
-    console.log('Show Parks:', showParks);
-    console.log('Show Places:', showPlaces);
-    // You can use the values to filter and display search results.
+    // Sample data representing parks and places
+    const data = [
+      { name: 'Whitman Mission National Historic Site', type: 'place' },
+      { name: 'Mount Rainer National Park', type: 'park' },
+      { name: 'Olympic National Park', type: 'park' },
+      { name: 'Lewis and Clark National Historic Park', type: 'park' },
+    ];
+  
+    // Convert searchText to lowercase for case-insensitive comparison
+    const searchTextLower = searchText.toLowerCase();
+  
+    // Filter the data based on search text, showParks, and showPlaces
+    const filteredData = data.filter(item => {
+      const matchesSearchText = item.name.toLowerCase().includes(searchTextLower);
+      const matchesType = (showParks && item.type === 'park') || (showPlaces && item.type === 'place');
+  
+      return matchesSearchText && matchesType;
+    });
+  
+    // Log or use the filteredData for displaying search results
+    console.log('Filtered Data:', filteredData);
   };
 
   return (
