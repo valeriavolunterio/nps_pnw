@@ -3,6 +3,7 @@ import { SafeAreaView, Text, View, StyleSheet, Image } from "react-native";
 import CustomButton from "../../components/Buttons";
 import { Colors } from "../../styles/Colors";
 import { Ionicons } from "@expo/vector-icons";
+import { ScrollView } from "react-native-gesture-handler";
 
 const parkScreenData = [
   {
@@ -14,7 +15,7 @@ const parkScreenData = [
 
 const ParkScreen = ({ route, navigation }) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       {parkScreenData.map((item, index) => (
         <View key={index} style={styles.imageContainer}>
           {item.img && (
@@ -27,8 +28,18 @@ const ParkScreen = ({ route, navigation }) => {
           <View style={styles.overlay}>
             <Text style={styles.title}>{item.title}</Text>
           </View>
+          
         </View>
+       
+
+        
+
+            
+
       ))}
+      <View style={styles.parkEventContainer}>
+
+          </View>
       <CustomButton
         onPress={() => navigation.navigate("Alerts")}
         title="Active Alerts"
@@ -45,7 +56,7 @@ const ParkScreen = ({ route, navigation }) => {
         onPress={() => navigation.navigate("Park")}
         title="Park Information"
       />
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
@@ -77,6 +88,11 @@ const styles = StyleSheet.create({
     textAlign: "left", // Align title text to the right
     fontSize: 22,
   },
+  parkEventContainer: {
+    backgroundColor: "#FBF3EE",
+    height: 150,
+    marginBottom: 50,
+  }
 });
 
 export default ParkScreen;
