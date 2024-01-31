@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Pressable,
-  SafeAreaView,
+  //SafeAreaView,
   View,
   Text,
   ScrollView,
   Dimensions,
   Image,
+  //Fonts,
+  Linking,
 } from "react-native";
-import { Button, ButtonGroup } from "@rneui/themed";
-import { Fonts } from "../../styles/Fonts";
-
+import { useFonts } from "expo-font";
 import { Colors } from "../../styles/Colors";
 import Svg, { Polygon } from "react-native-svg";
+import { Ionicons } from "@expo/vector-icons";
 
 const { width } = Dimensions.get("window"); // Define width here
 
@@ -22,67 +23,58 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#D3D8DA",
   },
-  headerContainer: {
-    alignItems: "center",
-  },
-  headerText: {
-    fontWeight: "bold",
-    marginLeft: 60,
-    fontSize: 16,
-    //...Fonts.subheading,
-  },
-  subHeading: {
-    margin: 20,
-
-    fontWeight: "bold",
-    fontSize: 14,
+  iconContainer: {
+    flex: 1,
+    flexDirection: "row",
+    marginLeft: 30,
+    marginBottom: -50,
   },
   beigeBackground: {
     flex: 1,
-    //flexDirection: "row",
     backgroundColor: "#FFF9F5", // Beige color
     overflow: "hidden", // Clip overflow content
     width: "100%",
+    paddingTop: 20,
   },
+  headerContainer: {
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  headerText: {
+    marginTop: 26,
+    marginLeft: 60,
+    fontSize: 16,
+    fontFamily: "OpenSans-SemiBold",
+    flexDirection: "row",
+  },
+  subHeading: {
+    margin: 20,
+    marginLeft: 25,
+    fontWeight: "bold",
+    fontSize: 14,
+    fontFamily: "OpenSans-SemiBold",
+  },
+
   listItemContainer: {
     flexDirection: "row",
     alignItems: "center",
+    flexWrap: "wrap",
   },
 
   listHeading: {
     marginBottom: 2,
-    fontWeight: 400,
+    fontWeight: "400",
     fontSize: 18,
-    ...Fonts.header3,
-  },
-  listSubHeading: {
-    marginRight: 130,
-    marginBottom: 18,
-    fontWeight: 700,
-    //...Fonts.body2,
-    fontStyle: "italic",
+    fontFamily: "MPLUS1-Regular",
   },
   listItemText: {
-    ...Fonts.body,
-    // marginTop: 20,
-    // marginLeft: 20,
     marginBottom: -5,
-    //paddingTop: 10,
-    //margin: 10,
+    //marginLeft: 10,
   },
-  listItemText2: {
-    ...Fonts.body,
-    // marginTop: 20,
-    // marginLeft: 20,
-    marginBottom: -5,
-    paddingTop: 10,
-    //margin: 10,
-  },
+
   readMore: {
     flexDirection: "row-reverse",
-    //...Fonts.subheading,
     ...Colors.darkGray,
-    textDecorationLine: "underline",
   },
   svgTriangle: {
     flex: 1,
@@ -126,15 +118,53 @@ const styles = StyleSheet.create({
     marginTop: -50,
     marginRight: 10,
   },
+  wildlifeImageContainer: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  wildlifeImage: {
+    width: 71, // Set the width of the image
+    height: 89, // Set the height of the image
+    resizeMode: "cover", // Adjust as needed
+    marginBottom: -175,
+    marginRight: 30,
+    marginLeft: 5,
+  },
+  bearImageContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "flex-end",
+  },
+  bearlifeImage: {
+    width: 92, // Set the width of the image
+    height: 112, // Set the height of the image
+    resizeMode: "cover", // Adjust as needed
+    marginBottom: -350,
+    marginRight: 15,
+  },
 });
 
 const SafetyGuideScreen = ({ route, navigation }) => {
+  const [fontsLoaded] = useFonts({
+    "Stoke-Regular": require("../../assets/fonts/Stoke-Regular.ttf"),
+    "OpenSans-SemiBold": require("../../assets/fonts/OpenSans-SemiBold.ttf"),
+    ButtonFont: require("../../assets/fonts/MPLUS1p-Bold.ttf"),
+    "MPLUS1-Regular": require("../../assets/fonts/MPLUS1-Regular.ttf"),
+  });
+  // Check if fonts are loaded before rendering the component
+  if (!fontsLoaded) {
+    return null; //return a loading indicator here
+  }
+
   return (
     <ScrollView>
       <View style={styles.headerContainer}>
         <View style={styles.beigeBackground}>
-          <Text style={styles.headerText}> Dial 911 for Emergencies </Text>
           <View>
+            <View style={styles.iconContainer}>
+              <Ionicons name="ios-warning" size={24} color={Colors.darkRed} />
+            </View>
+            <Text style={styles.headerText}> Dial 911 for Emergencies </Text>
             <Text style={styles.subHeading}>
               Olympic is a wilderness park filled with natural wonders and
               potential hazards. Your safety is not guaranteed. Regulations are
@@ -159,15 +189,26 @@ const SafetyGuideScreen = ({ route, navigation }) => {
           />
         </View>
         <Text style={styles.listHeading}>Tides and Your Safety</Text>
-        <Text style={styles.listSubHeading}>
-          <Text style={{ fontWeight: "bold" }}>Always</Text> carry a tide table,
-          topographic map, and keep track of the time whenever hiking along
-          Olympic's coast
-        </Text>
+        <View>
+          <Text
+            style={{
+              //flexDirection: "row-reverse",
+              marginRight: 110,
+              marginBottom: 25,
+              //marginTop: 13,
+              fontWeight: "600",
+              fontFamily: "OpenSans-SemiBold",
+              fontStyle: "italic",
+            }}
+          >
+            <Text style={{ fontStyle: "italic" }}>Always</Text> carry a tide
+            table, topographic map, and keep track of the time whenever hiking
+            along Olympic's coast
+          </Text>
+        </View>
 
         <View style={styles.listItemContainer}>
-          {/* <Text style={{ fontSize: 20, marginBottom: 55 }}>{"\u2022"}</Text> */}
-          <Text style={styles.listItemText2}>
+          <Text style={styles.listItemText}>
             {"\u2022"}Several points along the coast are only passable at lower
             tides. Check the NOAA Tide Predictions to see if your chosen days
             are appropriate for coastal travel.{"\n"}
@@ -190,22 +231,55 @@ const SafetyGuideScreen = ({ route, navigation }) => {
           </Text>
         </View>
         <View style={styles.readMore}>
-          <Pressable>
-            <Text>Read More</Text>
+          <Pressable
+            onPress={() => {
+              Linking.openURL(
+                "https://www.nps.gov/olym/planyourvisit/tides-and-your-safety.htm"
+              );
+            }}
+          >
+            <Text style={{ textDecorationLine: "underline" }}>Read More</Text>
           </Pressable>
         </View>
       </View>
       <View style={styles.cardContainer}>
+        <View style={styles.wildlifeImageContainer}>
+          <Image
+            style={styles.wildlifeImage}
+            source={require("../../assets/wildlife.png")}
+          />
+        </View>
         <Text style={styles.listHeading}>Wildlife Safety</Text>
-        <Text style={styles.listSubHeading}>
-          <Text style={{ fontWeight: "bold" }}>
-            All park wildlife are potentially dangerous to humans and can
-            sometimes be unpredictable.
-          </Text>
+        <Text
+          style={{
+            flexDirection: "row-reverse",
+            marginRight: 95,
+            marginBottom: 8,
+            marginTop: 13,
+            fontWeight: "700",
+            fontFamily: "OpenSans-SemiBold",
+          }}
+        >
+          All park wildlife are potentially dangerous to humans and can
+          sometimes be unpredictable.
         </Text>
         <View style={styles.listItemContainer}>
-          {/* <Text style={{ fontSize: 20, marginBottom: 55 }}>{"\u2022"}</Text> */}
+          <Text
+            style={{
+              flexDirection: "row-reverse",
+              marginRight: 95,
+              marginBottom: 18,
+              fontWeight: "400",
+              fontStyle: "italic",
+            }}
+          >
+            Here are some basic guidelines that may help lessen the threat of
+            danger and will help to keep wildlife wild:
+          </Text>
+        </View>
+        <View style={styles.listItemContainer}>
           <Text style={styles.listItemText}>
+            {/* <Text style={{ fontSize: 20, marginBottom: 55 }}>{"\u2022"}</Text> */}
             {"\u2022"}
             <Text style={{ fontWeight: "bold" }}>
               Observe wildlife from a distance.
@@ -221,33 +295,60 @@ const SafetyGuideScreen = ({ route, navigation }) => {
         </View>
         <View style={styles.listItemContainer}>
           <Text style={styles.listItemText}>
-            {"\u2022"}Never feed wild animals. This includes all park animals:
-            birds, squirrels, marmots, deer, elk, otters etc., not just bears.
-            Learning to beg for and/or rely on human foods is extremely harmful
-            for all wild animals, big or small. Be careful not to leave
-            wrappers, crumbs, or other food trash after picnicking or snacking
-            on the trails. Feeding wildlife damages their health, alters natural
-            behaviors, and exposes them to predators and other dangers. Feeding
-            wildlife can also increase risks to you and other visitors.{"\n"}{" "}
+            {"\u2022"}
+            <Text style={{ fontWeight: "bold" }}>
+              Never feed wild animals.
+            </Text>{" "}
+            This includes all park animals: birds, squirrels, marmots, deer,
+            elk, otters etc., not just bears. Learning to beg for and/or rely on
+            human foods is extremely harmful for all wild animals, big or small.
+            Be careful not to leave wrappers, crumbs, or other food trash after
+            picnicking or snacking on the trails. Feeding wildlife damages their
+            health, alters natural behaviors, and exposes them to predators and
+            other dangers. Feeding wildlife can also increase risks to you and
+            other visitors.{"\n"}{" "}
           </Text>
         </View>
         <View style={styles.listItemContainer}>
           <Text style={styles.listItemText}>
-            {"\u2022"}Avoid wildlife during sensitive times.This includes times
-            when animals are mating, nesting, raising young, and during the
-            winter.{"\n"}
+            {"\u2022"}
+            <Text style={{ fontWeight: "bold" }}>
+              Avoid wildlife during sensitive times.
+            </Text>
+            This includes times when animals are mating, nesting, raising young,
+            and during the winter.{"\n"}
           </Text>
         </View>
         <View style={styles.readMore}>
-          <Pressable>
-            <Text>Read More</Text>
+          <Pressable
+            onPress={() => {
+              Linking.openURL(
+                "https://www.nps.gov/olym/planyourvisit/wilderness-food-storage.htm"
+              );
+            }}
+          >
+            <Text style={{ textDecorationLine: "underline" }}>Read More</Text>
           </Pressable>
         </View>
       </View>
+
       <View style={styles.cardContainer}>
         <Text style={styles.listHeading}>Bears</Text>
-        <Text style={styles.listSubHeading}>
-          <Text>
+        <View style={styles.bearImageContainer}>
+          <Image
+            style={styles.bearlifeImage}
+            source={require("../../assets/bears.png")}
+          />
+        </View>
+        <Text
+          style={{
+            marginBottom: 18,
+            fontWeight: "700",
+            fontStyle: "italic",
+            fontFamily: "OpenSans-SemiBold",
+          }}
+        >
+          <Text style={{ color: "#681A0E" }}>
             Minimize bear encounters: keep a clean camp and store food properly.
           </Text>
         </Text>
@@ -260,17 +361,33 @@ const SafetyGuideScreen = ({ route, navigation }) => {
             There have been several instances of aggressive bears in the
             Olympics. No injuries have been reported, but property was damaged
             and bears have acted in a threatening manner. If you meet a bear on
-            the trail, give it a wide berth. If a bear comes into camp, make
-            noise to scare the bear away. If it is intent on getting your food
-            or other property, do not risk injury. In the face of repeated
-            encounters, leave the area, with or without your property as
-            appropriate. Notify park staff in all instances of food loss or
-            property damage, or any other threatening acts by bears.{"\n"}
+            the trail, give it a wide berth. If a bear
+          </Text>
+          <Text
+            style={{
+              flexDirection: "row-reverse",
+              paddingRight: 110,
+              fontWeight: "400",
+              fontStyle: "italic",
+            }}
+          >
+            comes into camp, make noise to scare the bear away. If it is intent
+            on getting your food or other property, do not risk injury. In the
+            face of repeated encounters, leave the area, with or without your
+            property as appropriate. Notify park staff in all instances of food
+            loss or property damage, or any other threatening acts by bears.
+            {"\n"}
           </Text>
         </View>
         <View style={styles.readMore}>
-          <Pressable>
-            <Text>Read More</Text>
+          <Pressable
+            onPress={() => {
+              Linking.openURL(
+                "https://www.nps.gov/olym/planyourvisit/wilderness-food-storage.htm"
+              );
+            }}
+          >
+            <Text style={{ textDecorationLine: "underline" }}>Read More</Text>
           </Pressable>
         </View>
       </View>
