@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   bearImageContainer: {
-    flex: 1,
+    //flex: 1,
     justifyContent: "center",
     alignItems: "flex-end",
   },

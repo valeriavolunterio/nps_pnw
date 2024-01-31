@@ -34,7 +34,7 @@ const ParkScreen = ({ route, navigation }) => {
         title="Active Alerts"
       />
       <CustomButton
-        onPress={() => navigation.navigate("Park")}
+        onPress={() => navigation.navigate("SafetyGuide")}
         title="Know Before You Go"
       />
       <CustomButton
@@ -80,4 +80,3 @@ const styles = StyleSheet.create({
 });
 
 export default ParkScreen;
-
