@@ -44,6 +44,27 @@ const styles = StyleSheet.create({
 export const CustomButtons = {
   safetyGuide: CustomButtonComponent(
     (icon = SVGIcons.buttons.safetyGuide),
-    (title = "Pacific Northwest Safety Guide")
+    (title = "Pacific Northwest Safety Guide"),
+    ...props
+  ),
+  safetyGuide: CustomButtonComponent(
+    (icon = SVGIcons.buttons.safetyGuide),
+    (title = "Pacific Northwest Safety Guide"),
+    ...props
+  ),
+  safetyGuide: CustomButtonComponent(
+    (icon = SVGIcons.buttons.safetyGuide),
+    (title = "Pacific Northwest Safety Guide"),
+    ...props
+  ),
+  safetyGuide: CustomButtonComponent(
+    (icon = SVGIcons.buttons.safetyGuide),
+    (title = "Pacific Northwest Safety Guide"),
+    ...props
+  ),
+  safetyGuide: CustomButtonComponent(
+    (icon = SVGIcons.buttons.safetyGuide),
+    (title = "Pacific Northwest Safety Guide"),
+    ...props
   ),
 };
