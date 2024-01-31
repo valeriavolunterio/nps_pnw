@@ -3805,9 +3805,6 @@ fs-monkey@^1.0.3:
 fs.realpath@^1.0.0:
   version "1.0.0"
 
-fsevents@^2.3.2, fsevents@~2.3.2:
-  version "2.3.3"
-
 function-bind@^1.1.1:
   version "1.1.1"
 
@@ -4486,9 +4483,6 @@ launch-editor@^2.6.0:
 
 leven@^3.1.0:
   version "3.1.0"
-
-lightningcss-darwin-arm64@1.19.0:
-  version "1.19.0"
 
 lightningcss@~1.19.0:
   version "1.19.0"
