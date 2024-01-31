@@ -4,7 +4,9 @@ import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 
-const CustomButton = ({ onPress, title, icons }) => {
+import { SVGIcons } from "./SVGIcons.js";
+
+const CustomButtonComponent = ({ onPress, title, icons }) => {
   const [fontsLoaded] = useFonts({
     ButtonFont: require("../assets/fonts/MPLUS1p-Bold.ttf"),
   });
@@ -39,4 +41,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomButton;
+export const CustomButtons = {
+  safetyGuide: CustomButtonComponent(
+    (icon = SVGIcons.buttons.safetyGuide),
+    (title = "Pacific Northwest Safety Guide")
+  ),
+};
