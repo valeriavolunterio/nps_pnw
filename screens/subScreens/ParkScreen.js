@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, Text, View, StyleSheet, Image } from "react-native";
-import CustomButton from "../../components/Buttons";
+import { TealButton } from "../../components/TealButton";
 import { Colors } from "../../styles/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
@@ -30,23 +30,10 @@ const ParkScreen = ({ route, navigation }) => {
           </View>
           
         </View>
-       
-
-        
-
-            
-
       ))}
-      <View style={styles.parkEventContainer}>
-
-          </View>
-      <CustomButton
-        onPress={() => navigation.navigate("Alerts")}
-        title="Active Alerts"
-      />
-      <CustomButton
-        onPress={() => navigation.navigate("Park")}
-        title="Know Before You Go"
+      <TealButton.alerts onPress={() => navigation.navigate("Alerts")} />
+      <TealButton.knowBefore
+        onPress={() => navigation.navigate("SafetyGuide")}
       />
       <CustomButton
         onPress={() => navigation.navigate("Park")}
@@ -56,7 +43,7 @@ const ParkScreen = ({ route, navigation }) => {
         onPress={() => navigation.navigate("Park")}
         title="Park Information"
       />
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -96,4 +83,3 @@ const styles = StyleSheet.create({
 });
 
 export default ParkScreen;
-
