@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, Text, View, StyleSheet, Image } from "react-native";
-import CustomButton from "../../components/Buttons";
+import { TealButton } from "../../components/TealButton";
 import { Colors } from "../../styles/Colors";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -29,22 +29,12 @@ const ParkScreen = ({ route, navigation }) => {
           </View>
         </View>
       ))}
-      <CustomButton
-        onPress={() => navigation.navigate("Alerts")}
-        title="Active Alerts"
+      <TealButton.alerts onPress={() => navigation.navigate("Alerts")} />
+      <TealButton.knowBefore
+        onPress={() => navigation.navigate("SafetyGuide")}
       />
-      <CustomButton
-        onPress={() => navigation.navigate("Park")}
-        title="Know Before You Go"
-      />
-      <CustomButton
-        onPress={() => navigation.navigate("Park")}
-        title="Places to See"
-      />
-      <CustomButton
-        onPress={() => navigation.navigate("Park")}
-        title="Park Information"
-      />
+      <TealButton.places onPress={() => navigation.navigate("Place")} />
+      <TealButton.parkInfo onPress={() => navigation.navigate("SafetyGuide")} />
     </SafeAreaView>
   );
 };
@@ -80,4 +70,3 @@ const styles = StyleSheet.create({
 });
 
 export default ParkScreen;
-
