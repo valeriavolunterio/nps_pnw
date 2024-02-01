@@ -3,6 +3,7 @@ import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 
 import { Colors } from "../../styles/Colors";
 import { Fonts } from "../../styles/Fonts";
+import { SVGIcons } from "../../components/SVGIcons";
 
 const placeData = [
   {
@@ -20,6 +21,24 @@ const placeData = [
         "Open Friday-Sunday, 10 AM to 4:30 PM and closed January/February.",
       hoursCont: "Open daily in summer; Hours vary according to season.",
     },
+    amenities: [
+      "parking",
+      "restrooms",
+      "water",
+      "information",
+      "permits",
+      "picnic",
+      "accessible",
+      "souvenirs",
+    ],
+    experiences: [
+      "hiking",
+      "fishing",
+      "kayak",
+      "trails",
+      "wildlife",
+      "camping",
+    ],
   },
   // Add more place data as needed
 ];
@@ -34,6 +53,16 @@ const PlaceScreen = ({ route, navigation }) => {
       </SafeAreaView>
     );
   }
+
+  // Function to get the SVG icon for an amenity
+  const getSVGIcon = (type, name) => {
+    if (SVGIcons[type][name]) {
+      const IconComponent = SVGIcons[type][name];
+      return <IconComponent />;
+    }
+    // Return a default icon or handle the case when the amenity name doesn't match any icon
+    return <View></View>;
+  };
 
   return (
     <SafeAreaView>
@@ -64,11 +93,27 @@ const PlaceScreen = ({ route, navigation }) => {
         </View>
         <View>
           <Text>Amenities</Text>
-          {/* Map amenities */}
+          {place.amenities.map((amenity, index) => (
+            <View
+              key={index}
+              style={{ flexDirection: "row", alignItems: "center" }}
+            >
+              {getSVGIcon("amenities", amenity)}
+              <Text>{amenity}</Text>
+            </View>
+          ))}
         </View>
         <View>
           <Text>Experiences</Text>
-          {/* Map experiences */}
+          {place.experiences.map((experience, index) => (
+            <View
+              key={index}
+              style={{ flexDirection: "row", alignItems: "center" }}
+            >
+              {getSVGIcon("experiences", experience)}
+              <Text>{experience}</Text>
+            </View>
+          ))}
         </View>
       </View>
     </SafeAreaView>
