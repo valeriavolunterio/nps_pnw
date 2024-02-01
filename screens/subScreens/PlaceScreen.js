@@ -74,4 +74,35 @@ const PlaceScreen = ({ route, navigation }) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#FFF9F5",
+    flex: 1,
+  },
+  imageContainer: {
+    marginBottom: 20,
+    position: "relative",
+  },
+  parkImage: {
+    width: "100%",
+    height: 225,
+  },
+  overlay: {
+    position: "absolute",
+    bottom: 0,
+    backgroundColor: "rgba(0,0,0,0.6)",
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    paddingBottom: 25,
+    width: "100%",
+  },
+  title: {
+    fontFamily: "Stoke-Regular",
+    color: "#fff",
+    textAlign: "left",
+    fontSize: 22,
+  },
+});
+
 export default PlaceScreen;

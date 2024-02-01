@@ -85,9 +85,7 @@ const MapScreen = ({ navigation }) => {
     // Handle directions button press
   };
 
-  const handleViewPage = () => {
-    // Handle view page button press
-  };
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -113,8 +111,8 @@ const MapScreen = ({ navigation }) => {
                 >
                   <Text style={styles.buttonText} color={Colors.darkGreen} >Directions</Text>
                 </Pressable>
-                <Pressable style={styles.button} onPress={handleViewPage}>
-                  <Text style={styles.buttonText}>View Page</Text>
+                <Pressable style={styles.button}>
+                  <Text onPress={() => navigation.navigate("Park")} style={styles.buttonText}>View Page</Text>
                 </Pressable>
               </View>
             </Callout>
