@@ -9,6 +9,12 @@ const parkScreenData = [
     miniTitle: "See Something New",
     title: "Olympic National Park",
     img: "https://www.nps.gov/npgallery/GetAsset/41e9450b-1dd8-b71b-0b41-ae6ab257056e/proxy/hires?",
+    places: [
+      "Hoh Rain Forest",
+      "Hurricane Ridge",
+      "Kaloch and Ruby Beach",
+      "Sol Duc Valley",
+    ],
   },
 ];
 
