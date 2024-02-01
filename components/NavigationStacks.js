@@ -13,7 +13,7 @@ import PassportScreen from "../screens/PassportScreen.js";
 
 import ParkScreen from "../screens/subScreens/ParkScreen.js";
 import PlaceScreen from "../screens/subScreens/PlaceScreen.js";
-import PlacesScreen from "../screens/subScreens/PlacesScreen.js";
+// import PlacesScreen from "../screens/subScreens/PlacesScreen.js";
 import SafetyGuideScreen from "../screens/subScreens/SafetyGuideScreen.js";
 import SavesScreen from "../screens/subScreens/SavesScreen.js";
 import AlertsScreen from "../screens/subScreens/AlertsScreen.js";
@@ -64,7 +64,7 @@ const HomeStack = () => {
           },
         }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Places"
         component={PlacesScreen}
         options={{
@@ -73,7 +73,7 @@ const HomeStack = () => {
             backgroundColor: Colors.nestedScreenColor,
           },
         }}
-      />
+      /> */}
       <Stack.Screen
         name="SafetyGuide"
         component={SafetyGuideScreen}
