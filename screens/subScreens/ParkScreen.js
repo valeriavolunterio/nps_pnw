@@ -43,7 +43,7 @@ const ParkScreen = ({ route, navigation }) => {
         onPress={() => navigation.navigate("Park")}
         title="Park Information"
       />
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
