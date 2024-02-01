@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, Text } from "react-native";
+import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 
 import { Colors } from "../../styles/Colors";
 import { Fonts } from "../../styles/Fonts";

@@ -13,6 +13,7 @@ import PassportScreen from "../screens/PassportScreen.js";
 
 import ParkScreen from "../screens/subScreens/ParkScreen.js";
 import PlaceScreen from "../screens/subScreens/PlaceScreen.js";
+import PlacesScreen from "../screens/subScreens/PlacesScreen.js";
 import SafetyGuideScreen from "../screens/subScreens/SafetyGuideScreen.js";
 import SavesScreen from "../screens/subScreens/SavesScreen.js";
 import AlertsScreen from "../screens/subScreens/AlertsScreen.js";
@@ -20,8 +21,6 @@ import NewsScreen from "../screens/subScreens/NewsScreen.js";
 import EventsScreen from "../screens/subScreens/EventsScreen";
 import PassportEditScreen from "../screens/subScreens/PassportEditScreen";
 import SettingsScreen from "../screens/subScreens/SettingsScreen.js";
-
-import PlaceScreen from "../screens/subScreens/PlaceScreen.js"
 
 import { SettingsButton } from "./SettingsButton.js";
 import { BackButton } from "./BackButton.js";
@@ -67,7 +66,7 @@ const HomeStack = () => {
       />
       <Stack.Screen
         name="Places"
-        component={PlaceScreen}
+        component={PlacesScreen}
         options={{
           title: "Places to See",
           headerStyle: {
