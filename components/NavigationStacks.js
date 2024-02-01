@@ -12,6 +12,8 @@ import SearchScreen from "../screens/SearchScreen.js";
 import PassportScreen from "../screens/PassportScreen.js";
 
 import ParkScreen from "../screens/subScreens/ParkScreen.js";
+import PlaceScreen from "../screens/subScreens/PlaceScreen.js";
+// import PlacesScreen from "../screens/subScreens/PlacesScreen.js";
 import SafetyGuideScreen from "../screens/subScreens/SafetyGuideScreen.js";
 import SavesScreen from "../screens/subScreens/SavesScreen.js";
 import AlertsScreen from "../screens/subScreens/AlertsScreen.js";
@@ -19,8 +21,6 @@ import NewsScreen from "../screens/subScreens/NewsScreen.js";
 import EventsScreen from "../screens/subScreens/EventsScreen";
 import PassportEditScreen from "../screens/subScreens/PassportEditScreen";
 import SettingsScreen from "../screens/subScreens/SettingsScreen.js";
-
-import PlaceScreen from "../screens/subScreens/PlaceScreen.js"
 
 import { SettingsButton } from "./SettingsButton.js";
 import { BackButton } from "./BackButton.js";
@@ -52,21 +52,28 @@ const HomeStack = () => {
         name="Park"
         component={ParkScreen}
         options={{
-          headerStyle: {
-            backgroundColor: Colors.lightTeal,
-          },
+          headerTransparent: true,
         }}
       />
       <Stack.Screen
-        name="Places"
+        name="Place"
         component={PlaceScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.baseTeal,
+          },
+        }}
+      />
+      {/* <Stack.Screen
+        name="Places"
+        component={PlacesScreen}
         options={{
           title: "Places to See",
           headerStyle: {
             backgroundColor: Colors.nestedScreenColor,
           },
         }}
-      />
+      /> */}
       <Stack.Screen
         name="SafetyGuide"
         component={SafetyGuideScreen}
@@ -149,9 +156,7 @@ const MapStack = () => {
         name="Park"
         component={ParkScreen}
         options={{
-          headerStyle: {
-            backgroundColor: Colors.green,
-          },
+          headerTransparent: true,
         }}
       />
       <Stack.Screen
@@ -180,13 +185,18 @@ const SearchStack = () => {
         name="Park"
         component={ParkScreen}
         options={{
-          headerStyle: {
-            backgroundColor: Colors.lightTeal,
-          },
-          headerRight: "",
+          headerTransparent: true,
         }}
       />
-      {/* <Stack.Screen name="Place" component={PlaceScreen} /> */}
+      <Stack.Screen
+        name="Place"
+        component={PlaceScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.baseTeal,
+          },
+        }}
+      />
       <Stack.Screen
         name="Settings"
         component={SettingsScreen}
