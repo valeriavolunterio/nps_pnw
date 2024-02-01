@@ -12,6 +12,7 @@ import SearchScreen from "../screens/SearchScreen.js";
 import PassportScreen from "../screens/PassportScreen.js";
 
 import ParkScreen from "../screens/subScreens/ParkScreen.js";
+import PlaceScreen from "../screens/subScreens/PlaceScreen.js";
 import SafetyGuideScreen from "../screens/subScreens/SafetyGuideScreen.js";
 import SavesScreen from "../screens/subScreens/SavesScreen.js";
 import AlertsScreen from "../screens/subScreens/AlertsScreen.js";
@@ -50,8 +51,15 @@ const HomeStack = () => {
         name="Park"
         component={ParkScreen}
         options={{
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="Place"
+        component={PlaceScreen}
+        options={{
           headerStyle: {
-            backgroundColor: Colors.lightTeal,
+            backgroundColor: Colors.baseTeal,
           },
         }}
       />
@@ -137,9 +145,7 @@ const MapStack = () => {
         name="Park"
         component={ParkScreen}
         options={{
-          headerStyle: {
-            backgroundColor: Colors.green,
-          },
+          headerTransparent: true,
         }}
       />
       <Stack.Screen
@@ -168,13 +174,18 @@ const SearchStack = () => {
         name="Park"
         component={ParkScreen}
         options={{
-          headerStyle: {
-            backgroundColor: Colors.lightTeal,
-          },
-          headerRight: "",
+          headerTransparent: true,
         }}
       />
-      {/* <Stack.Screen name="Place" component={PlaceScreen} /> */}
+      <Stack.Screen
+        name="Place"
+        component={PlaceScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.baseTeal,
+          },
+        }}
+      />
       <Stack.Screen
         name="Settings"
         component={SettingsScreen}
