@@ -4,47 +4,29 @@ import CustomButton from "../../components/Buttons";
 import { Colors } from "../../styles/Colors";
 import { Ionicons } from "@expo/vector-icons";
 
-const parkScreenData = [
+const placeScreenData = [
   {
     miniTitle: "See Something New",
-    title: "Olympic National Park",
-    img: "https://www.nps.gov/npgallery/GetAsset/41e9450b-1dd8-b71b-0b41-ae6ab257056e/proxy/hires?",
+    title: "Hoh Rain Forest",
   },
 ];
 
-const ParkScreen = ({ route, navigation }) => {
+const PlaceScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      {parkScreenData.map((item, index) => (
+      <View >
+      {placeScreenData.map((item, index) => (
+          <Text>{item.title}</Text>
+        ))}
+      
+      </View>
+      {placeScreenData.map((item, index) => (
         <View key={index} style={styles.imageContainer}>
-          {item.img && (
-            <Image
-              source={{ uri: item.img }}
-              style={styles.parkImage}
-              resizeMode="cover"
-            />
-          )}
           <View style={styles.overlay}>
             <Text style={styles.title}>{item.title}</Text>
           </View>
         </View>
       ))}
-      <CustomButton
-        onPress={() => navigation.navigate("Alerts")}
-        title="Active Alerts"
-      />
-      <CustomButton
-        onPress={() => navigation.navigate("Park")}
-        title="Know Before You Go"
-      />
-      <CustomButton
-        onPress={() => navigation.navigate("Park")}
-        title="Places to See"
-      />
-      <CustomButton
-        onPress={() => navigation.navigate("Park")}
-        title="Park Information"
-      />
     </SafeAreaView>
   );
 };
@@ -73,11 +55,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "Stoke-Regular",
-    color: "#fff", // Title text color
-    textAlign: "left", // Align title text to the right
+    color: "#fff",
+    textAlign: "left",
     fontSize: 22,
   },
 });
 
-export default ParkScreen;
+export default PlaceScreen;
 
