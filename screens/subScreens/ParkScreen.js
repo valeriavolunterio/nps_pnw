@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, Text, View, StyleSheet, Image } from "react-native";
+import {
+  SafeAreaView,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Pressable,
+  Dimensions
+} from "react-native";
 import { TealButton } from "../../components/TealButton";
 import { Colors } from "../../styles/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
+import RoundedButton from "../../components/RoundedButton";
+import ToggleButton from "../../components/ToggleButtons";
+
+const { width } = Dimensions.get("window");
 
 const parkScreenData = [
   {
@@ -28,18 +40,87 @@ const ParkScreen = ({ route, navigation }) => {
           <View style={styles.overlay}>
             <Text style={styles.title}>{item.title}</Text>
           </View>
-          
         </View>
       ))}
+      <View style={styles.actionBtnContainer}>
+        <View style={styles.actionBtns}>
+          <View style={{ paddingHorizontal: 10 }}>
+            <ToggleButton
+              type="favorite"
+              color={Colors.sepia}
+              buttonSize={48}
+              toggleState={true}
+            />
+          </View>
+          <View>
+            <ToggleButton
+              type="bookmark"
+              color={Colors.baseTeal}
+              buttonSize={48}
+              toggleState={true}
+            />
+          </View>
+          <View style={{ paddingHorizontal: 10 }}>
+            <ToggleButton
+              type="share"
+              color={Colors.green}
+              buttonSize={48}
+              toggleState={false}
+            />
+          </View>
+        </View>
+      </View>
+      <View style={styles.parkStatus}>
+        <View style={styles.showInMapBtn}>
+          <RoundedButton
+            type="pin"
+            text="Show in Map"
+            onPress={() => navigation.navigate("Map")}
+          />
+          <Text style={{ color: Colors.green, fontSize: 18 }}>Open Today:</Text>
+          <Text style={{ color: Colors.black, fontSize: 18 }}>24 Hours</Text>
+        </View>
+        <View>
+          <Text
+            style={{
+              color: Colors.darkGray,
+              fontSize: 12,
+              textAlign: "right",
+              paddingRight: 20,
+            }}
+          >
+            Entrance Pass Required
+          </Text>
+        </View>
+      </View>
+
+       {/* Park Events Section*/}
+
+      <View style={styles.parkEvents}>
+            <View style={styles.parkEventsDate}>
+            <Text style={{ color: Colors.green, fontSize: 18 }}>MAR</Text>
+          <Text style={{ color: Colors.green, fontSize: 18, paddingLeft: 5}}>24</Text>
+          <View style={styles.parkEventsText}>
+            <Text style={{ color: Colors.black, fontSize: 14, fontWeight:"bold"}}>Hurricane Ridge "It's Your Moon!" Telescope Program</Text>
+            <Text style={{ color: Colors.black, fontSize: 14}}>7:30 PM - 8:30 PM</Text>
+          </View>
+
+            </View>
+      </View>
+
+      <View style={styles.aboutPark}>
+        <Text>About This Park</Text>
+
+      </View>
       <TealButton.alerts onPress={() => navigation.navigate("Alerts")} />
       <TealButton.knowBefore
         onPress={() => navigation.navigate("SafetyGuide")}
       />
-      <CustomButton
+      <TealButton.places
         onPress={() => navigation.navigate("Park")}
         title="Places to See"
       />
-      <CustomButton
+      <TealButton.parkInfo
         onPress={() => navigation.navigate("Park")}
         title="Park Information"
       />
@@ -53,12 +134,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imageContainer: {
-    marginBottom: 20,
     position: "relative",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3.84,
+    zIndex: 99,
   },
   parkImage: {
     width: "100%",
-    height: 225,
+    height: 200,
   },
   overlay: {
     position: "absolute",
@@ -75,11 +163,74 @@ const styles = StyleSheet.create({
     textAlign: "left", // Align title text to the right
     fontSize: 22,
   },
-  parkEventContainer: {
+  actionBtnContainer: {
+    position: "absolute",
+    top: 180,
+    right: 10,
+    zIndex: 99,
+  },
+  actionBtns: {
+    zIndex: 99,
+    flexDirection: "row",
+  },
+  parkStatus: {
     backgroundColor: "#FBF3EE",
-    height: 150,
-    marginBottom: 50,
-  }
+    height: 100,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+  },
+  parkEvents: {
+    backgroundColor: "#FBF3EE",
+    height: 100,
+    width: width - 50,
+    justifyContent: "center",
+    alignSelf: "center",
+    marginVertical: 10,
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.35,
+    shadowRadius: 2,
+    borderRadius: 10,
+  },
+  parkEventsDate: {
+    paddingLeft: 20,
+    marginTop: 10,
+  },
+  parkEventsText: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 30,
+    paddingRight: 10,
+    marginBottom: 10,
+  },
+  aboutPark: {
+    backgroundColor: "#FBF3EE",
+    height: 200,
+    width: width - 50,
+    justifyContent: "center",
+    alignSelf: "center",
+    marginVertical: 20,
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.35,
+    shadowRadius: 2,
+    borderRadius: 10,
+  },  
+  showInMapBtn: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingTop: 35,
+    width: "100%",
+  },
 });
 
 export default ParkScreen;

@@ -3,6 +3,7 @@ import React from "react";
 import { Pressable, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../styles/Colors";
+import { Fonts } from "../styles/Fonts";
 
 const RoundedButton = ({ type, text, onPress }) => {
   const styles = {
@@ -16,9 +17,10 @@ const RoundedButton = ({ type, text, onPress }) => {
       elevation: 2,
       shadowColor: Colors.black,
       shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 1,
+      shadowOpacity: 0.25,
       shadowRadius: 2,
       marginLeft: 10,
+      
     },
   };
 
@@ -30,6 +32,10 @@ const RoundedButton = ({ type, text, onPress }) => {
     cancel: {
       name: "close-circle-outline",
       color: Colors.sepia,
+    },
+    pin: {
+      name: "navigate-circle-outline",
+      color: Colors.baseTeal,
     },
     // Add more types as needed
   };
