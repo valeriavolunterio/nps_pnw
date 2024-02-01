@@ -20,6 +20,8 @@ import EventsScreen from "../screens/subScreens/EventsScreen";
 import PassportEditScreen from "../screens/subScreens/PassportEditScreen";
 import SettingsScreen from "../screens/subScreens/SettingsScreen.js";
 
+import PlaceScreen from "../screens/subScreens/PlaceScreen.js"
+
 import { SettingsButton } from "./SettingsButton.js";
 import { BackButton } from "./BackButton.js";
 
@@ -52,6 +54,16 @@ const HomeStack = () => {
         options={{
           headerStyle: {
             backgroundColor: Colors.lightTeal,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Places"
+        component={PlaceScreen}
+        options={{
+          title: "Places to See",
+          headerStyle: {
+            backgroundColor: Colors.nestedScreenColor,
           },
         }}
       />

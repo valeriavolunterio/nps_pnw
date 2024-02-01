@@ -3,6 +3,7 @@ import { Pressable, Text, StyleSheet } from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
+import {SVGIcons} from "./SVGIcons.js";
 
 const CustomButton = ({ onPress, title, icons }) => {
   const [fontsLoaded] = useFonts({
@@ -15,6 +16,9 @@ const CustomButton = ({ onPress, title, icons }) => {
 
   return (
     <Pressable style={styles.button} onPress={onPress}>
+      <SVGIcons.experiences.camping 
+      size={32}
+      colo={Colors.white}/>
       <Text style={styles.text}>{title}</Text>
     </Pressable>
   );
@@ -40,3 +44,4 @@ const styles = StyleSheet.create({
 });
 
 export default CustomButton;
+

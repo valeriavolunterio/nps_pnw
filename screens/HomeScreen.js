@@ -15,8 +15,9 @@ import Svg, { Polygon } from "react-native-svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import SwipeCarousel from "../components/Carousel.js";
+import { TealButton } from "../components/TealButton.js";
 
-const { width } = Dimensions.get("window"); 
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -25,8 +26,8 @@ const styles = StyleSheet.create({
   },
   beigeBackground: {
     flex: 1,
-    backgroundColor: "#FFF9F5", 
-    overflow: "hidden", 
+    backgroundColor: "#FFF9F5",
+    overflow: "hidden",
   },
   grayBackground: {
     flex: 1,
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: Colors.lightOffWhite,
     borderRadius: 5,
-    elevation: 5, 
+    elevation: 5,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.3,
@@ -168,24 +169,17 @@ const HomeScreen = ({ route, navigation }) => {
 
         {/* Carousel Section */}
         <View>
-          <SwipeCarousel data={carouselData} navigation={navigation}/>
+          <SwipeCarousel data={carouselData} navigation={navigation} />
         </View>
 
         {/* PNW Safety Guide Button */}
-        <Pressable
-          style={styles.safetyGuideButton}
-          onPress={() => navigation.navigate("SafetyGuide")}
-        >
-          <Ionicons
-            name="ios-glasses"
-            size={24}
-            color={Colors.darkTeal}
-            style={styles.icon}
+        <View>
+          {/* Use the safetyGuide button */}
+          <TealButton.safetyGuide
+            style={{ height: 500 }}
+            onPress={() => navigation.navigate("SafetyGuide")}
           />
-          <Text style={styles.safetyGuideButtonText}>
-            Pacific Northwest Safety Guide
-          </Text>
-        </Pressable>
+        </View>
 
         {/* Icon Grid Section */}
         <View style={styles.row}>
