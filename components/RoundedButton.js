@@ -37,6 +37,10 @@ const RoundedButton = ({ type, text, onPress }) => {
       name: "navigate-circle-outline",
       color: Colors.baseTeal,
     },
+    map: {
+      name: "map-outline",
+      color: Colors.baseTeal,
+    },
     // Add more types as needed
   };
 

@@ -14,6 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import RoundedButton from "../../components/RoundedButton";
 import ToggleButton from "../../components/ToggleButtons";
+import { Fonts } from "../../styles/Fonts";
 
 const { width } = Dimensions.get("window");
 
@@ -22,6 +23,7 @@ const parkScreenData = [
     miniTitle: "See Something New",
     title: "Olympic National Park",
     img: "https://www.nps.gov/npgallery/GetAsset/41e9450b-1dd8-b71b-0b41-ae6ab257056e/proxy/hires?",
+    about: "Olympic National Park, a natural wonder on Washington's Olympic Peninsula, enchants with its diverse landscapes. From ancient rainforests adorned with moss-draped trees to rugged coastlines graced by tide pools and pristine lakes nestled amid majestic mountains, this park offers a breathtaking tapestry of wilderness and outdoor adventure."
   },
 ];
 
@@ -73,7 +75,7 @@ const ParkScreen = ({ route, navigation }) => {
       <View style={styles.parkStatus}>
         <View style={styles.showInMapBtn}>
           <RoundedButton
-            type="pin"
+            type="map"
             text="Show in Map"
             onPress={() => navigation.navigate("Map")}
           />
@@ -96,22 +98,25 @@ const ParkScreen = ({ route, navigation }) => {
 
        {/* Park Events Section*/}
 
-      <View style={styles.parkEvents}>
-            <View style={styles.parkEventsDate}>
-            <Text style={{ color: Colors.green, fontSize: 18 }}>MAR</Text>
-          <Text style={{ color: Colors.green, fontSize: 18, paddingLeft: 5}}>24</Text>
-          <View style={styles.parkEventsText}>
-            <Text style={{ color: Colors.black, fontSize: 14, fontWeight:"bold"}}>Hurricane Ridge "It's Your Moon!" Telescope Program</Text>
-            <Text style={{ color: Colors.black, fontSize: 14}}>7:30 PM - 8:30 PM</Text>
-          </View>
+       <View style={styles.parkEvents}>
+  <View style={styles.parkEventsDate}>
+    <Text style={{ color: Colors.green, fontSize: 18 }}>MAR</Text>
+    <Text style={{ color: Colors.green, fontSize: 18, paddingLeft: 5 }}>24</Text>
+  </View>
+  <View style={styles.parkEventsText}>
+    <Text style={{ color: Colors.black, fontSize: 14, fontWeight: "bold",  }}>Hurricane Ridge "It's Your Moon!" Telescope Program</Text>
+    <Text style={{ color: Colors.black, fontSize: 14, paddingTop: 5 }}>7:30 PM - 8:30 PM</Text>
+  </View>
+</View>
 
-            </View>
-      </View>
 
-      <View style={styles.aboutPark}>
-        <Text>About This Park</Text>
 
-      </View>
+      {parkScreenData.map((item, index) => (
+        <View key={index} style={styles.aboutPark}>
+          <Text style={[Fonts.header3, { color: Colors.sepia, paddingBottom: 10  }]}>About This Park</Text>
+          <Text>{item.about}</Text>    
+        </View>
+      ))}
       <TealButton.alerts onPress={() => navigation.navigate("Alerts")} />
       <TealButton.knowBefore
         onPress={() => navigation.navigate("SafetyGuide")}
@@ -186,9 +191,10 @@ const styles = StyleSheet.create({
   },
   parkEvents: {
     backgroundColor: "#FBF3EE",
+    flexDirection: "row", // Change to row direction
     height: 100,
     width: width - 50,
-    justifyContent: "center",
+    justifyContent: "space-between", // Distribute items along the main axis
     alignSelf: "center",
     marginVertical: 10,
     elevation: 5,
@@ -200,15 +206,16 @@ const styles = StyleSheet.create({
   },
   parkEventsDate: {
     paddingLeft: 20,
-    marginTop: 10,
+    alignItems: "center",
+    marginVertical: 30,
+    paddingRight: 30, 
   },
   parkEventsText: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: 30,
-    paddingRight: 10,
-    marginBottom: 10,
+    alignItems: "flex-start",
+    marginVertical: 30,  
+    paddingRight: 90,
   },
+  
   aboutPark: {
     backgroundColor: "#FBF3EE",
     height: 200,
@@ -222,6 +229,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowRadius: 2,
     borderRadius: 10,
+    padding: 20,
+  },
+  aboutParkText: {
+    fontFamily: "Body",
   },  
   showInMapBtn: {
     flexDirection: "row",
