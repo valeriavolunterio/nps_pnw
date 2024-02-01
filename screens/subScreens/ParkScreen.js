@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Image,
   Pressable,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import { TealButton } from "../../components/TealButton";
 import { Colors } from "../../styles/Colors";
@@ -23,7 +23,8 @@ const parkScreenData = [
     miniTitle: "See Something New",
     title: "Olympic National Park",
     img: "https://www.nps.gov/npgallery/GetAsset/41e9450b-1dd8-b71b-0b41-ae6ab257056e/proxy/hires?",
-    about: "Olympic National Park, a natural wonder on Washington's Olympic Peninsula, enchants with its diverse landscapes. From ancient rainforests adorned with moss-draped trees to rugged coastlines graced by tide pools and pristine lakes nestled amid majestic mountains, this park offers a breathtaking tapestry of wilderness and outdoor adventure."
+    about:
+      "Olympic National Park, a natural wonder on Washington's Olympic Peninsula, enchants with its diverse landscapes. From ancient rainforests adorned with moss-draped trees to rugged coastlines graced by tide pools and pristine lakes nestled amid majestic mountains, this park offers a breathtaking tapestry of wilderness and outdoor adventure.",
     places: [
       "Hoh Rain Forest",
       "Hurricane Ridge",
@@ -102,25 +103,35 @@ const ParkScreen = ({ route, navigation }) => {
         </View>
       </View>
 
-       {/* Park Events Section*/}
+      {/* Park Events Section*/}
 
-       <View style={styles.parkEvents}>
-  <View style={styles.parkEventsDate}>
-    <Text style={{ color: Colors.green, fontSize: 18 }}>MAR</Text>
-    <Text style={{ color: Colors.green, fontSize: 18, paddingLeft: 5 }}>24</Text>
-  </View>
-  <View style={styles.parkEventsText}>
-    <Text style={{ color: Colors.black, fontSize: 14, fontWeight: "bold",  }}>Hurricane Ridge "It's Your Moon!" Telescope Program</Text>
-    <Text style={{ color: Colors.black, fontSize: 14, paddingTop: 5 }}>7:30 PM - 8:30 PM</Text>
-  </View>
-</View>
-
-
+      <View style={styles.parkEvents}>
+        <View style={styles.parkEventsDate}>
+          <Text style={{ color: Colors.green, fontSize: 18 }}>MAR</Text>
+          <Text style={{ color: Colors.green, fontSize: 18, paddingLeft: 5 }}>
+            24
+          </Text>
+        </View>
+        <View style={styles.parkEventsText}>
+          <Text
+            style={{ color: Colors.black, fontSize: 14, fontWeight: "bold" }}
+          >
+            Hurricane Ridge "It's Your Moon!" Telescope Program
+          </Text>
+          <Text style={{ color: Colors.black, fontSize: 14, paddingTop: 5 }}>
+            7:30 PM - 8:30 PM
+          </Text>
+        </View>
+      </View>
 
       {parkScreenData.map((item, index) => (
         <View key={index} style={styles.aboutPark}>
-          <Text style={[Fonts.header3, { color: Colors.sepia, paddingBottom: 10  }]}>About This Park</Text>
-          <Text>{item.about}</Text>    
+          <Text
+            style={[Fonts.header3, { color: Colors.sepia, paddingBottom: 10 }]}
+          >
+            About This Park
+          </Text>
+          <Text>{item.about}</Text>
         </View>
       ))}
       <TealButton.alerts onPress={() => navigation.navigate("Alerts")} />
@@ -214,14 +225,14 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     alignItems: "center",
     marginVertical: 30,
-    paddingRight: 30, 
+    paddingRight: 30,
   },
   parkEventsText: {
     alignItems: "flex-start",
-    marginVertical: 30,  
+    marginVertical: 30,
     paddingRight: 90,
   },
-  
+
   aboutPark: {
     backgroundColor: "#FBF3EE",
     height: 200,
@@ -239,7 +250,7 @@ const styles = StyleSheet.create({
   },
   aboutParkText: {
     fontFamily: "Body",
-  },  
+  },
   showInMapBtn: {
     flexDirection: "row",
     justifyContent: "space-between",
