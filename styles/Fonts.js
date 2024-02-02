@@ -36,7 +36,7 @@ export const Fonts = {
   },
   body: {
     fontFamily: "OpenSans-Regular",
-    fontSize: 14,
+    fontSize: 12,
     fontStyle: "normal",
   },
 

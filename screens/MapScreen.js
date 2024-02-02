@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     shadowRadius: 1, 
   },
   buttonText: {
-    fontFamily: "Open-Sans",
+    fontFamily: "OpenSans-Regular",
     color: Colors.darkestGray,
     fontSize: 12,
   },
@@ -66,7 +66,7 @@ const nationalParksData = [
   {
     id: 1,
     name: "Olympic National Park",
-    type: "Geological Attraction",
+    //type: "Geological Attraction",
     amenities: "Visitor Center, Trails, Campsites",
     experience: "Scenic Views, Hiking, Wildlife",
     coordinate: {

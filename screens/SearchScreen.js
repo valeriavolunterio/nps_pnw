@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { View, TextInput, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { Colors } from "../styles/Colors";
+import { Fonts } from "../styles/Fonts";
 
 const searchData = [
-  { name: 'Whitman Mission National Historic Site', type: 'place' },
-  { name: 'Mount Rainer National Park', type: 'park' },
-  { name: 'Olympic National Park', type: 'park' },
-  { name: 'Lewis and Clark National Historic Park', type: 'park' },
+  { name: 'Whitman Mission National Historic Site', description: "Whitman Mission National Historic Site was established to focus on the continuing relevance..." },
+  { name: 'Mount Rainer National Park', description: "Ascending to 14,410 feet above sea level, Mount Rainier stands as an icon in the Washington.... " },
+  { name: 'Olympic National Park', description: "Olympic National Park, a natural wonder on Washington's Olympic Peninsula, enchants with its..." },
+  { name: 'Lewis and Clark National Historic Park', description: "Discover the rich heritage of the native people. Unfold the dramatic stories of America's most fam.." },
 ];
 
 const SearchScreen = () => {
@@ -38,8 +39,8 @@ const SearchScreen = () => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <View style={styles.itemContainer}>
-            <Text>{item.name}</Text>
-            <Text>{item.type}</Text>
+            <Text style={Fonts.header4}>{item.name}</Text>
+            <Text style={Fonts.body}>{item.description}</Text>
           </View>
         )}
       />
@@ -71,11 +72,11 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     justifyContent: "space-between",
-    marginVertical: 10,
     marginHorizontal: 10,
-    padding: 5,
-    backgroundColor: "#eee",
+    padding: 15,
     borderRadius: 5,
+    borderBottomColor: Colors.darkestGray,
+    borderBottomWidth: 0.5,
   },
 });
 

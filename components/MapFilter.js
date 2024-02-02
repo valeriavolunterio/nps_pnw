@@ -23,20 +23,6 @@ const MapFilterComponent = ({ onFilterChange }) => {
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const handleCheckboxChange = (category, value) => {
-    const updatedFilters = { ...filters, [category]: [...filters[category]] };
-
-    if (updatedFilters[category].includes(value)) {
-      updatedFilters[category] = updatedFilters[category].filter(
-        (item) => item !== value
-      );
-    } else {
-      updatedFilters[category] = [...updatedFilters[category], value];
-    }
-
-    setFilters(updatedFilters);
-  };
-
   const handleApplyFilters = () => {
     onFilterChange(filters);
     setModalVisible(false);
@@ -59,16 +45,18 @@ const MapFilterComponent = ({ onFilterChange }) => {
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
       >
-        <Pressable
-          style={styles.modalBackground}
-          
-        >
+        <Pressable style={styles.modalBackground}>
           <View style={styles.modalBackground}>
-            
-              <Pressable onPress={() => setModalVisible(false)} style={styles.topBox}></Pressable>
-            
+            <Pressable
+              onPress={() => setModalVisible(false)}
+              style={styles.topBox}
+            ></Pressable>
+
             <View>
-              <Pressable onPress={() => setModalVisible(false)} style={styles.closeFilterBtn}>
+              <Pressable
+                onPress={() => setModalVisible(false)}
+                style={styles.closeFilterBtn}
+              >
                 <Text style={styles.applyButtonText}>Close</Text>
               </Pressable>
             </View>
@@ -76,65 +64,68 @@ const MapFilterComponent = ({ onFilterChange }) => {
               <ScrollView>
                 {/* PARKS */}
                 <FilterSection title="Parks" style={styles.sectionHeaderText}>
-                  <CheckBox
-                    style={styles.checkbox}
-                    value={filters.parks.includes("park")}
-                    onValueChange={() => handleCheckboxChange("parks", "park")}
-                  />
-                  <Text>National Park</Text>
+                  <CheckBox style={styles.CheckBox} title="National Park" />
                   <CheckBox
                     value={filters.parks.includes("park")}
-                    onValueChange={() => handleCheckboxChange("parks", "park")}
+                    title="National Historical Park/Site"
                   />
-                  <Text>Park</Text>
+                  <CheckBox
+                    value={filters.parks.includes("park")}
+                    title="National Reserve"
+                  />
                 </FilterSection>
 
-                {/* PARKS */}
+                {/* PLACES */}
                 <FilterSection title="Places">
                   <CheckBox
                     value={filters.parks.includes("park")}
-                    onValueChange={() => handleCheckboxChange("parks", "park")}
+                    title="Geological"
                   />
-                  <Text>National Park</Text>
                   <CheckBox
                     value={filters.parks.includes("park")}
-                    onValueChange={() => handleCheckboxChange("parks", "park")}
+                    title="Historical"
                   />
-                  <Text>Park</Text>
+                  <CheckBox
+                    value={filters.parks.includes("park")}
+                    title="Overlook"
+                  />
                 </FilterSection>
 
-                {/* PARKS */}
+                {/* Experiences */}
                 <FilterSection title="Experiences">
                   <CheckBox
                     value={filters.parks.includes("park")}
-                    onValueChange={() => handleCheckboxChange("parks", "park")}
+                    title="Backcountry Hiking"
                   />
-                  <Text>National Parks</Text>
+
                   <CheckBox
                     value={filters.parks.includes("park")}
-                    onValueChange={() => handleCheckboxChange("parks", "park")}
+                    title="Camping"
                   />
-                  <Text>Park</Text>
+                  <CheckBox
+                    value={filters.parks.includes("park")}
+                    title="Climbing"
+                  />
                 </FilterSection>
 
-                {/* PARKS */}
+                {/* Amenities */}
                 <FilterSection
                   title="Amenities"
                   style={styles.sectionHeaderText}
                 >
                   <CheckBox
                     value={filters.parks.includes("park")}
-                    onValueChange={() => handleCheckboxChange("parks", "park")}
+                    title="Accessibility"
                   />
-                  <Text>National Park</Text>
                   <CheckBox
                     value={filters.parks.includes("park")}
-                    onValueChange={() => handleCheckboxChange("parks", "park")}
+                    title="Parking"
                   />
-                  <Text>Park</Text>
+                  <CheckBox
+                    value={filters.parks.includes("park")}
+                    title="Public Restrooms"
+                  />
                 </FilterSection>
-
-               
               </ScrollView>
               <Pressable
                 onPress={() => setModalVisible(false)}
@@ -222,7 +213,7 @@ const styles = StyleSheet.create({
   modalBackground: {
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.4)",
-    justifyContent: "flex-end", 
+    justifyContent: "flex-end",
     zIndex: -99,
   },
   modalContainer: {
@@ -231,7 +222,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     height: "75%",
     width: "95%",
-    alignSelf: "center", 
+    alignSelf: "center",
     justifyContent: "center",
   },
   applyButton: {
@@ -266,18 +257,18 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     backgroundColor: "#FBF3EE",
   },
-  checkbox: {
-    borderWidth: 1, 
-    borderColor: "gray", 
-    borderRadius: 5, 
+  CheckBox: {
+    borderWidth: 1,
+    borderColor: "gray",
+    borderRadius: 5,
   },
   topBox: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
-    width: '100%',
-    height: '25%',
-    backgroundColor: 'rgba(0,0,0,0)',
+    width: "100%",
+    height: "25%",
+    backgroundColor: "rgba(0,0,0,0)",
   },
 });
 
