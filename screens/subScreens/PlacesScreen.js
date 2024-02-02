@@ -210,8 +210,6 @@ const PlacesScreen = ({ route, navigation }) => {
     const renderPlace = ({ item }) => (
       <Pressable
         style={styles.placeContainer}
-        // access in PlaceScreen with
-        // const { place } = route.params;
         onPress={() =>
           navigation.navigate("Place", {
             place: item,

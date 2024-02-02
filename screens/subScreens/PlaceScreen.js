@@ -12,46 +12,8 @@ import RoundedButton from "../../components/RoundedButton";
 
 const { width } = Dimensions.get("window"); // Define width here
 
-const placeData = [
-  {
-    name: "Hoh Rain Forest",
-    type: "Geological Attraction",
-    park: "Olympic National Park",
-    season: "Year Round",
-    description:
-      "The Hoh Rainforest is a lush, enchanting oasis within Olympic National Park. Known for its ancient towering trees, vibrant mosses, and diverse plant and animal life, this unique ecosystem is a haven for nature enthusiasts. Exploring the moss-draped trails feels like stepping into a fairytale, and the soothing sound of raindrops on leaves creates a serene atmosphere.",
-    visitorCenter: {
-      name: "Hoh Rain Forest Visitor Center",
-      address: "18113 Upper Hoh Rd.,\nForks, WA 98331",
-      phone: "(360) 565-3000",
-      hoursBold:
-        "Open Friday-Sunday, 10 AM to 4:30 PM and closed January/February.",
-      hoursCont: " Open daily in summer; Hours vary according to season.",
-    },
-    amenities: [
-      "parking",
-      "restrooms",
-      "water",
-      "information",
-      "permits",
-      "picnic",
-      "accessible",
-      "souvenirs",
-    ],
-    experiences: [
-      "hiking",
-      "fishing",
-      "kayak",
-      "trails",
-      "wildlife",
-      "camping",
-    ],
-  },
-  // Add more place data as needed
-];
-
 const PlaceScreen = ({ route, navigation }) => {
-  const place = placeData.find((item) => item.name === "Hoh Rain Forest");
+  const { place } = route.params;
 
   if (!place) {
     return (
