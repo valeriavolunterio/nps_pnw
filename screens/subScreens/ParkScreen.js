@@ -139,7 +139,11 @@ const ParkScreen = ({ route, navigation }) => {
         onPress={() => navigation.navigate("SafetyGuide")}
       />
       <TealButton.places
-        onPress={() => navigation.navigate("Place")}
+        onPress={() =>
+          navigation.navigate("Places", {
+            parkName: parkScreenData.map((item, index) => item.title),
+          })
+        }
         title="Places to See"
       />
       <TealButton.parkInfo

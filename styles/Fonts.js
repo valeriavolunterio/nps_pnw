@@ -18,14 +18,14 @@ export const Fonts = {
     fontStyle: "normal",
   },
   header4: {
-    fontFamily: "Open-Sans-SemiBold",
+    fontFamily: "OpenSans-SemiBold",
     fontSize: 16,
     fontStyle: "normal",
   },
 
   // sub, button, and body
   subheading: {
-    fontFamily: "Open-Sans-SemiBold",
+    fontFamily: "OpenSans-SemiBold",
     fontSize: 16,
     fontStyle: "normal",
   },
