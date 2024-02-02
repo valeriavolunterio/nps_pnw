@@ -4,6 +4,7 @@ import { SafeAreaView, View, Text, StyleSheet, Dimensions } from "react-native";
 import { Colors } from "../../styles/Colors";
 import { Fonts } from "../../styles/Fonts";
 import { SVGIcons } from "../../components/SVGIcons";
+import { Ionicons } from "@expo/vector-icons";
 import Svg, { Polygon } from "react-native-svg";
 import { ScrollView } from "react-native-gesture-handler";
 import ToggleButton from "../../components/ToggleButtons";
@@ -81,11 +82,22 @@ const PlaceScreen = ({ route, navigation }) => {
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
+                  justifyContent: "space-between",
                   marginTop: 5,
+                  marginBottom: 35,
                 }}
               >
-                {/* icon */}
-                <View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <Ionicons
+                    name="ellipse"
+                    size={15}
+                    color={Colors.green} // Add conditional for color based on type
+                  />
                   <Text style={styles.typeText}>{place.type}</Text>
                 </View>
                 <View>
@@ -204,18 +216,16 @@ const styles = StyleSheet.create({
   typeText: {
     ...Fonts.subheading,
     fontSize: 12,
-
+    marginLeft: 5,
     letterSpacing: 0.18,
-    marginBottom: 46,
   },
   parkText: {
     ...Fonts.subheading,
     fontSize: 12,
-
     letterSpacing: 0.18,
     color: Colors.baseTeal,
-    marginLeft: 135,
-    marginBottom: 46,
+    textAlign: "right",
+    marginRight: 0,
     flexWrap: "wrap",
   },
   seasonTitle: {

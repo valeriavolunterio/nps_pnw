@@ -224,7 +224,6 @@ const PlacesScreen = ({ route, navigation }) => {
           color={Colors.green} // Add conditional for color based on type
           style={styles.iconContainer}
         />
-        {/* Text content on the right of icon */}
         <View style={styles.textContainer}>
           <Text style={styles.subHeading}>{item.name}</Text>
           <Text style={styles.body} numberOfLines={2} ellipsizeMode="tail">
