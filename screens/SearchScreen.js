@@ -1,70 +1,75 @@
-import React, { useState } from 'react';
-import { View, TextInput, Switch, Text, Button, StyleSheet } from 'react-native';
-//import { SearchBar } from 'react-native-elements';
+import React, { useState } from "react";
+import { View, TextInput, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import { Colors } from "../styles/Colors";
+
+const searchData = [
+  { name: 'Whitman Mission National Historic Site', type: 'place' },
+  { name: 'Mount Rainer National Park', type: 'park' },
+  { name: 'Olympic National Park', type: 'park' },
+  { name: 'Lewis and Clark National Historic Park', type: 'park' },
+];
 
 const SearchScreen = () => {
-  const [searchText, setSearchText] = useState('');
-  const [showParks, setShowParks] = useState(false);
-  const [showPlaces, setShowPlaces] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
-  const handleSearch = () => {
-    // Sample data representing parks and places
-    const data = [
-      { name: 'Whitman Mission National Historic Site', type: 'place' },
-      { name: 'Mount Rainer National Park', type: 'park' },
-      { name: 'Olympic National Park', type: 'park' },
-      { name: 'Lewis and Clark National Historic Park', type: 'park' },
-    ];
-  
-    // Convert searchText to lowercase for case-insensitive comparison
-    const searchTextLower = searchText.toLowerCase();
-  
-    // Filter the data based on search text, showParks, and showPlaces
-    const filteredData = data.filter(item => {
-      const matchesSearchText = item.name.toLowerCase().includes(searchTextLower);
-      const matchesType = (showParks && item.type === 'park') || (showPlaces && item.type === 'place');
-  
-      return matchesSearchText && matchesType;
-    });
-  
-    // Log or use the filteredData for displaying search results
-    console.log('Filtered Data:', filteredData);
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    const filteredResults = searchData.filter(item =>
+      item.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredData(filteredResults);
   };
 
   return (
-    <View style={{ flex: 1, padding: 16 }}>
-      <SearchBar
-        placeholder="Search..."
-        onChangeText={(text) => setSearchText(text)}
-        value={searchText}
-        platform="ios" // or "android"
+    <SafeAreaView style={styles.container}>
+      <View style={styles.searchContainer}>
+        <TextInput
+          placeholder="Search..."
+          clearButtonMode="always"
+          style={styles.searchBox}
+          autoCapitalize="none"
+          value={searchQuery}
+          onChangeText={handleSearch}
+        />
+      </View>
+      <FlatList
+        data={filteredData}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.itemContainer}>
+            <Text>{item.name}</Text>
+            <Text>{item.type}</Text>
+          </View>
+        )}
       />
-      
-      <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10 }}>
-        <Text>Show Parks</Text>
-        <Switch value={showParks} onValueChange={() => setShowParks(!showParks)} />
-      </View>
-
-      <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10 }}>
-        <Text>Show Places</Text>
-        <Switch value={showPlaces} onValueChange={() => setShowPlaces(!showPlaces)} />
-      </View>
-
-      <Button title="Search" onPress={handleSearch} />
-
-      {/* Add your search results component here */}
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
-    backgroundColor: "#FFF9F5",
-    justifyContent: undefined,
+    flex: 1,
+  },
+  searchContainer: {
+    width: "100%",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: Colors.baseTeal,
+  },
+  searchBox: {
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderColor: "#000",
+    borderRadius: 8,
+    backgroundColor: "#FFF",
+    shadowColor: Colors.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 5,
   },
   itemContainer: {
-    flex: 1 / 2,
     justifyContent: "space-between",
     marginVertical: 10,
     marginHorizontal: 10,
@@ -72,9 +77,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#eee",
     borderRadius: 5,
   },
-  title: {
-    textAlign: "center",
-  },
 });
 
 export default SearchScreen;
+
+

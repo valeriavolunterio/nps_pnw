@@ -174,14 +174,18 @@ const SearchStack = () => {
       <Stack.Screen
         name="SearchStack"
         component={SearchScreen}
-        options={{ headerLeft: () => null }}
+        options={{ headerLeft: () => null, 
+          headerStyle: {
+            backgroundColor: Colors.baseTeal,
+          },
+        }}
       />
       <Stack.Screen
         name="Park"
         component={ParkScreen}
         options={{
           headerStyle: {
-            backgroundColor: Colors.lightTeal,
+            headerTransparent: true,
           },
           headerRight: "",
         }}
