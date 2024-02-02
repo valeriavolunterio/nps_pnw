@@ -164,7 +164,7 @@ const PlaceScreen = ({ route, navigation }) => {
             </Text>
           </View>
           <View style={styles.cardContainer}>
-            <Text>Amenities</Text>
+            <Text style={styles.amenitiesText}>Amenities</Text>
             <View style={styles.gridContainer}>
               {place.amenities.map((amenity, index) => (
                 <View key={index} style={styles.gridItem}>
@@ -175,7 +175,7 @@ const PlaceScreen = ({ route, navigation }) => {
             </View>
           </View>
           <View style={styles.cardContainer}>
-            <Text>Experiences</Text>
+            <Text style={styles.experienceText}>Experiences</Text>
             <View style={styles.gridContainer}>
               {place.experiences.map((experience, index) => (
                 <View key={index} style={styles.gridItem}>
@@ -345,6 +345,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
+  },
+  amenitiesText: {
+    ...Fonts.subheading,
+    color: Colors.green,
+    fontWeight: 600,
+    fontSize: 16,
+  },
+  experienceText: {
+    ...Fonts.subheading,
+    color: Colors.green,
+    fontWeight: 600,
+    fontSize: 16,
   },
 });
 
