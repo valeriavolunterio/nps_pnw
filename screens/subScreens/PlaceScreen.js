@@ -204,14 +204,14 @@ const styles = StyleSheet.create({
   typeText: {
     ...Fonts.subheading,
     fontSize: 12,
-    fontWeight: 600,
+
     letterSpacing: 0.18,
     marginBottom: 46,
   },
   parkText: {
     ...Fonts.subheading,
     fontSize: 12,
-    fontWeight: 600,
+
     letterSpacing: 0.18,
     color: Colors.baseTeal,
     marginLeft: 135,
@@ -221,18 +221,17 @@ const styles = StyleSheet.create({
   seasonTitle: {
     ...Fonts.header4,
     fontSize: 16,
-    fontWeight: 600,
+
     marginBottom: 12,
   },
   description: {
     ...Fonts.body,
     fontSize: 12,
-    fontWeight: 400,
   },
   visitorCenter: {
     color: Colors.darkTeal,
     ...Fonts.subheading,
-    fontWeight: 600,
+
     fontSize: 14,
     letterSpacing: 0.21,
     marginBottom: 7,
@@ -240,7 +239,7 @@ const styles = StyleSheet.create({
   address: {
     ...Fonts.header4,
     fontSize: 12,
-    fontWeight: 600,
+
     letterSpacing: 0.18,
     marginBottom: 10,
   },
@@ -349,13 +348,13 @@ const styles = StyleSheet.create({
   amenitiesText: {
     ...Fonts.subheading,
     color: Colors.green,
-    fontWeight: 600,
+
     fontSize: 16,
   },
   experienceText: {
     ...Fonts.subheading,
     color: Colors.green,
-    fontWeight: 600,
+
     fontSize: 16,
   },
 });
