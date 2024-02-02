@@ -134,7 +134,7 @@ const placeData = [
     ],
   },
   {
-    name: "HKalaloch and Ruby Beach",
+    name: "Kalaloch and Ruby Beach",
     type: "Geological Attraction",
     park: "Olympic National Park",
     season: "Year Round",
