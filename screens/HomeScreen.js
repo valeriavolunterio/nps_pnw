@@ -8,6 +8,7 @@ import {
   Dimensions,
   Pressable,
   TouchableWithoutFeedback,
+  FlatList
 } from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
@@ -16,6 +17,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import SwipeCarousel from "../components/Carousel.js";
 import { TealButton } from "../components/TealButton.js";
+import { Fonts } from "../styles/Fonts.js";
 
 const { width } = Dimensions.get("window");
 
@@ -112,6 +114,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 10,
     padding: 20,
+    paddingHorizontal: 30,
     backgroundColor: Colors.lightOffWhite,
     borderRadius: 5,
     elevation: 5,
@@ -125,6 +128,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: Colors.black,
     marginBottom: 20,
+  },
+  alertItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  alertTextContainer: {
+    marginLeft: 10, // Add spacing between the warning icon and text
   },
 });
 
@@ -142,6 +153,54 @@ const HomeScreen = ({ route, navigation }) => {
 
   const [activeAlerts, setActiveAlerts] = useState([]); // State for active alerts
 
+  const [parksAndAlerts, setParksAndAlerts] = useState([]);
+
+  useEffect(() => {
+    const fetchParksAndAlerts = async () => {
+      const states = ["wa", "or", "id", "nv"]; // Add more states as needed
+      const parksAndAlertsData = [];
+
+      try {
+        await Promise.all(
+          states.map(async (state) => {
+            const parksResponse = await fetch(
+              `https://developer.nps.gov/api/v1/parks?stateCode=${state}`,
+              {
+                headers: {
+                  "X-Api-Key": "khwZtjloZ1uc84rQkAVtJu2ZdcnCJaUI2QIDR9WH",
+                },
+              }
+            );
+            const parksData = await parksResponse.json();
+
+            const alertsResponse = await fetch(
+              `https://developer.nps.gov/api/v1/alerts?stateCode=${state}`,
+              {
+                headers: {
+                  "X-Api-Key": "khwZtjloZ1uc84rQkAVtJu2ZdcnCJaUI2QIDR9WH",
+                },
+              }
+            );
+            const alertsData = await alertsResponse.json();
+
+            parksData.data.slice(0, 3).forEach((park, index) => {
+              if (index < 3) {
+                const alert = alertsData.data.find(alert => alert.parkCode === park.parkCode);
+                parksAndAlertsData.push({ park, alert });
+              }
+            });
+          })
+        );
+
+        setParksAndAlerts(parksAndAlertsData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchParksAndAlerts();
+  }, []);
+
   const carouselData = [
     {
       miniTitle: "See Something New",
@@ -153,10 +212,13 @@ const HomeScreen = ({ route, navigation }) => {
     { title: "Carousel Item 3" },
   ];
 
-  // Check if fonts are loaded before rendering the component
+
   if (!fontsLoaded) {
-    return null; //return a loading indicator here
+    return null;
   }
+
+
+  
   return (
     <ScrollView style={styles.container}>
       <View style={styles.beigeBackground}>
@@ -248,66 +310,55 @@ const HomeScreen = ({ route, navigation }) => {
       <View style={styles.grayBackground}>
         {/* Active Alerts Section */}
         <View style={styles.alertContainer}>
-          <Text style={styles.alertHeaderText}>Active Alerts</Text>
-          {activeAlerts.length === 0 ? (
-            <Text>No active alerts at the moment.</Text>
-          ) : (
-            <FlatList
-              data={activeAlerts}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => (
-                <View>
-                  {/* Display alert information here */}
-                  <Text>{item.title}</Text>
-                  <Text>{item.park}</Text>
-                  <Text>{item.description}</Text>
-                </View>
-              )}
-            />
-          )}
+  <Text style={styles.alertHeaderText}>Active Alerts</Text>
+  {parksAndAlerts
+    .filter(({ alert }) => alert) // Filter parks with active alerts
+    .slice(0, 3) // Limit to a maximum of 3 parks
+    .map(({ park, alert }) => (
+      <View key={park.id} style={styles.alertItem}>
+        {alert.description.toLowerCase().includes("close") ? (
+          <Ionicons name="ios-warning" size={24} color={Colors.red} />
+        ) : (
+          <Ionicons name="ios-alert" size={24} color={Colors.yellow} />
+        )}
+        <View style={styles.alertTextContainer}>
+          <Text style={Fonts.header4}>{park.fullName}</Text>
+          {alert && <Text>{alert.title}</Text>}
         </View>
+      </View>
+    ))}
+</View>
+
+
+<View style={styles.alertContainer}>
+  <Text style={styles.alertHeaderText}>Events</Text>
+  {parksAndAlerts
+    .filter(({ alert }) => alert) // Filter parks with active alerts
+    .slice(0, 3) // Limit to a maximum of 3 parks
+    .map(({ park, alert }) => (
+      <View key={park.id} style={styles.alertItem}>
+        {alert.description.toLowerCase().includes("close") ? (
+          <Ionicons name="ios-warning" size={24} color={Colors.red} />
+        ) : (
+          <Ionicons name="ios-alert" size={24} color={Colors.yellow} />
+        )}
+        <View style={styles.alertTextContainer}>
+          <Text style={Fonts.header4}>{park.fullName}</Text>
+          {alert && <Text>{alert.title}</Text>}
+        </View>
+      </View>
+    ))}
+</View>
+
+
+
+
 
         {/* PNW News Section */}
-        <View style={styles.alertContainer}>
-          <Text style={styles.alertHeaderText}>Pacific Northwest News</Text>
-          {activeAlerts.length === 0 ? (
-            <Text>News</Text>
-          ) : (
-            <FlatList
-              data={pnwNews}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => (
-                <View>
-                  {/* Display alert information here */}
-                  <Text>{item.title}</Text>
-                  <Text>{item.park}</Text>
-                  <Text>{item.description}</Text>
-                </View>
-              )}
-            />
-          )}
-        </View>
+        
 
         {/* PNW Events Section */}
-        <View style={styles.alertContainer}>
-          <Text style={styles.alertHeaderText}>Events in the Area</Text>
-          {activeAlerts.length === 0 ? (
-            <Text>Events</Text>
-          ) : (
-            <FlatList
-              data={pnwNews}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => (
-                <View>
-                  {/* Display alert information here */}
-                  <Text>{item.title}</Text>
-                  <Text>{item.park}</Text>
-                  <Text>{item.description}</Text>
-                </View>
-              )}
-            />
-          )}
-        </View>
+        
       </View>
     </ScrollView>
 
