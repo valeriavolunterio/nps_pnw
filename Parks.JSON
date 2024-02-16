@@ -1,0 +1,266 @@
+{
+    "Olympic National Park": {
+      "Experience": [
+        "Trailheads",
+        "Skiing",
+        "Wildlife watching",
+        "Backcountry camping",
+        "Front-country hiking",
+        "Bus/shuttle guided tour",
+        "Biking",
+        "Boating"
+      ],
+      "Places": [
+        {
+          "Name": "Hoh Rainforest",
+          "Type": "",
+          "Best Season": "Spring and fall (April to June, September to October)",
+          "Blurb": "The Hoh Rainforest is a lush, enchanting oasis within Olympic National Park. Known for its ancient towering trees, vibrant mosses, and diverse plant and animal life, this unique ecosystem is a haven for nature enthusiasts. Exploring the moss-draped trails feels like stepping into a fairytale, and the soothing sound of raindrops on leaves creates a serene atmosphere.",
+          "Amenities": [
+            "Wheelchair accessible",
+            "Drinking Water",
+            "Parking available",
+            "Permits and Passes",
+            "Picnic Tables",
+            "Restrooms",
+            "Transportation"
+          ]
+        },
+        {
+          "Name": "Elwha River Valley",
+          "Type": "",
+          "Best Season": "Spring and fall (April to June, September to October)",
+          "Blurb": "The Elwha River Valley, a serene haven nestled within the heart of the Olympic Peninsula, captivates with its unspoiled beauty and tranquil ambiance. Home to the free-flowing Elwha River, this idyllic landscape boasts lush forests, diverse wildlife, and cascading waterfalls. Enthusiasts of nature and adventure alike find solace in its meandering trails, pristine camping sites, and breathtaking vistas. Steeped in natural wonder and historical significance, the Elwha River Valley offers a rejuvenating escape, inviting all to explore its hidden gems and witness the harmony between wilderness and the human spirit.",
+          "Amenities": [
+            "Picnic tables",
+            "Restrooms",
+            "Wheelchair accessible",
+            "Bike rack"
+          ]
+        },
+        {
+          "Name": "Hurricane Ridge",
+          "Type": "Geological",
+          "Best Season": "Summer and early fall (July to September)",
+          "Blurb": "Hurricane Ridge is a must-visit destination within Olympic National Park, offering breathtaking panoramic views of the surrounding mountains, glaciers, and lush forests. During the summer and early fall months, this iconic spot becomes a hiker's paradise and a haven for nature enthusiasts. Visitors can embark on scenic hikes, capture stunning photographs, and witness diverse wildlife in their natural habitat. The ridge is especially renowned for its vibrant wildflower meadows, making it a paradise for botany enthusiasts and photographers alike.",
+          "Amenities": [
+            "Trailheads",
+            "Wheelchair accessible",
+            "Restrooms"
+          ]
+        }
+      ]
+    },
+    "Mount Rainier National Park": {
+      "Experience": [
+        "Biking",
+        "Boating",
+        "Car or front country camping",
+        "Cross country skiing",
+        "Freshwater fishing",
+        "Scenic driving",
+        "Snowshoeing",
+        "Stargazing",
+        "Museum exhibits",
+        "Junior ranger program"
+      ],
+      "Places": [
+        {
+          "Name": "Paradise Exhibit Panel",
+          "Best Season": "Summer and late spring (July to September)",
+          "Blurb": "The Paradise Exhibit Panel in Mount Rainier National Park serves as a captivating window into the park's natural wonders. Located in the heart of Paradise, this informative display showcases the region's rich biodiversity, geological marvels, and cultural significance. Through vivid imagery and detailed explanations, visitors gain a deeper understanding of the park's diverse ecosystems, rare flora, and iconic wildlife. The panel invites explorers of all ages to engage with the park's ecological marvels, fostering a profound appreciation for the delicate balance of nature within this alpine paradise. Enriching the visitor experience, the Paradise Exhibit Panel offers a fascinating glimpse into the ecological tapestry of Mount Rainier National Park, leaving a lasting impression on all who encounter its educational treasures.",
+          "Amenities": [
+            "Parking",
+            "Restroom",
+            "Wheelchair accessible"
+          ]
+        },
+        {
+          "Name": "Ohanapecosh",
+          "Type": "Geological",
+          "Best Season": "Summer only (May-October)",
+          "Blurb": "Ohanapecosh, a hidden gem within Mount Rainier National Park, is a haven of natural wonders. Here, ancient forests whisper tales of time, while the gentle Ohanapecosh River weaves its way through the heart of the wilderness. Visitors can wander along scenic trails, surrounded by towering trees and vibrant wildflowers, immersing themselves in the serenity of this pristine paradise. With its tranquil atmosphere and abundant wildlife, Ohanapecosh offers a peaceful retreat for nature enthusiasts and a perfect opportunity to reconnect with the great outdoors.",
+          "Amenities": [
+            "Benches/seating",
+            "Restrooms available",
+            "Drinking water",
+            "Telephones",
+            "Wheelchair accessible",
+            "Recycling",
+            "Parking-bus/rv/cars",
+            "Park newspaper",
+            "Maps available",
+            "Rangers present"
+          ]
+        },
+        {
+          "Name": "Carbon River",
+          "Type": "Geological",
+          "Best Season": "Year Round",
+          "Blurb": "Carbon River, a captivating region within Mount Rainier National Park, invites adventurers to explore its untamed beauty. Here, the rhythmic flow of the Carbon River serenades travelers as they journey through dense old-growth forests and moss-covered landscapes. Majestic waterfalls cascade over rocky cliffs, adding a touch of grandeur to the lush surroundings. The area is a paradise for hikers, offering a network of trails that wind through ancient trees and alongside the river, providing glimpses of diverse wildlife and breathtaking vistas. With its rich biodiversity and pristine wilderness, Carbon River provides an immersive experience for nature enthusiasts, capturing the essence of the Pacific Northwest's natural splendor.",
+          "Amenities": [
+            "Restrooms available",
+            "Picnic tables",
+            "Recycling",
+            "Bike rack",
+            "Wheelchair accessible",
+            "Permits issued",
+            "Parking",
+            "Maps available",
+            "Newspaper available"
+          ]
+        }
+      ]
+    },
+    "North Cascades National Park": {
+      "Experience": [
+        "Backcountry camping",
+        "Boating",
+        "Fishing",
+        "Hiking"
+      ],
+      "Places": [
+        {
+          "Name": "Stehekin",
+          "Type": "Geological",
+          "Best Season": "Summer and late spring (July to September)",
+          "Blurb": "Stehekin is a remote and enchanting wilderness retreat accessible only by boat, plane, or hiking. This hidden gem offers a pristine escape into the natural beauty of the Cascade Mountains. Surrounded by rugged peaks, serene lakes, and lush forests, Stehekin is a haven for outdoor enthusiasts, hikers, and nature lovers. Visitors can explore miles of pristine trails, discover the captivating Stehekin Valley, and savor the tranquility of this untouched paradise. With no roads connecting it to the outside world, Stehekin provides a unique opportunity to disconnect from the hustle and bustle of modern life and reconnect with the unspoiled wilderness of the North Cascades. Whether you seek solitude, adventure, or simply a deep connection with nature, Stehekin beckons with its awe-inspiring beauty and remote charm, making it a must-visit destination for those in search of a true wilderness experience.",
+          "Amenities": [
+            "Boat ramp",
+            "Animal safe food storage",
+            "Boat launch",
+            "Baby changing station",
+            "Cell phone charging",
+            "Grill",
+            "Ice",
+            "Wifi available",
+            "Life jacket rentals",
+            "Picnic tables",
+            "Propane",
+            "Restrooms available",
+            "Recycling",
+            "Showers",
+            "Water",
+            "Wheelchair accessible",
+            "Trash dumpster",
+            "Shelter/cabin"
+          ]
+        },
+        {
+          "Name": "Hozomeen",
+          "Type": "",
+          "Best Season": "Late June to early September",
+          "Blurb": "Hozomeen, a hidden paradise within the heart of North Cascades National Park, beckons explorers with its enchanting wilderness and unparalleled tranquility. Nestled on the park's northern boundary, this remote haven boasts pristine lakes, majestic peaks, and ancient forests, creating a haven for outdoor enthusiasts and nature aficionados. The rugged beauty of Hozomeen invites adventurous souls to embark on scenic hikes, discover cascading waterfalls, and camp beneath the starlit skies. Rich in biodiversity and steeped in natural wonder, Hozomeen is a testament to the awe-inspiring landscapes that define the Pacific Northwest, offering an unforgettable escape into the embrace of untamed nature.",
+          "Amenities": [
+            "Boat ramp",
+            "Picnic tables"
+          ]
+        }
+      ]
+    },
+    "Crater Lake National Park": {
+      "Experience": [],
+      "Places": [
+        {
+          "Name": "Crater Lake",
+          "Type": "",
+          "Best Season": "Depends on what activity you are looking for",
+          "Blurb": "Crater Lake, nestled in the heart of Crater Lake National Park in Oregon, is a mesmerizing jewel of natural beauty. Formed within the remnants of a volcanic caldera, this deep blue lake is renowned for its astonishing clarity and striking cobalt hue. Encircled by steep cliffs and framed by lush forests, Crater Lake offers visitors a serene and awe-inspiring experience. Its pristine waters and breathtaking vistas make it a must-see destination, inviting travelers to marvel at the wonders of nature and immerse themselves in the tranquility of this iconic landmark.",
+          "Amenities": [
+            "Toilet with composting",
+            "Information kiosk"
+          ]
+        },
+        {
+          "Name": "Phantom Ship Overlook",
+          "Type": "",
+          "Best Season": "July-October",
+          "Blurb": "Phantom Ship Overlook is one of the most captivating viewpoints at Crater Lake National Park, offering visitors a breathtaking panoramic view of the enigmatic Phantom Ship. This natural rock formation resembles a ghostly sailing vessel, rising from the depths of the mesmerizing blue waters of Crater Lake. Surrounded by the park's rugged cliffs and set against the backdrop of the stunning lake, Phantom Ship Overlook provides a mesmerizing spectacle that showcases the park's unique geological features. Visitors are drawn to this overlook to witness the Phantom Ship's mysterious beauty and to marvel at the wonders of nature, making it a must-see destination for anyone exploring Crater Lake.",
+          "Amenities": []
+        },
+        {
+          "Name": "Pumice Desert",
+          "Type": "",
+          "Best Season": "June Through October",
+          "Blurb": "Pumice Desert, nestled within Crater Lake National Park, is a surreal landscape of volcanic remnants. Stretching as far as the eye can see, this barren terrain is blanketed with porous pumice stones, a testament to ancient volcanic eruptions. Amidst the desolate beauty, resilient plants and wildlife find their home, creating a stark yet captivating contrast against the surrounding lush forests. Walking through Pumice Desert unveils the raw power of nature, offering visitors a unique and haunting experience in the heart of this geological wonder.",
+          "Amenities": []
+        }
+      ]
+    },
+    "San Juan Island National Historical Park": {
+      "Experience": [
+        "Arts and Culture",
+        "Saltwater swimming",
+        "Wildlife watching",
+        "Birdwatching",
+        "Hiking",
+        "Biking"
+      ],
+      "Places": [
+        {
+          "Name": "American Camp",
+          "Type": "Historical",
+          "Best Season": "Spring or Fall",
+          "Blurb": "American Camp, a significant site within San Juan Island National Historical Park in Washington State, holds the echoes of a pivotal chapter in American history. This serene landscape was once a military encampment during the Pig War Crisis of 1859, a peaceful standoff between American and British forces over territorial disputes. Today, the park preserves the historical remnants of this event, offering visitors a chance to explore well-preserved military structures, wander through historic buildings, and engage with compelling interpretive exhibits. Beyond its historical importance, American Camp captivates visitors with its scenic beauty. Coastal vistas, winding hiking trails, and opportunities for wildlife observation abound, creating a harmonious blend of history and nature. As visitors immerse themselves in the park's rich heritage and natural wonders, they gain a deep appreciation for the diplomacy and cooperation that shaped the region. American Camp stands as a testament to the enduring spirit of peace and serves as an educational and inspiring destination for all.",
+          "Amenities": [
+            "Baby changing station",
+            "Benches",
+            "Maps available",
+            "Fire extinguisher",
+            "Chair accessible",
+            "Telephones",
+            "Recycling",
+            "Public transit"
+          ]
+        },
+        {
+          "Name": "English Camp",
+          "Type": "Historical",
+          "Best Season": "Spring or fall",
+          "Blurb": "English Camp, part of San Juan Island National Historical Park, invites visitors to step back in time to the era of the Pig War Crisis in 1859. This historic site, once a British military camp, now features restored buildings, beautiful gardens, and hiking trails. Surrounded by natural beauty, English Camp offers a peaceful atmosphere for reflection and exploration. Visitors can immerse themselves in the island's history, appreciating the site's serene charm and the enduring spirit of international cooperation.",
+          "Amenities": [
+            "Parking",
+            "Toilet and composting"
+          ]
+        }
+      ]
+    },
+    "Lewis and Clark National Historical Park": {
+      "Experience": [
+        "Arts and Culture",
+        "Hiking",
+        "Kayaking",
+        "Stargazing",
+        "Self-guided tours"
+      ],
+      "Places": [
+        {
+          "Name": "Fort Clatsop",
+          "Type": "Historical",
+          "Best Season": "Spring and summer (April to August)",
+          "Blurb": "Fort Clatsop, nestled within the Lewis and Clark National Historical Park, stands as a living testament to the historic expedition of Lewis and Clark and their Corps of Discovery. During the spring and summer months, this reconstructed fort offers visitors a glimpse into the challenging yet adventurous lives of the explorers as they spent the winter of 1805-1806 on the Pacific Coast. Walk in the footsteps of Meriwether Lewis, William Clark, and their crew, and immerse yourself in the rich history of the expedition. Explore the fort's exhibits, interact with costumed interpreters, and gain a deeper understanding of the challenges faced and discoveries made by the Corps of Discovery. Fort Clatsop is a captivating destination for history enthusiasts and anyone interested in the exploration of the American West.",
+          "Amenities": []
+        },
+        {
+          "Name": "Fort Clatsop Visitor Center",
+          "Type": "",
+          "Best Season": "",
+          "Blurb": "The Fort Clatsop Visitor Center, nestled within the picturesque Lewis and Clark National Historical Park in Oregon, invites visitors on a captivating journey into American history. Through interactive exhibits and engaging displays, guests can relive the adventures of Lewis and Clark and their Corps of Discovery. Surrounded by the natural beauty of the Pacific Northwest, the center provides a rich educational experience, offering insights into the expedition's challenges and the diverse cultures encountered. It's a must-visit destination for history enthusiasts, offering a glimpse into the past against the backdrop of stunning landscapes.",
+          "Amenities": []
+        },
+        {
+          "Name": "Dismal Nitch",
+          "Type": "",
+          "Best Season": "Depends on what you are looking for",
+          "Blurb": "Dismal Nitch, a place of both hardship and triumph, is a significant site within the Lewis and Clark National Historic Park. This remote and rugged location, nestled along the Columbia River, holds a poignant chapter in the epic journey of Lewis and Clark. It was here that the Corps of Discovery faced some of their greatest challenges, enduring relentless rain, treacherous terrain, and dwindling supplies. But it was also at Dismal Nitch that their perseverance and determination prevailed, marking a pivotal moment on their historic expedition. Visitors to this hallowed ground can experience the resilience of these early explorers and gain a deeper appreciation for their indomitable spirit.",
+          "Amenities": [
+            "Baby changing station",
+            "Toilet",
+            "Wheelchair accessible",
+            "Drinking water",
+            "Parking"
+          ]
+        }
+      ]
+    }
+  }
