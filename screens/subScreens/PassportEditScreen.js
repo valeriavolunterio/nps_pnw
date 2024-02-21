@@ -101,7 +101,6 @@ const PassportEditScreen = ({ route, navigation }) => {
       youtube: youtube !== null ? youtube.trim() : null,
     };
 
-    route.params.onUpdateUser(updatedUser);
     navigation.navigate("PassportStack", { updatedUser });
   };
 

@@ -20,6 +20,7 @@ import AlertsScreen from "../screens/subScreens/AlertsScreen.js";
 import NewsScreen from "../screens/subScreens/NewsScreen.js";
 import EventsScreen from "../screens/subScreens/EventsScreen";
 import PassportEditScreen from "../screens/subScreens/PassportEditScreen";
+import ScannerScreen from "../screens/subScreens/ScannerScreen.js";
 import SettingsScreen from "../screens/subScreens/SettingsScreen.js";
 
 import { SettingsButton } from "./SettingsButton.js";
@@ -179,7 +180,8 @@ const SearchStack = () => {
       <Stack.Screen
         name="SearchStack"
         component={SearchScreen}
-        options={{ headerLeft: () => null, 
+        options={{
+          headerLeft: () => null,
           headerStyle: {
             backgroundColor: Colors.baseTeal,
           },
@@ -224,6 +226,11 @@ const PassportStack = () => {
         options={{ headerLeft: () => null }}
       />
       <Stack.Screen name="PassportEdit" component={PassportEditScreen} />
+      <Stack.Screen
+        name="Scanner"
+        component={ScannerScreen}
+        options={{ headerShown: false, tabBarVisible: false }}
+      />
       <Stack.Screen
         name="Settings"
         component={SettingsScreen}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -9,16 +9,20 @@ import {
   Pressable,
   Image,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Camera } from "expo-camera";
 
+import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../styles/Colors.js";
+import { Fonts } from "../styles/Fonts.js";
 import ToggleButton from "../components/ToggleButtons.js";
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    position: "relative",
+    paddingHorizontal: 20,
   },
   userCard: {
     flexDirection: "row",
@@ -56,6 +60,27 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
   },
+  floatingButton: {
+    position: "absolute",
+    bottom: 0,
+    right: 20,
+    backgroundColor: Colors.green,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 20,
+    height: 60,
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: -5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  camera: {
+    flex: 1,
+    aspectRatio: 1,
+  },
 });
 
 const defaultUser = {
@@ -66,6 +91,7 @@ const defaultUser = {
   instagram: "instagram",
   tiktok: "tiktok",
   youtube: "youtube",
+  scanned: [],
 };
 
 const badgesData = [
@@ -107,46 +133,49 @@ const badgesData = [
   },
 ];
 
-const Badge = ({ visited, onPress, Scanned, Unscanned }) => {
-  const BadgeComponent = visited ? Scanned : Unscanned;
+const Badge = ({ visited, sources }) => {
+  const badgeSource = visited ? sources.scanned : sources.unscanned;
 
   return (
-    <Pressable onPress={onPress}>
-      <View style={styles.badgeContainer}>
-        <Image
-          source={BadgeComponent}
-          style={{
-            resizeMode: "contain",
-          }}
-        />
-      </View>
-    </Pressable>
+    <View style={styles.badgeContainer}>
+      <Image
+        source={badgeSource}
+        style={{
+          resizeMode: "contain",
+        }}
+      />
+    </View>
   );
 };
 
 const PassportScreen = ({ route, navigation }) => {
-  const [user, setUser] = useState({
-    name: defaultUser.name,
-    date: defaultUser.date,
-    photo: defaultUser.photo,
-    facebook: defaultUser.facebook,
-    instagram: defaultUser.instagram,
-    tiktok: defaultUser.tiktok,
-    youtube: defaultUser.youtube,
-  });
+  const [user, setUser] = useState(defaultUser);
+  const [scannedParks, setScannedParks] = useState([]);
 
-  const updateUser = (updatedUser) => {
-    setUser(updatedUser);
-  };
-
-  const [visitedBadges, setVisitedBadges] = useState([]);
-
-  const toggleVisited = (badgeId) => {
-    if (visitedBadges.includes(badgeId)) {
-      setVisitedBadges(visitedBadges.filter((id) => id !== badgeId));
-    } else {
-      setVisitedBadges([...visitedBadges, badgeId]);
+  useEffect(() => {
+    if (route.params?.updatedUser) {
+      setUser(route.params.updatedUser);
     }
+  }, [route.params?.updatedUser]);
+
+  useEffect(() => {
+    if (route.params?.updatedScannedParks) {
+      setScannedParks(route.params.updatedScannedParks);
+    }
+  }, [route.params?.updatedScannedParks]);
+
+  useEffect(() => {
+    // Update user data when scanned parks change
+    const updatedUser = {
+      ...user,
+      scanned: scannedParks,
+    };
+    setUser(updatedUser);
+    console.log("User Parks updated:", user.scanned);
+  }, [scannedParks]);
+
+  const handleScannerPress = () => {
+    navigation.navigate("Scanner", { scannedParks });
   };
 
   return (
@@ -160,7 +189,6 @@ const PassportScreen = ({ route, navigation }) => {
             onPress={() =>
               navigation.navigate("PassportEdit", {
                 user,
-                onUpdateUser: updateUser,
               })
             }
           >
@@ -190,7 +218,6 @@ const PassportScreen = ({ route, navigation }) => {
               handlePress={() =>
                 navigation.navigate("PassportEdit", {
                   user,
-                  onUpdateUser: updateUser,
                 })
               }
             />
@@ -236,19 +263,30 @@ const PassportScreen = ({ route, navigation }) => {
           </View>
         </View>
       </View>
+      <Pressable style={styles.floatingButton}>
+        <Text style={{ color: Colors.white }}>+</Text>
+      </Pressable>
       <ScrollView contentContainerStyle={styles.badgesContainer}>
-        {badgesData.map((badge) => (
-          <Badge
-            key={badge.id}
-            visited={visitedBadges.includes(badge.id)}
-            onPress={() => toggleVisited(badge.id)}
-            Unscanned={badge.unscannedSource}
-            Scanned={badge.scannedSource}
-          />
-        ))}
+        {badgesData.map((badge) => {
+          // Check if the park is scanned by the user
+          const parkScanned = user.scanned.includes(badge.name);
+          return (
+            <Badge
+              key={badge.id}
+              visited={parkScanned}
+              sources={{
+                scanned: badge.scannedSource,
+                unscanned: badge.unscannedSource,
+              }}
+            />
+          );
+        })}
       </ScrollView>
-      <Pressable>
-        <Text>Add Park</Text>
+      {/* Floating Button Section */}
+      <Pressable style={styles.floatingButton} onPress={handleScannerPress}>
+        <Text style={{ color: Colors.white, ...Fonts.button }}>
+          + Scan Park
+        </Text>
       </Pressable>
     </SafeAreaView>
   );
