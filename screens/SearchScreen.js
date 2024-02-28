@@ -7,7 +7,6 @@ import {
   FlatList, 
   SafeAreaView,
 } from "react-native";
-import { Colors } from "../styles/Colors";
 import { Fonts } from "../styles/Fonts";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
