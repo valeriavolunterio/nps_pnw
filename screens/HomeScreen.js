@@ -154,10 +154,11 @@ const HomeScreen = ({ route, navigation }) => {
   const [activeAlerts, setActiveAlerts] = useState([]); // State for active alerts
 
   const [parksAndAlerts, setParksAndAlerts] = useState([]);
+  const [parksData, setParksData] = useState([]);
 
   useEffect(() => {
     const fetchParksAndAlerts = async () => {
-      const states = ["wa", "or", "id", "nv"]; // Add more states as needed
+      const states = ["wa", "or", "id"]; // Add more states as needed
       const parksAndAlertsData = [];
 
       try {
@@ -172,6 +173,7 @@ const HomeScreen = ({ route, navigation }) => {
               }
             );
             const parksData = await parksResponse.json();
+            setParksData(parksData.data)
 
             const alertsResponse = await fetch(
               `https://developer.nps.gov/api/v1/alerts?stateCode=${state}`,
@@ -200,6 +202,21 @@ const HomeScreen = ({ route, navigation }) => {
 
     fetchParksAndAlerts();
   }, []);
+
+ // Function to search by ID
+// function searchById(jsonArray, id) {
+//   return jsonArray.find(item => item.fullName === id);
+// }
+
+// // Example usage
+// var idToSearch = "Lewis and Clark National Historical Park";
+// var result = searchById(parksData, idToSearch);
+// if (result) {
+//   console.log("Found:", result);
+// } else {
+//   console.log("ID", idToSearch, "not found.");
+// }
+  // console.log(parksData)
 
   const carouselData = [
     {
