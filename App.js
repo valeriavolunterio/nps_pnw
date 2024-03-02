@@ -17,6 +17,9 @@ import {
   PassportStack,
 } from "./components/NavigationStacks.js";
 
+import { collection, onSnapshot } from "firebase/firestore";
+
+
 const Tab = createBottomTabNavigator();
 
 // all images from unsplash.com
