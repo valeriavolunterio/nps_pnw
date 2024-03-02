@@ -8,7 +8,7 @@ import {
   Dimensions,
   Pressable,
   TouchableWithoutFeedback,
-  FlatList
+  FlatList,
 } from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
@@ -140,83 +140,41 @@ const styles = StyleSheet.create({
 });
 
 const HomeScreen = ({ route, navigation }) => {
+  const { parksData, alertsData } = route.params;
+
+  useEffect(() => {
+    console.log("HomeScreen rendered");
+  }, []); // Empty dependency array ensures this effect runs only once after initial render
+
   const [fontsLoaded] = useFonts({
     "Stoke-Regular": require("../assets/fonts/Stoke-Regular.ttf"),
     "OpenSans-SemiBold": require("../assets/fonts/OpenSans-SemiBold.ttf"),
     ButtonFont: require("../assets/fonts/MPLUS1p-Bold.ttf"),
     "MPLUS1-Regular": require("../assets/fonts/MPLUS1-Regular.ttf"),
   });
+  // for alerts icons
+  const iconMapping = {
+    "Park Closure": {
+      name: "ios-remove-circle",
+      color: Colors.red,
+    },
+    Information: {
+      name: "ios-information-circle",
+      color: Colors.blue,
+    },
+    Danger: {
+      name: "ios-warning",
+      color: Colors.darkRed,
+    },
+    Caution: {
+      name: "ios-warning",
+      color: Colors.yellow,
+    },
+  };
 
   const navigateToSaves = (screenName, headerColor) => {
     navigation.navigate("Saves", { screenName, headerColor });
   };
-
-  const [activeAlerts, setActiveAlerts] = useState([]); // State for active alerts
-
-  const [parksAndAlerts, setParksAndAlerts] = useState([]);
-  const [parksData, setParksData] = useState([]);
-
-  useEffect(() => {
-    const fetchParksAndAlerts = async () => {
-      const states = ["wa", "or", "id"]; // Add more states as needed
-      const parksAndAlertsData = [];
-
-      try {
-        await Promise.all(
-          states.map(async (state) => {
-            const parksResponse = await fetch(
-              `https://developer.nps.gov/api/v1/parks?stateCode=${state}`,
-              {
-                headers: {
-                  "X-Api-Key": "khwZtjloZ1uc84rQkAVtJu2ZdcnCJaUI2QIDR9WH",
-                },
-              }
-            );
-            const parksData = await parksResponse.json();
-            setParksData(parksData.data)
-
-            const alertsResponse = await fetch(
-              `https://developer.nps.gov/api/v1/alerts?stateCode=${state}`,
-              {
-                headers: {
-                  "X-Api-Key": "khwZtjloZ1uc84rQkAVtJu2ZdcnCJaUI2QIDR9WH",
-                },
-              }
-            );
-            const alertsData = await alertsResponse.json();
-
-            parksData.data.slice(0, 3).forEach((park, index) => {
-              if (index < 3) {
-                const alert = alertsData.data.find(alert => alert.parkCode === park.parkCode);
-                parksAndAlertsData.push({ park, alert });
-              }
-            });
-          })
-        );
-
-        setParksAndAlerts(parksAndAlertsData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchParksAndAlerts();
-  }, []);
-
- // Function to search by ID
-// function searchById(jsonArray, id) {
-//   return jsonArray.find(item => item.fullName === id);
-// }
-
-// // Example usage
-// var idToSearch = "Lewis and Clark National Historical Park";
-// var result = searchById(parksData, idToSearch);
-// if (result) {
-//   console.log("Found:", result);
-// } else {
-//   console.log("ID", idToSearch, "not found.");
-// }
-  // console.log(parksData)
 
   const carouselData = [
     {
@@ -229,13 +187,10 @@ const HomeScreen = ({ route, navigation }) => {
     { title: "Carousel Item 3" },
   ];
 
-
   if (!fontsLoaded) {
     return null;
   }
 
-
-  
   return (
     <ScrollView style={styles.container}>
       <View style={styles.beigeBackground}>
@@ -323,59 +278,38 @@ const HomeScreen = ({ route, navigation }) => {
           />
         </Svg>
       </View>
-
+      {/* PNW Active Alerts Section */}
       <View style={styles.grayBackground}>
         {/* Active Alerts Section */}
         <View style={styles.alertContainer}>
-  <Text style={styles.alertHeaderText}>Active Alerts</Text>
-  {parksAndAlerts
-    .filter(({ alert }) => alert) // Filter parks with active alerts
-    .slice(0, 3) // Limit to a maximum of 3 parks
-    .map(({ park, alert }) => (
-      <View key={park.id} style={styles.alertItem}>
-        {alert.description.toLowerCase().includes("close") ? (
-          <Ionicons name="ios-warning" size={24} color={Colors.red} />
-        ) : (
-          <Ionicons name="ios-alert" size={24} color={Colors.yellow} />
-        )}
-        <View style={styles.alertTextContainer}>
-          <Text style={Fonts.header4}>{park.fullName}</Text>
-          {alert && <Text>{alert.title}</Text>}
+          <Text style={styles.alertHeaderText}>Active Alerts</Text>
+          {alertsData
+            .slice(0, 3) // Limit to a maximum of 3 parks
+            .map((alert) => {
+              console.log(alert);
+              const park = parksData.find(
+                (park) => park.parkCode === alert.parkCode
+              );
+
+              return (
+                <View key={alert.id} style={styles.alertItem}>
+                  <Ionicons
+                    name={iconMapping[alert.category].name}
+                    size={24}
+                    color={iconMapping[alert.category].color}
+                  />
+                  <View style={styles.alertTextContainer}>
+                    <Text style={Fonts.header4}>{park.fullName}</Text>
+                    <Text>{alert.title}</Text>
+                  </View>
+                </View>
+              );
+            })}
         </View>
-      </View>
-    ))}
-</View>
-
-
-<View style={styles.alertContainer}>
-  <Text style={styles.alertHeaderText}>Events</Text>
-  {parksAndAlerts
-    .filter(({ alert }) => alert) // Filter parks with active alerts
-    .slice(0, 3) // Limit to a maximum of 3 parks
-    .map(({ park, alert }) => (
-      <View key={park.id} style={styles.alertItem}>
-        {alert.description.toLowerCase().includes("close") ? (
-          <Ionicons name="ios-warning" size={24} color={Colors.red} />
-        ) : (
-          <Ionicons name="ios-alert" size={24} color={Colors.yellow} />
-        )}
-        <View style={styles.alertTextContainer}>
-          <Text style={Fonts.header4}>{park.fullName}</Text>
-          {alert && <Text>{alert.title}</Text>}
-        </View>
-      </View>
-    ))}
-</View>
-
-
-
-
 
         {/* PNW News Section */}
-        
 
         {/* PNW Events Section */}
-        
       </View>
     </ScrollView>
 

@@ -1,4 +1,3 @@
-// AppStack.js
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useEffect, useState } from "react";
 import { Pressable } from "react-native";
@@ -41,12 +40,20 @@ const headerStyles = {
   headerLeft: () => <BackButton />,
   headerRight: () => <SettingsButton />,
 };
-const HomeStack = () => {
+const HomeStack = ({ route }) => {
+  const { parksData, alertsData } = route.params;
+
   return (
-    <Stack.Navigator screenOptions={headerStyles}>
+    <Stack.Navigator
+      screenOptions={{
+        ...headerStyles,
+        initialParams: { parksData: parksData, alertsData: alertsData }, // Set initialParams for all screens
+      }}
+    >
       <Stack.Screen
         name="HomeStack"
         component={HomeScreen}
+        initialParams={{ parksData: parksData, alertsData: alertsData }}
         options={{ headerLeft: () => null, headerTransparent: true }}
       />
       <Stack.Screen
@@ -140,9 +147,16 @@ const HomeStack = () => {
   );
 };
 
-const MapStack = () => {
+const MapStack = ({ route }) => {
+  const { parksData } = route.params;
+
   return (
-    <Stack.Navigator screenOptions={headerStyles}>
+    <Stack.Navigator
+      screenOptions={{
+        ...headerStyles,
+        initialParams: { parksData: parksData }, // Set initialParams for all screens
+      }}
+    >
       <Stack.Screen
         name="MapStack"
         component={MapScreen}
@@ -174,9 +188,16 @@ const MapStack = () => {
   );
 };
 
-const SearchStack = () => {
+const SearchStack = ({ route }) => {
+  const { parksData } = route.params;
+
   return (
-    <Stack.Navigator screenOptions={headerStyles}>
+    <Stack.Navigator
+      screenOptions={{
+        ...headerStyles,
+        initialParams: { parksData: parksData }, // Set initialParams for all screens
+      }}
+    >
       <Stack.Screen
         name="SearchStack"
         component={SearchScreen}
