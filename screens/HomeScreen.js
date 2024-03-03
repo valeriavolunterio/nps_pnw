@@ -19,6 +19,7 @@ import SwipeCarousel from "../components/Carousel.js";
 import { TealButton } from "../components/TealButton.js";
 import { Fonts } from "../styles/Fonts.js";
 
+
 const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
@@ -176,16 +177,20 @@ const HomeScreen = ({ route, navigation }) => {
     navigation.navigate("Saves", { screenName, headerColor });
   };
 
-  const carouselData = [
-    {
-      miniTitle: "See Something New",
-      title: "Olympic National Park",
-      img: "https://www.nps.gov/npgallery/GetAsset/41e9450b-1dd8-b71b-0b41-ae6ab257056e/proxy/hires?",
-    },
-
-    { title: "Carousel Item 2" },
-    { title: "Carousel Item 3" },
-  ];
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+  
+  // Shuffle the parksData array and take the first 3 elements
+  const shuffledParksData = shuffleArray(parksData);
+  const carouselData = shuffledParksData.slice(0, 3).map((park) => ({
+    title: park.fullName,
+    img: park.images.length > 0 ? park.images[0].url : "default_image_url",
+  }));
 
   if (!fontsLoaded) {
     return null;

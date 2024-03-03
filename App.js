@@ -26,6 +26,8 @@ import LoadingScreen from "./screens/LoadingScreen.js";
 import { collection, onSnapshot } from "firebase/firestore";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { ParkDataProvider, useParkDataContext } from "./serverConnections/parksDataContext.js";
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -66,6 +68,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
+      <ParkDataProvider>
       <Tab.Navigator>
         <Tab.Screen
           name="Home"
@@ -120,6 +123,7 @@ export default function App() {
           }}
         />
       </Tab.Navigator>
+      </ParkDataProvider>
     </NavigationContainer>
   );
 }

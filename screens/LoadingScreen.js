@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
-  FlatList,
   StyleSheet,
-  Linking,
+  Image,
 } from "react-native";
 import { Button, ButtonGroup } from "@rneui/themed";
 // import { styles } from "../../App";
@@ -13,7 +11,9 @@ import { Button, ButtonGroup } from "@rneui/themed";
 const LoadingScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Loading Screen </Text>
+      <View style={styles.imageContainer}>
+    <Image source={require("../assets/logos/nps_pnw_logo.png")} style={styles.image}/>
+      </View>
     </View>
   );
 };
@@ -21,7 +21,19 @@ const LoadingScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    justifyContent: "center",
+    alignItems: "center"
+    //padding: 20,
+  },
+  imageContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  image: {
+    width: 350,
+    height: 350,
+    resizeMode: "contain",
   },
 });
 

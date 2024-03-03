@@ -67,17 +67,18 @@ const styles = StyleSheet.create({
 
 
 
-const CarouselItem = ({ title, img, navigation}) => (
+const CarouselItem = ({ title, img, navigation }) => (
   <>
-  <Pressable onPress={() => navigation.navigate("Park")}>
-  <View style={[styles.item, { backgroundColor: "rgba(0,0,0,0.5)" }]}>
-
-    <Image source={{ uri: img }} style={{ width: "100%", height: "100%", borderRadius: 9 }} />
-    <View style={styles.titleContainer}>
-      <Text style={styles.miniTitle}>See something new</Text>
-      <Text style={styles.title}>{title}</Text>
-    </View>
-  </View></Pressable></>
+    <Pressable onPress={() => navigation.navigate("Park")}>
+      <View style={[styles.item, { backgroundColor: "rgba(0,0,0,0.5)" }]}>
+        <Image source={{ uri: img }} style={{ width: "100%", height: "100%", borderRadius: 9 }} />
+        <View style={styles.titleContainer}>
+          <Text style={styles.miniTitle}>See something new</Text>
+          <Text style={styles.title}>{title}</Text>
+        </View>
+      </View>
+    </Pressable>
+  </>
 );
 
 const Dot = ({ active }) => (
@@ -94,7 +95,6 @@ const SwipeCarousel = ({ data, navigation }) => {
   };
 
   useEffect(() => {
-   
     const updateIndex = (event) => handleScroll(event);
     return () => {
       
@@ -109,15 +109,14 @@ const SwipeCarousel = ({ data, navigation }) => {
         showsHorizontalScrollIndicator={false}
         style={styles.container}
         onScroll={handleScroll}
-        scrollEventThrottle={16} 
+        scrollEventThrottle={16}
       >
-        {data.map((item, index) => (
-  <CarouselItem key={index} title={item.title} img={item.img} navigation={navigation} />
-))}
-
+        {data.map((park, index) => (
+          <CarouselItem key={index} title={park.title} img={park.img} navigation={navigation} />
+        ))}
       </ScrollView>
       <View style={styles.paginationContainer}>
-        {data.map((item, index) => (
+        {data.map((_, index) => (
           <Dot key={index} active={index === activeIndex} />
         ))}
       </View>
