@@ -19,6 +19,7 @@ import SwipeCarousel from "../components/Carousel.js";
 import { TealButton } from "../components/TealButton.js";
 import { Fonts } from "../styles/Fonts.js";
 import { useParkData } from "../serverConnections/parksDataContext.js";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 
@@ -140,8 +141,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeScreen = ({ route, navigation }) => {
-  const { parkData, alertData, setParkData } = useParkData([]);
+const HomeScreen = () => {
+  const { parkData, alertData, setSelectedParkData } = useParkData([]);
+  const navigation = useNavigation();
+
+  const handleParkPress = (park) => {
+    setSelectedParkData(park); // Set selected park data in the context
+    navigation.navigate("Park", { park });
+  };
 
   // useEffect(() => {
   //   const fetchParkDataFromAPI = async () => {
@@ -221,7 +228,8 @@ const HomeScreen = ({ route, navigation }) => {
 
         {/* Carousel Section */}
         <View>
-          <SwipeCarousel data={carouselData} navigation={navigation} />
+          
+          <SwipeCarousel data={carouselData} navigation={navigation} onParkPress={handleParkPress} />
         </View>
 
         {/* PNW Safety Guide Button */}

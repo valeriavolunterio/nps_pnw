@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, StyleSheet, View, Text, Dimensions, Image, Pressable } from "react-native";
 
+
 const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
@@ -87,6 +88,7 @@ const Dot = ({ active }) => (
 
 const SwipeCarousel = ({ data, navigation }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  
 
   const handleScroll = (event) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;

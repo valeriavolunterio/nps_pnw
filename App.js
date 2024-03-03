@@ -26,7 +26,10 @@ import LoadingScreen from "./screens/LoadingScreen.js";
 import { collection, onSnapshot } from "firebase/firestore";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { ParkDataProvider, useParkDataContext } from "./serverConnections/parksDataContext.js";
+import {
+  ParkDataProvider,
+  useParkDataContext,
+} from "./serverConnections/parksDataContext.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -67,63 +70,63 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <ParkDataProvider>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          component={HomeStack}
-          initialParams={{ parksData: parksData, alertsData: alertsData }}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
-            ),
-            headerShown: false,
-          }}
-        />
-        <Tab.Screen
-          name="Map"
-          component={MapStack}
-          initialParams={{ parksData: parksData }}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="map" color={color} size={size} />
-            ),
-            headerShown: false,
-          }}
-        />
-        <Tab.Screen
-          name="Search"
-          component={SearchStack}
-          initialParams={{ parksData: parksData }}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="magnify"
-                color={color}
-                size={size}
-              />
-            ),
-            headerShown: false,
-          }}
-        />
-        <Tab.Screen
-          name="Passport"
-          component={PassportStack}
-          initialParams={{ parksData: parksData }}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="smart-card"
-                color={color}
-                size={size}
-              />
-            ),
-            headerShown: false,
-          }}
-        />
-      </Tab.Navigator>
-      </ParkDataProvider>
-    </NavigationContainer>
+    <ParkDataProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Home"
+            component={HomeStack}
+            initialParams={{ parksData: parksData, alertsData: alertsData }}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="home" color={color} size={size} />
+              ),
+              headerShown: false,
+            }}
+          />
+          <Tab.Screen
+            name="Map"
+            component={MapStack}
+            initialParams={{ parksData: parksData }}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="map" color={color} size={size} />
+              ),
+              headerShown: false,
+            }}
+          />
+          <Tab.Screen
+            name="Search"
+            component={SearchStack}
+            initialParams={{ parksData: parksData }}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons
+                  name="magnify"
+                  color={color}
+                  size={size}
+                />
+              ),
+              headerShown: false,
+            }}
+          />
+          <Tab.Screen
+            name="Passport"
+            component={PassportStack}
+            initialParams={{ parksData: parksData }}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons
+                  name="smart-card"
+                  color={color}
+                  size={size}
+                />
+              ),
+              headerShown: false,
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </ParkDataProvider>
   );
 }

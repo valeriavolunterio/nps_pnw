@@ -12,6 +12,7 @@ export const useParkData = () => useContext(ParkDataContext);
 
 export const ParkDataProvider = ({ children }) => {
   const [parkData, setParkData] = useState([]);
+  const [selectedParkData, setSelectedParkData] = useState(null);
   const [alertData, setAlertData] = useState([]);
   const [eventsData, setEventsData] = useState([]);
   const [newsData, setNewsData] = useState([]);
@@ -36,7 +37,7 @@ useEffect(() => {
 
 return (
     <ParkDataContext.Provider
-      value={{ parkData, alertData, eventsData, newsData }}
+      value={{ parkData, alertData, eventsData, newsData, selectedParkData, setSelectedParkData }}
     >
       {children}
     </ParkDataContext.Provider>

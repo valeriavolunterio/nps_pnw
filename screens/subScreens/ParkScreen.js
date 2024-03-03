@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   SafeAreaView,
   Text,
@@ -15,42 +15,45 @@ import { ScrollView } from "react-native-gesture-handler";
 import RoundedButton from "../../components/RoundedButton";
 import ToggleButton from "../../components/ToggleButtons";
 import { Fonts } from "../../styles/Fonts";
+import { ParkDataContext } from "../../serverConnections/parksDataContext";
 
 const { width } = Dimensions.get("window");
 
-const parkScreenData = [
-  {
-    miniTitle: "See Something New",
-    title: "Olympic National Park",
-    img: "https://www.nps.gov/npgallery/GetAsset/41e9450b-1dd8-b71b-0b41-ae6ab257056e/proxy/hires?",
-    about:
-      "Olympic National Park, a natural wonder on Washington's Olympic Peninsula, enchants with its diverse landscapes. From ancient rainforests adorned with moss-draped trees to rugged coastlines graced by tide pools and pristine lakes nestled amid majestic mountains, this park offers a breathtaking tapestry of wilderness and outdoor adventure.",
-    places: [
-      "Hoh Rain Forest",
-      "Hurricane Ridge",
-      "Kaloch and Ruby Beach",
-      "Sol Duc Valley",
-    ],
-  },
-];
+// const parkScreenData = [
+//   {
+//     miniTitle: "See Something New",
+//     title: "Olympic National Park",
+//     img: "https://www.nps.gov/npgallery/GetAsset/41e9450b-1dd8-b71b-0b41-ae6ab257056e/proxy/hires?",
+//     about:
+//       "Olympic National Park, a natural wonder on Washington's Olympic Peninsula, enchants with its diverse landscapes. From ancient rainforests adorned with moss-draped trees to rugged coastlines graced by tide pools and pristine lakes nestled amid majestic mountains, this park offers a breathtaking tapestry of wilderness and outdoor adventure.",
+//     places: [
+//       "Hoh Rain Forest",
+//       "Hurricane Ridge",
+//       "Kaloch and Ruby Beach",
+//       "Sol Duc Valley",
+//     ],
+//   },
+// ];
 
-const ParkScreen = ({ route, navigation }) => {
+const ParkScreen = () => {
+  const { selectedPark } = useContext(ParkDataContext);
   return (
     <ScrollView style={styles.container}>
-      {parkScreenData.map((item, index) => (
-        <View key={index} style={styles.imageContainer}>
-          {item.img && (
+      {selectedPark && (
+        <View style={styles.imageContainer}>
+          {selectedPark.img && (
             <Image
-              source={{ uri: item.img }}
+              source={{ uri: selectedPark.img }}
               style={styles.parkImage}
               resizeMode="cover"
             />
           )}
           <View style={styles.overlay}>
-            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.title}>{selectedPark.title}</Text>
           </View>
         </View>
-      ))}
+      )}
+
       <View style={styles.actionBtnContainer}>
         <View style={styles.actionBtns}>
           <View style={{ paddingHorizontal: 10 }}>
@@ -124,7 +127,7 @@ const ParkScreen = ({ route, navigation }) => {
         </View>
       </View>
 
-      {parkScreenData.map((item, index) => (
+      {ParkDataContext.map((item, index) => (
         <View key={index} style={styles.aboutPark}>
           <Text
             style={[Fonts.header3, { color: Colors.sepia, paddingBottom: 10 }]}
