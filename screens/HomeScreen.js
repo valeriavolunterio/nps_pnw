@@ -18,7 +18,7 @@ import { useFonts } from "expo-font";
 import SwipeCarousel from "../components/Carousel.js";
 import { TealButton } from "../components/TealButton.js";
 import { Fonts } from "../styles/Fonts.js";
-
+import { useParkData } from "../serverConnections/parksDataContext.js";
 
 const { width } = Dimensions.get("window");
 
@@ -141,11 +141,24 @@ const styles = StyleSheet.create({
 });
 
 const HomeScreen = ({ route, navigation }) => {
-  const { parksData, alertsData } = route.params;
+  const { parkData, alertData, setParkData } = useParkData([]);
+
+  // useEffect(() => {
+  //   const fetchParkDataFromAPI = async () => {
+  //     try {
+  //       const response = await fetchParkData();
+  //       setParkData(response);
+  //     } catch (error) {
+  //       console.error("Error fetching park data:", error);
+  //     }
+  //   };
+
+  //   fetchParkDataFromAPI();
+  // }, []);
 
   useEffect(() => {
     console.log("HomeScreen rendered");
-  }, []); // Empty dependency array ensures this effect runs only once after initial render
+  }, []);
 
   const [fontsLoaded] = useFonts({
     "Stoke-Regular": require("../assets/fonts/Stoke-Regular.ttf"),
@@ -186,7 +199,7 @@ const HomeScreen = ({ route, navigation }) => {
   };
   
   // Shuffle the parksData array and take the first 3 elements
-  const shuffledParksData = shuffleArray(parksData);
+  const shuffledParksData = shuffleArray(parkData);
   const carouselData = shuffledParksData.slice(0, 3).map((park) => ({
     title: park.fullName,
     img: park.images.length > 0 ? park.images[0].url : "default_image_url",
@@ -288,11 +301,11 @@ const HomeScreen = ({ route, navigation }) => {
         {/* Active Alerts Section */}
         <View style={styles.alertContainer}>
           <Text style={styles.alertHeaderText}>Active Alerts</Text>
-          {alertsData
+          {alertData
             .slice(0, 3) // Limit to a maximum of 3 parks
             .map((alert) => {
               console.log(alert);
-              const park = parksData.find(
+              const park = parkData.find(
                 (park) => park.parkCode === alert.parkCode
               );
 
