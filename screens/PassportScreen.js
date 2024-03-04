@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
 const defaultUser = {
   name: "John Doe",
   date: "Jan 2023",
-  photo: require("../assets/userPlaceholder.jpg"),
+  photo: require("../assets/userPlaceholder.png"),
   facebook: "facebook",
   instagram: "instagram",
   tiktok: "tiktok",
