@@ -35,7 +35,7 @@ const { width } = Dimensions.get("window");
 //   },
 // ];
 
-const ParkScreen = ({ route }) => {
+const ParkScreen = ({ route, navigation }) => {
   const { parkData, alertData } = useParkData([]);
   const { parkCode } = route.params;
   const selectedPark = parkData.find((park) => park.parkCode === parkCode);
@@ -138,7 +138,11 @@ const ParkScreen = ({ route }) => {
         </Text>
         <Text>{selectedPark.description}</Text>
       </View>
-      <TealButton.alerts onPress={() => navigation.navigate("Alerts")} />
+      <TealButton.alerts
+        onPress={() =>
+          navigation.navigate("Alerts", { parkCode: selectedPark.parkCode })
+        }
+      />
       <TealButton.knowBefore
         onPress={() => navigation.navigate("SafetyGuide")}
       />

@@ -65,16 +65,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const activeAlerts = [
-  {
-    id: 1,
-    park: "Crater Lake",
-    type: "Closure",
-    heading: "Rim Drive and North Entrance Road are CLOSED for the season",
-    body: "Rim Drive and North Entrance Road are closed for the season. They will gradually open again beginning sometime in June depending on snowpack and plowing operations. The road to Rim Village remains open except when there is heavy snow. Hwy 62 is open.",
-  },
-];
-
 const AlertsScreen = ({ route, navigation }) => {
   const { alertData, parkData } = useParkData([]);
 
@@ -89,9 +79,16 @@ const AlertsScreen = ({ route, navigation }) => {
     return null; //return a loading indicator here
   }
 
-  const AlertsList = ({ alerts }) => {
+  const AlertsList = ({ alerts, parkCode }) => {
+    let filteredAlerts = alerts;
+    if (route.params.parkCode) {
+      filteredAlerts = filteredAlerts.filter(
+        (alert) => alert.parkCode === route.params.parkCode
+      );
+    }
+
     const alertsByPark = Array.from(
-      new Set(alerts.map((alert) => alert.parkCode))
+      new Set(filteredAlerts.map((alert) => alert.parkCode))
     );
 
     const iconMapping = {
