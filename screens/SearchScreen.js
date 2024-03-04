@@ -2,24 +2,28 @@ import React, { useState } from "react";
 import { View, TextInput, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { Colors } from "../styles/Colors";
 import { Fonts } from "../styles/Fonts";
+import { useParkData } from "../serverConnections/parksDataContext";
 
-const searchData = [
-  { name: 'Whitman Mission National Historic Site', description: "Whitman Mission National Historic Site was established to focus on the continuing relevance..." },
-  { name: 'Mount Rainer National Park', description: "Ascending to 14,410 feet above sea level, Mount Rainier stands as an icon in the Washington.... " },
-  { name: 'Olympic National Park', description: "Olympic National Park, a natural wonder on Washington's Olympic Peninsula, enchants with its..." },
-  { name: 'Lewis and Clark National Historic Park', description: "Discover the rich heritage of the native people. Unfold the dramatic stories of America's most fam.." },
-];
+const MAX_DESCRIPTION_LENGTH = 100; // Maximum length of the short description
 
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
+  const { parkData } = useParkData([]);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
-    const filteredResults = searchData.filter(item =>
-      item.name.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredData(filteredResults);
+  };
+
+  const filteredData = parkData.filter(item =>
+    item.fullName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Function to truncate the description to a maximum length
+  const truncateDescription = (description) => {
+    if (description.length > MAX_DESCRIPTION_LENGTH) {
+      return `${description.substring(0, MAX_DESCRIPTION_LENGTH)}...`;
+    }
+    return description;
   };
 
   return (
@@ -36,11 +40,13 @@ const SearchScreen = () => {
       </View>
       <FlatList
         data={filteredData}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.parkCode}
         renderItem={({ item }) => (
           <View style={styles.itemContainer}>
-            <Text style={Fonts.header4}>{item.name}</Text>
-            <Text style={Fonts.body}>{item.description}</Text>
+            <Text style={Fonts.header4}>{item.fullName}</Text>
+            <Text style={Fonts.body}>
+              {truncateDescription(item.description)}
+            </Text>
           </View>
         )}
       />
@@ -81,5 +87,3 @@ const styles = StyleSheet.create({
 });
 
 export default SearchScreen;
-
-
