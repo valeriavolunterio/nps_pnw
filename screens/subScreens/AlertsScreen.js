@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
-// import { styles } from "../../App";
+import { Colors } from "../../styles/Colors.js";
+import { useParkData } from "../../serverConnections/parksDataContext.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -72,45 +73,11 @@ const activeAlerts = [
     heading: "Rim Drive and North Entrance Road are CLOSED for the season",
     body: "Rim Drive and North Entrance Road are closed for the season. They will gradually open again beginning sometime in June depending on snowpack and plowing operations. The road to Rim Village remains open except when there is heavy snow. Hwy 62 is open.",
   },
-  {
-    id: 2,
-    park: "Crater Lake",
-    type: "Info",
-    heading: "Steel Visitor Center is Closed for Construction",
-    body: "The visitor center at park headquarters is currently closed for a major rehabilitation project. Restrooms are available at Rim Village and Goodbye Picnic Area.",
-  },
-  {
-    id: 3,
-    park: "Olympic",
-    type: "Danger",
-    heading: "Trail Closures Due to Wildfires",
-    body: "Elwha River, Hayden Pass, Dosewallips: Dose Meadows to Hayden Pass, North Fork Quinault: Elip Creek to Low Divide, Skyline: Elip Creek Trail junction to Low Divide, Martins Park",
-  },
-  {
-    id: 4,
-    park: "Olympic",
-    type: "Closure",
-    heading:
-      "Hurricane Ridge Road closed for demolition and preparation for winter",
-    body: "Beginning on October 16, demolition and removal of the remaining Hurricane Ridge Day Lodge debris begins. This critical step in the ongoing efforts to restore visitor services and ensure public safety will require a temporary closure of the area.",
-  },
-  {
-    id: 5,
-    park: "San Juan",
-    type: "Danger",
-    heading: "Burn Ban in Effect",
-    body: "The superintendent has issued a ban on outdoor and recreational fires due atmospheric conditions that have resulted in an increased risk of wildfire. This ban will remain in effect until further notice.",
-  },
-  {
-    id: 6,
-    park: "San Juan",
-    type: "Caution",
-    heading: "Wildlife Viewing Guidelines",
-    body: "San Juan Island National Historical Park provides habitat for many species of animals. When you visit the park, you are visiting their home. Do not approach any wildlife within 75 ft/23 m (two school bus lengths).",
-  },
 ];
 
 const AlertsScreen = ({ route, navigation }) => {
+  const { alertData, parkData } = useParkData([]);
+
   const [fontsLoaded] = useFonts({
     "Stoke-Regular": require("../../assets/fonts/Stoke-Regular.ttf"),
     "OpenSans-SemiBold": require("../../assets/fonts/OpenSans-SemiBold.ttf"),
@@ -123,66 +90,85 @@ const AlertsScreen = ({ route, navigation }) => {
   }
 
   const AlertsList = ({ alerts }) => {
+    const alertsByPark = Array.from(
+      new Set(alerts.map((alert) => alert.parkCode))
+    );
+
     const iconMapping = {
-      Closure: { name: "ios-remove-circle", color: "rgba(186, 52, 48, 1)" },
-      Info: { name: "ios-information-circle", color: "rgba(48, 80, 163, 1)" },
-      Danger: { name: "ios-warning", color: "rgba(104, 26, 14, 1)" },
-      Caution: { name: "ios-warning", color: "rgba(224, 137, 73, 1)" },
+      "Park Closure": {
+        name: "ios-remove-circle",
+        color: Colors.red,
+      },
+      Information: {
+        name: "ios-information-circle",
+        color: Colors.blue,
+      },
+      Danger: {
+        name: "ios-warning",
+        color: Colors.darkRed,
+      },
+      Caution: {
+        name: "ios-warning",
+        color: Colors.yellow,
+      },
     };
-    // Group alerts by park
-    const alertsByPark = alerts.reduce((acc, alert) => {
-      if (!acc[alert.park]) {
-        acc[alert.park] = [];
-      }
-      acc[alert.park].push(alert);
-      return acc;
-    }, {});
 
     const renderAlertItem = ({ item }) => (
-      <View styles={styles.container}>
+      <View style={styles.container}>
         <View style={styles.alertContainer}>
           {/* display icon according to type */}
           <View style={styles.iconContainer}>
             <Ionicons
-              name={iconMapping[item.type].name}
+              name={iconMapping[item.category].name}
               size={30}
-              color={iconMapping[item.type].color}
+              color={iconMapping[item.category].color}
             />
           </View>
           {/*Text content on the right of icon */}
           <View style={styles.textContainer}>
-            <Text style={styles.subHeading}>{item.heading}</Text>
+            <Text style={styles.subHeading}>{item.title}</Text>
             <Text style={styles.body} numberOfLines={3} ellipsizeMode="tail">
-              {item.body}
+              {item.description}
             </Text>
           </View>
         </View>
       </View>
     );
 
-    const renderParkAlerts = ({ item: park }) => (
-      <View>
-        <Text style={styles.heading}>{park} National Park</Text>
-        <View style={styles.horizontalRule} />
-        <FlatList
-          data={alertsByPark[park]}
-          renderItem={renderAlertItem}
-          keyExtractor={(alert) => alert.id.toString()}
-        />
-      </View>
-    );
+    const renderParkAlerts = ({ item: parkCode }) => {
+      const parkAlerts = alerts.filter((alert) => alert.parkCode === parkCode);
+      const park = parkData.find((park) => park.parkCode === parkCode);
+
+      return (
+        <View>
+          <Text style={styles.heading}>{park.fullName}</Text>
+          <View style={styles.horizontalRule} />
+          <FlatList
+            data={parkAlerts}
+            renderItem={renderAlertItem}
+            keyExtractor={(alert) => alert.id.toString()}
+          />
+        </View>
+      );
+    };
 
     return (
       <FlatList
-        data={Object.keys(alertsByPark)}
+        data={alertsByPark}
         renderItem={renderParkAlerts}
-        keyExtractor={(park) => park}
+        keyExtractor={(parkCode) => parkCode}
       />
     );
   };
+
   return (
     <SafeAreaView style={styles.container}>
-      <AlertsList alerts={activeAlerts} />
+      <AlertsList
+        alerts={alertData.map((alert) => ({
+          ...alert,
+          park: parkData.find((park) => park.parkCode === alert.parkCode),
+        }))}
+      />
     </SafeAreaView>
   );
 };
