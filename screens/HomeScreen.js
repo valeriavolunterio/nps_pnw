@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     fontFamily: "Stoke-Regular",
   },
   subHeaderText: {
-    color: Colors.red,
+    color: Colors.sepia,
     fontSize: 16,
     fontFamily: "OpenSans-SemiBold",
     fontWeight: "bold",
