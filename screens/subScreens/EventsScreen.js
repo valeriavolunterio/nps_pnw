@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   time: {
-    color: 'green',
+    color: Colors.green,
     fontSize: 12,
     fontWeight: 'bold',
     marginBottom: 5,

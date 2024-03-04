@@ -6,70 +6,66 @@ import {
   FlatList,
   StyleSheet,
   Linking,
+  Dimensions,
+  Image,
 } from "react-native";
-import { Button, ButtonGroup } from "@rneui/themed";
-// import { styles } from "../../App";
+import { useParkData } from "../../serverConnections/parksDataContext";
+import { Colors } from "../../styles/Colors.js";
+import { Fonts } from "../../styles/Fonts.js";
 
-// Sample data for news articles
-const newsData = [
-  {
-    id: "1",
-    title:
-      "Mount Rainer National Park expands winter recreational access for the 2023/2024 season",
-    date: "2023-11-08",
-    park: "Mount Rainer National Park",
-    description:
-      "Mount Rainier National Park announced updates today to the winter 2023-24 recreation access schedule. Beginning Nov. 15, the park will expand winter public vehicle access to the Paradise area to five days per week on a Thursday through Monday schedule. ",
-    link: "https://www.nps.gov/mora/learn/news/mount-rainier-national-park-expands-winter-recreational-access-for-the-2023-2024-season.htm",
-  },
-  {
-    id: "2",
-    title: "Be a Tourist in Your Own Hometowns",
-    date: "2023-10-25",
-    park: "Lewis and Clark National Historic Park",
-    description:
-      "Pacific and Clatsop Counties are known for their tourist attractions, but how long has it been since you visited these sites? As a “local tourist,” the Hometown Tourism Day on Saturday, November 11 (Veterans Day), might be just the ticket for you.",
-    link: "https://www.nps.gov/lewi/learn/news/be-a-tourist-in-your-own-hometowns.htm",
-  },
-  {
-    id: "3",
-    title:
-      "Olympic National Park seeks public input on Elwha Bridge replacement environmental assessment",
-    date: "2023-10-19",
-    park: "Olympic National Park",
-    description:
-      "Olympic National Park is seeking public input on an environmental assessment that proposes to construct 12 engineered log jams - structures designed to mimic natural river dynamics - to mitigate impacts from the construction of the U.S. 101 Elwha River Bridge.",
-    link: "https://www.nps.gov/olym/learn/news/olympic-national-park-seeks-public-input-on-elwha-bridge-replacement-environmental-assessment.htm",
-  },
-  {
-    id: "4",
-    title:
-      "Additional public meetings scheduled on options for restoring grizzly bears to the North Cascades",
-    date: "2023-10-13",
-    park: "North Cascades National Park",
-    description:
-      "Two additional meetings scheduled for the public to provide comment on recently released documents.",
-    link: "https://www.nps.gov/noca/learn/news/additional-public-meetings-scheduled-on-options-for-restoring-grizzly-bears-to-the-north-cascades.htm",
-  },
-];
+const EventsScreen = () => {
+  const { newsData, parkData } = useParkData();
 
-const NewsScreen = () => {
-  // Function to render each news card
-  const renderNewsCard = ({ item }) => (
-    <TouchableOpacity onPress={() => openLink(item.link)}>
-      <View style={styles.card}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.date}>{item.date}</Text>
-        <Text style={styles.park}>{item.park}</Text>
-        <Text style={styles.description}>{item.description}</Text>
-      </View>
-    </TouchableOpacity>
-  );
+  const renderEventsCard = ({ item }) => {
+    const { title, times, url, parkCode, lastIndexedDate, abstract, image } = item;
+    const parkName =
+      parkData.find((park) => park.parkCode === parkCode)?.fullName ||
+      "Unknown Park";
+    //console.log(newsData)
+    const handlePress = () => {
+      if (url) {
+        openLink(url);
+      } else {
+        console.warn("No link available for this event.");
+      }
+    };
+
+    return (
+      <TouchableOpacity onPress={handlePress}>
+        <View style={styles.card}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.park}>{parkName}</Text>
+          <Text style={styles.date}>{lastIndexedDate}</Text>
+          <Text style={styles.abstract}>{abstract}</Text>
+          
+          {times && (
+            <View style={styles.time}>
+              {times.map((time, index) => (
+                <Text key={index} style={styles.time}>
+                  {time.timestart} - {time.timeend}
+                </Text>
+              ))}
+            </View>
+          )}
+           {/* {url && (
+            <View>
+              <Image source={{uri: image}} style={styles.image}/>
+            </View>
+          )} */}
+          {url && (
+            <TouchableOpacity onPress={() => openLink(url)}>
+              <Text style={styles.link}>Read More</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   // Function to open the link in a browser or handle navigation
-  const openLink = (link) => {
+  const openLink = (url) => {
     // Use Linking to open the URL
-    Linking.openURL(link).catch((error) =>
+    Linking.openURL(url).catch((error) =>
       console.error("Error opening link:", error)
     );
   };
@@ -79,7 +75,7 @@ const NewsScreen = () => {
       <FlatList
         data={newsData}
         keyExtractor={(item) => item.id}
-        renderItem={renderNewsCard}
+        renderItem={renderEventsCard}
       />
     </View>
   );
@@ -88,17 +84,27 @@ const NewsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    backgroundColor: Colors.lightOffWhite,
   },
+
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: Colors.offWhite,
+    width: 350,
+    alignSelf: "center",
     borderRadius: 8,
     padding: 15,
     marginBottom: 15,
     elevation: 2,
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
   },
   title: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
     marginBottom: 5,
   },
@@ -106,13 +112,34 @@ const styles = StyleSheet.create({
     color: "gray",
     marginBottom: 5,
   },
+  abstract: {
+    paddingVertical: 5,
+  },
   park: {
-    color: "green",
+    color: Colors.baseGray,
+    marginBottom: 5,
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  time: {
+    color: Colors.green,
+    fontSize: 12,
+    fontWeight: "bold",
     marginBottom: 5,
   },
-  description: {
-    fontSize: 14,
+  link: {
+    color: Colors.sepia,
+    fontSize: 12,
+    fontWeight: "bold",
+    marginBottom: 5,
+    textDecorationLine: "underline",
+  },
+  image: {
+    width: 300,
+    height: 200,
+    resizeMode: 'cover',
+    marginBottom: 10,
   },
 });
 
-export default NewsScreen;
+export default EventsScreen;
