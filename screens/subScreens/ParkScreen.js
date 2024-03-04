@@ -15,7 +15,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import RoundedButton from "../../components/RoundedButton";
 import ToggleButton from "../../components/ToggleButtons";
 import { Fonts } from "../../styles/Fonts";
-import { ParkDataContext } from "../../serverConnections/parksDataContext";
+import { useParkData } from "../../serverConnections/parksDataContext.js";
 
 const { width } = Dimensions.get("window");
 
@@ -35,8 +35,11 @@ const { width } = Dimensions.get("window");
 //   },
 // ];
 
-const ParkScreen = () => {
-  const { selectedPark } = useContext(ParkDataContext);
+const ParkScreen = ({ route }) => {
+  const { parkData, alertData } = useParkData([]);
+  const { parkCode } = route.params;
+  const selectedPark = parkData.find((park) => park.parkCode === parkCode);
+
   return (
     <ScrollView style={styles.container}>
       {selectedPark && (
@@ -127,16 +130,14 @@ const ParkScreen = () => {
         </View>
       </View>
 
-      {ParkDataContext.map((item, index) => (
-        <View key={index} style={styles.aboutPark}>
-          <Text
-            style={[Fonts.header3, { color: Colors.sepia, paddingBottom: 10 }]}
-          >
-            About This Park
-          </Text>
-          <Text>{item.about}</Text>
-        </View>
-      ))}
+      <View style={styles.aboutPark}>
+        <Text
+          style={[Fonts.header3, { color: Colors.sepia, paddingBottom: 10 }]}
+        >
+          About This Park
+        </Text>
+        <Text>{selectedPark.description}</Text>
+      </View>
       <TealButton.alerts onPress={() => navigation.navigate("Alerts")} />
       <TealButton.knowBefore
         onPress={() => navigation.navigate("SafetyGuide")}

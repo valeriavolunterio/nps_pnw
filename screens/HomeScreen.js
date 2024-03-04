@@ -141,14 +141,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeScreen = () => {
-  const { parkData, alertData, setSelectedParkData } = useParkData([]);
-  const navigation = useNavigation();
-
-  const handleParkPress = (park) => {
-    setSelectedParkData(park); // Set selected park data in the context
-    navigation.navigate("Park", { park });
-  };
+const HomeScreen = ({ navigation }) => {
+  const { parkData, alertData } = useParkData([]);
 
   // useEffect(() => {
   //   const fetchParkDataFromAPI = async () => {
@@ -204,12 +198,13 @@ const HomeScreen = () => {
     }
     return array;
   };
-  
+
   // Shuffle the parksData array and take the first 3 elements
   const shuffledParksData = shuffleArray(parkData);
   const carouselData = shuffledParksData.slice(0, 3).map((park) => ({
     title: park.fullName,
     img: park.images.length > 0 ? park.images[0].url : "default_image_url",
+    parkCode: park.parkCode,
   }));
 
   if (!fontsLoaded) {
@@ -228,8 +223,7 @@ const HomeScreen = () => {
 
         {/* Carousel Section */}
         <View>
-          
-          <SwipeCarousel data={carouselData} navigation={navigation} onParkPress={handleParkPress} />
+          <SwipeCarousel data={carouselData} navigation={navigation} />
         </View>
 
         {/* PNW Safety Guide Button */}
@@ -312,7 +306,6 @@ const HomeScreen = () => {
           {alertData
             .slice(0, 3) // Limit to a maximum of 3 parks
             .map((alert) => {
-              console.log(alert);
               const park = parkData.find(
                 (park) => park.parkCode === alert.parkCode
               );

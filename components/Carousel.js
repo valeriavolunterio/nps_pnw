@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet, View, Text, Dimensions, Image, Pressable } from "react-native";
-
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  Image,
+  Pressable,
+} from "react-native";
 
 const { width } = Dimensions.get("window");
 
@@ -17,7 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 9,
-    marginHorizontal: 20, 
+    marginHorizontal: 20,
     elevation: 5,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
@@ -27,7 +34,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     position: "absolute",
     bottom: 0,
-    backgroundColor: "rgba(0,0,0,0.6)", 
+    backgroundColor: "rgba(0,0,0,0.6)",
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderBottomLeftRadius: 9,
@@ -39,7 +46,7 @@ const styles = StyleSheet.create({
     fontFamily: "OpenSans-SemiBold",
     fontSize: 14,
     textAlign: "left",
-    paddingBottom: 10, 
+    paddingBottom: 10,
     paddingTop: 10,
   },
   title: {
@@ -66,20 +73,21 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
-const CarouselItem = ({ title, img, navigation }) => (
-  <>
-    <Pressable onPress={() => navigation.navigate("Park")}>
-      <View style={[styles.item, { backgroundColor: "rgba(0,0,0,0.5)" }]}>
-        <Image source={{ uri: img }} style={{ width: "100%", height: "100%", borderRadius: 9 }} />
-        <View style={styles.titleContainer}>
-          <Text style={styles.miniTitle}>See something new</Text>
-          <Text style={styles.title}>{title}</Text>
-        </View>
+const CarouselItem = ({ title, img, parkCode, navigation }) => (
+  <Pressable
+    onPress={() => navigation.navigate("Park", { parkCode: parkCode })}
+  >
+    <View style={[styles.item, { backgroundColor: "rgba(0,0,0,0.5)" }]}>
+      <Image
+        source={{ uri: img }}
+        style={{ width: "100%", height: "100%", borderRadius: 9 }}
+      />
+      <View style={styles.titleContainer}>
+        <Text style={styles.miniTitle}>See something new</Text>
+        <Text style={styles.title}>{title}</Text>
       </View>
-    </Pressable>
-  </>
+    </View>
+  </Pressable>
 );
 
 const Dot = ({ active }) => (
@@ -88,7 +96,6 @@ const Dot = ({ active }) => (
 
 const SwipeCarousel = ({ data, navigation }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  
 
   const handleScroll = (event) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
@@ -98,9 +105,7 @@ const SwipeCarousel = ({ data, navigation }) => {
 
   useEffect(() => {
     const updateIndex = (event) => handleScroll(event);
-    return () => {
-      
-    };
+    return () => {};
   }, [activeIndex]);
 
   return (
@@ -114,7 +119,13 @@ const SwipeCarousel = ({ data, navigation }) => {
         scrollEventThrottle={16}
       >
         {data.map((park, index) => (
-          <CarouselItem key={index} title={park.title} img={park.img} navigation={navigation} />
+          <CarouselItem
+            key={index}
+            title={park.title}
+            img={park.img}
+            parkCode={park.parkCode}
+            navigation={navigation}
+          />
         ))}
       </ScrollView>
       <View style={styles.paginationContainer}>
@@ -127,6 +138,3 @@ const SwipeCarousel = ({ data, navigation }) => {
 };
 
 export default SwipeCarousel;
-
-
-
