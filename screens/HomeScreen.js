@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
 });
 
 const HomeScreen = ({ navigation }) => {
-  const { parkData, alertData } = useParkData([]);
+  const { parkData, alertData, newsData, eventsData } = useParkData([]);
 
   // useEffect(() => {
   //   const fetchParkDataFromAPI = async () => {
@@ -298,9 +298,9 @@ const HomeScreen = ({ navigation }) => {
           />
         </Svg>
       </View>
+
       {/* PNW Active Alerts Section */}
       <View style={styles.grayBackground}>
-        {/* Active Alerts Section */}
         <View style={styles.alertContainer}>
           <Text style={styles.alertHeaderText}>Active Alerts</Text>
           {alertData
@@ -328,7 +328,58 @@ const HomeScreen = ({ navigation }) => {
 
         {/* PNW News Section */}
 
+        <View style={styles.alertContainer}>
+          <Text style={styles.alertHeaderText}>Pacific Northwest News</Text>
+          {newsData
+            .slice(0, 3) // Limit to a maximum of 3 parks
+            .map((alert) => {
+              const park = parkData.find(
+                (park) => park.parkCode === alert.parkCode
+              );
+
+              return (
+                <View key={alert.id} style={styles.alertItem}>
+                  <View style={styles.alertTextContainer}>
+                    <Text style={Fonts.header4}>{park.fullName}</Text>
+                    <Text>{alert.title}</Text>
+                  </View>
+                </View>
+              );
+            })}
+        </View>
+
         {/* PNW Events Section */}
+
+        <View style={styles.alertContainer}>
+  <Text style={styles.alertHeaderText}>Events in the Area</Text>
+  {eventsData
+    .slice(0, 3) // Limit to a maximum of 3 parks
+    .map((event) => {
+      const park = parkData.find((park) => event.parkCode === park.parkCode);
+
+      return (
+        <View key={event.id} style={styles.alertItem}>
+          <View style={styles.alertTextContainer}>
+             {park && <Text style={Fonts.body}>{park.fullName}</Text>}
+            <Text>{event.title}</Text>
+            <Text style={Colors.darkGreen}>{event.date}</Text>
+            {event.times && (  
+              <View >
+                {event.times.map((time, index) => (
+                  <Text key={index} style={{ color: Colors.green, fontWeight: "bold"}}>
+                    {time.timestart} - {time.timeend}
+                  </Text>
+                ))}
+              </View>
+            )}
+            
+            
+          </View>
+        </View>
+      );
+    })}
+</View>
+
       </View>
     </ScrollView>
 
