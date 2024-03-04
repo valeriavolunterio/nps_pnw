@@ -1,87 +1,7 @@
 import React, { useState } from "react";
-import { 
-  View, 
-  TextInput,
-  Text, 
-  StyleSheet, 
-  FlatList, 
-  SafeAreaView,
-} from "react-native";
+import { View, TextInput, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import { Colors } from "../styles/Colors";
 import { Fonts } from "../styles/Fonts";
-import { Colors } from "../styles/Colors.js";
-import { Ionicons } from "@expo/vector-icons";
-import Svg, { Polygon } from "react-native-svg";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { useFonts } from "expo-font";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#D3D8DA",
-  },
-  beigeBackground: {
-    flex: 1,
-    backgroundColor: "#FFF9F5",
-    overflow: "hidden",
-  },
-  grayBackground: {
-    flex: 1,
-    backgroundColor: "#D3D8DA", // Gray color
-  },
-  itemContainer: {
-    flex: 1,
-    justifyContent: "space-between",
-    marginVertical: 10,
-    marginHorizontal: 10,
-    padding: 5,
-    backgroundColor: Colors.white,
-    borderRadius: 5,
-  },
-  headerContainer: {
-    padding: 10,
-    alignSelf: "flex-start",
-    marginTop: 90,
-  },
-  subHeaderContainer: {
-    paddingTop: 1,
-    paddingLeft: 10,
-    alignSelf: "flex-start",
-  },
-  titleHeaderText: {
-    color: Colors.black,
-    fontSize: 22,
-    fontFamily: "Stoke-Regular",
-  },
-  subHeaderText: {
-    color: Colors.red,
-    fontSize: 16,
-    fontFamily: "OpenSans-SemiBold",
-    fontWeight: "bold",
-  },
-  buttonContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginVertical: 20,
-    marginHorizontal: 20,
-  },
-  svgTriangle: {
-    flex: 1,
-    alignItems: "center",
-    elevation: 4,
-    shadowColor: "#000",
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 2,
-  },
-  });
-
-
-
 
 const searchData = [
   { name: 'Whitman Mission National Historic Site', description: "Whitman Mission National Historic Site was established to focus on the continuing relevance..." },
@@ -128,5 +48,38 @@ const SearchScreen = () => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  searchContainer: {
+    width: "100%",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: Colors.baseTeal,
+  },
+  searchBox: {
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderColor: "#000",
+    borderRadius: 8,
+    backgroundColor: "#FFF",
+    shadowColor: Colors.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  itemContainer: {
+    justifyContent: "space-between",
+    marginHorizontal: 10,
+    padding: 15,
+    borderRadius: 5,
+    borderBottomColor: Colors.darkestGray,
+    borderBottomWidth: 0.5,
+  },
+});
 
 export default SearchScreen;
+
+
