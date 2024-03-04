@@ -269,7 +269,9 @@ const HomeScreen = ({ navigation }) => {
               name="ios-warning"
               size={42}
               color={Colors.darkTeal}
-              onPress={() => navigation.navigate("Alerts")}
+              onPress={() =>
+                navigation.navigate("Alerts", { parkFilter: null })
+              }
             />
           </View>
           <View style={styles.iconContainer}>
@@ -351,35 +353,37 @@ const HomeScreen = ({ navigation }) => {
         {/* PNW Events Section */}
 
         <View style={styles.alertContainer}>
-  <Text style={styles.alertHeaderText}>Events in the Area</Text>
-  {eventsData
-    .slice(0, 3) // Limit to a maximum of 3 parks
-    .map((event) => {
-      const park = parkData.find((park) => event.parkCode === park.parkCode);
+          <Text style={styles.alertHeaderText}>Events in the Area</Text>
+          {eventsData
+            .slice(0, 3) // Limit to a maximum of 3 parks
+            .map((event) => {
+              const park = parkData.find(
+                (park) => event.parkCode === park.parkCode
+              );
 
-      return (
-        <View key={event.id} style={styles.alertItem}>
-          <View style={styles.alertTextContainer}>
-             {park && <Text style={Fonts.body}>{park.fullName}</Text>}
-            <Text>{event.title}</Text>
-            <Text style={Colors.darkGreen}>{event.date}</Text>
-            {event.times && (  
-              <View >
-                {event.times.map((time, index) => (
-                  <Text key={index} style={{ color: Colors.green, fontWeight: "bold"}}>
-                    {time.timestart} - {time.timeend}
-                  </Text>
-                ))}
-              </View>
-            )}
-            
-            
-          </View>
+              return (
+                <View key={event.id} style={styles.alertItem}>
+                  <View style={styles.alertTextContainer}>
+                    {park && <Text style={Fonts.body}>{park.fullName}</Text>}
+                    <Text>{event.title}</Text>
+                    <Text style={Colors.darkGreen}>{event.date}</Text>
+                    {event.times && (
+                      <View>
+                        {event.times.map((time, index) => (
+                          <Text
+                            key={index}
+                            style={{ color: Colors.green, fontWeight: "bold" }}
+                          >
+                            {time.timestart} - {time.timeend}
+                          </Text>
+                        ))}
+                      </View>
+                    )}
+                  </View>
+                </View>
+              );
+            })}
         </View>
-      );
-    })}
-</View>
-
       </View>
     </ScrollView>
 

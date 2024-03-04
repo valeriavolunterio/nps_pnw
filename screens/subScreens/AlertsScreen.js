@@ -81,9 +81,9 @@ const AlertsScreen = ({ route, navigation }) => {
 
   const AlertsList = ({ alerts, parkCode }) => {
     let filteredAlerts = alerts;
-    if (route.params.parkCode) {
+    if (route.params.parkFilter) {
       filteredAlerts = filteredAlerts.filter(
-        (alert) => alert.parkCode === route.params.parkCode
+        (alert) => alert.parkCode === route.params.parkFilter
       );
     }
 

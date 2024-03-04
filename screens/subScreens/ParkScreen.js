@@ -140,7 +140,7 @@ const ParkScreen = ({ route, navigation }) => {
       </View>
       <TealButton.alerts
         onPress={() =>
-          navigation.navigate("Alerts", { parkCode: selectedPark.parkCode })
+          navigation.navigate("Alerts", { parkFilter: selectedPark.parkCode })
         }
       />
       <TealButton.knowBefore
