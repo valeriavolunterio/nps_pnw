@@ -18,38 +18,32 @@ const badgesData = [
   {
     id: 1,
     name: "Olympic",
-    scannedSource: require("../assets/badges/Scanned_Olympic.png"),
-    unscannedSource: require("../assets/badges/Unscanned_Olympic.png"),
+    scannedSource: require("../assets/badges/olym.png"),
+    unscannedSource: require("../assets/badges/Unscanned.png"),
   },
   {
     id: 2,
-    name: "Badge 1",
-    scannedSource: require("../assets/badges/Unscanned_Vector2.png"),
-    unscannedSource: require("../assets/badges/Unscanned_Vector2.png"),
+    name: "Crater Lake",
+    scannedSource: require("../assets/badges/crla.png"),
+    unscannedSource: require("../assets/badges/Unscanned.png"),
   },
   {
     id: 3,
-    name: "Badge 2",
-    scannedSource: require("../assets/badges/Unscanned_Vector2.png"),
-    unscannedSource: require("../assets/badges/Unscanned_Vector2.png"),
+    name: "Glacier",
+    scannedSource: require("../assets/badges/glac.png"),
+    unscannedSource: require("../assets/badges/Unscanned.png"),
   },
   {
     id: 4,
     name: "Badge 3",
-    scannedSource: require("../assets/badges/Unscanned_Vector2.png"),
-    unscannedSource: require("../assets/badges/Unscanned_Vector2.png"),
+    scannedSource: require("../assets/badges/olym.png"),
+    unscannedSource: require("../assets/badges/Unscanned.png"),
   },
   {
     id: 5,
     name: "Badge 4",
-    scannedSource: require("../assets/badges/Unscanned_Vector2.png"),
-    unscannedSource: require("../assets/badges/Unscanned_Vector2.png"),
-  },
-  {
-    id: 6,
-    name: "Badge 5",
-    scannedSource: require("../assets/badges/Unscanned_Vector2.png"),
-    unscannedSource: require("../assets/badges/Unscanned_Vector2.png"),
+    scannedSource: require("../assets/badges/crla.png"),
+    unscannedSource: require("../assets/badges/Unscanned.png"),
   },
 ];
 
@@ -199,7 +193,14 @@ const PassportUser = ({ user, route, navigation }) => {
           );
         })}
       </ScrollView>
-      <Pressable style={styles.floatingButton} onPress={handleScannerPress}>
+      <Pressable
+        style={{
+          ...styles.floatingButton,
+          backgroundColor: Colors.green,
+          right: 20,
+        }}
+        onPress={handleScannerPress}
+      >
         <Text style={{ color: Colors.white, ...Fonts.button }}>
           + Scan Park
         </Text>

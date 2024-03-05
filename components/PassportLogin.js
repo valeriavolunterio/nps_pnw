@@ -5,10 +5,12 @@ import {
   Text,
   Image,
   TextInput,
+  Pressable,
   Dimensions,
 } from "react-native";
 
 import { styles } from "../styles/PassportStyles.js";
+import { Fonts } from "../styles/Fonts.js";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -66,7 +68,24 @@ const PassportLogin = ({ handleLogin }) => {
         type="confirm"
         text="Sign In"
         onPress={() => handleLogin({ email, password })}
+        style={{
+          justifyContent: "flex-end",
+          alignSelf: "flex-end",
+          marginRight: "10%",
+        }}
       />
+      <Pressable
+        style={{
+          ...styles.floatingButton,
+          backgroundColor: Colors.sepia,
+          left: 40,
+        }}
+        onPress={console.log("pressed")}
+      >
+        <Text style={{ color: Colors.white, ...Fonts.button }}>
+          + Create Account
+        </Text>
+      </Pressable>
       <View
         style={{
           position: "absolute",
