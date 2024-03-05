@@ -8,69 +8,11 @@ import {
   Pressable,
   Image,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-
+import { SVGIcons } from "../../components/SVGIcons.js";
 import { Colors } from "../../styles/Colors.js";
+import { styles } from "../../styles/PassportStyles.js";
 import ToggleButton from "../../components/ToggleButtons.js";
 import RoundedButton from "../../components/RoundedButton.js";
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-  userCard: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginVertical: 10,
-    padding: 10,
-    backgroundColor: Colors.lightOffWhite,
-    borderRadius: 5,
-    elevation: 5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  userImg: {
-    width: "35%",
-    position: "relative",
-  },
-  userInfo: {
-    width: "60%",
-    marginLeft: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
-  badgesContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-  },
-  badgeContainer: {
-    width: "50%",
-    marginBottom: 10,
-    padding: 5,
-    borderRadius: 5,
-  },
-  editButton: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
-  },
-  input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    marginBottom: 10,
-    padding: 5,
-    borderRadius: 5,
-  },
-});
 
 const PassportEditScreen = ({ route, navigation }) => {
   const [name, setName] = useState(route.params.user.name);
@@ -107,7 +49,7 @@ const PassportEditScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.userCard}>
-        <View style={styles.userImg}>
+        <View style={styles.userImgContainer}>
           <Pressable
             style={{
               aspectRatio: 1,
@@ -116,16 +58,25 @@ const PassportEditScreen = ({ route, navigation }) => {
             <Image
               source={route.params.user.photo}
               style={{
+                ...styles.userImg,
+                position: "absolute",
+                top: 0,
+              }}
+            />
+            <View
+              style={{
+                ...styles.userImg,
                 ...styles.overlay,
-                width: "100%",
-                height: "100%",
-                borderRadius: 100,
-                borderColor: Colors.white,
-                borderWidth: 6,
               }}
             />
           </Pressable>
-          <View style={styles.editButton}>
+          <View
+            style={{
+              position: "absolute",
+              bottom: 0,
+              right: 0,
+            }}
+          >
             <ToggleButton
               type="edit"
               color={Colors.darkGreen}
@@ -137,7 +88,7 @@ const PassportEditScreen = ({ route, navigation }) => {
         </View>
         <View style={styles.userInfo}>
           <TextInput
-            style={styles.input}
+            style={styles.nameInput}
             placeholder="Enter Name"
             value={name}
             onChangeText={(text) => setName(text)}
@@ -145,25 +96,28 @@ const PassportEditScreen = ({ route, navigation }) => {
           <Text>Exploring National Parks since {route.params.user.date}</Text>
           <View style={{ flexDirection: "row" }}>
             {facebook && (
-              <Ionicons
-                name="logo-facebook"
-                size={24}
-                color={Colors.baseTeal}
-                style={{ marginRight: 5 }}
-              />
-            )}
-            {instagram && (
-              <Ionicons
-                name="logo-instagram"
+              <SVGIcons.socials.facebook
                 size={24}
                 color={Colors.darkTeal}
                 style={{ marginRight: 5 }}
               />
             )}
-            {/* tiktok not recognized */}
+            {instagram && (
+              <SVGIcons.socials.instagram
+                size={24}
+                color={Colors.green}
+                style={{ marginRight: 5 }}
+              />
+            )}
+            {tiktok && (
+              <SVGIcons.socials.tiktok
+                size={24}
+                color={Colors.baseTeal}
+                style={{ marginRight: 5 }}
+              />
+            )}
             {youtube && (
-              <Ionicons
-                name="logo-youtube"
+              <SVGIcons.socials.youtube
                 size={24}
                 color={Colors.sepia}
                 style={{ marginRight: 5 }}
@@ -172,50 +126,79 @@ const PassportEditScreen = ({ route, navigation }) => {
           </View>
         </View>
       </View>
-      <View style={styles.userInfo}>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Facebook Handle"
-          value={facebook}
-          onChangeText={(text) => setFacebook(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Instagram Handle"
-          value={instagram}
-          onChangeText={(text) => setInstagram(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Enter TikTok Handle"
-          value={tiktok}
-          onChangeText={(text) => setTiktok(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Enter YouTube Handle"
-          value={youtube}
-          onChangeText={(text) => setYoutube(text)}
-        />
+      <View style={styles.inputCard}>
+        <Text style={styles.inputTitle}>Socials</Text>
+        <View style={styles.inputContainer}>
+          <SVGIcons.socials.facebook
+            size={24}
+            color={Colors.darkTeal}
+            style={{ marginRight: 5 }}
+          />
+          <TextInput
+            style={styles.formInput}
+            placeholder="Enter Facebook Handle"
+            value={facebook}
+            onChangeText={(text) => setFacebook(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <SVGIcons.socials.instagram
+            size={24}
+            color={Colors.green}
+            style={{ marginRight: 5 }}
+          />
+          <TextInput
+            style={styles.formInput}
+            placeholder="Enter Instagram Handle"
+            value={instagram}
+            onChangeText={(text) => setInstagram(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <SVGIcons.socials.tiktok
+            size={24}
+            color={Colors.baseTeal}
+            style={{ marginRight: 5 }}
+          />
+          <TextInput
+            style={styles.formInput}
+            placeholder="Enter TikTok Handle"
+            value={tiktok}
+            onChangeText={(text) => setTiktok(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <SVGIcons.socials.youtube
+            size={24}
+            color={Colors.sepia}
+            style={{ marginRight: 5 }}
+          />
+          <TextInput
+            style={styles.formInput}
+            placeholder="Enter YouTube Handle"
+            value={youtube}
+            onChangeText={(text) => setYoutube(text)}
+          />
+        </View>
       </View>
       <View
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
-          marginHorizontal: 20,
+          marginHorizontal: 90,
         }}
       >
-        <RoundedButton
-          type="confirm"
-          text="Confirm Changes"
-          onPress={handleConfirm}
-          style={{ marginRight: 10 }}
-        />
         <RoundedButton
           type="cancel"
           text="Discard"
           onPress={handleDiscard}
-          style={{ marginLeft: 10 }}
+          style={{ marginRight: 20 }}
+        />
+        <RoundedButton
+          type="confirm"
+          text="Confirm Changes"
+          onPress={handleConfirm}
+          style={{ marginLeft: 20 }}
         />
       </View>
     </SafeAreaView>

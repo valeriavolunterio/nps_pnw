@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { SVGIcons } from "./SVGIcons.js";
 
 const ToggleButton = ({
   type,
@@ -24,8 +25,6 @@ const ToggleButton = ({
         return isToggled ? "bookmark" : "bookmark-outline";
       case "share":
         return "share-social";
-      case "edit":
-        return "pencil";
       default:
         return "ios-close";
     }
@@ -36,23 +35,30 @@ const ToggleButton = ({
       // onPress={handleToggle}
       style={[
         styles.button,
-        { width: buttonSize, backgroundColor: isToggled ? color : "white" },
+        {
+          width: buttonSize,
+          height: buttonSize,
+          borderRadius: buttonSize / 2,
+          backgroundColor: isToggled ? color : "white",
+        },
       ]}
     >
-      <Ionicons
-        name={iconType(type)}
-        size={24}
-        color={isToggled ? "white" : color}
-      />
+      {type !== "edit" ? (
+        <Ionicons
+          name={iconType(type)}
+          size={24}
+          color={isToggled ? "white" : color}
+        />
+      ) : (
+        <SVGIcons.buttons.edit size={24} color={isToggled ? "white" : color} />
+      )}
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 100,
     aspectRatio: 1,
-    padding: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

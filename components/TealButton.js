@@ -3,9 +3,8 @@ import { Pressable, Text, StyleSheet, Dimensions } from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Fonts } from "../styles/Fonts.js";
 import { Ionicons } from "@expo/vector-icons";
-import { useFonts } from "expo-font";
-
 import { SVGIcons } from "./SVGIcons.js";
+import { useFonts } from "expo-font";
 
 const { width } = Dimensions.get("window");
 

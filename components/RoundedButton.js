@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../styles/Colors";
 import { Fonts } from "../styles/Fonts";
 
-const RoundedButton = ({ type, text, onPress }) => {
+const RoundedButton = ({ type, text, onPress, style }) => {
   const styles = {
     buttonBackground: {
       backgroundColor: Colors.white,
@@ -19,8 +19,7 @@ const RoundedButton = ({ type, text, onPress }) => {
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.25,
       shadowRadius: 2,
-      marginLeft: 10,
-      
+      ...style,
     },
   };
 
