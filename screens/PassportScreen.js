@@ -26,7 +26,7 @@ const defaultUsers = {
       instagram: "instagram",
       tiktok: "tiktok",
       youtube: "youtube",
-      scanned: [],
+      scanned: ["Olympic"],
     },
   ],
 };
@@ -36,8 +36,6 @@ const PassportScreen = ({ route, navigation }) => {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState(defaultUsers.users);
 
-
-
   // useEffect(() => {
   //   // Check if a new user is passed as a parameter from the SignInScreen
   //   if (route.params?.newUser) {
@@ -46,8 +44,6 @@ const PassportScreen = ({ route, navigation }) => {
   //   }
   //   console.log(users);
   // }, [route.params?.newUser]);
-
-
 
   const handleLogin = ({ email, password }) => {
     // Check if the email and password match any user in the default users data
@@ -126,8 +122,6 @@ const PassportScreen = ({ route, navigation }) => {
   );
 };
 export default PassportScreen;
-
-
 
 //Displays Data From FireBase
 

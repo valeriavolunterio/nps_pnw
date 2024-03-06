@@ -2,29 +2,6 @@ import { useState, useEffect } from "react";
 
 const parkCodes =
   "ciro,crla,crmo,ebla,fova,glac,grko,hafo,joda,klsa,laro,lewi,mapr,miin,miin,mora,noca,nepe,olym,orca,sajh,whmi";
-const parkCodesArr = [
-  "crla",
-  "ciro",
-  "ebla",
-  "fova",
-  "glac",
-  "grko",
-  "hafo",
-  "joda",
-  "klse",
-  "laro",
-  "lewi",
-  "mapr",
-  "miin",
-  "miin",
-  "mora",
-  "nepe",
-  "noca",
-  "olym",
-  "orca",
-  "sajh",
-  "whmi",
-];
 
 export const fetchParkData = async () => {
   try {
@@ -39,6 +16,25 @@ export const fetchParkData = async () => {
     const parksData = await parksResponse.json();
 
     return parksData.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+};
+
+export const fetchPlaceData = async () => {
+  try {
+    const newsResponse = await fetch(
+      `https://developer.nps.gov/api/v1/places?parkCode=${parkCodes}`,
+      {
+        headers: {
+          "X-Api-Key": "khwZtjloZ1uc84rQkAVtJu2ZdcnCJaUI2QIDR9WH",
+        },
+      }
+    );
+    const placeData = await newsResponse.json();
+
+    return placeData.data;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];

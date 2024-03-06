@@ -88,7 +88,7 @@ const PassportUser = ({ user, route, navigation }) => {
       scanned: scannedParks,
     };
     setCurrentUser(updatedUser);
-    console.log("User Parks updated:", currentUser.scanned);
+    console.log("User Parks updated:", updatedUser.scanned);
   }, [scannedParks]);
 
   const handleScannerPress = () => {

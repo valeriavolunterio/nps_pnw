@@ -43,14 +43,13 @@ const firebaseConfig = {
   storageBucket: "fb-database-4cc25.appspot.com",
   messagingSenderId: "102511707539",
   appId: "1:102511707539:web:e27990139dd6008d4c5466",
-  measurementId: "G-DKDSMPRDL8"
+  measurementId: "G-DKDSMPRDL8",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 //const db = getFirestore(app);
 const analytics = getAnalytics(app);
-
 
 const Tab = createBottomTabNavigator();
 
@@ -67,6 +66,12 @@ export default function App() {
 
         setParksData(parksResponse);
         setAlertsData(alertsResponse);
+
+        const response = await fetch(
+          `https://firestore.googleapis.com/v1/projects/fb-database-4cc25/databases/(default)/documents/users/`
+        );
+        const data = await response.JSON();
+        console.log(data);
 
         setDataLoaded(true);
       } catch (error) {
