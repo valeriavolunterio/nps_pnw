@@ -31,10 +31,20 @@ const defaultUsers = {
 const PassportScreen = ({ route, navigation }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [users, setUsers] = useState(defaultUsers.users);
+
+  // useEffect(() => {
+  //   // Check if a new user is passed as a parameter from the SignInScreen
+  //   if (route.params?.newUser) {
+  //     // Update the users array with the new user
+  //     setUsers([...users, route.params.newUser]);
+  //   }
+  //   console.log(users);
+  // }, [route.params?.newUser]);
 
   const handleLogin = ({ email, password }) => {
     // Check if the email and password match any user in the default users data
-    const loggedInUser = defaultUsers.users.find(
+    const loggedInUser = users.find(
       (u) => u.email === email && u.password === password
     );
 
@@ -48,6 +58,47 @@ const PassportScreen = ({ route, navigation }) => {
     }
   };
 
+  // can probably be moved to sign up screen when connections are implemented
+  const handleSignUp = ({ name, email, password }) => {
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return false;
+    }
+
+    // Check if the email already exists in the users array
+    const existingUser = users.find((u) => u.email === email);
+
+    if (existingUser) {
+      // User with the same email already exists, handle accordingly
+      console.log("User with the same email already exists.");
+      return false;
+    }
+
+    const generatedDate = new Date().toLocaleString("default", {
+      month: "short",
+      year: "numeric",
+    });
+
+    const newUser = {
+      name: name,
+      date: `${generatedDate}`,
+      photo: require("../assets/userPlaceholder.png"),
+      email: email,
+      password: password,
+      facebook: null,
+      instagram: null,
+      tiktok: null,
+      youtube: null,
+      scanned: [],
+    };
+
+    setUsers([...users, newUser]);
+    console.log(users);
+    return true;
+  };
+
   return (
     <SafeAreaView style={styles.passportView}>
       {/* <Pressable style={styles.floatingButton}>
@@ -58,7 +109,11 @@ const PassportScreen = ({ route, navigation }) => {
         <PassportUser user={user} route={route} navigation={navigation} />
       ) : (
         // Render login screen if not logged in
-        <PassportLogin handleLogin={handleLogin} />
+        <PassportLogin
+          handleLogin={handleLogin}
+          handleSignUp={handleSignUp}
+          navigation={navigation}
+        />
       )}
     </SafeAreaView>
   );

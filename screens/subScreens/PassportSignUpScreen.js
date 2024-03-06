@@ -1,36 +1,43 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  SafeAreaView,
   View,
   Text,
-  Image,
   TextInput,
+  StyleSheet,
+  SafeAreaView,
   Pressable,
-  Dimensions,
+  Image,
 } from "react-native";
 
-import { styles } from "../styles/PassportStyles.js";
-import { Fonts } from "../styles/Fonts.js";
-import { Colors } from "../styles/Colors.js";
+import { styles } from "../../styles/PassportStyles.js";
+import { Colors } from "../../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
+import RoundedButton from "../../components/RoundedButton.js";
 
-import RoundedButton from "./RoundedButton.js";
-
-const PassportLogin = ({ handleLogin, handleSignUp, navigation }) => {
+const PassportSignUpScreen = ({ handleSignUp, navigation }) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { width } = Dimensions.get("window");
-
-  const handleSignUpPage = () => {
-    navigation.navigate("PassportSignUp", { handleSignUp: handleSignUp });
+  const handleDiscard = () => {
+    navigation.goBack();
   };
+
+  const handleConfirm = () => {
+    // Basic email validation
+    if (handleSignUp({ name, email, password })) {
+      navigation.navigate("PassportStack");
+    } else {
+      return;
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.userCard}>
         <View style={{ ...styles.userImgContainer, aspectRatio: 1 }}>
           <Image
-            source={require("../assets/userPlaceholder.png")}
+            source={require("../../assets/userPlaceholder.png")}
             style={{
               ...styles.userImg,
               position: "absolute",
@@ -48,7 +55,16 @@ const PassportLogin = ({ handleLogin, handleSignUp, navigation }) => {
       <View style={styles.inputCard}>
         <Text style={styles.inputTitle}>Log In To Account</Text>
         <View style={styles.inputContainer}>
-          <Ionicons name="mail" size={24} color={Colors.darkTeal} />
+          <Ionicons name="person" size={24} color={Colors.darkTeal} />
+          <TextInput
+            style={styles.formInput}
+            placeholder="Name"
+            value={name}
+            onChangeText={setName}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Ionicons name="person" size={24} color={Colors.darkTeal} />
           <TextInput
             style={styles.formInput}
             placeholder="Email"
@@ -67,49 +83,28 @@ const PassportLogin = ({ handleLogin, handleSignUp, navigation }) => {
           />
         </View>
       </View>
-      <RoundedButton
-        type="confirm"
-        text="Sign In"
-        onPress={() => handleLogin({ email, password })}
-        style={{
-          justifyContent: "flex-end",
-          alignSelf: "flex-end",
-          marginRight: "10%",
-        }}
-      />
-      <Pressable
-        style={{
-          ...styles.floatingButton,
-          backgroundColor: Colors.sepia,
-          left: 40,
-        }}
-        onPress={handleSignUpPage}
-      >
-        <Text style={{ color: Colors.white, ...Fonts.button }}>
-          + Create Account
-        </Text>
-      </Pressable>
       <View
         style={{
-          position: "absolute",
-          bottom: 0,
-          right: 0,
-          width: width,
-          aspectRatio: 5.4 / 3.4,
-          zIndex: -1,
-          overflow: "hidden",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginHorizontal: 90,
         }}
       >
-        <Image
-          source={require("../assets/mountainBG.png")}
-          style={{
-            flex: 1,
-            width: "100%",
-          }}
+        <RoundedButton
+          type="cancel"
+          text="Cancel"
+          onPress={handleDiscard}
+          style={{ marginRight: 20 }}
+        />
+        <RoundedButton
+          type="confirm"
+          text="CreateAccount"
+          onPress={handleConfirm}
+          style={{ marginLeft: 20 }}
         />
       </View>
     </SafeAreaView>
   );
 };
 
-export default PassportLogin;
+export default PassportSignUpScreen;
