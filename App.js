@@ -26,10 +26,31 @@ import LoadingScreen from "./screens/LoadingScreen.js";
 import { collection, onSnapshot } from "firebase/firestore";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { db } from "./src/config/firebase.js";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
+
 import {
   ParkDataProvider,
   useParkDataContext,
 } from "./serverConnections/parksDataContext.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyABwX5Wog6cD-X1uy3zjy0m-GvRr9wrTsw",
+  authDomain: "fb-database-4cc25.firebaseapp.com",
+  projectId: "fb-database-4cc25",
+  storageBucket: "fb-database-4cc25.appspot.com",
+  messagingSenderId: "102511707539",
+  appId: "1:102511707539:web:e27990139dd6008d4c5466",
+  measurementId: "G-DKDSMPRDL8"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+//const db = getFirestore(app);
+const analytics = getAnalytics(app);
+
 
 const Tab = createBottomTabNavigator();
 
