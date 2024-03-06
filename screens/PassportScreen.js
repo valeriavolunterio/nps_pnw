@@ -11,6 +11,9 @@ import PassportUser from "../components/PassportUser.js";
 import PassportLogin from "../components/PassportLogin.js";
 import ToggleButton from "../components/ToggleButtons.js";
 
+import { db } from "../src/config/firebase.js";
+import { collection, onSnapshot, getDocs } from "firebase/firestore";
+
 const defaultUsers = {
   users: [
     {
@@ -33,6 +36,8 @@ const PassportScreen = ({ route, navigation }) => {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState(defaultUsers.users);
 
+
+
   // useEffect(() => {
   //   // Check if a new user is passed as a parameter from the SignInScreen
   //   if (route.params?.newUser) {
@@ -41,6 +46,8 @@ const PassportScreen = ({ route, navigation }) => {
   //   }
   //   console.log(users);
   // }, [route.params?.newUser]);
+
+
 
   const handleLogin = ({ email, password }) => {
     // Check if the email and password match any user in the default users data
@@ -119,3 +126,45 @@ const PassportScreen = ({ route, navigation }) => {
   );
 };
 export default PassportScreen;
+
+
+
+//Displays Data From FireBase
+
+// const PassportScreen = ({ route, navigation }) => {
+//   const [users, setUsers] = useState([]);
+
+//   useEffect(() => {
+//     const fetchUsers = async () => {
+//       try {
+//         const usersCollection = collection(db, "users");
+//         const usersSnapshot = await getDocs(usersCollection);
+//         const usersData = usersSnapshot.docs.map((doc) => ({
+//           id: doc.id,
+//           ...doc.data(),
+//         }));
+//         setUsers(usersData);
+//       } catch (error) {
+//         console.error("Error fetching users:", error);
+//       }
+//     };
+
+//     fetchUsers();
+//   }, []);
+
+//   return (
+//     <SafeAreaView>
+//       <View>
+//         <Text>User List:</Text>
+//         {users.map((user) => (
+//           <View key={user.date}>
+//             <Text>{user.name}</Text>
+//             <Text>{user.email}</Text>
+//           </View>
+//         ))}
+//       </View>
+//     </SafeAreaView>
+//   );
+// };
+
+// export default PassportScreen;
