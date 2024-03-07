@@ -34,6 +34,9 @@ export const UserProvider = ({ children }) => {
 
     if (user !== null) {
       updateUser(user);
+    } else {
+      // If user is null (logged out), remove user data from AsyncStorage
+      AsyncStorage.removeItem("userData");
     }
   }, [user]);
 
