@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TextInput,
-  StyleSheet,
   SafeAreaView,
   Pressable,
   Image,
@@ -14,36 +13,57 @@ import { styles } from "../../styles/PassportStyles.js";
 import ToggleButton from "../../components/ToggleButtons.js";
 import RoundedButton from "../../components/RoundedButton.js";
 
+import { db } from "../../src/config/firebase.js";
+import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
+
 const PassportEditScreen = ({ route, navigation }) => {
-  const [name, setName] = useState(route.params.user.name);
-  const [facebook, setFacebook] = useState(route.params.user.facebook || "");
-  const [instagram, setInstagram] = useState(route.params.user.instagram || "");
-  const [tiktok, setTiktok] = useState(route.params.user.tiktok || "");
-  const [youtube, setYoutube] = useState(route.params.user.youtube || "");
+  const { user } = route.params;
+  const [userEdits, setUserEdits] = useState({
+    name: "",
+    date: "",
+    photo: null,
+    email: "",
+    password: "",
+    facebook: "",
+    instagram: "",
+    tiktok: "",
+    youtube: "",
+    scanned: [],
+  });
 
   useEffect(() => {
-    // Set initial values for text inputs
-    setFacebook(route.params.user.facebook);
-    setInstagram(route.params.user.instagram);
-    setTiktok(route.params.user.tiktok);
-    setYoutube(route.params.user.youtube);
-  }, [route.params.user]);
+    const fetchUser = async () => {
+      try {
+        const userDocRef = doc(collection(db, "users"), user.id);
+        const userDocSnap = await getDoc(userDocRef);
+
+        if (userDocSnap.exists()) {
+          const userData = { id: userDocSnap.id, ...userDocSnap.data() };
+          setUserEdits(userData);
+        } else {
+          console.log("User not found.");
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    fetchUser();
+  }, [user.id]);
 
   const handleDiscard = () => {
     navigation.goBack();
   };
 
-  const handleConfirm = () => {
-    const updatedUser = {
-      ...route.params.user,
-      name: name !== null ? name.trim() : null,
-      facebook: facebook !== null ? facebook.trim() : null,
-      instagram: instagram !== null ? instagram.trim() : null,
-      tiktok: tiktok !== null ? tiktok.trim() : null,
-      youtube: youtube !== null ? youtube.trim() : null,
-    };
-
-    navigation.navigate("PassportStack", { updatedUser });
+  const handleConfirm = async () => {
+    try {
+      const userDocRef = doc(collection(db, "users"), userEdits.id);
+      await updateDoc(userDocRef, userEdits);
+      console.log("Confirmed changes:", userEdits);
+      navigation.navigate("PassportStack");
+    } catch (error) {
+      console.error("Error updating document: ", error);
+    }
   };
 
   return (
@@ -56,7 +76,7 @@ const PassportEditScreen = ({ route, navigation }) => {
             }}
           >
             <Image
-              source={route.params.user.photo}
+              source={require("../../assets/adminPhoto.jpg")}
               style={{
                 ...styles.userImg,
                 position: "absolute",
@@ -90,33 +110,33 @@ const PassportEditScreen = ({ route, navigation }) => {
           <TextInput
             style={styles.nameInput}
             placeholder="Enter Name"
-            value={name}
-            onChangeText={(text) => setName(text)}
+            value={userEdits.name}
+            onChangeText={(text) => setUserEdits({ ...userEdits, name: text })}
           />
-          <Text>Exploring National Parks since {route.params.user.date}</Text>
+          <Text>Exploring National Parks since {userEdits.date}</Text>
           <View style={{ flexDirection: "row" }}>
-            {facebook && (
+            {userEdits.facebook && (
               <SVGIcons.socials.facebook
                 size={24}
                 color={Colors.darkTeal}
                 style={{ marginRight: 5 }}
               />
             )}
-            {instagram && (
+            {userEdits.instagram && (
               <SVGIcons.socials.instagram
                 size={24}
                 color={Colors.green}
                 style={{ marginRight: 5 }}
               />
             )}
-            {tiktok && (
+            {userEdits.tiktok && (
               <SVGIcons.socials.tiktok
                 size={24}
                 color={Colors.baseTeal}
                 style={{ marginRight: 5 }}
               />
             )}
-            {youtube && (
+            {userEdits.youtube && (
               <SVGIcons.socials.youtube
                 size={24}
                 color={Colors.sepia}
@@ -137,8 +157,10 @@ const PassportEditScreen = ({ route, navigation }) => {
           <TextInput
             style={styles.formInput}
             placeholder="Enter Facebook Handle"
-            value={facebook}
-            onChangeText={(text) => setFacebook(text)}
+            value={userEdits.facebook}
+            onChangeText={(text) =>
+              setUserEdits({ ...userEdits, facebook: text })
+            }
           />
         </View>
         <View style={styles.inputContainer}>
@@ -150,8 +172,10 @@ const PassportEditScreen = ({ route, navigation }) => {
           <TextInput
             style={styles.formInput}
             placeholder="Enter Instagram Handle"
-            value={instagram}
-            onChangeText={(text) => setInstagram(text)}
+            value={userEdits.instagram}
+            onChangeText={(text) =>
+              setUserEdits({ ...userEdits, instagram: text })
+            }
           />
         </View>
         <View style={styles.inputContainer}>
@@ -163,8 +187,10 @@ const PassportEditScreen = ({ route, navigation }) => {
           <TextInput
             style={styles.formInput}
             placeholder="Enter TikTok Handle"
-            value={tiktok}
-            onChangeText={(text) => setTiktok(text)}
+            value={userEdits.tiktok}
+            onChangeText={(text) =>
+              setUserEdits({ ...userEdits, tiktok: text })
+            }
           />
         </View>
         <View style={styles.inputContainer}>
@@ -176,8 +202,10 @@ const PassportEditScreen = ({ route, navigation }) => {
           <TextInput
             style={styles.formInput}
             placeholder="Enter YouTube Handle"
-            value={youtube}
-            onChangeText={(text) => setYoutube(text)}
+            value={userEdits.youtube}
+            onChangeText={(text) =>
+              setUserEdits({ ...userEdits, youtube: text })
+            }
           />
         </View>
       </View>

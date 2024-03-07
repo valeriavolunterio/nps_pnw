@@ -16,14 +16,14 @@ import { Ionicons } from "@expo/vector-icons";
 
 import RoundedButton from "./RoundedButton.js";
 
-const PassportLogin = ({ handleLogin, handleSignUp, navigation }) => {
+const PassportLogin = ({ handleLogin, navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { width } = Dimensions.get("window");
 
   const handleSignUpPage = () => {
-    navigation.navigate("PassportSignUp", { handleSignUp: handleSignUp });
+    navigation.navigate("PassportSignUp");
   };
   return (
     <SafeAreaView style={styles.container}>

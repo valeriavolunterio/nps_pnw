@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import {getFirestore} from 'firebase/firestore'
+import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -14,10 +13,9 @@ const firebaseConfig = {
   storageBucket: "fb-database-4cc25.appspot.com",
   messagingSenderId: "102511707539",
   appId: "1:102511707539:web:e27990139dd6008d4c5466",
-  measurementId: "G-DKDSMPRDL8"
+  measurementId: "G-DKDSMPRDL8",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-export const db = getFirestore()
+export const db = getFirestore();

@@ -1,7 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useEffect, useState } from "react";
-import { Pressable } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import React from "react";
 import { Colors } from "../styles/Colors.js";
 import { Fonts } from "../styles/Fonts.js";
 
@@ -17,8 +15,8 @@ import SafetyGuideScreen from "../screens/subScreens/SafetyGuideScreen.js";
 import SavesScreen from "../screens/subScreens/SavesScreen.js";
 import AlertsScreen from "../screens/subScreens/AlertsScreen.js";
 import NewsScreen from "../screens/subScreens/NewsScreen.js";
-import EventsScreen from "../screens/subScreens/EventsScreen";
-import PassportEditScreen from "../screens/subScreens/PassportEditScreen";
+import EventsScreen from "../screens/subScreens/EventsScreen.js";
+import PassportEditScreen from "../screens/subScreens/PassportEditScreen.js";
 import PassportSignUpScreen from "../screens/subScreens/PassportSignUpScreen.js";
 import ScannerScreen from "../screens/subScreens/ScannerScreen.js";
 import SettingsScreen from "../screens/subScreens/SettingsScreen.js";

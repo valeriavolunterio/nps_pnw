@@ -14,22 +14,61 @@ import { Colors } from "../../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 import RoundedButton from "../../components/RoundedButton.js";
 
-const PassportSignUpScreen = ({ handleSignUp, navigation }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+import { db } from "../../src/config/firebase.js";
+import { collection, addDoc, getDocs } from "firebase/firestore";
+
+const PassportSignUpScreen = ({ navigation }) => {
+  const [user, setUser] = useState({
+    name: "",
+    date: "",
+    photo: null,
+    email: "",
+    password: "",
+    facebook: "",
+    instagram: "",
+    tiktok: "",
+    youtube: "",
+    scanned: [],
+  });
 
   const handleDiscard = () => {
     navigation.goBack();
   };
 
-  const handleConfirm = () => {
+  const handleSignUp = async () => {
+    const usersQuery = collection(db, "users");
+    const usersCollection = await getDocs(usersQuery);
+    const usersData = usersCollection.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    const generatedDate = new Date().toLocaleString("default", {
+      month: "short",
+      year: "numeric",
+    });
+    setUser({ ...user, date: generatedDate });
+
     // Basic email validation
-    if (handleSignUp({ name, email, password })) {
-      navigation.navigate("PassportStack");
-    } else {
-      return;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(user.email)) {
+      setError("Please enter a valid email address.");
+      return console.log("Please enter a valid email address.");
     }
+    // Check if the email already exists in the users array
+    const existingUser = usersData.find((u) => u.email === user.email);
+
+    if (existingUser) {
+      // User with the same email already exists, handle accordingly
+      return console.log("User with the same email already exists.");
+    }
+
+    try {
+      await addDoc(usersCollection, { ...user });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+    navigation.navigate("PassportStack");
   };
 
   return (
@@ -59,8 +98,8 @@ const PassportSignUpScreen = ({ handleSignUp, navigation }) => {
           <TextInput
             style={styles.formInput}
             placeholder="Name"
-            value={name}
-            onChangeText={setName}
+            value={user.name}
+            onChangeText={(text) => setUser({ ...user, name: text })}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -68,8 +107,8 @@ const PassportSignUpScreen = ({ handleSignUp, navigation }) => {
           <TextInput
             style={styles.formInput}
             placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
+            value={user.email}
+            onChangeText={(text) => setUser({ ...user, email: text })}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -78,10 +117,20 @@ const PassportSignUpScreen = ({ handleSignUp, navigation }) => {
             style={styles.formInput}
             placeholder="Password"
             secureTextEntry={true}
-            value={password}
-            onChangeText={setPassword}
+            value={user.password}
+            onChangeText={(text) => setUser({ ...user, password: text })}
           />
         </View>
+        {/* <View style={styles.inputContainer}>
+          <Ionicons name="lock-closed" size={24} color={Colors.darkTeal} />
+          <TextInput
+            style={styles.formInput}
+            placeholder="Confirm Password"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(text) => setUser({ ...user, password: text })}
+          />
+        </View> */}
       </View>
       <View
         style={{
@@ -99,7 +148,7 @@ const PassportSignUpScreen = ({ handleSignUp, navigation }) => {
         <RoundedButton
           type="confirm"
           text="CreateAccount"
-          onPress={handleConfirm}
+          onPress={handleSignUp}
           style={{ marginLeft: 20 }}
         />
       </View>

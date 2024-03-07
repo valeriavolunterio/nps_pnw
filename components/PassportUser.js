@@ -14,6 +14,9 @@ import { Colors } from "../styles/Colors.js";
 import { Fonts } from "../styles/Fonts.js";
 import ToggleButton from "./ToggleButtons.js";
 
+import { db } from "../src/config/firebase.js";
+import { doc, onSnapshot } from "firebase/firestore";
+
 const badgesData = [
   {
     id: 1,
@@ -67,13 +70,16 @@ const PassportUser = ({ user, route, navigation }) => {
   const [currentUser, setCurrentUser] = useState(user);
 
   useEffect(() => {
-    if (route.params?.updatedUser) {
-      setCurrentUser((prevUser) => ({
-        ...prevUser,
-        ...route.params.updatedUser,
-      }));
-    }
-  }, [route.params?.updatedUser]);
+    const userDocRef = doc(db, "users", currentUser.id);
+    const unsubscribe = onSnapshot(userDocRef, (doc) => {
+      if (doc.exists()) {
+        setCurrentUser({ ...doc.data(), id: doc.id });
+      }
+    });
+
+    // Cleanup subscription
+    return () => unsubscribe();
+  }, [currentUser.id]);
 
   useEffect(() => {
     if (route.params?.updatedScannedParks) {
@@ -92,7 +98,7 @@ const PassportUser = ({ user, route, navigation }) => {
   }, [scannedParks]);
 
   const handleScannerPress = () => {
-    navigation.navigate("Scanner", { scannedParks });
+    navigation.navigate("Scanner", { user: user });
   };
 
   return (
@@ -105,12 +111,12 @@ const PassportUser = ({ user, route, navigation }) => {
             }}
             onPress={() =>
               navigation.navigate("PassportEdit", {
-                user,
+                user: user,
               })
             }
           >
             <Image
-              source={currentUser.photo}
+              source={require("../assets/adminPhoto.jpg")}
               style={{
                 width: "100%",
                 height: "100%",
@@ -134,7 +140,7 @@ const PassportUser = ({ user, route, navigation }) => {
               toggleState={false}
               handlePress={() =>
                 navigation.navigate("PassportEdit", {
-                  user,
+                  user: user,
                 })
               }
             />

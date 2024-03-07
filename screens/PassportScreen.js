@@ -1,49 +1,59 @@
-import React, { useState, useEffect, useRef } from "react";
-import { View, Text, SafeAreaView, Pressable, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { SafeAreaView } from "react-native";
 
-import { Ionicons } from "@expo/vector-icons";
-import { SVGIcons } from "../components/SVGIcons.js";
 import { styles } from "../styles/PassportStyles.js";
-import { Colors } from "../styles/Colors.js";
-import { Fonts } from "../styles/Fonts.js";
 
 import PassportUser from "../components/PassportUser.js";
 import PassportLogin from "../components/PassportLogin.js";
-import ToggleButton from "../components/ToggleButtons.js";
+import LoadingScreen from "./LoadingScreen.js";
 
 import { db } from "../src/config/firebase.js";
-import { collection, onSnapshot, getDocs } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 
-const defaultUsers = {
-  users: [
-    {
-      name: "John Doe",
-      date: "Jan 2023",
-      photo: require("../assets/adminPhoto.jpg"),
-      email: "admin@nps.gov",
-      password: "password1",
-      facebook: "facebook",
-      instagram: "instagram",
-      tiktok: "tiktok",
-      youtube: "youtube",
-      scanned: ["Olympic"],
-    },
-  ],
-};
+// users: [
+//   {
+//     name: "John Doe",
+//     date: "Jan 2023",
+//     photo: require("../assets/adminPhoto.jpg"),
+//     email: "admin@nps.gov",
+//     password: "password1",
+//     facebook: "facebook",
+//     instagram: "instagram",
+//     tiktok: "tiktok",
+//     youtube: "youtube",
+//     scanned: ["Olympic"],
+//   },
+// ],
 
 const PassportScreen = ({ route, navigation }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
-  const [users, setUsers] = useState(defaultUsers.users);
+  const [users, setUsers] = useState([]);
+  const [dataLoaded, setDataLoaded] = useState(false); // Add loading state
 
-  // useEffect(() => {
-  //   // Check if a new user is passed as a parameter from the SignInScreen
-  //   if (route.params?.newUser) {
-  //     // Update the users array with the new user
-  //     setUsers([...users, route.params.newUser]);
-  //   }
-  //   console.log(users);
-  // }, [route.params?.newUser]);
+  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Fetch Users Data and update real time
+  useEffect(() => {
+    try {
+      const usersQuery = collection(db, "users");
+      onSnapshot(usersQuery, (snapshot) => {
+        let usersList = [];
+        snapshot.docs.map((doc) =>
+          usersList.push({ ...doc.data(), id: doc.id })
+        );
+        setUsers(usersList);
+        setDataLoaded(true);
+      });
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  }, []);
+
+  if (!dataLoaded) {
+    return <LoadingScreen />;
+  }
+
+  console.log(users);
 
   const handleLogin = ({ email, password }) => {
     // Check if the email and password match any user in the default users data
@@ -54,111 +64,23 @@ const PassportScreen = ({ route, navigation }) => {
     if (loggedInUser) {
       setIsLoggedIn(true);
       setUser(loggedInUser);
-      console.log("Logged in as:", loggedInUser.name);
+      console.log("Logged in as:", loggedInUser);
     } else {
       // Handle invalid credentials
-      console.log("Invalid Credentials");
+      console.log(`Email: ${email} and password: ${password} do not match.`);
     }
-  };
-
-  // can probably be moved to sign up screen when connections are implemented
-  const handleSignUp = ({ name, email, password }) => {
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError("Please enter a valid email address.");
-      return false;
-    }
-
-    // Check if the email already exists in the users array
-    const existingUser = users.find((u) => u.email === email);
-
-    if (existingUser) {
-      // User with the same email already exists, handle accordingly
-      console.log("User with the same email already exists.");
-      return false;
-    }
-
-    const generatedDate = new Date().toLocaleString("default", {
-      month: "short",
-      year: "numeric",
-    });
-
-    const newUser = {
-      name: name,
-      date: `${generatedDate}`,
-      photo: require("../assets/userPlaceholder.png"),
-      email: email,
-      password: password,
-      facebook: null,
-      instagram: null,
-      tiktok: null,
-      youtube: null,
-      scanned: [],
-    };
-
-    setUsers([...users, newUser]);
-    console.log(users);
-    return true;
   };
 
   return (
     <SafeAreaView style={styles.passportView}>
-      {/* <Pressable style={styles.floatingButton}>
-        <Text style={{ color: Colors.white }}>+</Text>
-      </Pressable> */}
       {isLoggedIn && user ? (
         // Render badge screen if logged in
         <PassportUser user={user} route={route} navigation={navigation} />
       ) : (
         // Render login screen if not logged in
-        <PassportLogin
-          handleLogin={handleLogin}
-          handleSignUp={handleSignUp}
-          navigation={navigation}
-        />
+        <PassportLogin handleLogin={handleLogin} navigation={navigation} />
       )}
     </SafeAreaView>
   );
 };
 export default PassportScreen;
-
-//Displays Data From FireBase
-
-// const PassportScreen = ({ route, navigation }) => {
-//   const [users, setUsers] = useState([]);
-
-//   useEffect(() => {
-//     const fetchUsers = async () => {
-//       try {
-//         const usersCollection = collection(db, "users");
-//         const usersSnapshot = await getDocs(usersCollection);
-//         const usersData = usersSnapshot.docs.map((doc) => ({
-//           id: doc.id,
-//           ...doc.data(),
-//         }));
-//         setUsers(usersData);
-//       } catch (error) {
-//         console.error("Error fetching users:", error);
-//       }
-//     };
-
-//     fetchUsers();
-//   }, []);
-
-//   return (
-//     <SafeAreaView>
-//       <View>
-//         <Text>User List:</Text>
-//         {users.map((user) => (
-//           <View key={user.date}>
-//             <Text>{user.name}</Text>
-//             <Text>{user.email}</Text>
-//           </View>
-//         ))}
-//       </View>
-//     </SafeAreaView>
-//   );
-// };
-
-// export default PassportScreen;
