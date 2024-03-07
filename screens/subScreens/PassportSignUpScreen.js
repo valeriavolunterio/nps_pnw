@@ -36,35 +36,36 @@ const PassportSignUpScreen = ({ navigation }) => {
   };
 
   const handleSignUp = async () => {
-    const usersQuery = collection(db, "users");
-    const usersCollection = await getDocs(usersQuery);
-    const usersData = usersCollection.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-
-    const generatedDate = new Date().toLocaleString("default", {
-      month: "short",
-      year: "numeric",
-    });
-    setUser({ ...user, date: generatedDate });
-
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(user.email)) {
-      setError("Please enter a valid email address.");
-      return console.log("Please enter a valid email address.");
-    }
-    // Check if the email already exists in the users array
-    const existingUser = usersData.find((u) => u.email === user.email);
-
-    if (existingUser) {
-      // User with the same email already exists, handle accordingly
-      return console.log("User with the same email already exists.");
-    }
-
     try {
-      await addDoc(usersCollection, { ...user });
+      const usersQuery = collection(db, "users");
+      const usersCollection = await getDocs(usersQuery);
+      const usersData = usersCollection.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      const generatedDate = new Date().toLocaleString("default", {
+        month: "short",
+        year: "numeric",
+      });
+      setUser({ ...user, date: generatedDate });
+
+      // Basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(user.email)) {
+        setError("Please enter a valid email address.");
+        return console.log("Please enter a valid email address.");
+      }
+
+      // Check if the email already exists in the users array
+      const existingUser = usersData.find((u) => u.email === user.email);
+      if (existingUser) {
+        // User with the same email already exists, handle accordingly
+        return console.log("User with the same email already exists.");
+      }
+
+      await addDoc(usersQuery, { ...user });
+      navigation.navigate("PassportStack");
     } catch (error) {
       console.error("Error adding document: ", error);
     }
