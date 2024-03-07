@@ -1,12 +1,20 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import {
+  View,
+  TextInput,
+  Text,
+  StyleSheet,
+  FlatList,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
 import { Colors } from "../styles/Colors";
 import { Fonts } from "../styles/Fonts";
 import { useParkData } from "../serverConnections/parksDataContext";
 
 const MAX_DESCRIPTION_LENGTH = 100; // Maximum length of the short description
 
-const SearchScreen = () => {
+const SearchScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const { parkData } = useParkData([]);
 
@@ -14,7 +22,7 @@ const SearchScreen = () => {
     setSearchQuery(query);
   };
 
-  const filteredData = parkData.filter(item =>
+  const filteredData = parkData.filter((item) =>
     item.fullName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -42,12 +50,17 @@ const SearchScreen = () => {
         data={filteredData}
         keyExtractor={(item) => item.parkCode}
         renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
+          <Pressable
+            style={styles.itemContainer}
+            onPress={() =>
+              navigation.navigate("Park", { parkCode: item.parkCode })
+            }
+          >
             <Text style={Fonts.header4}>{item.fullName}</Text>
             <Text style={Fonts.body}>
               {truncateDescription(item.description)}
             </Text>
-          </View>
+          </Pressable>
         )}
       />
     </SafeAreaView>
