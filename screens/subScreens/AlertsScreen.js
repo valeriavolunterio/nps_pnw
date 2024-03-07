@@ -10,7 +10,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import { Colors } from "../../styles/Colors.js";
-import { useParkData } from "../../serverConnections/parksDataContext.js";
+import { useParkData } from "../../data_management/parksDataContext.js";
 
 const styles = StyleSheet.create({
   container: {

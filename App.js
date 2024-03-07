@@ -10,7 +10,7 @@ import { AppLoading } from "expo";
 import {
   fetchParkData,
   fetchAlertData,
-} from "./serverConnections/npsAPI_connections.js";
+} from "./data_management/npsAPI_connections.js";
 import { useFonts } from "expo-font";
 
 import {
@@ -24,12 +24,13 @@ import LoadingScreen from "./screens/LoadingScreen.js";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
+import { ParkDataProvider } from "./data_management/parksDataContext.js";
+import { UserProvider } from "./data_management/UserContext.js";
 import {
-  ParkDataProvider,
-  useParkDataContext,
-} from "./serverConnections/parksDataContext.js";
-
-import { UserProvider } from "./serverConnections/UserContext.js";
+  RecentParksProvider,
+  BookmarkedParksProvider,
+  FavoriteParksProvider,
+} from "./data_management/StorageContext.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -72,70 +73,79 @@ export default function App() {
   return (
     <ParkDataProvider>
       <UserProvider>
-        <NavigationContainer>
-          <Tab.Navigator>
-            <Tab.Screen
-              name="Home"
-              component={HomeStack}
-              initialParams={{ parksData: parksData, alertsData: alertsData }}
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <MaterialCommunityIcons
-                    name="home"
-                    color={color}
-                    size={size}
+        <RecentParksProvider>
+          <BookmarkedParksProvider>
+            <FavoriteParksProvider>
+              <NavigationContainer>
+                <Tab.Navigator>
+                  <Tab.Screen
+                    name="Home"
+                    component={HomeStack}
+                    initialParams={{
+                      parksData: parksData,
+                      alertsData: alertsData,
+                    }}
+                    options={{
+                      tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons
+                          name="home"
+                          color={color}
+                          size={size}
+                        />
+                      ),
+                      headerShown: false,
+                    }}
                   />
-                ),
-                headerShown: false,
-              }}
-            />
-            <Tab.Screen
-              name="Map"
-              component={MapStack}
-              initialParams={{ parksData: parksData }}
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <MaterialCommunityIcons
-                    name="map"
-                    color={color}
-                    size={size}
+                  <Tab.Screen
+                    name="Map"
+                    component={MapStack}
+                    initialParams={{ parksData: parksData }}
+                    options={{
+                      tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons
+                          name="map"
+                          color={color}
+                          size={size}
+                        />
+                      ),
+                      headerShown: false,
+                    }}
                   />
-                ),
-                headerShown: false,
-              }}
-            />
-            <Tab.Screen
-              name="Search"
-              component={SearchStack}
-              initialParams={{ parksData: parksData }}
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <MaterialCommunityIcons
-                    name="magnify"
-                    color={color}
-                    size={size}
+                  <Tab.Screen
+                    name="Search"
+                    component={SearchStack}
+                    initialParams={{ parksData: parksData }}
+                    options={{
+                      tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons
+                          name="magnify"
+                          color={color}
+                          size={size}
+                        />
+                      ),
+                      headerShown: false,
+                    }}
                   />
-                ),
-                headerShown: false,
-              }}
-            />
-            <Tab.Screen
-              name="Passport"
-              component={PassportStack}
-              initialParams={{ parksData: parksData }}
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <MaterialCommunityIcons
-                    name="smart-card"
-                    color={color}
-                    size={size}
+                  <Tab.Screen
+                    name="Passport"
+                    component={PassportStack}
+                    initialParams={{ parksData: parksData }}
+                    options={{
+                      tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons
+                          name="smart-card"
+                          color={color}
+                          size={size}
+                        />
+                      ),
+                      headerShown: false,
+                    }}
                   />
-                ),
-                headerShown: false,
-              }}
-            />
-          </Tab.Navigator>
-        </NavigationContainer>
+                </Tab.Navigator>
+              </NavigationContainer>
+            </FavoriteParksProvider>
+          </BookmarkedParksProvider>
+        </RecentParksProvider>
       </UserProvider>
     </ParkDataProvider>
   );

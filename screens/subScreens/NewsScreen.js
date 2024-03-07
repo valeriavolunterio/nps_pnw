@@ -9,7 +9,7 @@ import {
   Dimensions,
   Image,
 } from "react-native";
-import { useParkData } from "../../serverConnections/parksDataContext";
+import { useParkData } from "../../data_management/parksDataContext.js";
 import { Colors } from "../../styles/Colors.js";
 import { Fonts } from "../../styles/Fonts.js";
 
@@ -17,7 +17,8 @@ const EventsScreen = () => {
   const { newsData, parkData } = useParkData();
 
   const renderEventsCard = ({ item }) => {
-    const { title, times, url, parkCode, lastIndexedDate, abstract, image } = item;
+    const { title, times, url, parkCode, lastIndexedDate, abstract, image } =
+      item;
     const parkName =
       parkData.find((park) => park.parkCode === parkCode)?.fullName ||
       "Unknown Park";
@@ -37,7 +38,7 @@ const EventsScreen = () => {
           <Text style={styles.park}>{parkName}</Text>
           <Text style={styles.date}>{lastIndexedDate}</Text>
           <Text style={styles.abstract}>{abstract}</Text>
-          
+
           {times && (
             <View style={styles.time}>
               {times.map((time, index) => (
@@ -47,7 +48,7 @@ const EventsScreen = () => {
               ))}
             </View>
           )}
-           {/* {url && (
+          {/* {url && (
             <View>
               <Image source={{uri: image}} style={styles.image}/>
             </View>
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
   image: {
     width: 300,
     height: 200,
-    resizeMode: 'cover',
+    resizeMode: "cover",
     marginBottom: 10,
   },
 });

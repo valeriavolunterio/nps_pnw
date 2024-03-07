@@ -1,22 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { SVGIcons } from "./SVGIcons.js";
 
-const ToggleButton = ({
-  type,
-  color,
-  buttonSize,
-  toggleState,
-  handlePress,
-}) => {
-  const [isToggled, setIsToggled] = useState(toggleState);
-
-  const handleToggle = () => {
-    toggleState ? setIsToggled(!isToggled) : null;
-    handlePress();
-  };
-
+const ToggleButton = ({ type, color, buttonSize, isToggled, onPress }) => {
   const iconType = (type) => {
     switch (type) {
       case "favorite":
@@ -32,7 +19,7 @@ const ToggleButton = ({
 
   return (
     <Pressable
-      // onPress={handleToggle}
+      onPress={onPress} // Call onPress function provided by the parent component
       style={[
         styles.button,
         {
@@ -43,15 +30,11 @@ const ToggleButton = ({
         },
       ]}
     >
-      {type !== "edit" ? (
-        <Ionicons
-          name={iconType(type)}
-          size={24}
-          color={isToggled ? "white" : color}
-        />
-      ) : (
-        <SVGIcons.buttons.edit size={24} color={isToggled ? "white" : color} />
-      )}
+      <Ionicons
+        name={iconType(type)}
+        size={24}
+        color={isToggled ? "white" : color}
+      />
     </Pressable>
   );
 };

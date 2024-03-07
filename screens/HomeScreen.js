@@ -13,13 +13,11 @@ import {
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 import Svg, { Polygon } from "react-native-svg";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import SwipeCarousel from "../components/Carousel.js";
 import { TealButton } from "../components/TealButton.js";
 import { Fonts } from "../styles/Fonts.js";
-import { useParkData } from "../serverConnections/parksDataContext.js";
-import { useNavigation } from "@react-navigation/native";
+import { useParkData } from "../data_management/parksDataContext.js";
 
 const { width } = Dimensions.get("window");
 
@@ -143,19 +141,6 @@ const styles = StyleSheet.create({
 
 const HomeScreen = ({ navigation }) => {
   const { parkData, alertData, newsData, eventsData } = useParkData([]);
-
-  // useEffect(() => {
-  //   const fetchParkDataFromAPI = async () => {
-  //     try {
-  //       const response = await fetchParkData();
-  //       setParkData(response);
-  //     } catch (error) {
-  //       console.error("Error fetching park data:", error);
-  //     }
-  //   };
-
-  //   fetchParkDataFromAPI();
-  // }, []);
 
   useEffect(() => {
     console.log("HomeScreen rendered");

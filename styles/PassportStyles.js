@@ -39,6 +39,17 @@ export const styles = StyleSheet.create({
     borderColor: Colors.white,
     borderWidth: 6,
   },
+  editButton: {
+    aspectRatio: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
   overlay: { opacity: 0.25, backgroundColor: "black" },
   userInfo: {
     width: "60%",

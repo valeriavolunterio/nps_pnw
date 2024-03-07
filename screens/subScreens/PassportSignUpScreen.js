@@ -14,7 +14,7 @@ import { Colors } from "../../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 import RoundedButton from "../../components/RoundedButton.js";
 
-import { db } from "../../serverConnections/firebaseConfig.js";
+import { db } from "../../data_management/firebaseConfig.js";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 
 const PassportSignUpScreen = ({ navigation }) => {

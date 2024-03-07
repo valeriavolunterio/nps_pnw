@@ -17,27 +17,32 @@ export const ParkDataProvider = ({ children }) => {
   const [eventsData, setEventsData] = useState([]);
   const [newsData, setNewsData] = useState([]);
 
-
-useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
-        const parks = await fetchParkData();
-        const alerts = await fetchAlertData();
-        const events = await fetchEventsData();
-        const news = await fetchNewsData();
+      const parks = await fetchParkData();
+      const alerts = await fetchAlertData();
+      const events = await fetchEventsData();
+      const news = await fetchNewsData();
 
-        setParkData(parks);
-        setAlertData(alerts);
-        setEventsData(events);
-        setNewsData(news);
-
+      setParkData(parks);
+      setAlertData(alerts);
+      setEventsData(events);
+      setNewsData(news);
     };
 
     fetchData();
-}, []);
+  }, []);
 
-return (
+  return (
     <ParkDataContext.Provider
-      value={{ parkData, alertData, eventsData, newsData, selectedParkData, setSelectedParkData }}
+      value={{
+        parkData,
+        alertData,
+        eventsData,
+        newsData,
+        selectedParkData,
+        setSelectedParkData,
+      }}
     >
       {children}
     </ParkDataContext.Provider>

@@ -12,12 +12,11 @@ import { SVGIcons } from "./SVGIcons.js";
 import { styles } from "../styles/PassportStyles.js";
 import { Colors } from "../styles/Colors.js";
 import { Fonts } from "../styles/Fonts.js";
-import ToggleButton from "./ToggleButtons.js";
 
-import { db } from "../serverConnections/firebaseConfig.js";
+import { db } from "../data_management/firebaseConfig.js";
 import { doc, onSnapshot } from "firebase/firestore";
 
-import UserContext from "../serverConnections/UserContext.js";
+import UserContext from "../data_management/UserContext.js";
 
 const badgesData = [
   {
@@ -141,17 +140,22 @@ const PassportUser = ({ route, navigation }) => {
               right: 0,
             }}
           >
-            <ToggleButton
-              type="edit"
-              color={Colors.darkGreen}
-              buttonSize={42}
-              toggleState={false}
-              handlePress={() =>
+            <Pressable
+              onPress={() =>
                 navigation.navigate("PassportEdit", {
                   user: user,
                 })
               }
-            />
+              style={{
+                ...styles.editButton,
+                width: 42,
+                height: 42,
+                borderRadius: 21,
+                backgroundColor: "white",
+              }}
+            >
+              <SVGIcons.buttons.edit size={24} color={Colors.darkGreen} />
+            </Pressable>
           </View>
         </View>
         <View style={styles.userInfo}>

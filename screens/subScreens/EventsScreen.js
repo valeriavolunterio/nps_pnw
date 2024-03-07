@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, FlatList, StyleSheet, Linking, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Linking,
+  Dimensions,
+} from "react-native";
 import { Button, ButtonGroup } from "@rneui/themed";
-import { useParkData } from "../../serverConnections/parksDataContext";
-import { Colors } from "../../styles/Colors.js"
+import { useParkData } from "../../data_management/parksDataContext.js";
+import { Colors } from "../../styles/Colors.js";
 
 const { width } = Dimensions.get("window");
 
 const EventsScreen = () => {
-  
   const { eventsData } = useParkData();
 
   const renderEventsCard = ({ item }) => {
     const { title, recurrencedatestart, times, regresurl, parkfullname } = item;
-    console.log(eventsData)
+    console.log(eventsData);
     const handlePress = () => {
       if (regresurl) {
         openLink(regresurl);
       } else {
-        console.warn('No link available for this event.');
+        console.warn("No link available for this event.");
       }
     };
-  
+
     return (
       <TouchableOpacity onPress={handlePress}>
         <View style={styles.card}>
@@ -30,11 +37,13 @@ const EventsScreen = () => {
           {times && (
             <View style={styles.time}>
               {times.map((time, index) => (
-                <Text key={index} style={styles.time}>{time.timestart} - {time.timeend}</Text>
+                <Text key={index} style={styles.time}>
+                  {time.timestart} - {time.timeend}
+                </Text>
               ))}
             </View>
           )}
-           {regresurl && (
+          {regresurl && (
             <TouchableOpacity onPress={() => openLink(regresurl)}>
               <Text style={styles.link}>More Info</Text>
             </TouchableOpacity>
@@ -43,13 +52,13 @@ const EventsScreen = () => {
       </TouchableOpacity>
     );
   };
-  
 
   // Function to open the link in a browser or handle navigation
   const openLink = (regresurl) => {
     // Use Linking to open the URL
-    Linking.openURL(regresurl)
-      .catch((error) => console.error('Error opening link:', error));
+    Linking.openURL(regresurl).catch((error) =>
+      console.error("Error opening link:", error)
+    );
   };
 
   return (
@@ -68,7 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.lightOffWhite,
   },
-  
+
   card: {
     backgroundColor: Colors.offWhite,
     width: 350,
@@ -77,9 +86,9 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 15,
     elevation: 2,
-    shadowColor: '#000', 
-    shadowOpacity: 0.3, 
-    shadowRadius: 5, 
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -87,18 +96,18 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
   date: {
-    color: 'gray',
+    color: "gray",
     marginBottom: 5,
   },
   park: {
     color: Colors.baseGray,
     marginBottom: 5,
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   description: {
     fontSize: 14,
@@ -106,13 +115,13 @@ const styles = StyleSheet.create({
   time: {
     color: Colors.green,
     fontSize: 12,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
   link: {
     color: Colors.sepia,
     fontSize: 12,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
 });

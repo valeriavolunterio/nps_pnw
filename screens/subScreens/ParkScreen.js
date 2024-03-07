@@ -8,37 +8,50 @@ import {
   Pressable,
   Dimensions,
 } from "react-native";
-import { TealButton } from "../../components/TealButton";
+
 import { Colors } from "../../styles/Colors";
+import { Fonts } from "../../styles/Fonts";
 import { Ionicons } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import RoundedButton from "../../components/RoundedButton";
+import { TealButton } from "../../components/TealButton";
 import ToggleButton from "../../components/ToggleButtons";
-import { Fonts } from "../../styles/Fonts";
-import { useParkData } from "../../serverConnections/parksDataContext.js";
+
+import { useParkData } from "../../data_management/parksDataContext.js";
+import {
+  RecentParksContext,
+  BookmarkedParksContext,
+  FavoriteParksContext,
+} from "../../data_management/StorageContext.js";
 
 const { width } = Dimensions.get("window");
-
-// const parkScreenData = [
-//   {
-//     miniTitle: "See Something New",
-//     title: "Olympic National Park",
-//     img: "https://www.nps.gov/npgallery/GetAsset/41e9450b-1dd8-b71b-0b41-ae6ab257056e/proxy/hires?",
-//     about:
-//       "Olympic National Park, a natural wonder on Washington's Olympic Peninsula, enchants with its diverse landscapes. From ancient rainforests adorned with moss-draped trees to rugged coastlines graced by tide pools and pristine lakes nestled amid majestic mountains, this park offers a breathtaking tapestry of wilderness and outdoor adventure.",
-//     places: [
-//       "Hoh Rain Forest",
-//       "Hurricane Ridge",
-//       "Kaloch and Ruby Beach",
-//       "Sol Duc Valley",
-//     ],
-//   },
-// ];
 
 const ParkScreen = ({ route, navigation }) => {
   const { parkData, alertData } = useParkData([]);
   const { parkCode } = route.params;
   const selectedPark = parkData.find((park) => park.parkCode === parkCode);
+
+  const { recentParks, setRecentParks } = useContext(RecentParksContext);
+  const { favoriteParks, setFavoriteParks } = useContext(FavoriteParksContext);
+  const { bookmarkedParks, setBookmarkedParks } = useContext(
+    BookmarkedParksContext
+  );
+
+  useEffect(() => {
+    setRecentParks((prevRecentParks) => {
+      // Remove the parkCode if it already exists to add it as the most recent
+      const updatedRecentParks = prevRecentParks.filter(
+        (code) => code !== parkCode
+      );
+      // Add the parkCode to the beginning of the array to represent the most recent
+      const newRecentParks = [parkCode, ...updatedRecentParks];
+
+      // Limit the recentParks array to 5 parks
+      const limitedRecentParks = newRecentParks.slice(0, 5);
+
+      return limitedRecentParks;
+    });
+  }, [parkCode, setRecentParks]);
 
   return (
     <ScrollView style={styles.container}>

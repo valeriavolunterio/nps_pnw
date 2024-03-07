@@ -10,12 +10,11 @@ import {
 import { SVGIcons } from "../../components/SVGIcons.js";
 import { Colors } from "../../styles/Colors.js";
 import { styles } from "../../styles/PassportStyles.js";
-import ToggleButton from "../../components/ToggleButtons.js";
 import RoundedButton from "../../components/RoundedButton.js";
 
-import { db } from "../../serverConnections/firebaseConfig.js";
+import { db } from "../../data_management/firebaseConfig.js";
 import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
-import UserContext from "../../serverConnections/UserContext.js";
+import UserContext from "../../data_management/UserContext.js";
 
 const PassportEditScreen = ({ route, navigation }) => {
   const { user } = useContext(UserContext);
@@ -98,13 +97,18 @@ const PassportEditScreen = ({ route, navigation }) => {
               right: 0,
             }}
           >
-            <ToggleButton
-              type="edit"
-              color={Colors.darkGreen}
-              buttonSize={42}
-              toggleState={true}
-              handlePress={() => console.log("Upload new photo")}
-            />
+            <Pressable
+              onPress={() => console.log("Upload new photo")}
+              style={{
+                ...styles.editButton,
+                width: 42,
+                height: 42,
+                borderRadius: 21,
+                backgroundColor: Colors.darkGreen,
+              }}
+            >
+              <SVGIcons.buttons.edit size={24} color={Colors.white} />
+            </Pressable>
           </View>
         </View>
         <View style={styles.userInfo}>

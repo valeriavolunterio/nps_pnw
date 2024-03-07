@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -9,9 +9,14 @@ import {
   FlatList,
 } from "react-native";
 //import ToggleSwitch from "../../components/Switch";
-// import { styles } from "../../App";
 import SlideSwitch from "../../components/SlideSwitch";
 import { Colors } from "../../styles/Colors.js";
+
+import {
+  RecentParksContext,
+  BookmarkedParksContext,
+  FavoriteParksContext,
+} from "../../data_management/StorageContext.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -92,6 +97,7 @@ const ParkList = ({ data }) => {
 
 const SavesScreen = ({ route, navigation }) => {
   const { screenName, headerColor } = route.params;
+  const { recentParks } = useContext(RecentParksContext); // Access recentParks context
 
   useEffect(() => {
     navigation.setOptions({
@@ -101,6 +107,10 @@ const SavesScreen = ({ route, navigation }) => {
       },
     });
   }, [navigation, screenName, headerColor]);
+
+  if (screenName === "Recently Viewed") {
+    console.log(recentParks);
+  }
 
   return (
     <SafeAreaView style={styles.container}>

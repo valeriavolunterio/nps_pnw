@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import { Button, ButtonGroup } from "@rneui/themed";
 
-import { db } from "../../serverConnections/firebaseConfig";
+import { db } from "../../data_management/firebaseConfig";
 import { collection, doc, deleteDoc } from "firebase/firestore";
-import UserContext from "../../serverConnections/UserContext";
+import UserContext from "../../data_management/UserContext";
 
 // Create a functional component for the settings screen
 const SettingsScreen = () => {

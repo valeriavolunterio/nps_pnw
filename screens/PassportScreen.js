@@ -7,9 +7,9 @@ import PassportUser from "../components/PassportUser.js";
 import PassportLogin from "../components/PassportLogin.js";
 import LoadingScreen from "./LoadingScreen.js";
 
-import { db } from "../serverConnections/firebaseConfig.js";
+import { db } from "../data_management/firebaseConfig.js";
 import { collection, onSnapshot } from "firebase/firestore";
-import UserContext from "../serverConnections/UserContext.js";
+import UserContext from "../data_management/UserContext.js";
 
 // users: [
 //   {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { Camera } from "expo-camera";
 
-import { db } from "../../serverConnections/firebaseConfig.js";
+import { db } from "../../data_management/firebaseConfig.js";
 import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
 
 const ScannerScreen = ({ route, navigation }) => {

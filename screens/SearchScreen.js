@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Colors } from "../styles/Colors";
 import { Fonts } from "../styles/Fonts";
-import { useParkData } from "../serverConnections/parksDataContext";
+import { useParkData } from "../data_management/parksDataContext";
 
 const MAX_DESCRIPTION_LENGTH = 100; // Maximum length of the short description
 
