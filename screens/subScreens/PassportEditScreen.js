@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -13,11 +13,12 @@ import { styles } from "../../styles/PassportStyles.js";
 import ToggleButton from "../../components/ToggleButtons.js";
 import RoundedButton from "../../components/RoundedButton.js";
 
-import { db } from "../../src/config/firebase.js";
+import { db } from "../../serverConnections/firebaseConfig.js";
 import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import UserContext from "../../serverConnections/UserContext.js";
 
 const PassportEditScreen = ({ route, navigation }) => {
-  const { user } = route.params;
+  const { user } = useContext(UserContext);
   const [userEdits, setUserEdits] = useState({
     name: "",
     date: "",

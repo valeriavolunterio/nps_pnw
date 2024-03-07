@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   SafeAreaView,
   Pressable,
@@ -14,8 +14,10 @@ import { Colors } from "../styles/Colors.js";
 import { Fonts } from "../styles/Fonts.js";
 import ToggleButton from "./ToggleButtons.js";
 
-import { db } from "../src/config/firebase.js";
+import { db } from "../serverConnections/firebaseConfig.js";
 import { doc, onSnapshot } from "firebase/firestore";
+
+import UserContext from "../serverConnections/UserContext.js";
 
 const badgesData = [
   {
@@ -65,7 +67,8 @@ const Badge = ({ visited, sources }) => {
   );
 };
 
-const PassportUser = ({ user, route, navigation }) => {
+const PassportUser = ({ route, navigation }) => {
+  const { user, setUser } = useContext(UserContext);
   const [scannedParks, setScannedParks] = useState([]);
   const [currentUser, setCurrentUser] = useState(user);
 
@@ -99,6 +102,11 @@ const PassportUser = ({ user, route, navigation }) => {
 
   const handleScannerPress = () => {
     navigation.navigate("Scanner", { user: user });
+  };
+
+  const handleLogout = () => {
+    // Clear the user data from context
+    setUser(null);
   };
 
   return (
@@ -199,6 +207,16 @@ const PassportUser = ({ user, route, navigation }) => {
           );
         })}
       </ScrollView>
+      <Pressable
+        style={{
+          ...styles.floatingButton,
+          backgroundColor: Colors.sepia,
+          left: 20,
+        }}
+        onPress={handleLogout}
+      >
+        <Text style={{ color: Colors.white, ...Fonts.button }}>Log Out </Text>
+      </Pressable>
       <Pressable
         style={{
           ...styles.floatingButton,

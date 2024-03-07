@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   SafeAreaView,
   Text,
@@ -8,18 +8,23 @@ import {
 } from "react-native";
 import { Button, ButtonGroup } from "@rneui/themed";
 
+import { db } from "../../serverConnections/firebaseConfig";
+import { collection, doc, deleteDoc } from "firebase/firestore";
+import UserContext from "../../serverConnections/UserContext";
+
 // Create a functional component for the settings screen
 const SettingsScreen = () => {
+  const { user, setUser } = useContext(UserContext);
+
   // Function to handle the deletion of Passport
   const handleDeletePassport = async () => {
     try {
-      // Clear user data from AsyncStorage or any other storage mechanism
-      await AsyncStorage.clear();
-
-      // Redirect to the login or onboarding screen
-      navigation.navigate("Login"); // Replace 'Login' with your actual login screen route
+      const userDocRef = doc(collection(db, "users"), user.id);
+      await deleteDoc(userDocRef);
+      console.log("Deleted User with ID:", user.id);
+      setUser(null);
     } catch (error) {
-      console.error("Error deleting Passport:", error);
+      console.error("Error deleting document: ", error);
     }
   };
 

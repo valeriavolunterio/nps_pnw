@@ -14,13 +14,16 @@ import { Colors } from "../../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 import RoundedButton from "../../components/RoundedButton.js";
 
-import { db } from "../../src/config/firebase.js";
+import { db } from "../../serverConnections/firebaseConfig.js";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 
 const PassportSignUpScreen = ({ navigation }) => {
   const [user, setUser] = useState({
     name: "",
-    date: "",
+    date: new Date().toLocaleString("default", {
+      month: "short",
+      year: "numeric",
+    }),
     photo: null,
     email: "",
     password: "",
@@ -43,12 +46,6 @@ const PassportSignUpScreen = ({ navigation }) => {
         id: doc.id,
         ...doc.data(),
       }));
-
-      const generatedDate = new Date().toLocaleString("default", {
-        month: "short",
-        year: "numeric",
-      });
-      setUser({ ...user, date: generatedDate });
 
       // Basic email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

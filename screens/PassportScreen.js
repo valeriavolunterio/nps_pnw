@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { SafeAreaView } from "react-native";
 
 import { styles } from "../styles/PassportStyles.js";
@@ -7,8 +7,9 @@ import PassportUser from "../components/PassportUser.js";
 import PassportLogin from "../components/PassportLogin.js";
 import LoadingScreen from "./LoadingScreen.js";
 
-import { db } from "../src/config/firebase.js";
+import { db } from "../serverConnections/firebaseConfig.js";
 import { collection, onSnapshot } from "firebase/firestore";
+import UserContext from "../serverConnections/UserContext.js";
 
 // users: [
 //   {
@@ -26,11 +27,10 @@ import { collection, onSnapshot } from "firebase/firestore";
 // ],
 
 const PassportScreen = ({ route, navigation }) => {
+  const { user, setUser } = useContext(UserContext);
+
   const [users, setUsers] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false); // Add loading state
-
-  const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Fetch Users Data and update real time
   useEffect(() => {
@@ -53,7 +53,7 @@ const PassportScreen = ({ route, navigation }) => {
     return <LoadingScreen />;
   }
 
-  console.log(users);
+  console.log(user);
 
   const handleLogin = ({ email, password }) => {
     // Check if the email and password match any user in the default users data
@@ -62,7 +62,7 @@ const PassportScreen = ({ route, navigation }) => {
     );
 
     if (loggedInUser) {
-      setIsLoggedIn(true);
+      // setIsLoggedIn(true);
       setUser(loggedInUser);
       console.log("Logged in as:", loggedInUser);
     } else {
@@ -73,7 +73,7 @@ const PassportScreen = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.passportView}>
-      {isLoggedIn && user ? (
+      {user ? (
         // Render badge screen if logged in
         <PassportUser user={user} route={route} navigation={navigation} />
       ) : (
