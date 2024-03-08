@@ -97,6 +97,7 @@ const ParkList = ({ data }) => {
 
 const SavesScreen = ({ route, navigation }) => {
   const { screenName, headerColor } = route.params;
+
   const { recentParks } = useContext(RecentParksContext);
   const { bookmarkedParks } = useContext(BookmarkedParksContext);
   const { favoriteParks } = useContext(FavoriteParksContext);

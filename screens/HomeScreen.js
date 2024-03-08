@@ -1,15 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  ScrollView,
-  Button,
-  View,
-  Text,
-  Dimensions,
-  Pressable,
-  TouchableWithoutFeedback,
-  FlatList,
-} from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, ScrollView, View, Text, Dimensions } from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 import Svg, { Polygon } from "react-native-svg";
@@ -18,6 +8,8 @@ import SwipeCarousel from "../components/Carousel.js";
 import { TealButton } from "../components/TealButton.js";
 import { Fonts } from "../styles/Fonts.js";
 import { useParkData } from "../data_management/parksDataContext.js";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { width } = Dimensions.get("window");
 
@@ -143,6 +135,11 @@ const HomeScreen = ({ navigation }) => {
   const { parkData, alertData, newsData, eventsData } = useParkData([]);
 
   useEffect(() => {
+    // // clear park data AsyncStorage for testing
+    // AsyncStorage.removeItem("recentParks");
+    // AsyncStorage.removeItem("favoriteParks");
+    // AsyncStorage.removeItem("bookmarkedParks");
+
     console.log("HomeScreen rendered");
   }, []);
 
