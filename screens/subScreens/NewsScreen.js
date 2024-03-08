@@ -13,6 +13,8 @@ import { useParkData } from "../../data_management/parksDataContext.js";
 import { Colors } from "../../styles/Colors.js";
 import { Fonts } from "../../styles/Fonts.js";
 
+const MAX_DESCRIPTION_LENGTH = 100;
+
 const EventsScreen = () => {
   const { newsData, parkData } = useParkData();
 
@@ -31,13 +33,20 @@ const EventsScreen = () => {
       }
     };
 
+    const truncateAbstract = (abstract) => {
+      if (abstract.length > MAX_DESCRIPTION_LENGTH) {
+        return `${abstract.substring(0, MAX_DESCRIPTION_LENGTH)}...`;
+      }
+      return abstract;
+    };
+
     return (
       <TouchableOpacity onPress={handlePress}>
         <View style={styles.card}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.park}>{parkName}</Text>
           <Text style={styles.date}>{lastIndexedDate}</Text>
-          <Text style={styles.abstract}>{abstract}</Text>
+          <Text style={styles.abstract}>{truncateAbstract(item.abstract)}</Text>
 
           {times && (
             <View style={styles.time}>
