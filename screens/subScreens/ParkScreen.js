@@ -36,6 +36,9 @@ const ParkScreen = ({ route, navigation }) => {
   const { bookmarkedParks, setBookmarkedParks } = useContext(
     BookmarkedParksContext
   );
+  // Check if the park is bookmarked or favorited
+  const isBookmarked = bookmarkedParks.includes(parkCode);
+  const isFavorited = favoriteParks.includes(parkCode);
 
   useEffect(() => {
     setRecentParks((prevRecentParks) => {
@@ -77,7 +80,19 @@ const ParkScreen = ({ route, navigation }) => {
               type="favorite"
               color={Colors.sepia}
               buttonSize={48}
-              toggleState={true}
+              isToggled={isFavorited}
+              onPress={() => {
+                if (isFavorited) {
+                  // Remove from favorites
+                  const updatedFavorites = favoriteParks.filter(
+                    (code) => code !== parkCode
+                  );
+                  setFavoriteParks(updatedFavorites);
+                } else {
+                  // Add to favorites
+                  setFavoriteParks([...favoriteParks, parkCode]);
+                }
+              }}
             />
           </View>
           <View>
@@ -85,7 +100,19 @@ const ParkScreen = ({ route, navigation }) => {
               type="bookmark"
               color={Colors.baseTeal}
               buttonSize={48}
-              toggleState={true}
+              isToggled={isBookmarked}
+              onPress={() => {
+                if (isBookmarked) {
+                  // Remove from bookmarks
+                  const updatedBookmarks = bookmarkedParks.filter(
+                    (code) => code !== parkCode
+                  );
+                  setBookmarkedParks(updatedBookmarks);
+                } else {
+                  // Add to bookmarks
+                  setBookmarkedParks([...bookmarkedParks, parkCode]);
+                }
+              }}
             />
           </View>
           <View style={{ paddingHorizontal: 10 }}>

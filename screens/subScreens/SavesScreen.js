@@ -97,7 +97,9 @@ const ParkList = ({ data }) => {
 
 const SavesScreen = ({ route, navigation }) => {
   const { screenName, headerColor } = route.params;
-  const { recentParks } = useContext(RecentParksContext); // Access recentParks context
+  const { recentParks } = useContext(RecentParksContext);
+  const { bookmarkedParks } = useContext(BookmarkedParksContext);
+  const { favoriteParks } = useContext(FavoriteParksContext);
 
   useEffect(() => {
     navigation.setOptions({
@@ -110,6 +112,12 @@ const SavesScreen = ({ route, navigation }) => {
 
   if (screenName === "Recently Viewed") {
     console.log(recentParks);
+  } else if (screenName === "Bookmarks") {
+    console.log(bookmarkedParks);
+  } else if (screenName === "Favorites") {
+    console.log(favoriteParks);
+  } else {
+    console.log("Error: Invalid screenName");
   }
 
   return (
