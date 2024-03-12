@@ -63,7 +63,7 @@ export const fetchAlertData = async () => {
 export const fetchEventsData = async () => {
   try {
     const eventsResponse = await fetch(
-      `https://developer.nps.gov/api/v1/events?parkCode=${parkCodes}`,
+      `https://developer.nps.gov/api/v1/events?siteCode=${parkCodes}`,
       {
         headers: {
           "X-Api-Key": "khwZtjloZ1uc84rQkAVtJu2ZdcnCJaUI2QIDR9WH",

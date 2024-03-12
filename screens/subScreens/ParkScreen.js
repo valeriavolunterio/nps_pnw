@@ -55,20 +55,22 @@ const ParkScreen = ({ route, navigation }) => {
       return limitedRecentParks;
     });
   }, [parkCode, setRecentParks]);
-
   return (
     <ScrollView style={styles.container}>
       {selectedPark && (
         <View style={styles.imageContainer}>
-          {selectedPark.img && (
+          {selectedPark.images.length > 0 ? (
             <Image
-              source={{ uri: selectedPark.img }}
+              source={{ uri: selectedPark.images[0].url }}
               style={styles.parkImage}
               resizeMode="cover"
+              onError={(error) => console.log("Error loading image:", error)}
             />
+          ) : (
+            <Text style={{ color: "red" }}>Image not found</Text>
           )}
           <View style={styles.overlay}>
-            <Text style={styles.title}>{selectedPark.title}</Text>
+            <Text style={styles.title}>{selectedPark.fullName}</Text>
           </View>
         </View>
       )}
@@ -220,7 +222,7 @@ const styles = StyleSheet.create({
   },
   parkImage: {
     width: "100%",
-    height: 200,
+    height: 250,
   },
   overlay: {
     position: "absolute",
@@ -239,7 +241,7 @@ const styles = StyleSheet.create({
   },
   actionBtnContainer: {
     position: "absolute",
-    top: 180,
+    top: 230,
     right: 10,
     zIndex: 99,
   },

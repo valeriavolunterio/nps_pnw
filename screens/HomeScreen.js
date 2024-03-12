@@ -293,7 +293,14 @@ const HomeScreen = ({ navigation }) => {
               const park = parkData.find(
                 (park) => park.parkCode === alert.parkCode
               );
-
+              if (!park || typeof park.fullName !== "string") {
+                // If park is undefined or park.fullName is not a string, skip rendering this alert
+                console.error(
+                  "Active Alert Park not found or fullName is not a string for parkCode:",
+                  alert
+                );
+                return null;
+              }
               return (
                 <View key={alert.id} style={styles.alertItem}>
                   <Ionicons
@@ -302,7 +309,7 @@ const HomeScreen = ({ navigation }) => {
                     color={iconMapping[alert.category].color}
                   />
                   <View style={styles.alertTextContainer}>
-                    <Text style={Fonts.header4}>{park.fullName}</Text>
+                    {/* <Text style={Fonts.header4}>{park.fullName}</Text> */}
                     <Text>{alert.title}</Text>
                   </View>
                 </View>
@@ -316,16 +323,28 @@ const HomeScreen = ({ navigation }) => {
           <Text style={styles.alertHeaderText}>Pacific Northwest News</Text>
           {newsData
             .slice(0, 3) // Limit to a maximum of 3 parks
-            .map((alert) => {
+            .map((article) => {
+              const parkCodes = article.parkCode
+                .split(",")
+                .map((code) => code.trim());
               const park = parkData.find(
-                (park) => park.parkCode === alert.parkCode
+                (park) =>
+                  park.parkCode === article.parkCode ||
+                  parkCodes.includes(park.parkCode)
               );
-
+              if (!park || !park.fullName) {
+                // If park is undefined or park.fullName is undefined, skip rendering this alert
+                console.error(
+                  "News Park not found or missing fullName for parkCode:",
+                  article.parkCode
+                );
+                return null;
+              }
               return (
-                <View key={alert.id} style={styles.alertItem}>
+                <View key={article.id} style={styles.alertItem}>
                   <View style={styles.alertTextContainer}>
                     <Text style={Fonts.header4}>{park.fullName}</Text>
-                    <Text>{alert.title}</Text>
+                    <Text>{article.title}</Text>
                   </View>
                 </View>
               );
@@ -340,9 +359,16 @@ const HomeScreen = ({ navigation }) => {
             .slice(0, 3) // Limit to a maximum of 3 parks
             .map((event) => {
               const park = parkData.find(
-                (park) => event.parkCode === park.parkCode
+                (park) => event.siteCode === park.siteCode
               );
-
+              if (!park || !park.fullName) {
+                // If park is undefined or park.fullName is undefined, skip rendering this alert
+                console.error(
+                  "Event Park not found or missing fullName for parkCode:",
+                  event.siteCode
+                );
+                return null;
+              }
               return (
                 <View key={event.id} style={styles.alertItem}>
                   <View style={styles.alertTextContainer}>
