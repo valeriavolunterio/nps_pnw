@@ -31,7 +31,7 @@ const ParkScreen = ({ route, navigation }) => {
   const { parkCode } = route.params;
   const selectedPark = parkData.find((park) => park.parkCode === parkCode);
 
-  const { recentParks, setRecentParks } = useContext(RecentParksContext);
+  const { setRecentParks } = useContext(RecentParksContext);
   const { favoriteParks, setFavoriteParks } = useContext(FavoriteParksContext);
   const { bookmarkedParks, setBookmarkedParks } = useContext(
     BookmarkedParksContext
@@ -55,6 +55,7 @@ const ParkScreen = ({ route, navigation }) => {
       return limitedRecentParks;
     });
   }, [parkCode, setRecentParks]);
+
   return (
     <ScrollView style={styles.container}>
       {selectedPark && (
