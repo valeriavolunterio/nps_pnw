@@ -183,7 +183,7 @@ const ParkScreen = ({ route, navigation }) => {
       </View>
       <TealButton.alerts
         onPress={() =>
-          navigation.navigate("Alerts", { parkFilter: selectedPark.parkCode })
+          navigation.navigate("Alerts", { parkCode: selectedPark.parkCode })
         }
       />
       <TealButton.knowBefore
@@ -192,7 +192,8 @@ const ParkScreen = ({ route, navigation }) => {
       <TealButton.places
         onPress={() =>
           navigation.navigate("Places", {
-            parkName: parkScreenData.map((item, index) => item.title),
+            parkCode: selectedPark.parkCode,
+            parkName: selectedPark.fullName,
           })
         }
         title="Places to See"

@@ -9,7 +9,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AppLoading } from "expo";
 import {
   fetchParkData,
-  fetchAlertData,
+  fetchPlaceData,
 } from "./data_management/npsAPI_connections.js";
 import { useFonts } from "expo-font";
 
@@ -35,18 +35,13 @@ import {
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [parksData, setParksData] = useState([]);
-  const [alertsData, setAlertsData] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const parksResponse = await fetchParkData();
-        const alertsResponse = await fetchAlertData();
-
-        setParksData(parksResponse);
-        setAlertsData(alertsResponse);
+        await fetchParkData();
+        await fetchPlaceData();
 
         setDataLoaded(true);
       } catch (error) {
@@ -81,10 +76,6 @@ export default function App() {
                   <Tab.Screen
                     name="Home"
                     component={HomeStack}
-                    initialParams={{
-                      parksData: parksData,
-                      alertsData: alertsData,
-                    }}
                     options={{
                       tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons
@@ -99,7 +90,6 @@ export default function App() {
                   <Tab.Screen
                     name="Map"
                     component={MapStack}
-                    initialParams={{ parksData: parksData }}
                     options={{
                       tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons
@@ -114,7 +104,6 @@ export default function App() {
                   <Tab.Screen
                     name="Search"
                     component={SearchStack}
-                    initialParams={{ parksData: parksData }}
                     options={{
                       tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons
@@ -129,7 +118,6 @@ export default function App() {
                   <Tab.Screen
                     name="Passport"
                     component={PassportStack}
-                    initialParams={{ parksData: parksData }}
                     options={{
                       tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons
