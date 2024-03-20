@@ -40,19 +40,15 @@ const headerStyles = {
   headerRight: () => <SettingsButton />,
 };
 const HomeStack = ({ route }) => {
-  const { parksData, alertsData } = route.params;
-
   return (
     <Stack.Navigator
       screenOptions={{
         ...headerStyles,
-        initialParams: { parksData: parksData, alertsData: alertsData }, // Set initialParams for all screens
       }}
     >
       <Stack.Screen
         name="HomeStack"
         component={HomeScreen}
-        initialParams={{ parksData: parksData, alertsData: alertsData }}
         options={{ headerLeft: () => null, headerTransparent: true }}
       />
       <Stack.Screen
@@ -147,13 +143,10 @@ const HomeStack = ({ route }) => {
 };
 
 const MapStack = ({ route }) => {
-  const { parksData } = route.params;
-
   return (
     <Stack.Navigator
       screenOptions={{
         ...headerStyles,
-        initialParams: { parksData: parksData }, // Set initialParams for all screens
       }}
     >
       <Stack.Screen
@@ -188,13 +181,10 @@ const MapStack = ({ route }) => {
 };
 
 const SearchStack = ({ route }) => {
-  const { parksData } = route.params;
-
   return (
     <Stack.Navigator
       screenOptions={{
         ...headerStyles,
-        initialParams: { parksData: parksData }, // Set initialParams for all screens
       }}
     >
       <Stack.Screen

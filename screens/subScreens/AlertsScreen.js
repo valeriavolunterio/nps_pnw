@@ -79,11 +79,11 @@ const AlertsScreen = ({ route, navigation }) => {
     return null; //return a loading indicator here
   }
 
-  const AlertsList = ({ alerts, parkCode }) => {
+  const AlertsList = ({ alerts }) => {
     let filteredAlerts = alerts;
-    if (route.params.parkFilter) {
+    if (route.params.parkCode) {
       filteredAlerts = filteredAlerts.filter(
-        (alert) => alert.parkCode === route.params.parkFilter
+        (alert) => alert.parkCode === route.params.parkCode
       );
     }
 

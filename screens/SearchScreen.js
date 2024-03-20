@@ -11,6 +11,7 @@ import {
 import { Colors } from "../styles/Colors";
 import { Fonts } from "../styles/Fonts";
 import { useParkData } from "../data_management/parksDataContext";
+import ParkOpenStatus from "../components/ParkOpenStatus";
 
 const MAX_DESCRIPTION_LENGTH = 100; // Maximum length of the short description
 
@@ -60,6 +61,10 @@ const SearchScreen = ({ navigation }) => {
             <Text style={Fonts.body}>
               {truncateDescription(item.description)}
             </Text>
+            {/* <Text>
+              Open?{" "}
+              <ParkOpenStatus hours={item.operatingHours[0].standardHours} />
+            </Text> */}
           </Pressable>
         )}
       />

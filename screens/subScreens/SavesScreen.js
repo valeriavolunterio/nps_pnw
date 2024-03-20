@@ -10,8 +10,10 @@ import {
 } from "react-native";
 //import ToggleSwitch from "../../components/Switch";
 import SlideSwitch from "../../components/SlideSwitch";
+import ParkOpenStatus from "../../components/ParkOpenStatus.js";
 import { Colors } from "../../styles/Colors.js";
 
+import { useParkData } from "../../data_management/parksDataContext.js";
 import {
   RecentParksContext,
   BookmarkedParksContext,
@@ -37,66 +39,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const savedParks = [
-  {
-    id: 1,
-    name: "Crater Lake",
-    imageUrl:
-      "https://www.nps.gov/common/uploads/grid_builder/crla/crop16_9/963F4262-C1C0-E248-ADC5F94443A1B88B.jpg?width=640&quality=90&mode=crop",
-    isOpen: false,
-  },
-  {
-    id: 2,
-    name: "Olympic",
-    imageUrl:
-      "https://www.nps.gov/common/uploads/grid_builder/olym/crop16_9/37A477A2-DBD7-96C0-0C135C8028ED6CEF.jpg?width=640&quality=90&mode=crop",
-    isOpen: true,
-  },
-  {
-    id: 3,
-    name: "Mount Rainier",
-    imageUrl:
-      "https://www.nps.gov/common/uploads/grid_builder/mora/crop16_9/F096F25E-1DD8-B71B-0BB2F7B3366C4901.JPG?width=640&quality=90&mode=crop",
-    isOpen: true,
-  },
-  {
-    id: 4,
-    name: "North Cascades",
-    imageUrl:
-      "https://www.nps.gov/common/uploads/grid_builder/noca/crop16_9/E56D56D8-98A0-49D8-831F443EE2E6AB70.jpg?width=640&quality=90&mode=crop",
-    isOpen: true,
-  },
-];
-
-const ParkList = ({ data }) => {
-  const renderParkCard = ({ item: park }) => (
-    <View>
-      <Image
-        source={{ uri: park.imageUrl }}
-        style={{ width: 100, height: 100 }}
-      />
-      <Text>{park.name}</Text>
-      {/* {icon toggle} */}
-      <Text>National Park</Text>
-      <Text>{park.isOpen ? "Open" : "Closed"}</Text>
-      <Pressable>
-        {/* {map icon} */}
-        <Text>Directions</Text>
-      </Pressable>
-    </View>
-  );
-
-  return (
-    <FlatList
-      data={data}
-      renderItem={renderParkCard}
-      keyExtractor={(park) => park.id.toString()}
-    />
-  );
-};
-
 const SavesScreen = ({ route, navigation }) => {
   const { screenName, headerColor } = route.params;
+
+  const { parkData, alertData } = useParkData([]);
 
   const { recentParks } = useContext(RecentParksContext);
   const { bookmarkedParks } = useContext(BookmarkedParksContext);
@@ -112,14 +58,36 @@ const SavesScreen = ({ route, navigation }) => {
   }, [navigation, screenName, headerColor]);
 
   if (screenName === "Recently Viewed") {
-    console.log(recentParks);
+    savedParks = parkData.filter((park) => recentParks.includes(park.parkCode));
   } else if (screenName === "Bookmarks") {
-    console.log(bookmarkedParks);
+    savedParks = parkData.filter((park) =>
+      bookmarkedParks.includes(park.parkCode)
+    );
   } else if (screenName === "Favorites") {
-    console.log(favoriteParks);
+    savedParks = parkData.filter((park) =>
+      favoriteParks.includes(park.parkCode)
+    );
   } else {
-    console.log("Error: Invalid screenName");
+    console.error("Invalid screenName");
   }
+  const renderParkCard = ({ item: park }) => (
+    <View>
+      <Image
+        source={{ uri: park.images[0].url }}
+        style={{ width: 100, height: 100 }}
+      />
+      <Text>{park.name}</Text>
+      {/* {icon toggle} */}
+      <Text>{park.designation}</Text>
+      <View>
+        {/* <ParkOpenStatus hours={park.operatingHours[0].standardHours} /> */}
+      </View>
+      <Pressable>
+        {/* {map icon} */}
+        <Text>Directions</Text>
+      </Pressable>
+    </View>
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -133,7 +101,11 @@ const SavesScreen = ({ route, navigation }) => {
         {/* {SortIcon} */}
         <View style={styles.horizontalRule} />
       </View>
-      <ParkList data={savedParks} />
+      <FlatList
+        data={savedParks}
+        renderItem={renderParkCard}
+        keyExtractor={(park) => park.id.toString()}
+      />
     </SafeAreaView>
   );
 };
