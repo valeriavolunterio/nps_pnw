@@ -13,6 +13,7 @@ import MapFilterComponent from "../components/MapFilter";
 import { Ionicons } from "@expo/vector-icons";
 import { Fonts } from "../styles/Fonts";
 import { Colors } from "../styles/Colors.js";
+import { useParkData } from "../data_management/parksDataContext.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -62,22 +63,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const nationalParksData = [
-  {
-    id: 1,
-    name: "Olympic National Park",
-    //type: "Geological Attraction",
-    amenities: "Visitor Center, Trails, Campsites",
-    experience: "Scenic Views, Hiking, Wildlife",
-    coordinate: {
-      latitude: 47.8021,
-      longitude: -123.6044,
-    },
-  },
-  // Add more national parks here...
-];
 
 const MapScreen = ({ navigation }) => {
+
+  const { parkData } = useParkData([]);
+  //console.log(parkData)
+  
   const handleDirections = (park) => {
     const { latitude, longitude } = park.coordinate;
     const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
@@ -85,17 +76,23 @@ const MapScreen = ({ navigation }) => {
     // Handle directions button press
   };
 
-  
+  const initialRegion = {
+    latitude: 47.5,
+    longitude: -117, 
+    latitudeDelta: 20, 
+    longitudeDelta: 20, 
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <MapView style={styles.map}>
-        {nationalParksData.map((park) => (
-          <Marker key={park.id} coordinate={park.coordinate} title={park.name}>
+      <MapView style={styles.map}  initialRegion={initialRegion}>
+        {parkData.map((park) => (
+          <Marker key={park.fullName}  coordinate={{ latitude: park.latitude, longitude: park.longitude }}
+          title={park.fullName}>
             {/* Custom marker icon using Ionicons */}
             <Ionicons name="ios-pin" size={24} color="#B87044" />
             <Callout style={styles.calloutContainer}>
-              <Text style={styles.calloutTitle}>{park.name}</Text>
+              <Text style={styles.calloutTitle}>{park.fullName}</Text>
               <Text style={styles.calloutText}>{park.type}</Text>
               <Text style={styles.calloutText}>
                 Amenities: {park.amenities}
@@ -104,12 +101,14 @@ const MapScreen = ({ navigation }) => {
                 Experience: {park.experience}
               </Text>
               <View style={styles.buttonsContainer}>
-                <Pressable
+              <Pressable
                   backgroundColor={Colors.white}
                   style={styles.button}
                   onPress={() => handleDirections(park)}
                 >
-                  <Text style={styles.buttonText} color={Colors.darkGreen} >Directions</Text>
+                  <Text style={styles.buttonText} color={Colors.darkGreen}>
+                    Directions
+                  </Text>
                 </Pressable>
                 <Pressable style={styles.button}>
                   <Text onPress={() => navigation.navigate("Park")} style={styles.buttonText}>View Page</Text>
