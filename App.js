@@ -72,7 +72,11 @@ export default function App() {
           <BookmarkedParksProvider>
             <FavoriteParksProvider>
               <NavigationContainer>
-                <Tab.Navigator>
+                <Tab.Navigator
+                  screenOptions={{
+                    tabBarHideOnKeyboard: true, // Hide tab bar when keyboard is displayed
+                  }}
+                >
                   <Tab.Screen
                     name="Home"
                     component={HomeStack}

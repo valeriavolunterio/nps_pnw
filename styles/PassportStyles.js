@@ -1,6 +1,8 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Fonts } from "../styles/Fonts.js";
+
+const { height: deviceHeight } = Dimensions.get("window");
 
 export const styles = StyleSheet.create({
   passportView: {
@@ -9,6 +11,7 @@ export const styles = StyleSheet.create({
   // All passport styles
   container: {
     flex: 1,
+    minHeight: deviceHeight,
     alignItems: "center",
     justifyContent: "top",
     position: "relative",
@@ -117,7 +120,7 @@ export const styles = StyleSheet.create({
   },
   floatingButton: {
     position: "absolute",
-    bottom: 0,
+    bottom: 100,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
