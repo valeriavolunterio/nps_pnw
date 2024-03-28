@@ -90,7 +90,7 @@ const MapScreen = ({ navigation }) => {
           <Marker key={park.fullName}  coordinate={{ latitude: park.latitude, longitude: park.longitude }}
           title={park.fullName}>
             {/* Custom marker icon using Ionicons */}
-            <Ionicons name="ios-pin" size={24} color="#B87044" />
+            <Ionicons name="ios-pin" size={24} color={Colors.blue} />
             <Callout style={styles.calloutContainer}>
               <Text style={styles.calloutTitle}>{park.fullName}</Text>
               <Text style={styles.calloutText}>{park.type}</Text>
