@@ -8,46 +8,46 @@ import {
   Image,
 } from "react-native";
 
-import { SVGIcons } from "./SVGIcons.js";
-import { styles } from "../styles/PassportStyles.js";
-import { Colors } from "../styles/Colors.js";
-import { Fonts } from "../styles/Fonts.js";
+import { SVGIcons } from "../../components/SVGIcons.js";
+import { styles } from "../../styles/PassportStyles.js";
+import { Colors } from "../../styles/Colors.js";
+import { Fonts } from "../../styles/Fonts.js";
 
-import { db } from "../data_management/firebaseConfig.js";
+import { db } from "../../data_management/firebaseConfig.js";
 import { doc, onSnapshot } from "firebase/firestore";
 
-import UserContext from "../data_management/UserContext.js";
+import UserContext from "../../data_management/UserContext.js";
 
 const badgesData = [
   {
     id: 1,
     name: "Olympic",
-    scannedSource: require("../assets/badges/olym.png"),
-    unscannedSource: require("../assets/badges/Unscanned.png"),
+    scannedSource: require("../../assets/badges/olym.png"),
+    unscannedSource: require("../../assets/badges/Unscanned.png"),
   },
   {
     id: 2,
     name: "Crater Lake",
-    scannedSource: require("../assets/badges/crla.png"),
-    unscannedSource: require("../assets/badges/Unscanned.png"),
+    scannedSource: require("../../assets/badges/crla.png"),
+    unscannedSource: require("../../assets/badges/Unscanned.png"),
   },
   {
     id: 3,
     name: "Glacier",
-    scannedSource: require("../assets/badges/glac.png"),
-    unscannedSource: require("../assets/badges/Unscanned.png"),
+    scannedSource: require("../../assets/badges/glac.png"),
+    unscannedSource: require("../../assets/badges/Unscanned.png"),
   },
   {
     id: 4,
     name: "Badge 3",
-    scannedSource: require("../assets/badges/olym.png"),
-    unscannedSource: require("../assets/badges/Unscanned.png"),
+    scannedSource: require("../../assets/badges/olym.png"),
+    unscannedSource: require("../../assets/badges/Unscanned.png"),
   },
   {
     id: 5,
     name: "Badge 4",
-    scannedSource: require("../assets/badges/crla.png"),
-    unscannedSource: require("../assets/badges/Unscanned.png"),
+    scannedSource: require("../../assets/badges/crla.png"),
+    unscannedSource: require("../../assets/badges/Unscanned.png"),
   },
 ];
 
@@ -123,7 +123,7 @@ const PassportUser = ({ route, navigation }) => {
             }
           >
             <Image
-              source={require("../assets/adminPhoto.jpg")}
+              source={require("../../assets/adminPhoto.jpg")}
               style={{
                 width: "100%",
                 height: "100%",

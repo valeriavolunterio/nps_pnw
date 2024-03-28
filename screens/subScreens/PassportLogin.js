@@ -9,12 +9,12 @@ import {
   Dimensions,
 } from "react-native";
 
-import { styles } from "../styles/PassportStyles.js";
-import { Fonts } from "../styles/Fonts.js";
-import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
+import { styles } from "../../styles/PassportStyles.js";
+import { Colors } from "../../styles/Colors.js";
+import { Fonts } from "../../styles/Fonts.js";
 
-import RoundedButton from "./RoundedButton.js";
+import RoundedButton from "../../components/RoundedButton.js";
 
 const PassportLogin = ({ handleLogin, navigation }) => {
   const [email, setEmail] = useState("");
@@ -30,7 +30,7 @@ const PassportLogin = ({ handleLogin, navigation }) => {
       <View style={styles.userCard}>
         <View style={{ ...styles.userImgContainer, aspectRatio: 1 }}>
           <Image
-            source={require("../assets/userPlaceholder.png")}
+            source={require("../../assets/userPlaceholder.png")}
             style={{
               ...styles.userImg,
               position: "absolute",
@@ -101,7 +101,7 @@ const PassportLogin = ({ handleLogin, navigation }) => {
         }}
       >
         <Image
-          source={require("../assets/mountainBG.png")}
+          source={require("../../assets/mountainBG.png")}
           style={{
             flex: 1,
             width: "100%",

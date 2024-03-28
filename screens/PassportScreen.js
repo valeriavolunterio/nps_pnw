@@ -3,8 +3,8 @@ import { SafeAreaView } from "react-native";
 
 import { styles } from "../styles/PassportStyles.js";
 
-import PassportUser from "../components/PassportUser.js";
-import PassportLogin from "../components/PassportLogin.js";
+import PassportUser from "./subScreens/PassportUser.js";
+import PassportLogin from "./subScreens/PassportLogin.js";
 import LoadingScreen from "./LoadingScreen.js";
 
 import { db } from "../data_management/firebaseConfig.js";
