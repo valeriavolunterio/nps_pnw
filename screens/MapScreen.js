@@ -28,9 +28,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF9F5",
   },
   calloutTitle: {
-    fontFamily: "Stoke-Regular",
+    ...Fonts.header2,
     color: "#2C505E",
-    fontSize: 20,
     fontWeight: "bold",
     marginBottom: 5,
     padding: 15,
@@ -57,7 +56,7 @@ const styles = StyleSheet.create({
     shadowRadius: 1, 
   },
   buttonText: {
-    fontFamily: "OpenSans-Regular",
+    ...Fonts.button,
     color: Colors.darkestGray,
     fontSize: 12,
   },

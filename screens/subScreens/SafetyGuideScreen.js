@@ -11,7 +11,7 @@ import {
   //Fonts,
   Linking,
 } from "react-native";
-import { useFonts } from "expo-font";
+import { Fonts } from "../../styles/Fonts";
 import { Colors } from "../../styles/Colors";
 import Svg, { Polygon } from "react-native-svg";
 import { Ionicons } from "@expo/vector-icons";
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     marginTop: 26,
     marginLeft: 60,
     fontSize: 16,
-    fontFamily: "OpenSans-SemiBold",
+    ...Fonts.header1,
     flexDirection: "row",
   },
   subHeading: {
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     fontWeight: "bold",
     fontSize: 14,
-    fontFamily: "OpenSans-SemiBold",
+    ...Fonts.subheading,
   },
 
   listItemContainer: {
