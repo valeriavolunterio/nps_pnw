@@ -176,6 +176,35 @@ const MapStack = ({ route }) => {
           headerRight: "",
         }}
       />
+      <Stack.Screen
+        name="Places"
+        component={PlacesScreen}
+        options={{
+          title: "Places to See",
+          headerStyle: {
+            backgroundColor: Colors.baseTeal,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Place"
+        component={PlaceScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.baseTeal,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Alerts"
+        component={AlertsScreen}
+        options={{
+          title: "Active Alerts",
+          headerStyle: {
+            backgroundColor: Colors.sepia,
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -214,6 +243,16 @@ const SearchStack = ({ route }) => {
         }}
       />
       <Stack.Screen
+        name="Places"
+        component={PlacesScreen}
+        options={{
+          title: "Places to See",
+          headerStyle: {
+            backgroundColor: Colors.baseTeal,
+          },
+        }}
+      />
+      <Stack.Screen
         name="Settings"
         component={SettingsScreen}
         options={{
@@ -221,6 +260,16 @@ const SearchStack = ({ route }) => {
             backgroundColor: Colors.darkestGray,
           },
           headerRight: "",
+        }}
+      />
+       <Stack.Screen
+        name="Alerts"
+        component={AlertsScreen}
+        options={{
+          title: "Active Alerts",
+          headerStyle: {
+            backgroundColor: Colors.sepia,
+          },
         }}
       />
     </Stack.Navigator>
