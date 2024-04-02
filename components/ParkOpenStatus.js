@@ -57,7 +57,7 @@ const ParkOpenStatus = ({ hours }) => {
     }
   };
 
-  return <Text>{isOpen() ? "Open" : "Closed"}</Text>;
+  return <Text style={{ color: "white" }}>{isOpen() ? "Open" : "Closed"}</Text>;
 };
 
 export default ParkOpenStatus;
