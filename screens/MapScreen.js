@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 5,
     padding: 15,
-    
   },
   calloutText: {
     fontSize: 14,
@@ -50,11 +49,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 23,
-    elevation: 5, 
-    shadowColor: "#000", 
-    shadowOffset: { width: 0, height: 1 }, 
-    shadowOpacity: 0.6, 
-    shadowRadius: 1, 
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.6,
+    shadowRadius: 1,
   },
   buttonText: {
     fontFamily: "OpenSans-Regular",
@@ -63,12 +62,10 @@ const styles = StyleSheet.create({
   },
 });
 
-
 const MapScreen = ({ navigation }) => {
-
   const { parkData } = useParkData([]);
   //console.log(parkData)
-  
+
   const handleDirections = (park) => {
     const { latitude, longitude } = park.coordinate;
     const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
@@ -78,17 +75,20 @@ const MapScreen = ({ navigation }) => {
 
   const initialRegion = {
     latitude: 47.5,
-    longitude: -117, 
-    latitudeDelta: 20, 
-    longitudeDelta: 20, 
+    longitude: -117,
+    latitudeDelta: 20,
+    longitudeDelta: 20,
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <MapView style={styles.map}  initialRegion={initialRegion}>
+      <MapView style={styles.map} initialRegion={initialRegion}>
         {parkData.map((park) => (
-          <Marker key={park.fullName}  coordinate={{ latitude: park.latitude, longitude: park.longitude }}
-          title={park.fullName}>
+          <Marker
+            key={park.fullName}
+            coordinate={{ latitude: park.latitude, longitude: park.longitude }}
+            title={park.fullName}
+          >
             {/* Custom marker icon using Ionicons */}
             <Ionicons name="ios-pin" size={24} color={Colors.blue} />
             <Callout style={styles.calloutContainer}>
@@ -101,7 +101,7 @@ const MapScreen = ({ navigation }) => {
                 Experience: {park.experience}
               </Text>
               <View style={styles.buttonsContainer}>
-              <Pressable
+                <Pressable
                   backgroundColor={Colors.white}
                   style={styles.button}
                   onPress={() => handleDirections(park)}
@@ -110,8 +110,13 @@ const MapScreen = ({ navigation }) => {
                     Directions
                   </Text>
                 </Pressable>
-                <Pressable style={styles.button}>
-                  <Text onPress={() => navigation.navigate("Park")} style={styles.buttonText}>View Page</Text>
+                <Pressable
+                  style={styles.button}
+                  onPress={() =>
+                    navigation.navigate("Park", { parkCode: park.parkCode })
+                  }
+                >
+                  <Text style={styles.buttonText}>View Park</Text>
                 </Pressable>
               </View>
             </Callout>
