@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f6419581-24e2-4a9f-911b-7e48c442d9fe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/RoundedButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/RoundedButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/subScreens/PassportLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/subScreens/PassportLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/subScreens/PassportSignUpScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/subScreens/PassportSignUpScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/subScreens/PlaceScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/subScreens/PlaceScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/subScreens/PlacesScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/subScreens/PlacesScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
