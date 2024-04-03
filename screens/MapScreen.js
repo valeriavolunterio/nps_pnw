@@ -86,7 +86,8 @@ const MapScreen = ({ navigation }) => {
         {parkData.map((park) => (
           <Marker
             key={park.fullName}
-            coordinate={{ latitude: park.latitude, longitude: park.longitude }}
+            coordinate={{   latitude: parseFloat(park.latitude), // Convert string to float
+            longitude: parseFloat(park.longitude), }}
             title={park.fullName}
           >
             {/* Custom marker icon using Ionicons */}
