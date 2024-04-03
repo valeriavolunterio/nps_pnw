@@ -70,9 +70,6 @@ const PlacesScreen = ({ route, navigation }) => {
   const { placeData, parkData } = useParkData([]);
   const { parkCode, parkName } = route.params;
 
-  placeData.forEach((element) => {
-    console.log(element);
-  });
   const filteredPlaces = placeData.filter((place) =>
     place.relatedParks.some((park) => park.parkCode === parkCode)
   );
@@ -80,11 +77,11 @@ const PlacesScreen = ({ route, navigation }) => {
   const renderPlace = ({ item }) => (
     <Pressable
       style={styles.placeContainer}
-      // onPress={() =>
-      //   navigation.navigate("Place", {
-      //     place: item,
-      //   })
-      // }
+      onPress={() =>
+        navigation.navigate("Place", {
+          place: item,
+        })
+      }
     >
       <Ionicons
         name="ellipse"
