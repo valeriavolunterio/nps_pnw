@@ -67,16 +67,35 @@ const PassportLogin = ({ handleLogin, navigation }) => {
           />
         </View>
       </View>
-      <RoundedButton
-        type="confirm"
-        text="Sign In"
-        onPress={() => handleLogin({ email, password })}
+      <View
         style={{
-          justifyContent: "flex-end",
-          alignSelf: "flex-end",
-          marginRight: "10%",
+          flexDirection: "row",
+          justifyContent: "center", 
+          paddingHorizontal: 20,
+          marginTop: 10,
         }}
-      />
+      >
+        <RoundedButton
+          type="create"
+          text="Create Account"
+          onPress={() => handleLogin({ email, password })}
+          style={{
+            justifyContent: "flex-end",
+            alignSelf: "flex-end",
+            marginRight: "10%",
+          }}
+        />
+        <RoundedButton
+          type="confirm"
+          text="Sign In"
+          onPress={() => handleLogin({ email, password })}
+          style={{
+            justifyContent: "flex-start",
+            alignSelf: "flex-start",
+            marginRight: "10%",
+          }}
+        />
+      </View>
       <Pressable
         style={{
           ...styles.floatingButton,

@@ -67,12 +67,9 @@ const styles = StyleSheet.create({
 });
 
 const PlacesScreen = ({ route, navigation }) => {
-  const { placeData, parkData } = useParkData([]);
+  const { placeData } = useParkData([]);
   const { parkCode, parkName } = route.params;
 
-  placeData.forEach((element) => {
-    console.log(element);
-  });
   const filteredPlaces = placeData.filter((place) =>
     place.relatedParks.some((park) => park.parkCode === parkCode)
   );
@@ -80,11 +77,11 @@ const PlacesScreen = ({ route, navigation }) => {
   const renderPlace = ({ item }) => (
     <Pressable
       style={styles.placeContainer}
-      // onPress={() =>
-      //   navigation.navigate("Place", {
-      //     place: item,
-      //   })
-      // }
+      onPress={() =>
+        navigation.navigate("Place", {
+          place: item,
+        })
+      }
     >
       <Ionicons
         name="ellipse"
@@ -92,7 +89,7 @@ const PlacesScreen = ({ route, navigation }) => {
         color={Colors.green} // Add conditional for color based on type
         style={styles.iconContainer}
       />
-      <View style={styles.textContainer}>
+      <View style={styles.container}>
         <Text style={styles.subHeading}>{item.title}</Text>
         <Text style={styles.body} numberOfLines={2} ellipsizeMode="tail">
           {item.bodyText}
@@ -110,7 +107,7 @@ const PlacesScreen = ({ route, navigation }) => {
         <FlatList
           data={filteredPlaces}
           renderItem={renderPlace}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
         />
       </View>
     </SafeAreaView>

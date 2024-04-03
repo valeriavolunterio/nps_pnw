@@ -13,9 +13,9 @@ import RoundedButton from "../../components/RoundedButton";
 const { width } = Dimensions.get("window"); // Define width here
 
 const PlaceScreen = ({ route, navigation }) => {
-  const { place } = route.params;
+  const { item } = route.params;
 
-  if (!place) {
+  if (!item) {
     return (
       <SafeAreaView>
         <Text>Place not found</Text>
@@ -39,7 +39,7 @@ const PlaceScreen = ({ route, navigation }) => {
         <View>
           <View style={styles.tealBackground}>
             <View style={styles.cardContainer}>
-              <Text style={styles.headerText}>{place.name}</Text>
+              <Text style={styles.headerText}>{item.name}</Text>
               <View
                 style={{
                   flexDirection: "row",
@@ -60,10 +60,10 @@ const PlaceScreen = ({ route, navigation }) => {
                     size={15}
                     color={Colors.green} // Add conditional for color based on type
                   />
-                  <Text style={styles.typeText}>{place.type}</Text>
+                  <Text style={styles.typeText}>{item.type}</Text>
                 </View>
                 <View>
-                  <Text style={styles.parkText}>{place.park}</Text>
+                  <Text style={styles.parkText}>{item.park}</Text>
                 </View>
               </View>
             </View>
@@ -114,33 +114,33 @@ const PlaceScreen = ({ route, navigation }) => {
         </View>
         <View>
           <View style={styles.cardContainer}>
-            <Text style={styles.seasonTitle}>Season: {place.season}</Text>
-            <Text style={styles.description}>{place.description}</Text>
+            <Text style={styles.seasonTitle}>Season: {item.season}</Text>
+            <Text style={styles.description}>{item.description}</Text>
           </View>
           <View style={styles.cardContainer}>
-            <Text style={styles.visitorCenter}>{place.visitorCenter.name}</Text>
+            <Text style={styles.visitorCenter}>{item.visitorCenter.name}</Text>
             <View
               style={{
                 flexDirection: "row",
                 alignItems: "center",
               }}
             >
-              <Text style={styles.address}>{place.visitorCenter.address}</Text>
+              <Text style={styles.address}>{item.visitorCenter.address}</Text>
               <Text style={styles.phone}>
-                Phone: {place.visitorCenter.phone}
+                Phone: {item.visitorCenter.phone}
               </Text>
             </View>
             <Text>
               <Text style={{ fontWeight: "bold" }}>
-                {place.visitorCenter.hoursBold}
+                {item.visitorCenter.hoursBold}
               </Text>
-              {place.visitorCenter.hoursCont}
+              {item.visitorCenter.hoursCont}
             </Text>
           </View>
           <View style={styles.cardContainer}>
             <Text style={styles.amenitiesText}>Amenities</Text>
             <View style={styles.gridContainer}>
-              {place.amenities.map((amenity, index) => (
+              {item.amenities.map((amenity, index) => (
                 <View key={index} style={styles.gridItem}>
                   {getSVGIcon("amenities", amenity)}
                   <Text />
@@ -151,7 +151,7 @@ const PlaceScreen = ({ route, navigation }) => {
           <View style={styles.cardContainer}>
             <Text style={styles.experienceText}>Experiences</Text>
             <View style={styles.gridContainer}>
-              {place.experiences.map((experience, index) => (
+              {item.experiences.map((experience, index) => (
                 <View key={index} style={styles.gridItem}>
                   {getSVGIcon("experiences", experience)}
                   <Text />

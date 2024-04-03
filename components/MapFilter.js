@@ -76,7 +76,7 @@ const MapFilterComponent = ({ onFilterChange }) => {
                 </FilterSection>
 
                 {/* PLACES */}
-                <FilterSection title="Places">
+                {/* <FilterSection title="Places">
                   <CheckBox
                     value={filters.parks.includes("park")}
                     title="Geological"
@@ -89,10 +89,10 @@ const MapFilterComponent = ({ onFilterChange }) => {
                     value={filters.parks.includes("park")}
                     title="Overlook"
                   />
-                </FilterSection>
+                </FilterSection> */}
 
                 {/* Experiences */}
-                <FilterSection title="Experiences">
+                {/* <FilterSection title="Experiences">
                   <CheckBox
                     value={filters.parks.includes("park")}
                     title="Backcountry Hiking"
@@ -106,10 +106,10 @@ const MapFilterComponent = ({ onFilterChange }) => {
                     value={filters.parks.includes("park")}
                     title="Climbing"
                   />
-                </FilterSection>
+                </FilterSection> */}
 
                 {/* Amenities */}
-                <FilterSection
+                {/* <FilterSection
                   title="Amenities"
                   style={styles.sectionHeaderText}
                 >
@@ -125,7 +125,7 @@ const MapFilterComponent = ({ onFilterChange }) => {
                     value={filters.parks.includes("park")}
                     title="Public Restrooms"
                   />
-                </FilterSection>
+                </FilterSection> */}
               </ScrollView>
               <Pressable
                 onPress={() => setModalVisible(false)}

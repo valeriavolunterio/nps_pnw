@@ -28,6 +28,7 @@ const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: Colors.offWhite,
     alignItems: "center",
     flex: 1,
   },
@@ -153,37 +154,44 @@ const SavesScreen = ({ route, navigation }) => {
     console.error("Invalid screenName");
   }
   const renderParkCard = ({ item: park }) => (
-    <View style={styles.cardContainer}>
-      <View style={{ flexDirection: "row" }}>
-        <Image
-          source={{ uri: park.images[0].url }}
-          style={{ width: 100, height: 100, borderRadius: 5 }}
-        />
-        <View style={{ marginLeft: 10 }}>
-          <Text style={styles.parkTitle}>{park.name}</Text>
-          {/* {icon toggle} */}
-          <Text style={styles.designation}>{park.designation}</Text>
-          <View style={styles.status}>
-            <ParkOpenStatus hours={park.operatingHours[0].standardHours} />
+    <Pressable
+      onPress={() => navigation.navigate("Park", { parkCode: park.parkCode })}
+    >
+      <View style={styles.cardContainer}>
+        <View style={{ flexDirection: "row" }}>
+          <Image
+            source={{ uri: park.images[0].url }}
+            style={{ width: 100, height: 100, borderRadius: 5 }}
+          />
+          <View style={{ marginLeft: 10 }}>
+            <Text style={styles.parkTitle}>{park.name}</Text>
+            {/* {icon toggle} */}
+            <Text style={styles.designation}>{park.designation}</Text>
+            <View style={styles.status}>
+              <ParkOpenStatus
+                hours={park.operatingHours[0].standardHours}
+                parkName={park.fullName}
+              />
+            </View>
           </View>
         </View>
+        <View style={styles.directionsButton}>
+          <Pressable onPress={() => navigation.navigate("Map")}>
+            <View style={styles.mapIcon}>
+              {/* <MaterialCommunityIcons name="map" /> */}
+            </View>
+            <Text style={styles.directionsText}>Directions</Text>
+          </Pressable>
+        </View>
       </View>
-      <View style={styles.directionsButton}>
-        <Pressable onPress={() => navigation.navigate("Map")}>
-          <View style={styles.mapIcon}>
-            {/* <MaterialCommunityIcons name="map" /> */}
-          </View>
-          <Text style={styles.directionsText}>Directions</Text>
-        </Pressable>
-      </View>
-    </View>
+    </Pressable>
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.slider}>
+      {/* <View style={styles.slider}>
         <SlideSwitch />
-      </View>
+      </View> */}
       {/* <Toggle> */}
       {/* Sort Container */}
       <View style={styles.recentlyAdded}>

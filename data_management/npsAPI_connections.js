@@ -25,7 +25,7 @@ export const fetchParkData = async () => {
 export const fetchPlaceData = async () => {
   try {
     const newsResponse = await fetch(
-      `https://developer.nps.gov/api/v1/places?parkCode=${parkCodes}`,
+      `https://developer.nps.gov/api/v1/places?parkCode=olym&limit=4000`,
       {
         headers: {
           "X-Api-Key": "khwZtjloZ1uc84rQkAVtJu2ZdcnCJaUI2QIDR9WH",
