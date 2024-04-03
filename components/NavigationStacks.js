@@ -8,6 +8,7 @@ import MapScreen from "../screens/MapScreen.js";
 import SearchScreen from "../screens/SearchScreen.js";
 import PassportScreen from "../screens/PassportScreen.js";
 
+import ParkInformationScreen from "../screens/subScreens/ParkInformationScreen.js";
 import ParkScreen from "../screens/subScreens/ParkScreen.js";
 import PlaceScreen from "../screens/subScreens/PlaceScreen.js";
 import PlacesScreen from "../screens/subScreens/PlacesScreen.js";
@@ -84,6 +85,17 @@ const HomeStack = ({ route }) => {
           title: "PNW Safety Guide",
           headerStyle: {
             backgroundColor: Colors.baseTeal,
+          },
+          headerTintColor: Colors.white,
+        }}
+      />
+      <Stack.Screen
+        name="ParkInformation"
+        component={ParkInformationScreen}
+        options={{
+          title: "Park Information",
+          headerStyle: {
+            backgroundColor: Colors.green,
           },
           headerTintColor: Colors.white,
         }}

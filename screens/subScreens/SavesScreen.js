@@ -7,6 +7,7 @@ import {
   Image,
   Pressable,
   FlatList,
+  Dimensions,
 } from "react-native";
 //import ToggleSwitch from "../../components/Switch";
 import SlideSwitch from "../../components/SlideSwitch";
@@ -22,6 +23,8 @@ import {
   FavoriteParksContext,
 } from "../../data_management/StorageContext.js";
 // import { FlatList, ScrollView } from "react-native-gesture-handler";
+
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -46,8 +49,9 @@ const styles = StyleSheet.create({
   cardContainer: {
     flex: 1,
     justifyContent: "space-between",
-    marginVertical: 10,
+    marginVertical: 12,
     marginHorizontal: 10,
+    width: width - 40,
     paddingLeft: 17,
     paddingRight: 40,
     padding: 15,
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     position: "absolute",
     bottom: 20,
-    right: 20,
+    right: 25,
     padding: 10,
     paddingLeft: 15,
     paddingRight: 15,
@@ -91,12 +95,11 @@ const styles = StyleSheet.create({
     color: Colors.darkGray,
   },
   recentlyAdded: {
-    marginLeft: 25,
-    justifyContent: "space-between",
-    width: "85%",
-    marginTop: 65,
+    width: "90%",
+    marginTop: 40,
     fontFamily: Fonts.header4.fontFamily,
-    marginBottom: 12,
+    marginBottom: 0, // Adjust margin as needed
+    color: Colors.black, // Change color as needed
   },
   status: {
     borderRadius: 9,
@@ -104,10 +107,10 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontFamily: Fonts.body.fontFamily,
     alignSelf: "flex-start",
-    marginTop: 17,
+    marginTop: 25,
     paddingLeft: 15,
     paddingRight: 15,
-    paddingTop: 10,
+    paddingTop: 5,
     paddingBottom: 10,
   },
   mapIcon: {
@@ -184,7 +187,7 @@ const SavesScreen = ({ route, navigation }) => {
       {/* <Toggle> */}
       {/* Sort Container */}
       <View style={styles.recentlyAdded}>
-        <Text>Recently Added</Text>
+        <Text style={styles.recentlyAdded}>Recently Added</Text>
         {/* {SortIcon} */}
         <View style={styles.horizontalRule} />
       </View>
