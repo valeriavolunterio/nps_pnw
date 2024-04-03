@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   recentlyAdded: {
     width: "90%",
-    marginTop: 40,
+    marginTop: 20,
     fontFamily: Fonts.header4.fontFamily,
     marginBottom: 0, // Adjust margin as needed
     color: Colors.black, // Change color as needed
