@@ -28,6 +28,10 @@ const RoundedButton = ({ type, text, onPress, style }) => {
       name: "checkmark-circle-outline",
       color: Colors.green,
     },
+    create: {
+      name: "add-circle-outline",
+      color: Colors.sepia,
+    },
     cancel: {
       name: "close-circle-outline",
       color: Colors.sepia,
