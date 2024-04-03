@@ -189,15 +189,17 @@ const ParkScreen = ({ route, navigation }) => {
       <TealButton.knowBefore
         onPress={() => navigation.navigate("SafetyGuide")}
       />
-      <TealButton.places
-        onPress={() =>
-          navigation.navigate("Places", {
-            parkCode: selectedPark.parkCode,
-            parkName: selectedPark.fullName,
-          })
-        }
-        title="Places to See"
-      />
+      {selectedPark && selectedPark.designation === "National Park" && (
+        <TealButton.places
+          onPress={() =>
+            navigation.navigate("Places", {
+              parkCode: selectedPark.parkCode,
+              parkName: selectedPark.fullName,
+            })
+          }
+          title="Places to See"
+        />
+      )}
       <TealButton.parkInfo
         onPress={() => navigation.navigate("ParkInformation")}
         title="Park Information"

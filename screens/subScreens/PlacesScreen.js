@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     width: "100%", // Adjust width as needed
   },
   horizontalRulePlace: {
-    marginTop: 30,
+    marginTop: 10,
+    marginBottom: 20,
     borderBottomColor: "black", // Change color as needed
     opacity: 0.2,
     borderBottomWidth: 1,
@@ -70,8 +71,9 @@ const PlacesScreen = ({ route, navigation }) => {
   const { placeData } = useParkData([]);
   const { parkCode, parkName } = route.params;
 
-  const filteredPlaces = placeData.filter((place) =>
-    place.relatedParks.some((park) => park.parkCode === parkCode)
+  console.log(parkCode);
+  const filteredPlaces = placeData.filter(
+    (place) => place.parkCode === parkCode
   );
 
   const renderPlace = ({ item }) => (
@@ -90,8 +92,8 @@ const PlacesScreen = ({ route, navigation }) => {
         style={styles.iconContainer}
       />
       <View style={styles.container}>
-        <Text style={styles.subHeading}>{item.title}</Text>
-        <Text style={styles.body} numberOfLines={2} ellipsizeMode="tail">
+        <Text style={styles.subHeading}>{item.placeName}</Text>
+        <Text style={styles.body} numberOfLines={3} ellipsizeMode="tail">
           {item.bodyText}
         </Text>
         <View style={styles.horizontalRulePlace} />

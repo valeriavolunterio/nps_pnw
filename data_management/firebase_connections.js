@@ -1,17 +1,37 @@
-<Text style={styles.alertHeaderText}>Active Alerts</Text>
-{parksAndAlerts
-  .filter(({ alert }) => alert) // Filter parks with active alerts
-  .slice(0, 3) // Limit to a maximum of 3 parks
-  .map(({ park, alert }) => (
-    <View key={park.id} style={styles.alertItem}>
-      {alert.description.toLowerCase().includes("close") ? (
-        <Ionicons name="ios-warning" size={24} color={Colors.red} />
-      ) : (
-        <Ionicons name="ios-alert" size={24} color={Colors.yellow} />
-      )}
-      <View style={styles.alertTextContainer}>
-        <Text style={Fonts.header4}>{park.fullName}</Text>
-        {alert && <Text>{alert.title}</Text>}
-      </View>
-    </View>
-  ))}
+import { db } from "../data_management/firebaseConfig.js";
+import { collection, getDocs, doc, setDoc } from "firebase/firestore";
+import { jsonData } from "./placesJSON.js";
+
+const uploadJsonToFirestore = async (jsonData) => {
+  try {
+    const documentId = `${jsonData.parkCode}-${jsonData.placeName
+      .replace(/\s+/g, "")
+      .toLowerCase()}`;
+
+    const docRef = doc(db, "places", documentId);
+    await setDoc(docRef, jsonData);
+    console.log("JSON data uploaded successfully!");
+  } catch (error) {
+    console.error("Error uploading JSON data:", error);
+  }
+};
+
+export const fetchPlaceData = async () => {
+  try {
+    console.log(jsonData);
+    // Iterate over each JSON object in jsonData and upload it to Firestore
+    jsonData.forEach(async (data) => {
+      await uploadJsonToFirestore(data);
+    });
+    const placesCollectionRef = collection(db, "places");
+    const snapshot = await getDocs(placesCollectionRef);
+    const placeData = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return placeData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+};

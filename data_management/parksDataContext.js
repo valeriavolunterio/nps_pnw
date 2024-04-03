@@ -1,11 +1,12 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import {
   fetchParkData,
-  fetchPlaceData,
   fetchAlertData,
   fetchEventsData,
   fetchNewsData,
 } from "./npsAPI_connections";
+
+import { fetchPlaceData } from "./firebase_connections";
 
 const ParkDataContext = createContext();
 

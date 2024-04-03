@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 const parkCodes =
   "ciro,crla,crmo,ebla,fova,glac,grko,hafo,joda,klsa,laro,lewi,miin,miin,mora,noca,nepe,olym,orca,sajh,whmi";
 
