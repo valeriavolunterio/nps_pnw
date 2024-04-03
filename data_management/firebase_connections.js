@@ -18,11 +18,11 @@ const uploadJsonToFirestore = async (jsonData) => {
 
 export const fetchPlaceData = async () => {
   try {
-    console.log(jsonData);
-    // Iterate over each JSON object in jsonData and upload it to Firestore
-    jsonData.forEach(async (data) => {
-      await uploadJsonToFirestore(data);
-    });
+    // // Iterate over each JSON object in jsonData and upload it to Firestore
+    // jsonData.forEach(async (data) => {
+    //   await uploadJsonToFirestore(data);
+    // });
+
     const placesCollectionRef = collection(db, "places");
     const snapshot = await getDocs(placesCollectionRef);
     const placeData = snapshot.docs.map((doc) => ({
