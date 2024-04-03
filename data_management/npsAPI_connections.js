@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const parkCodes =
-  "ciro,crla,crmo,ebla,fova,glac,grko,hafo,joda,klsa,laro,lewi,mapr,miin,miin,mora,noca,nepe,olym,orca,sajh,whmi";
+  "ciro,crla,crmo,ebla,fova,glac,grko,hafo,joda,klsa,laro,lewi,miin,miin,mora,noca,nepe,olym,orca,sajh,whmi";
 
 export const fetchParkData = async () => {
   try {
