@@ -70,9 +70,6 @@ const PlacesScreen = ({ route, navigation }) => {
   const { placeData } = useParkData([]);
   const { parkCode, parkName } = route.params;
 
-  placeData.forEach((element) => {
-    console.log(element);
-  });
   const filteredPlaces = placeData.filter((place) =>
     place.relatedParks.some((park) => park.parkCode === parkCode)
   );
