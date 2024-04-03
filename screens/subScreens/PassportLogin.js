@@ -67,14 +67,7 @@ const PassportLogin = ({ handleLogin, navigation }) => {
           />
         </View>
       </View>
-      <View
-        //style={{
-         // flexDirection: "row",
-          //justifyContent: "center", 
-          //paddingHorizontal: 20,
-         // marginTop: 10,
-       //</SafeAreaView> }}
-      >
+      
         {/* <RoundedButton
           type="create"
           text="Create Account"
@@ -90,12 +83,12 @@ const PassportLogin = ({ handleLogin, navigation }) => {
           text="Sign In"
           onPress={() => handleLogin({ email, password })}
           style={{
-            justifyContent: "flex-start",
-            alignSelf: "flex-start",
+            justifyContent: "flex-end",
+            alignSelf: "flex-end",
             marginRight: "10%",
           }}
         />
-      </View>
+      
       <Pressable
         style={{
           ...styles.floatingButton,
