@@ -35,7 +35,7 @@ export const jsonData = [
     ],
     bodyText:
       "Drive approximately 30 miles across the park on the North Cascades Highway (State Route 20), and experience the old growth forests, cascading waterfalls, and mountain scenery of North Cascades. Allow at least an hour to drive this beautiful, winding road, and add more time for stops along the way. Before arriving, check road conditions for seasonal closures. For road updates and pass history, visit Washington State Department of Transportation.",
-    experiences: ["camping", "hiking", "wildlife"],
+    experiences: ["camping", "biking", "hiking", "wildlife"],
     parkCode: "noca",
     parkName: "North Cascades National Park",
     placeName: "North Cascades Highway",

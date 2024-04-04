@@ -132,6 +132,9 @@ export const SVGIcons = {
     hiking: (props) => (
       <SVGComponent category="experiences" name="hiking" {...props} />
     ),
+    biking: (props) => (
+      <SVGComponent category="experiences" name="biking" {...props} />
+    ),
     climbing: (props) => (
       <SVGComponent category="experiences" name="climbing" {...props} />
     ),
@@ -146,9 +149,6 @@ export const SVGIcons = {
     ),
     swimming: (props) => (
       <SVGComponent category="experiences" name="swimming" {...props} />
-    ),
-    trails: (props) => (
-      <SVGComponent category="experiences" name="trails" {...props} />
     ),
     wildlife: (props) => (
       <SVGComponent category="experiences" name="wildlife" {...props} />
