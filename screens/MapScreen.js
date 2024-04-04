@@ -14,6 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Fonts } from "../styles/Fonts";
 import { Colors } from "../styles/Colors.js";
 import { useParkData } from "../data_management/parksDataContext.js";
+import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   container: {
@@ -23,8 +24,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   calloutContainer: {
-    width: 300,
-    height: 250,
+    width: 330,
+    height: 300,
+    padding: 10,
     backgroundColor: "#FFF9F5",
   },
   calloutTitle: {
@@ -32,12 +34,17 @@ const styles = StyleSheet.create({
     color: "#2C505E",
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 5,
-    padding: 15,
+    padding: 5,
   },
   calloutText: {
-    fontSize: 14,
+    fontFamily: "OpenSans-SemiBold",
+    fontSize: 16,
     marginBottom: 5,
+    color: Colors.baseTeal,
+  },
+  calloutTextItems: {
+    fontSize: 14,
+    color: Colors.darkTeal,
   },
   buttonsContainer: {
     marginTop: 30,
@@ -62,9 +69,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const MapScreen = ({ navigation }) => {
+const MapScreen = () => {
   const { parkData } = useParkData([]);
-  //console.log(parkData)
+  const navigation = useNavigation();
+  console.log(parkData);
 
   const handleDirections = (park) => {
     const { latitude, longitude } = park.coordinate;
@@ -86,8 +94,10 @@ const MapScreen = ({ navigation }) => {
         {parkData.map((park) => (
           <Marker
             key={park.fullName}
-            coordinate={{   latitude: parseFloat(park.latitude), // Convert string to float
-            longitude: parseFloat(park.longitude), }}
+            coordinate={{
+              latitude: parseFloat(park.latitude), // Convert string to float
+              longitude: parseFloat(park.longitude),
+            }}
             title={park.fullName}
           >
             {/* Custom marker icon using Ionicons */}
@@ -95,11 +105,19 @@ const MapScreen = ({ navigation }) => {
             <Callout style={styles.calloutContainer}>
               <Text style={styles.calloutTitle}>{park.fullName}</Text>
               <Text style={styles.calloutText}>{park.type}</Text>
-              <Text style={styles.calloutText}>
-                Amenities: {park.amenities}
+              <Text style={styles.calloutText}>Activities:</Text>
+              <Text style={styles.calloutTextItems}>
+                {park.activities
+                  .map((activity) => activity.name)
+                  .slice(0, 3)
+                  .join(", ")}
               </Text>
-              <Text style={styles.calloutText}>
-                Experience: {park.experience}
+              <Text style={styles.calloutText}>Experiences:</Text>
+              <Text style={styles.calloutTextItems}>
+                {park.topics
+                  .map((activity) => activity.name)
+                  .slice(0, 3)
+                  .join(", ")}
               </Text>
               <View style={styles.buttonsContainer}>
                 <Pressable
