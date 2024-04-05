@@ -15,6 +15,7 @@ import { Fonts } from "../styles/Fonts";
 import { Colors } from "../styles/Colors.js";
 import { useParkData } from "../data_management/parksDataContext.js";
 import { useNavigation } from "@react-navigation/native";
+import { SVGIcons } from "../components/SVGIcons.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -67,6 +68,12 @@ const styles = StyleSheet.create({
     color: Colors.darkestGray,
     fontSize: 12,
   },
+  gridItem: {
+    width: "16%", 
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+  },
 });
 
 const MapScreen = () => {
@@ -74,11 +81,22 @@ const MapScreen = () => {
   const navigation = useNavigation();
   console.log(parkData);
 
+  
+
   const handleDirections = (park) => {
     const { latitude, longitude } = park.coordinate;
     const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
     Linking.openURL(url);
     // Handle directions button press
+  };
+
+  const getSVGIcon = (type, name) => {
+    if (SVGIcons[type][name]) {
+      const IconComponent = SVGIcons[type][name];
+      return <IconComponent width={28} height={28} fill={Colors.darkTeal} />;
+    }
+    // Return a default icon or handle the case when the amenity name doesn't match any icon
+    return <View></View>;
   };
 
   const initialRegion = {
@@ -105,19 +123,23 @@ const MapScreen = () => {
             <Callout style={styles.calloutContainer}>
               <Text style={styles.calloutTitle}>{park.fullName}</Text>
               <Text style={styles.calloutText}>{park.type}</Text>
-              <Text style={styles.calloutText}>Activities:</Text>
+              <Text style={styles.calloutText}>Amenities:</Text>
               <Text style={styles.calloutTextItems}>
-                {park.activities
-                  .map((activity) => activity.name)
-                  .slice(0, 3)
-                  .join(", ")}
+              {park.activities.map((activity, index) => (
+                <View key={index} style={styles.gridItem}>
+                  {getSVGIcon("amenities", activity)}
+                  <Text />
+                </View>
+              ))}
               </Text>
               <Text style={styles.calloutText}>Experiences:</Text>
               <Text style={styles.calloutTextItems}>
-                {park.topics
-                  .map((activity) => activity.name)
-                  .slice(0, 3)
-                  .join(", ")}
+              {park.topics.map((experience, index) => (
+                <View key={index} style={styles.gridItem}>
+                  {getSVGIcon("experiences", experience)}
+                  <Text />
+                </View>
+              ))}
               </Text>
               <View style={styles.buttonsContainer}>
                 <Pressable
