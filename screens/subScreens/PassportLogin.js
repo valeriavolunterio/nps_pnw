@@ -18,6 +18,8 @@ import { Fonts } from "../../styles/Fonts.js";
 
 import RoundedButton from "../../components/RoundedButton.js";
 import { ScrollView } from "react-native-gesture-handler";
+import { useFocusEffect } from "@react-navigation/native";
+
 
 const PassportLogin = ({ handleLogin, navigation }) => {
   const [email, setEmail] = useState("");
@@ -37,6 +39,12 @@ const PassportLogin = ({ handleLogin, navigation }) => {
     setError(null); // Clear error before attempting login
     handleLogin({ email, password });
   };
+  useFocusEffect(
+    React.useCallback(() => {
+      setError(null); // Clear error when screen gains focus
+      return () => {}; // Cleanup function
+    }, [])
+  );
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView

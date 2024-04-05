@@ -8,7 +8,7 @@ import {
   Pressable,
   Image,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 
 import { styles } from "../../styles/PassportStyles.js";
@@ -36,6 +36,8 @@ const PassportSignUpScreen = ({ navigation }) => {
     scanned: [],
   });
 
+  const [error, setError] = useState(null);
+
   const handleDiscard = () => {
     navigation.goBack();
   };
@@ -48,6 +50,11 @@ const PassportSignUpScreen = ({ navigation }) => {
         id: doc.id,
         ...doc.data(),
       }));
+
+      if (!user.name || !user.email || !user.password) {
+        setError("Please fill in all fields.");
+        return;
+      }
 
       // Basic email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -73,68 +80,66 @@ const PassportSignUpScreen = ({ navigation }) => {
 
   return (
     // <ScrollView style={styles.scrollContainer}>
-      <SafeAreaView style={styles.container}>
-        <KeyboardAvoidingView
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 10}
-        
-        
-        
       >
         <ScrollView
           contentContainerStyle={{ flexGrow: 1 }}
           keyboardShouldPersistTaps="handled"
         >
-        <View style={styles.userCard}>
-          <View style={{ ...styles.userImgContainer, aspectRatio: 1 }}>
-            <Image
-              source={require("../../assets/userPlaceholder.png")}
-              style={{
-                ...styles.userImg,
-                position: "absolute",
-                top: 0,
-              }}
-            />
+          <View style={styles.userCard}>
+            <View style={{ ...styles.userImgContainer, aspectRatio: 1 }}>
+              <Image
+                source={require("../../assets/userPlaceholder.png")}
+                style={{
+                  ...styles.userImg,
+                  position: "absolute",
+                  top: 0,
+                }}
+              />
+            </View>
+            <View style={styles.userInfo}>
+              <Text style={styles.userTitle}>Welcome</Text>
+              <Text style={styles.body}>
+                Sign Up or Log In to the NPS Passport to start collecting
+                badges!
+              </Text>
+            </View>
           </View>
-          <View style={styles.userInfo}>
-            <Text style={styles.userTitle}>Welcome</Text>
-            <Text style={styles.body}>
-              Sign Up or Log In to the NPS Passport to start collecting badges!
-            </Text>
-          </View>
-        </View>
-        <View style={styles.inputCard}>
-          <Text style={styles.inputTitle}>Log In To Account</Text>
-          <View style={styles.inputContainer}>
-            <Ionicons name="person" size={24} color={Colors.darkTeal} />
-            <TextInput
-              style={styles.formInput}
-              placeholder="Name"
-              value={user.name}
-              onChangeText={(text) => setUser({ ...user, name: text })}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Ionicons name="person" size={24} color={Colors.darkTeal} />
-            <TextInput
-              style={styles.formInput}
-              placeholder="Email"
-              value={user.email}
-              onChangeText={(text) => setUser({ ...user, email: text })}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Ionicons name="lock-closed" size={24} color={Colors.darkTeal} />
-            <TextInput
-              style={styles.formInput}
-              placeholder="Password"
-              secureTextEntry={true}
-              value={user.password}
-              onChangeText={(text) => setUser({ ...user, password: text })}
-            />
-          </View>
-          {/* <View style={styles.inputContainer}>
+          <View style={styles.inputCard}>
+            <Text style={styles.inputTitle}>Log In To Account</Text>
+            <View style={styles.inputContainer}>
+              <Ionicons name="person" size={24} color={Colors.darkTeal} />
+              <TextInput
+                style={styles.formInput}
+                placeholder="Name"
+                value={user.name}
+                onChangeText={(text) => setUser({ ...user, name: text })}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Ionicons name="mail" size={24} color={Colors.darkTeal} />
+              <TextInput
+                style={styles.formInput}
+                placeholder="Email"
+                value={user.email}
+                onChangeText={(text) => setUser({ ...user, email: text })}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Ionicons name="lock-closed" size={24} color={Colors.darkTeal} />
+              <TextInput
+                style={styles.formInput}
+                placeholder="Password"
+                secureTextEntry={true}
+                value={user.password}
+                onChangeText={(text) => setUser({ ...user, password: text })}
+              />
+            </View>
+            {/* <View style={styles.inputContainer}>
           <Ionicons name="lock-closed" size={24} color={Colors.darkTeal} />
           <TextInput
             style={styles.formInput}
@@ -144,30 +149,35 @@ const PassportSignUpScreen = ({ navigation }) => {
             onChangeText={(text) => setUser({ ...user, password: text })}
           />
         </View> */}
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginHorizontal: 30,
-          }}
-        >
-          <RoundedButton
-            type="cancel"
-            text="Cancel"
-            onPress={handleDiscard}
-            style={{ marginRight: 20 }}
-          />
-          <RoundedButton
-            type="confirm"
-            text="CreateAccount"
-            onPress={handleSignUp}
-            style={{ marginLeft: 20 }}
-          />
-        </View>
+            {error && (
+              <View style={styles.errorContainer}>
+                <Text style={styles.errorText}>{error}</Text>
+              </View>
+            )}
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginHorizontal: 30,
+            }}
+          >
+            <RoundedButton
+              type="cancel"
+              text="Cancel"
+              onPress={handleDiscard}
+              style={{ marginRight: 20 }}
+            />
+            <RoundedButton
+              type="confirm"
+              text="CreateAccount"
+              onPress={handleSignUp}
+              style={{ marginLeft: 20 }}
+            />
+          </View>
         </ScrollView>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
     // </ScrollView>
   );
 };
