@@ -22,11 +22,20 @@ import { ScrollView } from "react-native-gesture-handler";
 const PassportLogin = ({ handleLogin, navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const { width } = Dimensions.get("window");
 
   const handleSignUpPage = () => {
     navigation.navigate("PassportSignUp");
+  };
+  const handleLoginPress = () => {
+    if (!email || !password) {
+      setError("Invalid Email or password.");
+      return;
+    }
+    setError(null); // Clear error before attempting login
+    handleLogin({ email, password });
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -34,7 +43,6 @@ const PassportLogin = ({ handleLogin, navigation }) => {
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 10}
-        
       >
         <ScrollView
           contentContainerStyle={{ flexGrow: 1 }}
@@ -80,6 +88,9 @@ const PassportLogin = ({ handleLogin, navigation }) => {
                 onChangeText={setPassword}
               />
             </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              {error && <Text style={{ ...styles.errorText }}>{error}</Text>}
+            </View>
           </View>
 
           {/* <RoundedButton
@@ -95,7 +106,7 @@ const PassportLogin = ({ handleLogin, navigation }) => {
           <RoundedButton
             type="confirm"
             text="Sign In"
-            onPress={() => handleLogin({ email, password })}
+            onPress={() => handleLoginPress({ email, password })}
             style={{
               justifyContent: "flex-end",
               alignSelf: "flex-end",

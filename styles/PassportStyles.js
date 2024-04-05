@@ -119,6 +119,11 @@ export const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
   },
+  errorText: {
+    ...Fonts.button,
+    color: Colors.red,
+    marginTop: 10,
+  },
   floatingButton: {
     position: 'absolute',
     borderTopLeftRadius: 20,
