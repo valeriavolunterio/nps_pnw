@@ -3,25 +3,17 @@ export const jsonData = [
   // Crater Lake
   // Phantom Ship Overlook
   // Pumice Desert
-  // Sinnott Memorial Overlook
-  // Castle Crest Wildflower Garden
-  // Rim Village
-  // Crater Lake Natural History
   // Pinnacles
   // glac - Glacier National Park
   // Apgar
   // Logan Pass
   // Many Glacier
   // Two Medicine
-  // The North Fork
   // mora - Mount Rainier National Park
   // Longmire
   // Paradise
   // Carbon River
   // Mowich Lake
-  // Ohanapecosh
-  // Sunrise
-  // White River
   // noca - North Cascades National Park
   {
     amenities: [
