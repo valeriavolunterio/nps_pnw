@@ -20,19 +20,19 @@ export const fetchParkData = async () => {
   }
 };
 
-export const fetchPlaceData = async () => {
+export const fetchVisitorCenterData = async () => {
   try {
     const newsResponse = await fetch(
-      `https://developer.nps.gov/api/v1/places?parkCode=olym&limit=4000`,
+      `https://developer.nps.gov/api/v1/visitorcenters?parkCode=${parkCodes}`,
       {
         headers: {
           "X-Api-Key": "khwZtjloZ1uc84rQkAVtJu2ZdcnCJaUI2QIDR9WH",
         },
       }
     );
-    const placeData = await newsResponse.json();
+    const visitorCenterData = await newsResponse.json();
 
-    return placeData.data;
+    return visitorCenterData.data;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];

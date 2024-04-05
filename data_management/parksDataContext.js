@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import {
   fetchParkData,
+  fetchVisitorCenterData,
   fetchAlertData,
   fetchEventsData,
   fetchNewsData,
@@ -15,6 +16,7 @@ export const useParkData = () => useContext(ParkDataContext);
 export const ParkDataProvider = ({ children }) => {
   const [parkData, setParkData] = useState([]);
   const [placeData, setPlaceData] = useState([]);
+  const [visitorCenterData, setVisitorCenterData] = useState([]);
   const [alertData, setAlertData] = useState([]);
   const [eventsData, setEventsData] = useState([]);
   const [newsData, setNewsData] = useState([]);
@@ -23,12 +25,14 @@ export const ParkDataProvider = ({ children }) => {
     const fetchData = async () => {
       const parks = await fetchParkData();
       const places = await fetchPlaceData();
+      const visitorCenters = await fetchVisitorCenterData();
       const alerts = await fetchAlertData();
       const events = await fetchEventsData();
       const news = await fetchNewsData();
 
       setParkData(parks);
       setPlaceData(places);
+      setVisitorCenterData(visitorCenters);
       setAlertData(alerts);
       setEventsData(events);
       setNewsData(news);
@@ -42,6 +46,7 @@ export const ParkDataProvider = ({ children }) => {
       value={{
         parkData,
         placeData,
+        visitorCenterData,
         alertData,
         eventsData,
         newsData,

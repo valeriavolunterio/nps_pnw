@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     width: width - 40, // Adjust width as needed
     marginLeft: 20,
+    marginTop: 10,
   },
   parkTitle: {
     fontFamily: Fonts.header4.fontFamily,
@@ -79,29 +80,41 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   days: {
-    marginLeft: 20,
+    marginLeft: 50,
     fontFamily: Fonts.body.fontFamily,
+    fontWeight: "bold",
     color: Colors.darkGray,
   },
   hours: {
     fontFamily: Fonts.body.fontFamily,
     color: Colors.darkGray,
-    marginRight: 25,
+    marginRight: 100,
   },
   rowContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 10,
+    padding: 5,
   },
 });
 
+function filterVisitorCentersByParkCode(visitorCenters, targetParkCode) {
+  // Filters the array of visitor centers, returning only those that match the targetParkCode
+  return visitorCenters.filter((center) => center.parkCode === targetParkCode);
+}
+
 // Define your new screen component
 function ParkInformationScreen({ route, navigation }) {
-  const { parkData } = useParkData([]);
+  const { parkData, visitorCenterData } = useParkData([]);
   const { parkCode } = route.params;
 
   const selectedPark = parkData.find((park) => park.parkCode === parkCode);
   const operatingHours = selectedPark.operatingHours[0].standardHours;
+  const filteredCenters = filterVisitorCentersByParkCode(
+    visitorCenterData,
+    parkCode
+  );
+
+  console.log(filteredCenters);
 
   const days = [
     "Monday",
@@ -122,7 +135,6 @@ function ParkInformationScreen({ route, navigation }) {
     "sunday",
   ];
 
-  console.log(operatingHours);
   // Get today's day name
   const today = new Date().getDay(); // Sunday - 0, Monday - 1, etc.
   const todayKey = dayKeys[today - 1] || dayKeys[6]; // Adjust for Sunday being 0
@@ -145,23 +157,26 @@ function ParkInformationScreen({ route, navigation }) {
         </View>
       </View>
       <View style={styles.horizontalRule} />
-      <View style={styles.cardContainer}>
-        <Text style={styles.cardTitle}>
-          Olympic National Park Visitor Center
-        </Text>
-        <View>
-          <Text style={styles.cardAddress}>
-            3002 Mount Angeles Road, Port Angeles, WA 98362
+      {/* {filteredCenters.map((center, index) => (
+        <View key={index} style={styles.cardContainer}>
+          <Text style={styles.cardTitle}>{center.name}</Text>
+          <View>
+            <Text style={styles.cardAddress}>
+              {center.addresses[0]}, {center.addresses[0].city},{" "}
+              {center.addresses[0].stateCode} {center.addresses[0].postalCode}
+            </Text>
+            <Text style={styles.cardPhone}>
+              Phone: {center.contacts.phoneNumbers[0].phoneNumber}
+            </Text>
+          </View>
+          <Text style={{ fontWeight: "bold" }}>
+            Open 9 AM - 4 PM in fall and winter. Hours vary according to season.
           </Text>
-          <Text style={styles.cardPhone}>Phone:(360) 565-3130</Text>
+          <Text style={styles.cardInformation}>
+            Call visitor center for current hours.
+          </Text>
         </View>
-        <Text style={{ fontWeight: "bold" }}>
-          Open 9 AM - 4 PM in fall and winter. Hours vary according to season.
-        </Text>
-        <Text style={styles.cardInformation}>
-          Call visitors center for current hours.
-        </Text>
-      </View>
+      ))} */}
     </ScrollView>
   );
 }
