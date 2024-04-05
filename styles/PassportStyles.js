@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, Platform } from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Fonts } from "../styles/Fonts.js";
 
@@ -120,18 +120,27 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
   },
   floatingButton: {
-    position: "absolute",
-    bottom: 100,
+    position: 'absolute',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
-    height: 60,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     elevation: -5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: -3 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: -3 },
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        height: 60,
+        bottom: 170,
+      },
+      android: {
+        elevation: 5, // Adjust elevation for Android
+        height: 60,
+        bottom: 100,
+      },
+    }),
   },
 });

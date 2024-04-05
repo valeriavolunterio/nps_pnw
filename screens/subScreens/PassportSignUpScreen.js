@@ -8,6 +8,7 @@ import {
   Pressable,
   Image,
   ScrollView,
+  KeyboardAvoidingView
 } from "react-native";
 
 import { styles } from "../../styles/PassportStyles.js";
@@ -71,8 +72,20 @@ const PassportSignUpScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={styles.scrollContainer}>
+    // <ScrollView style={styles.scrollContainer}>
       <SafeAreaView style={styles.container}>
+        <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 10}
+        
+        
+        
+      >
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          keyboardShouldPersistTaps="handled"
+        >
         <View style={styles.userCard}>
           <View style={{ ...styles.userImgContainer, aspectRatio: 1 }}>
             <Image
@@ -136,7 +149,7 @@ const PassportSignUpScreen = ({ navigation }) => {
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            marginHorizontal: 90,
+            marginHorizontal: 30,
           }}
         >
           <RoundedButton
@@ -152,8 +165,10 @@ const PassportSignUpScreen = ({ navigation }) => {
             style={{ marginLeft: 20 }}
           />
         </View>
+        </ScrollView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
-    </ScrollView>
+    // </ScrollView>
   );
 };
 
