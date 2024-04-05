@@ -12,6 +12,7 @@ import { CheckBox } from "@rneui/themed";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { Fonts } from "../styles/Fonts";
+import { useParkData } from "../data_management/parksDataContext.js";
 
 const MapFilterComponent = ({ onFilterChange }) => {
   const [filters, setFilters] = useState({
