@@ -143,7 +143,7 @@ const MapScreen = () => {
         ))}
       </MapView>
       <View>
-        <MapFilterComponent />
+        {/* <MapFilterComponent /> */}
       </View>
     </SafeAreaView>
   );
