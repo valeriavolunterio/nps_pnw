@@ -4,10 +4,7 @@ import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 import { Colors } from "../../styles/Colors.js";
 import { Fonts } from "../../styles/Fonts";
 
-const hours = ["8:00 AM - 5:00 PM", "9:00 AM - 6:00 PM", "10:00 AM - 7:00 PM"];
-const days = "Sunday Monday Tuesday Wednesday Thursday Friday Saturday".split(
-  " "
-);
+import { useParkData } from "../../data_management/parksDataContext.js";
 
 const { width } = Dimensions.get("window");
 
@@ -39,6 +36,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     width: width - 40, // Adjust width as needed
     marginLeft: 20,
+    marginTop: 10,
   },
   parkTitle: {
     fontFamily: Fonts.header4.fontFamily,
@@ -81,63 +79,104 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     paddingTop: 15,
   },
+  days: {
+    marginLeft: 50,
+    fontFamily: Fonts.body.fontFamily,
+    fontWeight: "bold",
+    color: Colors.darkGray,
+  },
   hours: {
     fontFamily: Fonts.body.fontFamily,
     color: Colors.darkGray,
-    marginLeft: 120, // Adjust the marginLeft value to align the hours with the days
-    paddingTop: 5,
-    position: "absolute",
-    marginTop: 30,
-    //alignSelf: "flex-start", // Align the hours to the left
+    marginRight: 100,
   },
-  days: {
+  rowContainer: {
     flexDirection: "row",
-    marginLeft: 20,
+    justifyContent: "space-between",
+    padding: 5,
   },
 });
 
+function filterVisitorCentersByParkCode(visitorCenters, targetParkCode) {
+  // Filters the array of visitor centers, returning only those that match the targetParkCode
+  return visitorCenters.filter((center) => center.parkCode === targetParkCode);
+}
+
 // Define your new screen component
 function ParkInformationScreen({ route, navigation }) {
+  const { parkData, visitorCenterData } = useParkData([]);
+  const { parkCode } = route.params;
+
+  const selectedPark = parkData.find((park) => park.parkCode === parkCode);
+  const operatingHours = selectedPark.operatingHours[0].standardHours;
+  const filteredCenters = filterVisitorCentersByParkCode(
+    visitorCenterData,
+    parkCode
+  );
+
+  console.log(filteredCenters);
+
+  const days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const dayKeys = [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+  ];
+
+  // Get today's day name
+  const today = new Date().getDay(); // Sunday - 0, Monday - 1, etc.
+  const todayKey = dayKeys[today - 1] || dayKeys[6]; // Adjust for Sunday being 0
+  const openToday = operatingHours[todayKey];
+
   return (
     <ScrollView style={{ backgroundColor: Colors.offWhite }}>
       <View style={styles.container}>
-        <Text style={styles.parkTitle}>Olympic National Park</Text>
+        <Text style={styles.parkTitle}>{selectedPark.fullName}</Text>
         <View style={styles.horizontalRule} />
-        <Text style={styles.openText}>Open Today: 24 Hours</Text>
+        <Text style={styles.openText}>Open Today: {openToday}</Text>
         <View>
           <Text style={styles.hourTitle}>Hours</Text>
-          <View>
-            {days.map((day, index) => (
-              <Text style={styles.days} key={index}>
-                {day}
-              </Text>
-            ))}
-          </View>
-          <View style={styles.hours}>
-            {hours.map((hour, index) => (
-              <Text key={index}> {hour}</Text>
-            ))}
-          </View>
+          {days.map((day, index) => (
+            <View key={index} style={styles.rowContainer}>
+              <Text style={styles.days}>{day}</Text>
+              <Text style={styles.hours}>{operatingHours[dayKeys[index]]}</Text>
+            </View>
+          ))}
         </View>
       </View>
       <View style={styles.horizontalRule} />
-      <View style={styles.cardContainer}>
-        <Text style={styles.cardTitle}>
-          Olympic National Park Visitor Center
-        </Text>
-        <View>
-          <Text style={styles.cardAddress}>
-            3002 Mount Angeles Road, Port Angeles, WA 98362
+      {/* {filteredCenters.map((center, index) => (
+        <View key={index} style={styles.cardContainer}>
+          <Text style={styles.cardTitle}>{center.name}</Text>
+          <View>
+            <Text style={styles.cardAddress}>
+              {center.addresses[0]}, {center.addresses[0].city},{" "}
+              {center.addresses[0].stateCode} {center.addresses[0].postalCode}
+            </Text>
+            <Text style={styles.cardPhone}>
+              Phone: {center.contacts.phoneNumbers[0].phoneNumber}
+            </Text>
+          </View>
+          <Text style={{ fontWeight: "bold" }}>
+            Open 9 AM - 4 PM in fall and winter. Hours vary according to season.
           </Text>
-          <Text style={styles.cardPhone}>Phone:(360) 565-3130</Text>
+          <Text style={styles.cardInformation}>
+            Call visitor center for current hours.
+          </Text>
         </View>
-        <Text style={{ fontWeight: "bold" }}>
-          Open 9 AM - 4 PM in fall and winter. Hours vary according to season.
-        </Text>
-        <Text style={styles.cardInformation}>
-          Call visitors center for current hours.
-        </Text>
-      </View>
+      ))} */}
     </ScrollView>
   );
 }

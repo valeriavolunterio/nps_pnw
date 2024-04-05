@@ -201,7 +201,11 @@ const ParkScreen = ({ route, navigation }) => {
         />
       )}
       <TealButton.parkInfo
-        onPress={() => navigation.navigate("ParkInformation")}
+        onPress={() =>
+          navigation.navigate("ParkInformation", {
+            parkCode: selectedPark.parkCode,
+          })
+        }
         title="Park Information"
       />
     </ScrollView>
