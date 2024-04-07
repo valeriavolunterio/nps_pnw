@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -7,6 +7,7 @@ import {
   Text,
   Pressable,
   Linking,
+  Platform,
 } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import MapFilterComponent from "../components/MapFilter";
@@ -14,7 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Fonts } from "../styles/Fonts";
 import { Colors } from "../styles/Colors.js";
 import { useParkData } from "../data_management/parksDataContext.js";
-import { useNavigation } from "@react-navigation/native";
+import { navigation, useNavigation, useIsFocused } from "@react-navigation/native";
 import { SVGIcons } from "../components/SVGIcons.js";
 
 const styles = StyleSheet.create({
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   },
   calloutTitle: {
     fontFamily: "Stoke-Regular",
-    color: "#2C505E",
+    color: Colors.sepia,
     fontSize: 20,
     fontWeight: "bold",
     padding: 5,
@@ -46,9 +47,10 @@ const styles = StyleSheet.create({
   calloutTextItems: {
     fontSize: 14,
     color: Colors.darkTeal,
+    marginBottom: 10,
   },
   buttonsContainer: {
-    marginTop: 30,
+    marginTop: 15,
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -76,18 +78,29 @@ const styles = StyleSheet.create({
   },
 });
 
-const MapScreen = () => {
-  const { parkData } = useParkData([]);
-  const navigation = useNavigation();
-  console.log(parkData);
-
+const MapScreen = ({ navigation }) => {
+  const { parkData: itemData } = useParkData([]);
+  console.log( itemData )
   
-
-  const handleDirections = (park) => {
-    const { latitude, longitude } = park.coordinate;
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
-    Linking.openURL(url);
-    // Handle directions button press
+  const handleDirections = (item) => {
+    if (item && item.latitude && item.longitude) {
+      const { latitude, longitude } = item;
+      let url = '';
+      if (Platform.OS === 'android') {
+        url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+      } else if (Platform.OS === 'ios') {
+        url = `http://maps.apple.com/?daddr=${latitude},${longitude}`;
+      }
+  
+      if (url !== '') {
+        Linking.openURL(url);
+      } else {
+        console.log('Platform not supported for directions.');
+      }
+    } else {
+      console.log('Invalid park data for directions.');
+    }
+    setScreenState("directionsClicked");
   };
 
   const getSVGIcon = (type, name) => {
@@ -95,8 +108,7 @@ const MapScreen = () => {
       const IconComponent = SVGIcons[type][name];
       return <IconComponent width={28} height={28} fill={Colors.darkTeal} />;
     }
-    // Return a default icon or handle the case when the amenity name doesn't match any icon
-    return <View></View>;
+    return <View></View>; // Return a default icon or handle the case when the amenity name doesn't match any icon
   };
 
   const initialRegion = {
@@ -109,43 +121,38 @@ const MapScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <MapView style={styles.map} initialRegion={initialRegion}>
-        {parkData.map((park) => (
+        {itemData.map((item) => (
           <Marker
-            key={park.fullName}
+            key={item.fullName}
             coordinate={{
-              latitude: parseFloat(park.latitude), // Convert string to float
-              longitude: parseFloat(park.longitude),
+              latitude: parseFloat(item.latitude),
+              longitude: parseFloat(item.longitude),
             }}
-            title={park.fullName}
+            title={item.fullName}
           >
-            {/* Custom marker icon using Ionicons */}
             <Ionicons name="ios-pin" size={24} color={Colors.blue} />
             <Callout style={styles.calloutContainer}>
-              <Text style={styles.calloutTitle}>{park.fullName}</Text>
-              <Text style={styles.calloutText}>{park.type}</Text>
-              <Text style={styles.calloutText}>Amenities:</Text>
+              <Text style={styles.calloutTitle}>{item.fullName}</Text>
+              <Text style={styles.calloutText}>{item.type}</Text>
+              <Text style={styles.calloutText}>Activities:</Text>
               <Text style={styles.calloutTextItems}>
-              {park.activities.map((activity, index) => (
-                <View key={index} style={styles.gridItem}>
-                  {getSVGIcon("amenities", activity)}
-                  <Text />
-                </View>
-              ))}
+              {item.activities
+                  .map((activity) => activity.name)
+                  .slice(0, 3)
+                  .join(", ")}
               </Text>
-              <Text style={styles.calloutText}>Experiences:</Text>
+              <Text style={styles.calloutText}>Topics:</Text>
               <Text style={styles.calloutTextItems}>
-              {park.topics.map((experience, index) => (
-                <View key={index} style={styles.gridItem}>
-                  {getSVGIcon("experiences", experience)}
-                  <Text />
-                </View>
-              ))}
+              {item.topics
+                  .map((topics) => topics.name)
+                  .slice(0, 3)
+                  .join(", ")}
               </Text>
               <View style={styles.buttonsContainer}>
                 <Pressable
                   backgroundColor={Colors.white}
                   style={styles.button}
-                  onPress={() => handleDirections(park)}
+                  onPress={() => handleDirections(item)}
                 >
                   <Text style={styles.buttonText} color={Colors.darkGreen}>
                     Directions
@@ -154,7 +161,7 @@ const MapScreen = () => {
                 <Pressable
                   style={styles.button}
                   onPress={() =>
-                    navigation.navigate("Park", { parkCode: park.parkCode })
+                    navigation.navigate("Park", { parkCode: item.parkCode })
                   }
                 >
                   <Text style={styles.buttonText}>View Park</Text>

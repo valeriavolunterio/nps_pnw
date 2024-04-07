@@ -56,6 +56,10 @@ const ParkScreen = ({ route, navigation }) => {
     });
   }, [parkCode, setRecentParks]);
 
+  const handleShowInMap = () => {
+    navigation.navigate('Map', { parkData: selectedParkData });
+  };
+
   return (
     <ScrollView style={styles.container}>
       {selectedPark && (

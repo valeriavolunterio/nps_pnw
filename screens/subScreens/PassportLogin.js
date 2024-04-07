@@ -33,7 +33,7 @@ const PassportLogin = ({ handleLogin, navigation }) => {
   };
   const handleLoginPress = () => {
     if (!email || !password) {
-      setError("Invalid Email or password.");
+      setError("Invalid email or password.");
       return;
     }
     setError(null); // Clear error before attempting login
