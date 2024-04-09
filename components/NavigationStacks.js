@@ -284,6 +284,28 @@ const SearchStack = ({ route }) => {
           },
         }}
       />
+      <Stack.Screen
+        name="SafetyGuide"
+        component={SafetyGuideScreen}
+        options={{
+          title: "PNW Safety Guide",
+          headerStyle: {
+            backgroundColor: Colors.baseTeal,
+          },
+          headerTintColor: Colors.white,
+        }}
+      />
+      <Stack.Screen
+        name="ParkInformation"
+        component={ParkInformationScreen}
+        options={{
+          title: "Park Information",
+          headerStyle: {
+            backgroundColor: Colors.green,
+          },
+          headerTintColor: Colors.white,
+        }}
+      />
     </Stack.Navigator>
   );
 };

@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
     top: 140,
     right: 10,
     zIndex: 99,
-    left: 230,
+    left: 200,
   },
   actionBtns: {
     zIndex: 99,
