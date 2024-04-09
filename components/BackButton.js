@@ -19,7 +19,7 @@ export const BackButton = () => {
         justifyContent: "center",
         marginLeft: 14,
       }}
-      onPress={navigation.goBack()}
+      onPress={() => navigation.goBack()}
     >
       <Ionicons
         name="arrow-back"
