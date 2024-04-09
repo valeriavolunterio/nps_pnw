@@ -7,10 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { AppLoading } from "expo";
-import {
-  fetchParkData,
-  fetchPlaceData,
-} from "./data_management/npsAPI_connections.js";
+import { fetchParkData } from "./data_management/npsAPI_connections.js";
 import { useFonts } from "expo-font";
 
 import {
@@ -41,7 +38,6 @@ export default function App() {
     const fetchData = async () => {
       try {
         await fetchParkData();
-        await fetchPlaceData();
 
         setDataLoaded(true);
       } catch (error) {

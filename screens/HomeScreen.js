@@ -1,9 +1,16 @@
 import React, { useEffect } from "react";
-import { StyleSheet, ScrollView, View, Text, Dimensions, Pressable } from "react-native";
+import {
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  Dimensions,
+  Pressable,
+} from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
 import Svg, { Polygon } from "react-native-svg";
-import Shadow from 'react-native-shadow-2';
+// import Shadow from 'react-native-shadow-2';
 import { useFonts } from "expo-font";
 import SwipeCarousel from "../components/Carousel.js";
 import { TealButton } from "../components/TealButton.js";
@@ -323,19 +330,19 @@ const HomeScreen = ({ navigation }) => {
                   <View style={styles.alertTextContainer}>
                     {/* <Text style={Fonts.header4}>{park.fullName}</Text> */}
                     <Text style={Fonts.subheading}>{alert.title}</Text>
-                    <Text style={[Fonts.body, { color: Colors.darkGray }]}>{park.fullName}</Text>
+                    <Text style={[Fonts.body, { color: Colors.darkGray }]}>
+                      {park.fullName}
+                    </Text>
                   </View>
                 </View>
               );
             })}
-             <Pressable
+          <Pressable
             style={styles.viewMoreButton}
-            onPress={() =>
-              navigation.navigate("Alerts", { parkFilter: null })
-            }
-            >
-              <Text style={styles.viewMoreButtonText}>View More</Text>
-            </Pressable>
+            onPress={() => navigation.navigate("Alerts", { parkFilter: null })}
+          >
+            <Text style={styles.viewMoreButtonText}>View More</Text>
+          </Pressable>
         </View>
 
         {/* PNW News Section */}
@@ -365,20 +372,19 @@ const HomeScreen = ({ navigation }) => {
                 <View key={article.id} style={styles.alertItem}>
                   <View style={styles.alertTextContainer}>
                     <Text style={Fonts.header4}>{article.title}</Text>
-                    <Text style={[Fonts.body, { color: Colors.darkGray}]}>{park.fullName}</Text>
-                    
+                    <Text style={[Fonts.body, { color: Colors.darkGray }]}>
+                      {park.fullName}
+                    </Text>
                   </View>
                 </View>
               );
             })}
-            <Pressable
+          <Pressable
             style={styles.viewMoreButton}
-            onPress={() =>
-              navigation.navigate("News", { parkFilter: null })
-            }
-            >
-              <Text style={styles.viewMoreButtonText}>View More</Text>
-            </Pressable>
+            onPress={() => navigation.navigate("News", { parkFilter: null })}
+          >
+            <Text style={styles.viewMoreButtonText}>View More</Text>
+          </Pressable>
         </View>
 
         {/* PNW Events Section */}
@@ -402,15 +408,29 @@ const HomeScreen = ({ navigation }) => {
               return (
                 <View key={event.id} style={styles.alertItem}>
                   <View style={styles.alertTextContainer}>
-                    {park && <Text style={[Fonts.body, { color: Colors.darkGray } ]}>{park.fullName}</Text>}
+                    {park && (
+                      <Text style={[Fonts.body, { color: Colors.darkGray }]}>
+                        {park.fullName}
+                      </Text>
+                    )}
                     <Text style={Fonts.subheading}>{event.title}</Text>
-                    <Text style={[Fonts.button, { color: Colors.green, paddingVertical: 5 }]}>{event.date}</Text>
+                    <Text
+                      style={[
+                        Fonts.button,
+                        { color: Colors.green, paddingVertical: 5 },
+                      ]}
+                    >
+                      {event.date}
+                    </Text>
                     {event.times && (
                       <View>
                         {event.times.map((time, index) => (
                           <Text
                             key={index}
-                            style={{ color: Colors.darkGray, fontWeight: "bold" }}
+                            style={{
+                              color: Colors.darkGray,
+                              fontWeight: "bold",
+                            }}
                           >
                             {time.timestart} - {time.timeend}
                           </Text>
@@ -420,15 +440,13 @@ const HomeScreen = ({ navigation }) => {
                   </View>
                 </View>
               );
-            })} 
-             <Pressable
+            })}
+          <Pressable
             style={styles.viewMoreButton}
-            onPress={() =>
-              navigation.navigate("Events", { parkFilter: null })
-            }
-            >
-              <Text style={styles.viewMoreButtonText}>View More</Text>
-            </Pressable>
+            onPress={() => navigation.navigate("Events", { parkFilter: null })}
+          >
+            <Text style={styles.viewMoreButtonText}>View More</Text>
+          </Pressable>
         </View>
       </View>
     </ScrollView>

@@ -159,6 +159,9 @@ const MapStack = ({ route }) => {
     <Stack.Navigator
       screenOptions={{
         ...headerStyles,
+        headerStyle: {
+          backgroundColor: Colors.green,
+        },
       }}
     >
       <Stack.Screen
@@ -176,6 +179,9 @@ const MapStack = ({ route }) => {
         component={ParkScreen}
         options={{
           headerTransparent: true,
+          headerLeft: () => (
+            <BackButton backAction={navigation.navigate("MapStack")} />
+          ),
         }}
       />
       <Stack.Screen
@@ -274,7 +280,7 @@ const SearchStack = ({ route }) => {
           headerRight: "",
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="Alerts"
         component={AlertsScreen}
         options={{

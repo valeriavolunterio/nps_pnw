@@ -15,7 +15,7 @@ export const fetchParkData = async () => {
 
     return parksData.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching park data:", error);
     return [];
   }
 };
@@ -34,7 +34,7 @@ export const fetchVisitorCenterData = async () => {
 
     return visitorCenterData.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching visitor center data:", error);
     return [];
   }
 };
@@ -53,7 +53,7 @@ export const fetchAlertData = async () => {
 
     return alertsData.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching alert data:", error);
     return [];
   }
 };
@@ -72,7 +72,7 @@ export const fetchEventsData = async () => {
 
     return eventsData.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching events data:", error);
     return [];
   }
 };
@@ -91,7 +91,7 @@ export const fetchNewsData = async () => {
 
     return newsData.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching news data:", error);
     return [];
   }
 };

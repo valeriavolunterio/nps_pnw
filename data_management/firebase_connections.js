@@ -31,7 +31,7 @@ export const fetchPlaceData = async () => {
     }));
     return placeData;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching place data:", error);
     return [];
   }
 };
