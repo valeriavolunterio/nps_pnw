@@ -179,9 +179,6 @@ const MapStack = ({ route }) => {
         component={ParkScreen}
         options={{
           headerTransparent: true,
-          headerLeft: () => (
-            <BackButton backAction={navigation.navigate("MapStack")} />
-          ),
         }}
       />
       <Stack.Screen

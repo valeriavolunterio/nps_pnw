@@ -15,7 +15,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { Fonts } from "../styles/Fonts";
 import { Colors } from "../styles/Colors.js";
 import { useParkData } from "../data_management/parksDataContext.js";
-import { navigation, useNavigation, useIsFocused } from "@react-navigation/native";
 import { SVGIcons } from "../components/SVGIcons.js";
 
 const styles = StyleSheet.create({
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   gridItem: {
-    width: "16%", 
+    width: "16%",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
@@ -80,25 +79,25 @@ const styles = StyleSheet.create({
 
 const MapScreen = ({ navigation }) => {
   const { parkData: itemData } = useParkData([]);
-  console.log( itemData )
-  
+  console.log(itemData);
+
   const handleDirections = (item) => {
     if (item && item.latitude && item.longitude) {
       const { latitude, longitude } = item;
-      let url = '';
-      if (Platform.OS === 'android') {
+      let url = "";
+      if (Platform.OS === "android") {
         url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
-      } else if (Platform.OS === 'ios') {
+      } else if (Platform.OS === "ios") {
         url = `http://maps.apple.com/?daddr=${latitude},${longitude}`;
       }
-  
-      if (url !== '') {
+
+      if (url !== "") {
         Linking.openURL(url);
       } else {
-        console.log('Platform not supported for directions.');
+        console.log("Platform not supported for directions.");
       }
     } else {
-      console.log('Invalid park data for directions.');
+      console.log("Invalid park data for directions.");
     }
     setScreenState("directionsClicked");
   };
@@ -129,6 +128,9 @@ const MapScreen = ({ navigation }) => {
               longitude: parseFloat(item.longitude),
             }}
             title={item.fullName}
+            onCalloutPress={() =>
+              navigation.navigate("Park", { parkCode: item.parkCode })
+            }
           >
             <Ionicons name="ios-pin" size={24} color={Colors.blue} />
             <Callout style={styles.calloutContainer}>
@@ -136,14 +138,14 @@ const MapScreen = ({ navigation }) => {
               <Text style={styles.calloutText}>{item.type}</Text>
               <Text style={styles.calloutText}>Activities:</Text>
               <Text style={styles.calloutTextItems}>
-              {item.activities
+                {item.activities
                   .map((activity) => activity.name)
                   .slice(0, 3)
                   .join(", ")}
               </Text>
               <Text style={styles.calloutText}>Topics:</Text>
               <Text style={styles.calloutTextItems}>
-              {item.topics
+                {item.topics
                   .map((topics) => topics.name)
                   .slice(0, 3)
                   .join(", ")}
@@ -158,22 +160,20 @@ const MapScreen = ({ navigation }) => {
                     Directions
                   </Text>
                 </Pressable>
-                <Pressable
+                <View
                   style={styles.button}
-                  onPress={() =>
-                    navigation.navigate("Park", { parkCode: item.parkCode })
-                  }
+                  // onPress={() =>
+                  //   navigation.navigate("Park", { parkCode: item.parkCode })
+                  // }
                 >
                   <Text style={styles.buttonText}>View Park</Text>
-                </Pressable>
+                </View>
               </View>
             </Callout>
           </Marker>
         ))}
       </MapView>
-      <View>
-        {/* <MapFilterComponent /> */}
-      </View>
+      <View>{/* <MapFilterComponent /> */}</View>
     </SafeAreaView>
   );
 };

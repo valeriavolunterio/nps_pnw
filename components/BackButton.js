@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../styles/Colors.js";
 import { useNavigation } from "@react-navigation/native";
 
-export const BackButton = ({ backAction }) => {
+export const BackButton = () => {
   // Corrected props usage
   const navigation = useNavigation();
 
@@ -19,7 +19,7 @@ export const BackButton = ({ backAction }) => {
         justifyContent: "center",
         marginLeft: 14,
       }}
-      onPress={backAction || (() => navigation.goBack())}
+      onPress={navigation.goBack()}
     >
       <Ionicons
         name="arrow-back"
