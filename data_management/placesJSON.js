@@ -67,7 +67,7 @@ export const jsonData = [
   },
   // olym - Olympic National Park
   {
-    amenities: [""],
+    amenities: ["parking, water, information, pciinic, restrooms"],
     bodyText:
       "Sol Duc Valley, a captivating sanctuary nestled within Olympic National Park, beckons nature enthusiasts with its lush rainforests, meandering river, and cascading waterfalls. Here, pristine wilderness meets serenity, as you traverse through old-growth forests adorned with moss-draped trees and vibrant ferns. The highlight of the valley is the enchanting Sol Duc Falls, a multi-tiered wonder that graces visitors with its powerful beauty. Whether you're a hiker, wildlife lover, or simply seeking tranquility, Sol Duc Valley offers an unforgettable escape into the heart of the Olympic Peninsula's natural wonders.",
     experiences: ["hiking", "wildlife", "fishing"],
@@ -78,7 +78,14 @@ export const jsonData = [
     type: "Geological",
   },
   {
-    amenities: [""],
+    amenities: [
+      "swimming",
+      "camping",
+      "hiking",
+      "fishing",
+      "wildlife",
+      "kayak",
+    ],
     bodyText:
       "Kalaloch and Ruby Beach, two stunning coastal gems nestled within Olympic National Park, offer nature enthusiasts a captivating blend of rugged beauty and pristine wilderness. Kalaloch boasts a windswept coastline with driftwood-strewn shores and awe-inspiring sea stacks, while Ruby Beach, just a short drive away, enchants visitors with its iconic sea stacks, tide pools teeming with marine life, and vibrant sunsets. Together, these beaches epitomize the Pacific Northwest's natural splendor, inviting hikers, photographers, and beachcombers to revel in the untamed allure of the Olympic Peninsula's coastline.",
     experiences: [
@@ -129,7 +136,7 @@ export const jsonData = [
   },
   // crla - Crater Lake National Park
   {
-    amenities: [],
+    amenities: ["parking", "restrooms"],
     bodyText:
       "Crater Lake, nestled in the heart of Crater Lake National Park in Oregon, is a mesmerizing jewel of natural beauty. Formed within the remnants of a volcanic caldera, this deep blue lake is renowned for its astonishing clarity and striking cobalt hue. Encircled by steep cliffs and framed by lush forests, Crater Lake offers visitors a serene and awe-inspiring experience. Its pristine waters and breathtaking vistas make it a must-see destination, inviting travelers to marvel at the wonders of nature and immerse themselves in the tranquility of this iconic landmark.",
     experiences: ["hiking", "wildlife"],
@@ -140,7 +147,7 @@ export const jsonData = [
     type: "Geological",
   },
   {
-    amenities: ["scenic view"],
+    amenities: ["souvenirs"],
     bodyText:
       "Phantom Ship Overlook, located within Crater Lake National Park in Oregon, offers visitors a stunning vantage point to behold the iconic Phantom Ship rock formation. Jutting out of the crystal-clear waters of Crater Lake, this natural wonder resembles a ghostly ship sailing across the deep blue expanse. The overlook provides a panoramic view of the lake and surrounding cliffs, allowing guests to witness the beauty and majesty of this unique geological formation. Whether you're a nature enthusiast, photographer, or simply seeking tranquility, Phantom Ship Overlook promises an unforgettable experience in the heart of the Pacific Northwest.",
     experiences: ["hiking", "wildlife"],
@@ -151,7 +158,7 @@ export const jsonData = [
     type: "Overlook",
   },
   {
-    amenities: ["scenic view"],
+    amenities: ["parking"],
     bodyText:
       "Pumice Desert, located within Crater Lake National Park in Oregon, offers visitors a unique and otherworldly landscape to explore. Formed by the eruption of Mount Mazama thousands of years ago, this vast expanse of volcanic ash and pumice is a stark contrast to the surrounding forests and mountains. The desolate beauty of the Pumice Desert provides a striking backdrop for hikers, photographers, and nature enthusiasts, inviting them to witness the raw power of nature and the enduring legacy of volcanic activity in the region.",
     experiences: ["hiking", "wildlife"],
@@ -174,10 +181,10 @@ export const jsonData = [
   },
   // glac - Glacier National Park
   {
-    amenities: ["parking", "restrooms", "scenic view"],
+    amenities: ["parking", "restrooms"],
     bodyText:
       "Apgar, located at the west entrance of Glacier National Park in Montana, is a charming lakeside village that serves as the gateway to the park's natural wonders. Surrounded by the pristine waters of Lake McDonald and the towering peaks of the Rocky Mountains, Apgar offers visitors a picturesque setting to begin their adventure. Whether you're embarking on a scenic boat tour, exploring the park's hiking trails, or simply relaxing by the water's edge, Apgar provides a tranquil and welcoming atmosphere for nature enthusiasts of all ages.",
-    experiences: ["hiking", "wildlife", "boating", "kayaking", ""],
+    experiences: ["hiking", "wildlife", "kayak"],
     parkCode: "glac",
     parkName: "Glacier National Park",
     placeName: "Apgar",
@@ -185,13 +192,7 @@ export const jsonData = [
     type: "Geological",
   },
   {
-    amenities: [
-      "parking",
-      "restrooms",
-      "information",
-      "parking",
-      "scenic view",
-    ],
+    amenities: ["parking", "restrooms", "information", "parking"],
     bodyText:
       "Logan Pass, located along the Going-to-the-Sun Road in Glacier National Park, offers visitors a breathtaking alpine experience amidst the rugged beauty of the Rocky Mountains. Situated at the Continental Divide, this iconic pass is a popular destination for hikers, wildlife enthusiasts, and photographers seeking panoramic views of the surrounding peaks and valleys. The Logan Pass Visitor Center provides a wealth of information about the park's natural and cultural history, making it an ideal starting point for exploring the wonders of Glacier National Park.",
     experiences: ["hiking", "wildlife"],
@@ -205,13 +206,7 @@ export const jsonData = [
     amenities: ["parking", "restrooms", "permits", "information"],
     bodyText:
       "Many Glacier, nestled in the heart of Glacier National Park in Montana, is a picturesque valley renowned for its stunning alpine scenery and abundant wildlife. Surrounded by towering peaks, pristine lakes, and lush forests, Many Glacier offers visitors a tranquil and immersive experience in the heart of the Rocky Mountains. Whether you're embarking on a scenic boat tour, hiking to a hidden waterfall, or simply relaxing by the shore, Many Glacier promises an unforgettable adventure in one of America's most iconic national parks.",
-    experiences: [
-      "hiking",
-      "wildlife",
-      "boating",
-      "camping",
-      "horseback riding",
-    ],
+    experiences: ["hiking", "wildlife", "kayak", "camping"],
     parkCode: "glac",
     parkName: "Glacier National Park",
     placeName: "Many Glacier",
@@ -222,7 +217,7 @@ export const jsonData = [
     amenities: ["parking", "restrooms", "information"],
     bodyText:
       "Two Medicine, located in the southeastern corner of Glacier National Park in Montana, is a tranquil and picturesque valley that offers visitors a serene escape into the heart of the Rocky Mountains. Surrounded by towering peaks, pristine lakes, and lush forests, Two Medicine provides a wealth of outdoor activities for nature enthusiasts of all ages. Whether you're embarking on a scenic boat tour, hiking to a hidden waterfall, or simply relaxing by the water's edge, Two Medicine promises an unforgettable adventure in one of America's most iconic national parks.",
-    experiences: ["hiking", "wildlife", "boating", "camping"],
+    experiences: ["hiking", "wildlife", "kayak", "camping"],
     parkCode: "glac",
     parkName: "Glacier National Park",
     placeName: "Two Medicine",
@@ -231,7 +226,7 @@ export const jsonData = [
   },
   // mora - Mount Rainier National Park
   {
-    amenities: ["parking", "restrooms", "information", "museum"],
+    amenities: ["parking", "restrooms", "information"],
     bodyText:
       "Longmire, located within Mount Rainier National Park in Washington, is a historic and picturesque destination that offers visitors a glimpse into the park's rich cultural and natural heritage. Surrounded by old-growth forests, towering peaks, and lush meadows, Longmire provides a tranquil and immersive experience in the heart of the Cascade Range. Whether you're exploring the historic buildings, embarking on a scenic hike, or simply relaxing in the natural beauty of the park, Longmire promises an unforgettable adventure for nature enthusiasts of all ages.",
     experiences: ["hiking", "wildlife", "camping"],
@@ -264,17 +259,10 @@ export const jsonData = [
     type: "Geological",
   },
   {
-    amenities: [
-      "parking",
-      "restrooms",
-      "information",
-      "picnic",
-      "scenic view",
-      "trailhead",
-    ],
+    amenities: ["parking", "restrooms", "information", "picnic"],
     bodyText:
       "Two Medicine, located in the southeastern corner of Glacier National Park in Montana, is a tranquil and picturesque valley that offers visitors a serene escape into the heart of the Rocky Mountains. Surrounded by towering peaks, pristine lakes, and lush forests, Two Medicine provides a wealth of outdoor activities for nature enthusiasts of all ages. Whether you're embarking on a scenic boat tour, hiking to a hidden waterfall, or simply relaxing by the water's edge, Two Medicine promises an unforgettable adventure in one of America's most iconic national parks.",
-    experiences: ["hiking", "camping"],
+    experiences: ["hiking", "camping", "wildlife", "fishing"],
     parkCode: "mora",
     parkName: "Mount Rainier National Park",
     placeName: "Mowich Lake",
