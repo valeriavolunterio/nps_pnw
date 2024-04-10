@@ -17,7 +17,7 @@ const { width } = Dimensions.get("window");
 
 const EventsScreen = () => {
   const { eventsData } = useParkData();
-  console.log(eventsData.length);
+
   const renderEventsCard = ({ item }) => {
     const { title, recurrencedatestart, times, regresurl, parkfullname } = item;
     console.log(eventsData.length);

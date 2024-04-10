@@ -56,23 +56,11 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   titleHeaderText: {
-<<<<<<< Updated upstream
-    color: Colors.black,
-    fontSize: 22,
-    fontFamily: "Stoke-Regular",
-  },
-  subHeaderText: {
-    color: Colors.sepia,
-    fontSize: 16,
-    fontFamily: "OpenSans-SemiBold",
-    fontWeight: "bold",
-=======
-    ...Fonts.header1
+    ...Fonts.header1,
   },
   subHeaderText: {
     ...Fonts.subheading,
     color: Colors.sepia,
->>>>>>> Stashed changes
   },
   safetyGuideButton: {
     alignItems: "stretch",
@@ -399,25 +387,12 @@ const HomeScreen = ({ navigation }) => {
           {eventsData
             .slice(0, 3) // Limit to a maximum of 3 parks
             .map((event) => {
-              const park = parkData.find(
-                (park) => event.siteCode === park.siteCode
-              );
-              if (!park || !park.fullName) {
-                // If park is undefined or park.fullName is undefined, skip rendering this alert
-                console.error(
-                  "Event Park not found or missing fullName for parkCode:",
-                  event.siteCode
-                );
-                return null;
-              }
               return (
                 <View key={event.id} style={styles.alertItem}>
                   <View style={styles.alertTextContainer}>
-                    {park && (
-                      <Text style={[Fonts.body, { color: Colors.darkGray }]}>
-                        {park.fullName}
-                      </Text>
-                    )}
+                    <Text style={[Fonts.body, { color: Colors.darkGray }]}>
+                      {event.parkfullname}
+                    </Text>
                     <Text style={Fonts.subheading}>{event.title}</Text>
                     <Text
                       style={[
