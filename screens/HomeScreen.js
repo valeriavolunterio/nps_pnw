@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     padding: 10,
     alignSelf: "flex-start",
     marginTop: 90,
+    ...Fonts.body,
   },
   subHeaderContainer: {
     paddingTop: 1,
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   titleHeaderText: {
+<<<<<<< Updated upstream
     color: Colors.black,
     fontSize: 22,
     fontFamily: "Stoke-Regular",
@@ -64,6 +66,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "OpenSans-SemiBold",
     fontWeight: "bold",
+=======
+    ...Fonts.header1
+  },
+  subHeaderText: {
+    ...Fonts.subheading,
+    color: Colors.sepia,
+>>>>>>> Stashed changes
   },
   safetyGuideButton: {
     alignItems: "stretch",
@@ -207,10 +216,6 @@ const HomeScreen = ({ navigation }) => {
     img: park.images.length > 0 ? park.images[0].url : "default_image_url",
     parkCode: park.parkCode,
   }));
-
-  if (!fontsLoaded) {
-    return null;
-  }
 
   return (
     <ScrollView style={styles.container}>

@@ -64,7 +64,7 @@ const SettingsScreen = () => {
 
       {/* Passport section */}
       <View style={styles.section}>
-        <Text style={styles.heading}>Passport</Text>
+        <Text style={styles.Text}>Passport</Text>
         <TouchableOpacity onPress={handleDeletePassport}>
           <Text style={styles.link}>Delete Passport</Text>
         </TouchableOpacity>
