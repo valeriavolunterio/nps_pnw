@@ -7,6 +7,7 @@ import {
   Image,
   Pressable,
   Dimensions,
+  Linking
 } from "react-native";
 
 import { Colors } from "../../styles/Colors";
@@ -85,6 +86,26 @@ const ParkScreen = ({ route, navigation }) => {
   const handleShowInMap = () => {
     navigation.navigate("Map", { parkData: selectedParkData });
   };
+  const handleDirections = (park) => {
+    if (park && park.latitude && park.longitude) {
+      const { latitude, longitude } = park;
+      let url = "";
+      if (Platform.OS === "android") {
+        url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+      } else if (Platform.OS === "ios") {
+        url = `http://maps.apple.com/?daddr=${latitude},${longitude}`;
+      }
+
+      if (url !== "") {
+        Linking.openURL(url);
+      } else {
+        console.log("Platform not supported for directions.");
+      }
+    } else {
+      console.log("Invalid park data for directions.");
+    }
+    //setScreenState("directionsClicked");
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -150,6 +171,7 @@ const ParkScreen = ({ route, navigation }) => {
           </View>
           <View style={{ paddingHorizontal: 10 }}>
             <ToggleButton
+            onPress={() => handleDirections(selectedPark)}
               type="directions"
               color={Colors.green}
               buttonSize={48}
