@@ -31,6 +31,7 @@ const PassportScreen = ({ route, navigation }) => {
 
   const [users, setUsers] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false); // Add loading state
+  const [error, setError] = useState(null); 
 
   // Fetch Users Data and update real time
   useEffect(() => {
@@ -67,6 +68,7 @@ const PassportScreen = ({ route, navigation }) => {
       console.log("Logged in as:", loggedInUser);
     } else {
       // Handle invalid credentials
+      setError("Invalid email or password.");
       console.log(`Email: ${email} and password: ${password} do not match.`);
     }
   };
@@ -78,7 +80,7 @@ const PassportScreen = ({ route, navigation }) => {
         <PassportUser user={user} route={route} navigation={navigation} />
       ) : (
         // Render login screen if not logged in
-        <PassportLogin handleLogin={handleLogin} navigation={navigation} />
+        <PassportLogin handleLogin={handleLogin} navigation={navigation} users={users} setUser={setUser} />
       )}
     </SafeAreaView>
   );

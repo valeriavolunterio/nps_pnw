@@ -21,7 +21,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useFocusEffect } from "@react-navigation/native";
 
 
-const PassportLogin = ({ handleLogin, navigation }) => {
+const PassportLogin = ({ handleLogin, navigation, users, setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -31,14 +31,31 @@ const PassportLogin = ({ handleLogin, navigation }) => {
   const handleSignUpPage = () => {
     navigation.navigate("PassportSignUp");
   };
-  const handleLoginPress = () => {
-    if (!email || !password) {
-      setError("Invalid email or password.");
-      return;
-    }
-    setError(null); // Clear error before attempting login
-    handleLogin({ email, password });
-  };
+  // const handleLoginPress = () => {
+  //   if (!email || !password) {
+  //     setError("Invalid email or password.");
+  //     return;
+  //   }
+  //   setError(null); // Clear error before attempting login
+  //   handleLogin({ email, password });
+  // };
+
+    // Check if the email and password match any user in the default users data
+    const handleLoginPress = () => {
+      const loggedInUser = users.find(
+        (u) => u.email === email && u.password === password
+      );
+  
+      if (loggedInUser) {
+        setUser(loggedInUser);
+        setError(null); // Clear any previous error
+        console.log("Logged in as:", loggedInUser);
+      } else {
+        setError("Invalid email or password."); // Set error message
+        console.log(`Email: ${email} and password: ${password} do not match.`);
+      }
+    };
+
   useFocusEffect(
     React.useCallback(() => {
       setError(null); // Clear error when screen gains focus

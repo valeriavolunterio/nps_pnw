@@ -75,6 +75,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
+    paddingBottom: 250,
   },
   badgeContainer: {
     width: "50%",
@@ -138,13 +139,13 @@ export const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: -3 },
         shadowOpacity: 0.3,
         shadowRadius: 2,
-        height: 60,
-        bottom: 170,
+        //height: 60,
+        bottom: deviceHeight * 0.2,
       },
       android: {
         elevation: 5, // Adjust elevation for Android
-        height: 60,
-        bottom: 100,
+        //height: 60,
+        bottom: deviceHeight * 0.15,
       },
     }),
   },
