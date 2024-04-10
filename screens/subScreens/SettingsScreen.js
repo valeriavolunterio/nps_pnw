@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Button, ButtonGroup } from "@rneui/themed";
-
+import { Fonts } from "../../styles/Fonts";
 import { db } from "../../data_management/firebaseConfig";
 import { collection, doc, deleteDoc } from "firebase/firestore";
 import UserContext from "../../data_management/UserContext";
@@ -83,14 +83,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   heading: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 10,
+    ...Fonts.header4,
   },
   link: {
-    fontSize: 16,
-    color: "blue",
-    marginBottom: 5,
+    ...Fonts.button,
   },
 });
 
