@@ -11,6 +11,7 @@ import {
 import { Button, ButtonGroup } from "@rneui/themed";
 import { useParkData } from "../../data_management/parksDataContext.js";
 import { Colors } from "../../styles/Colors.js";
+import { Fonts } from "../../styles/Fonts.js";
 
 const { width } = Dimensions.get("window");
 
@@ -31,13 +32,19 @@ const EventsScreen = () => {
     return (
       <TouchableOpacity onPress={handlePress}>
         <View style={styles.card}>
-          <Text style={styles.park}>{parkfullname}</Text>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.date}>{recurrencedatestart}</Text>
+          <Text style={[Fonts.body, { color: Colors.darkGray }]}>{parkfullname}</Text>
+          <Text style={Fonts.subheading}>{title}</Text>
+          <Text style={[
+                        Fonts.button,
+                        { color: Colors.green, paddingVertical: 5 },
+                      ]}>{recurrencedatestart}</Text>
           {times && (
             <View style={styles.time}>
               {times.map((time, index) => (
-                <Text key={index} style={styles.time}>
+                <Text key={index} style={{
+                  color: Colors.darkGray,
+                  fontWeight: "bold",
+                }}>
                   {time.timestart} - {time.timeend}
                 </Text>
               ))}
