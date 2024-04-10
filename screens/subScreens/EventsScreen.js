@@ -17,10 +17,10 @@ const { width } = Dimensions.get("window");
 
 const EventsScreen = () => {
   const { eventsData } = useParkData();
-
+  console.log(eventsData.length);
   const renderEventsCard = ({ item }) => {
     const { title, recurrencedatestart, times, regresurl, parkfullname } = item;
-    console.log(eventsData);
+    console.log(eventsData.length);
     const handlePress = () => {
       if (regresurl) {
         openLink(regresurl);
@@ -32,19 +32,25 @@ const EventsScreen = () => {
     return (
       <TouchableOpacity onPress={handlePress}>
         <View style={styles.card}>
-          <Text style={[Fonts.body, { color: Colors.darkGray }]}>{parkfullname}</Text>
+          <Text style={[Fonts.body, { color: Colors.darkGray }]}>
+            {parkfullname}
+          </Text>
           <Text style={Fonts.subheading}>{title}</Text>
-          <Text style={[
-                        Fonts.button,
-                        { color: Colors.green, paddingVertical: 5 },
-                      ]}>{recurrencedatestart}</Text>
+          <Text
+            style={[Fonts.button, { color: Colors.green, paddingVertical: 5 }]}
+          >
+            {recurrencedatestart}
+          </Text>
           {times && (
             <View style={styles.time}>
               {times.map((time, index) => (
-                <Text key={index} style={{
-                  color: Colors.darkGray,
-                  fontWeight: "bold",
-                }}>
+                <Text
+                  key={index}
+                  style={{
+                    color: Colors.darkGray,
+                    fontWeight: "bold",
+                  }}
+                >
                   {time.timestart} - {time.timeend}
                 </Text>
               ))}

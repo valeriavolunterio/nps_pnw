@@ -1,6 +1,8 @@
 const parkCodes =
   "ciro,crla,crmo,ebla,fova,glac,grko,hafo,joda,klsa,laro,lewi,miin,miin,mora,noca,nepe,olym,orca,sajh,whmi";
 
+const stateCodes = "or,wa,id,mt";
+
 export const fetchParkData = async () => {
   try {
     const parksResponse = await fetch(
@@ -61,7 +63,7 @@ export const fetchAlertData = async () => {
 export const fetchEventsData = async () => {
   try {
     const eventsResponse = await fetch(
-      `https://developer.nps.gov/api/v1/events?siteCode=${parkCodes}`,
+      `https://developer.nps.gov/api/v1/events?stateCode=${stateCodes}`,
       {
         headers: {
           "X-Api-Key": "khwZtjloZ1uc84rQkAVtJu2ZdcnCJaUI2QIDR9WH",
