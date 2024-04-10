@@ -10,8 +10,8 @@ const ToggleButton = ({ type, color, buttonSize, isToggled, onPress }) => {
         return isToggled ? "star" : "star-outline";
       case "bookmark":
         return isToggled ? "bookmark" : "bookmark-outline";
-      case "share":
-        return "share-social";
+      case "directions":
+        return "navigate";
       default:
         return "ios-close";
     }
