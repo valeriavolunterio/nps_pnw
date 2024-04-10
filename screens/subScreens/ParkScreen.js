@@ -27,9 +27,35 @@ import {
 const { width } = Dimensions.get("window");
 
 const ParkScreen = ({ route, navigation }) => {
-  const { parkData, alertData } = useParkData([]);
+  const { parkData, eventsData } = useParkData([]);
   const { parkCode } = route.params;
   const selectedPark = parkData.find((park) => park.parkCode === parkCode);
+
+  const matchingEvent = eventsData.find(
+    (event) => event.parkfullname === selectedPark.fullName
+  );
+  let month = "";
+  let day = "";
+
+  if (matchingEvent) {
+    const eventDate = new Date(matchingEvent.date);
+    const monthNames = [
+      "JAN",
+      "FEB",
+      "MAR",
+      "APR",
+      "MAY",
+      "JUN",
+      "JUL",
+      "AUG",
+      "SEP",
+      "OCT",
+      "NOV",
+      "DEC",
+    ];
+    month = monthNames[eventDate.getMonth()];
+    day = eventDate.getDate();
+  }
 
   const { setRecentParks } = useContext(RecentParksContext);
   const { favoriteParks, setFavoriteParks } = useContext(FavoriteParksContext);
@@ -57,7 +83,7 @@ const ParkScreen = ({ route, navigation }) => {
   }, [parkCode, setRecentParks]);
 
   const handleShowInMap = () => {
-    navigation.navigate('Map', { parkData: selectedParkData });
+    navigation.navigate("Map", { parkData: selectedParkData });
   };
 
   return (
@@ -157,25 +183,44 @@ const ParkScreen = ({ route, navigation }) => {
       </View>
 
       {/* Park Events Section*/}
-
-      <View style={styles.parkEvents}>
-        <View style={styles.parkEventsDate}>
-          <Text style={{ color: Colors.green, fontSize: 18 }}>MAR</Text>
-          <Text style={{ color: Colors.green, fontSize: 18, paddingLeft: 5 }}>
-            24
-          </Text>
+      {matchingEvent ? (
+        <View style={styles.parkEvents}>
+          <View style={styles.parkEventsDate}>
+            <Text style={{ color: Colors.green, fontSize: 18 }}>{month}</Text>
+            <Text style={{ color: Colors.green, fontSize: 18, paddingLeft: 5 }}>
+              {day}
+            </Text>
+          </View>
+          <View style={styles.parkEventsText}>
+            <Text
+              style={{
+                color: Colors.black,
+                fontSize: 14,
+                fontWeight: "bold",
+              }}
+            >
+              {matchingEvent.title}
+            </Text>
+            <Text style={{ color: Colors.black, fontSize: 14, paddingTop: 5 }}>
+              {matchingEvent.times && (
+                <View style={styles.time}>
+                  {matchingEvent.times.map((time, index) => (
+                    <Text
+                      key={index}
+                      style={{
+                        color: Colors.darkGray,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {time.timestart} - {time.timeend}
+                    </Text>
+                  ))}
+                </View>
+              )}
+            </Text>
+          </View>
         </View>
-        <View style={styles.parkEventsText}>
-          <Text
-            style={{ color: Colors.black, fontSize: 14, fontWeight: "bold" }}
-          >
-            Hurricane Ridge "It's Your Moon!" Telescope Program
-          </Text>
-          <Text style={{ color: Colors.black, fontSize: 14, paddingTop: 5 }}>
-            7:30 PM - 8:30 PM
-          </Text>
-        </View>
-      </View>
+      ) : null}
 
       <View style={styles.aboutPark}>
         <Text
