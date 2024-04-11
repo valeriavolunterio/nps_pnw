@@ -51,12 +51,12 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     marginTop: 15,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   button: {
     backgroundColor: "#FFF",
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
     borderRadius: 23,
     elevation: 5,
     shadowColor: "#000",
@@ -151,7 +151,7 @@ const MapScreen = ({ navigation }) => {
                   .join(", ")}
               </Text>
               <View style={styles.buttonsContainer}>
-                <Pressable
+                {/* <Pressable
                   backgroundColor={Colors.white}
                   style={styles.button}
                   onPress={() => handleDirections(item)}
@@ -159,7 +159,7 @@ const MapScreen = ({ navigation }) => {
                   <Text style={styles.buttonText} color={Colors.darkGreen}>
                     Directions
                   </Text>
-                </Pressable>
+                </Pressable> */}
                 <View
                   style={styles.button}
                   // onPress={() =>
