@@ -1,11 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  SafeAreaView,
-  Text,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { SafeAreaView, Text, StyleSheet, View, Pressable } from "react-native";
 import { Button, ButtonGroup } from "@rneui/themed";
 import { Fonts } from "../../styles/Fonts";
 import { db } from "../../data_management/firebaseConfig";
@@ -13,7 +7,7 @@ import { collection, doc, deleteDoc } from "firebase/firestore";
 import UserContext from "../../data_management/UserContext";
 
 // Create a functional component for the settings screen
-const SettingsScreen = () => {
+const SettingsScreen = ({ navigation }) => {
   const { user, setUser } = useContext(UserContext);
 
   // Function to handle the deletion of Passport
@@ -33,41 +27,29 @@ const SettingsScreen = () => {
       {/* App section */}
       <View style={styles.section}>
         <Text style={styles.heading}>App</Text>
-        <TouchableOpacity
-          onPress={() => console.log("Navigate to Audio Description and Tours")}
-        >
+        {/* <Pressable onPress={() => navigation.navigate("About NPS")}>
           <Text style={styles.link}>Audio Description and Tours</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() =>
-            console.log("Navigate to Other Accessibility Features")
-          }
-        >
+        </Pressable> */}
+        <Pressable onPress={() => navigation.navigate("Accessibility")}>
           <Text style={styles.link}>Other Accessibility Features</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => console.log("Navigate to Privacy Policy")}
-        >
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate("Privacy Policy")}>
           <Text style={styles.link}>Privacy Policy</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => console.log("Navigate to About the NPS")}
-        >
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate("About NPS")}>
           <Text style={styles.link}>About the NPS</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => console.log("Navigate to About this App")}
-        >
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate("About App")}>
           <Text style={styles.link}>About this App</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       {/* Passport section */}
       <View style={styles.section}>
         <Text style={styles.Text}>Passport</Text>
-        <TouchableOpacity onPress={handleDeletePassport}>
+        <Pressable onPress={handleDeletePassport}>
           <Text style={styles.link}>Delete Passport</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

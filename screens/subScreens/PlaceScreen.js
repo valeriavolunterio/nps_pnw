@@ -67,7 +67,7 @@ const PlaceScreen = ({ route, navigation }) => {
                 </View>
               </View>
             </View>
-            <View style={styles.actionBtnContainer}>
+            {/* <View style={styles.actionBtnContainer}>
               <View style={styles.actionBtns}>
                 <View style={{ paddingHorizontal: 10 }}>
                   <ToggleButton
@@ -87,14 +87,14 @@ const PlaceScreen = ({ route, navigation }) => {
                 </View>
                 <View style={{ paddingHorizontal: 10 }}>
                   <ToggleButton
-                    type="share"
+                    type="directions"
                     color={Colors.green}
                     buttonSize={48}
                     toggleState={false}
                   />
                 </View>
               </View>
-            </View>
+            </View> */}
             <View style={styles.showInMapBtn}>
               <RoundedButton
                 type="map"

@@ -21,6 +21,10 @@ import PassportEditScreen from "../screens/subScreens/PassportEditScreen.js";
 import PassportSignUpScreen from "../screens/subScreens/PassportSignUpScreen.js";
 import ScannerScreen from "../screens/subScreens/ScannerScreen.js";
 import SettingsScreen from "../screens/subScreens/SettingsScreen.js";
+import AboutNPSScreen from "../screens/subScreens/AboutNPSScreen.js";
+import AboutThisAppScreen from "../screens/subScreens/AboutThisAppScreen.js";
+import AccessibilityScreen from "../screens/subScreens/AccessibilityScreen.js";
+import PrivacyPolicyScreen from "../screens/subScreens/PrivacyPolicyScreen.js";
 
 import { SettingsButton } from "./SettingsButton.js";
 import { BackButton } from "./BackButton.js";
@@ -144,6 +148,51 @@ const HomeStack = ({ route }) => {
         name="Settings"
         component={SettingsScreen}
         options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="Accessibility"
+        component={AccessibilityScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="Privacy Policy"
+        component={PrivacyPolicyScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="About NPS"
+        component={AboutNPSScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="About App"
+        component={AboutThisAppScreen}
+        options={{
+          title: "Settings",
           headerStyle: {
             backgroundColor: Colors.darkestGray,
           },
@@ -185,6 +234,50 @@ const MapStack = ({ route }) => {
         name="Settings"
         component={SettingsScreen}
         options={{
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="Accessibility"
+        component={AccessibilityScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="Privacy Policy"
+        component={PrivacyPolicyScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="About NPS"
+        component={AboutNPSScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="About App"
+        component={AboutThisAppScreen}
+        options={{
+          title: "Settings",
           headerStyle: {
             backgroundColor: Colors.darkestGray,
           },
@@ -278,6 +371,50 @@ const SearchStack = ({ route }) => {
         }}
       />
       <Stack.Screen
+        name="Accessibility"
+        component={AccessibilityScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="Privacy Policy"
+        component={PrivacyPolicyScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="About NPS"
+        component={AboutNPSScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="About App"
+        component={AboutThisAppScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
         name="Alerts"
         component={AlertsScreen}
         options={{
@@ -333,6 +470,50 @@ const PassportStack = () => {
         component={SettingsScreen}
         options={{
           headerTintColor: Colors.white,
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="Accessibility"
+        component={AccessibilityScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="Privacy Policy"
+        component={PrivacyPolicyScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="About NPS"
+        component={AboutNPSScreen}
+        options={{
+          title: "Settings",
+          headerStyle: {
+            backgroundColor: Colors.darkestGray,
+          },
+          headerRight: "",
+        }}
+      />
+      <Stack.Screen
+        name="About App"
+        component={AboutThisAppScreen}
+        options={{
+          title: "Settings",
           headerStyle: {
             backgroundColor: Colors.darkestGray,
           },
