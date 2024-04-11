@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { SafeAreaView, Text, StyleSheet, View, Pressable } from "react-native";
 import { Button, ButtonGroup } from "@rneui/themed";
 import { Fonts } from "../../styles/Fonts";
+import { Colors } from "../../styles/Colors";
 import { db } from "../../data_management/firebaseConfig";
 import { collection, doc, deleteDoc } from "firebase/firestore";
 import UserContext from "../../data_management/UserContext";
@@ -26,10 +27,7 @@ const SettingsScreen = ({ navigation }) => {
     <View style={styles.container}>
       {/* App section */}
       <View style={styles.section}>
-        <Text style={styles.heading}>App</Text>
-        {/* <Pressable onPress={() => navigation.navigate("About NPS")}>
-          <Text style={styles.link}>Audio Description and Tours</Text>
-        </Pressable> */}
+        <Text style={styles.Text}>App</Text>
         <Pressable onPress={() => navigation.navigate("Accessibility")}>
           <Text style={styles.link}>Other Accessibility Features</Text>
         </Pressable>
@@ -69,6 +67,10 @@ const styles = StyleSheet.create({
   },
   link: {
     ...Fonts.button,
+    marginBottom: 10,
+    marginTop: 10,
+
+    borderBottomColor: Colors.darkestGray,
   },
 });
 

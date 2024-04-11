@@ -37,7 +37,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   heading: {
-    ...Fonts.header4,
+    ...Fonts.header3,
+    marginBottom: 10,
+    marginTop: 10,
   },
   body: {
     ...Fonts.body,

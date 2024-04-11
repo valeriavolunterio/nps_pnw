@@ -20,6 +20,13 @@ return (
           this commitment, we have designed our NPS app with accessibility in mind, aiming to make it a valuable 
           resource for everyone, regardless of their abilities
 </Text>
+<Text style={styles.header4}>Our Commitment</Text>
+          <Text style={styles.body}>We value feedback from our users and are committed to 
+          continuously improving the accessibility of our app.
+           If you encounter any challenges or have suggestions for enhancements related 
+           to accessibility, please don't hesitate to contact us. Your input is crucial in helping us create a more 
+           inclusive experience for all.
+</Text>
       </View>
       </View>
   
@@ -36,10 +43,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   heading: {
-    ...Fonts.header4,
+    ...Fonts.header3,
+    marginBottom: 10,
+    marginTop: 10,
   },
   body: {
     ...Fonts.body,
+    marginBottom: 10,
+    marginTop: 10,
   },
 });
 
