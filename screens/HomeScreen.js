@@ -56,11 +56,10 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   titleHeaderText: {
-    ...Fonts.header1,
+    ...Fonts.header3
   },
   subHeaderText: {
-    ...Fonts.subheading,
-    color: Colors.sepia,
+    ...Fonts.body
   },
   safetyGuideButton: {
     alignItems: "stretch",
@@ -73,8 +72,7 @@ const styles = StyleSheet.create({
   },
   safetyGuideButtonText: {
     color: Colors.white,
-    fontSize: 16,
-    fontFamily: "ButtonFont",
+    ...Fonts.button,
     textAlign: "center",
   },
   buttonContainer: {
@@ -121,8 +119,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   alertHeaderText: {
-    fontFamily: "MPLUS1-Regular",
-    fontSize: 18,
+    ...Fonts.header3,
     color: Colors.black,
     marginBottom: 20,
   },
@@ -159,12 +156,6 @@ const HomeScreen = ({ navigation }) => {
     console.log("HomeScreen rendered");
   }, []);
 
-  const [fontsLoaded] = useFonts({
-    "Stoke-Regular": require("../assets/fonts/Stoke-Regular.ttf"),
-    "OpenSans-SemiBold": require("../assets/fonts/OpenSans-SemiBold.ttf"),
-    ButtonFont: require("../assets/fonts/MPLUS1p-Bold.ttf"),
-    "MPLUS1-Regular": require("../assets/fonts/MPLUS1-Regular.ttf"),
-  });
   // for alerts icons
   const iconMapping = {
     "Park Closure": {

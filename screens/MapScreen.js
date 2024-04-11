@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   calloutTitle: {
     fontFamily: "Stoke-Regular",
-    color: Colors.sepia,
+    color: "#2C505E",
     fontSize: 20,
     fontWeight: "bold",
     padding: 5,
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
   },
   buttonText: {
-    fontFamily: "OpenSans-Regular",
+    ...Fonts.button,
     color: Colors.darkestGray,
     fontSize: 12,
   },

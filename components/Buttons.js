@@ -2,7 +2,7 @@ import React from "react";
 import { Pressable, Text, StyleSheet } from "react-native";
 import { Colors } from "../styles/Colors.js";
 import { Ionicons } from "@expo/vector-icons";
-import { useFonts } from "expo-font";
+import { Fonts } from "../styles/Fonts";
 import {SVGIcons} from "./SVGIcons.js";
 
 const CustomButton = ({ onPress, title, icons }) => {
