@@ -42,13 +42,16 @@ const SettingsScreen = ({ navigation }) => {
         </Pressable>
       </View>
 
-      {/* Passport section */}
-      <View style={styles.section}>
-        <Text style={styles.Text}>Passport</Text>
-        <Pressable onPress={handleDeletePassport}>
-          <Text style={styles.link}>Delete Passport</Text>
-        </Pressable>
-      </View>
+      {/* Passport section if user is logged in */}
+      {user ? (
+        <View style={styles.section}>
+          <Text style={styles.Text}>Passport</Text>
+
+          <Pressable onPress={handleDeletePassport}>
+            <Text style={styles.link}>Delete Passport</Text>
+          </Pressable>
+        </View>
+      ) : null}
     </View>
   );
 };
