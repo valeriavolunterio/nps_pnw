@@ -29,26 +29,22 @@ const styles = StyleSheet.create({
     width: "100%", // Adjust width as needed
   },
   heading: {
-    fontSize: 16,
+    ...Fonts.header4,
     marginTop: 20,
     color: "#616E73",
-    fontFamily: "OpenSans-SemiBold",
-    fontWeight: "600",
   },
   subHeading: {
+    ...Fonts.subheading,
     marginRight: 55,
     marginLeft: 8,
     paddingBottom: 10,
-    fontSize: 14,
-    fontWeight: "bold",
-    fontFamily: "OpenSans-SemiBold",
   },
   body: {
+    ...Fonts.body,
     alignItems: "center",
     marginLeft: 8,
     paddingBottom: 13,
     marginRight: 55,
-    fontSize: 12,
   },
   alertContainer: {
     flexDirection: "row",
@@ -67,17 +63,6 @@ const styles = StyleSheet.create({
 
 const AlertsScreen = ({ route, navigation }) => {
   const { alertData, parkData } = useParkData([]);
-
-  const [fontsLoaded] = useFonts({
-    "Stoke-Regular": require("../../assets/fonts/Stoke-Regular.ttf"),
-    "OpenSans-SemiBold": require("../../assets/fonts/OpenSans-SemiBold.ttf"),
-    ButtonFont: require("../../assets/fonts/MPLUS1p-Bold.ttf"),
-    "MPLUS1-Regular": require("../../assets/fonts/MPLUS1-Regular.ttf"),
-  });
-  // Check if fonts are loaded before rendering the component
-  if (!fontsLoaded) {
-    return null; //return a loading indicator here
-  }
 
   const AlertsList = ({ alerts }) => {
     let filteredAlerts = alerts;
