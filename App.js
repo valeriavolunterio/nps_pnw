@@ -74,9 +74,9 @@ export default function App() {
                     tabBarHideOnKeyboard: true, // Hide tab bar when keyboard is displayed
                     tabBarStyle: {
                       backgroundColor: Colors.lightOffWhite,
-                      height: 60,
+                      height: 80,
                       borderTopWidth: 1, // Top border width
-                      paddingBottom: 5, // Bottom padding
+                      paddingBottom: 25, // Bottom padding
                       paddingTop: 5, // Top padding
                     },
                     tabBarActiveTintColor: Colors.darkTeal,
