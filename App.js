@@ -1,10 +1,11 @@
 import "react-native-gesture-handler";
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "./styles/Colors.js";
 
 import { AppLoading } from "expo";
 import { fetchParkData } from "./data_management/npsAPI_connections.js";
@@ -71,17 +72,32 @@ export default function App() {
                 <Tab.Navigator
                   screenOptions={{
                     tabBarHideOnKeyboard: true, // Hide tab bar when keyboard is displayed
+                    tabBarStyle: {
+                      backgroundColor: Colors.lightOffWhite,
+                      height: 60,
+                      borderTopWidth: 1, // Top border width
+                      paddingBottom: 5, // Bottom padding
+                      paddingTop: 5, // Top padding
+                    },
+                  }}
+                  tabBarOptions={{
+                    activeTintColor: Colors.darkTeal,
+                    inactiveTintColor: Colors.baseGray,
+                    labelStyle: {
+                      fontSize: 12, // Font size of tab labels
+                      fontFamily: "OpenSans-Regular", // Font family of tab labels
+                    },
                   }}
                 >
                   <Tab.Screen
                     name="Home"
                     component={HomeStack}
                     options={{
-                      tabBarIcon: ({ color, size }) => (
+                      tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
                           name="home"
                           color={color}
-                          size={size}
+                          size={30}
                         />
                       ),
                       headerShown: false,
@@ -91,11 +107,11 @@ export default function App() {
                     name="Map"
                     component={MapStack}
                     options={{
-                      tabBarIcon: ({ color, size }) => (
+                      tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
                           name="map"
                           color={color}
-                          size={size}
+                          size={28}
                         />
                       ),
                       headerShown: false,
@@ -105,11 +121,11 @@ export default function App() {
                     name="Search"
                     component={SearchStack}
                     options={{
-                      tabBarIcon: ({ color, size }) => (
+                      tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
                           name="magnify"
                           color={color}
-                          size={size}
+                          size={32}
                         />
                       ),
                       headerShown: false,
@@ -119,11 +135,11 @@ export default function App() {
                     name="Passport"
                     component={PassportStack}
                     options={{
-                      tabBarIcon: ({ color, size }) => (
+                      tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
                           name="smart-card"
                           color={color}
-                          size={size}
+                          size={28}
                         />
                       ),
                       headerShown: false,
