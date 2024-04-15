@@ -8,7 +8,6 @@ import {
   ScrollView,
   Dimensions,
   Image,
-  //Fonts,
   Linking,
 } from "react-native";
 import { Fonts } from "../../styles/Fonts";
@@ -145,17 +144,6 @@ const styles = StyleSheet.create({
 });
 
 const SafetyGuideScreen = ({ route, navigation }) => {
-  const [fontsLoaded] = useFonts({
-    "Stoke-Regular": require("../../assets/fonts/Stoke-Regular.ttf"),
-    "OpenSans-SemiBold": require("../../assets/fonts/OpenSans-SemiBold.ttf"),
-    ButtonFont: require("../../assets/fonts/MPLUS1p-Bold.ttf"),
-    "MPLUS1-Regular": require("../../assets/fonts/MPLUS1-Regular.ttf"),
-  });
-  // Check if fonts are loaded before rendering the component
-  if (!fontsLoaded) {
-    return null; //return a loading indicator here
-  }
-
   return (
     <ScrollView>
       <View style={styles.headerContainer}>
