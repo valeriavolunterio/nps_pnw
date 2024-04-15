@@ -79,11 +79,9 @@ export default function App() {
                       paddingBottom: 5, // Bottom padding
                       paddingTop: 5, // Top padding
                     },
-                  }}
-                  tabBarOptions={{
-                    activeTintColor: Colors.darkTeal,
-                    inactiveTintColor: Colors.baseGray,
-                    labelStyle: {
+                    tabBarActiveTintColor: Colors.darkTeal,
+                    tabBarInactiveTintColor: Colors.baseGray,
+                    tabBarLabelStyle: {
                       fontSize: 12, // Font size of tab labels
                       fontFamily: "OpenSans-Regular", // Font family of tab labels
                     },
