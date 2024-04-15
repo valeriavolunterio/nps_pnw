@@ -40,7 +40,13 @@ const ScannerScreen = ({ route, navigation }) => {
   }, [user.id]);
 
   const handleBarCodeScanned = async ({ type, data }) => {
-    if (data === "Olympic" || data === "Crater Lake" || data === "Glacier") {
+    if (
+      data === "Olympic" ||
+      data === "Crater Lake" ||
+      data === "Glacier" ||
+      data === "North Cascades" ||
+      data === "Mount Rainier"
+    ) {
       console.log(
         `Bar code with type ${type} and data ${data} has been scanned!`
       );

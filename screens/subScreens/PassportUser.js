@@ -39,14 +39,14 @@ const badgesData = [
   },
   {
     id: 4,
-    name: "Badge 3",
-    scannedSource: require("../../assets/badges/olym.png"),
+    name: "North Cascades",
+    scannedSource: require("../../assets/badges/noca.png"),
     unscannedSource: require("../../assets/badges/Unscanned.png"),
   },
   {
     id: 5,
-    name: "Badge 4",
-    scannedSource: require("../../assets/badges/crla.png"),
+    name: "Mount Rainier",
+    scannedSource: require("../../assets/badges/mora.png"),
     unscannedSource: require("../../assets/badges/Unscanned.png"),
   },
 ];
