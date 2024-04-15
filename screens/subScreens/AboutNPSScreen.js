@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  Pressable,
-  Text,
-  StyleSheet,
-  View,
-} from "react-native";
+import { SafeAreaView, Text, StyleSheet, View, Pressable, Linking } from "react-native";
+import { Button, ButtonGroup } from "@rneui/themed";
 import { Fonts } from "../../styles/Fonts";
+import { Colors } from "../../styles/Colors";
+import { db } from "../../data_management/firebaseConfig";
+import { collection, doc, deleteDoc } from "firebase/firestore";
+import UserContext from "../../data_management/UserContext";
 
 
 const AboutNPSScreen = () => {
@@ -21,14 +21,18 @@ return (
           The National Park Service manages over 400 individual units covering more than 85 million acres in all 50 
           states, the District of Columbia, and US territories.
 </Text>
-<Text style={styles.header4}>website</Text>
-<Pressable onPress={() => navigation.navigate("https://www.nps.gov/index.htm")}>
+<Text style={styles.header4}>Website</Text>
+<View style={styles.line}></View>
+<Pressable onPress={() => Linking.openURL("https://www.nps.gov/index.htm")}>
 <Text style={styles.link}>Visit Us Here</Text>
 </Pressable>
+<View style={styles.line}></View>
 <Text style={styles.header4}>Contact Us</Text>
-<Pressable onPress={() => navigation.navigate("https://www.nps.gov/aboutus/contactus.htm")}>
+<View style={styles.line}></View>
+<Pressable onPress={() => Linking.openURL("https://www.nps.gov/aboutus/contactus.htm")}>
 <Text style={styles.link}>Contact Information</Text>
 </Pressable>
+<View style={styles.line}></View>
 <Text style={styles.header4}>Our Commitment</Text>
           <Text style={styles.body}>We value feedback from our users and are committed to 
           continuously improving the accessibility of our app.
@@ -45,11 +49,17 @@ return (
 // Define the styles for the components
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: Colors.offWhite,
     flex: 1,
     padding: 20,
+    padding: 15,
+    borderRadius: 5,
+    borderBottomColor: Colors.darkestGray,
+    borderBottomWidth: 0.5,
   },
   section: {
     marginBottom: 20,
+    marginHorizontal: 10,
   },
   heading: {
     ...Fonts.header3,
@@ -66,8 +76,15 @@ const styles = StyleSheet.create({
   },
   link: {
     ...Fonts.link,
-    marginBottom: 10,
-    marginTop: 10,
+    marginBottom: 5,
+    marginTop: 20,
+  },
+  line: {
+    justifyContent: "space-between",
+    padding: 10,
+    borderRadius: 5,
+    borderBottomColor: Colors.darkestGray,
+    borderBottomWidth: 0.5,
   },
 });
 
