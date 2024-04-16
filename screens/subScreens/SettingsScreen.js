@@ -1,11 +1,23 @@
-import React, { useState, useEffect, useContext } from "react";
-import { SafeAreaView, Text, StyleSheet, View, Pressable } from "react-native";
+import React, { useState, useEffect, useContext, version } from "react";
+import {
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  View,
+  Pressable,
+  Dimensions,
+  Linking,
+} from "react-native";
 import { Button, ButtonGroup } from "@rneui/themed";
+import { Ionicons } from "@expo/vector-icons";
 import { Fonts } from "../../styles/Fonts";
 import { Colors } from "../../styles/Colors";
 import { db } from "../../data_management/firebaseConfig";
 import { collection, doc, deleteDoc } from "firebase/firestore";
 import UserContext from "../../data_management/UserContext";
+import { TealButton } from "../../components/TealButton";
+
+const { width } = Dimensions.get("window");
 
 // Create a functional component for the settings screen
 const SettingsScreen = ({ navigation }) => {
@@ -27,31 +39,85 @@ const SettingsScreen = ({ navigation }) => {
     <View style={styles.container}>
       {/* App section */}
       <View style={styles.section}>
-        <Text style={styles.Text}>App</Text>
+        <Text style={styles.text}>App</Text>
+        <View style={styles.horizontalRule} />
         <Pressable onPress={() => navigation.navigate("Accessibility")}>
-          <Text style={styles.link}>Other Accessibility Features</Text>
+          <View style={styles.iconContainer}>
+            <Text style={styles.link}>Other Accessibility Features</Text>
+            <Ionicons
+              name="chevron-forward-outline"
+              style={styles.icon}
+            ></Ionicons>
+          </View>
+          <View style={styles.horizontalRule} />
         </Pressable>
-        <Pressable onPress={() => navigation.navigate("Privacy Policy")}>
-          <Text style={styles.link}>Privacy Policy</Text>
+        <Pressable
+          onPress={() =>
+            Linking.openURL(
+              "https://www.nps.gov/aboutus/application-privacy.htm"
+            )
+          }
+        >
+          <View style={styles.iconContainer}>
+            <Text style={styles.link}>Privacy Policy</Text>
+
+            <Ionicons
+              name="chevron-forward-outline"
+              style={styles.icon}
+            ></Ionicons>
+          </View>
+
+          <View style={styles.horizontalRule} />
         </Pressable>
         <Pressable onPress={() => navigation.navigate("About NPS")}>
-          <Text style={styles.link}>About the NPS</Text>
+          <View style={styles.iconContainer}>
+            <Text style={styles.link}>About the NPS</Text>
+            <Ionicons
+              name="chevron-forward-outline"
+              style={styles.icon}
+            ></Ionicons>
+          </View>
+          <View style={styles.horizontalRule} />
         </Pressable>
         <Pressable onPress={() => navigation.navigate("About App")}>
-          <Text style={styles.link}>About this App</Text>
+          <View style={styles.iconContainer}>
+            <Text style={styles.link}>About this App</Text>
+            <Ionicons
+              name="chevron-forward-outline"
+              style={styles.icon}
+            ></Ionicons>
+          </View>
+          <View style={styles.horizontalRule} />
         </Pressable>
       </View>
+      <Text style={styles.version}>Version: 1.0</Text>
 
       {/* Passport section if user is logged in */}
       {user ? (
         <View style={styles.section}>
-          <Text style={styles.Text}>Passport</Text>
-
-          <Pressable onPress={handleDeletePassport}>
-            <Text style={styles.link}>Delete Passport</Text>
-          </Pressable>
+          <View>
+            <Text style={[styles.text, { marginTop: 50 }]}>Passport</Text>
+          </View>
+          <View style={styles.horizontalRule} />
+          <View style={styles.iconContainer}>
+            <Pressable onPress={handleDeletePassport}>
+              <Text style={[styles.link, { color: "red" }]}>
+                Delete Passport
+              </Text>
+            </Pressable>
+            <Ionicons
+              name="chevron-forward-outline"
+              style={styles.icon}
+            ></Ionicons>
+          </View>
+          <View style={styles.horizontalRule} />
         </View>
       ) : null}
+
+      {/* Onboarding button*/}
+      <View style={styles.onboarding}>
+        <TealButton.onboarding style={{ height: 500 }} />
+      </View>
     </View>
   );
 };
@@ -71,10 +137,37 @@ const styles = StyleSheet.create({
   },
   link: {
     ...Fonts.button,
-    marginBottom: 10,
     marginTop: 10,
-
-    borderBottomColor: Colors.darkestGray,
+  },
+  horizontalRule: {
+    borderBottomColor: Colors.lightGray, // Change color as needed
+    borderBottomWidth: 1,
+    width: width - 40, // Adjust width as needed
+    marginTop: 10,
+  },
+  icon: {
+    fontSize: 20,
+    color: Colors.darkGray,
+    alignSelf: "flex-end",
+  },
+  iconContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 15,
+  },
+  version: {
+    ...Fonts.body,
+    color: Colors.green,
+    alignSelf: "center",
+    fontSize: 16,
+  },
+  text: {
+    ...Fonts.body,
+    color: Colors.darkGray,
+    fontSize: 16,
+  },
+  onboarding: {
+    marginTop: 20,
   },
 });
 
