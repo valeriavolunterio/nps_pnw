@@ -5,32 +5,38 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { Fonts } from "../../styles/Fonts";
 import { Colors } from "../../styles/Colors";
 
+const { width } = Dimensions.get("window");
 
 const AccessibilityScreen = () => {
-return (
+  return (
     <View style={styles.container}>
       {/* App section */}
       <View style={styles.section}>
         <Text style={styles.heading}>Accessibility</Text>
-          <Text style={styles.body}>At the National Park Service (NPS), we are committed to providing an 
-          inclusive and welcoming experience for all visitors, including those with disabilities. To further 
-          this commitment, we have designed our NPS app with accessibility in mind, aiming to make it a valuable 
+        <View style={styles.horizontalRule} />
+        <Text style={styles.body}>
+          At the National Park Service (NPS), we are committed to providing an
+          inclusive and welcoming experience for all visitors, including those
+          with disabilities. To further this commitment, we have designed our
+          NPS app with accessibility in mind, aiming to make it a valuable
           resource for everyone, regardless of their abilities
-</Text>
-<Text style={styles.header4}>Our Commitment</Text>
-          <Text style={styles.body}>We value feedback from our users and are committed to 
-          continuously improving the accessibility of our app.
-           If you encounter any challenges or have suggestions for enhancements related 
-           to accessibility, please don't hesitate to contact us. Your input is crucial in helping us create a more 
-           inclusive experience for all.
-</Text>
+        </Text>
+        <Text style={styles.heading}>Our Commitment</Text>
+        <View style={styles.horizontalRule} />
+        <Text style={styles.body}>
+          We value feedback from our users and are committed to continuously
+          improving the accessibility of our app. If you encounter any
+          challenges or have suggestions for enhancements related to
+          accessibility, please don't hesitate to contact us. Your input is
+          crucial in helping us create a more inclusive experience for all.
+        </Text>
       </View>
-      </View>
-  
+    </View>
   );
 };
 
@@ -46,12 +52,17 @@ const styles = StyleSheet.create({
   },
   heading: {
     ...Fonts.header3,
-    marginBottom: 10,
     marginTop: 10,
   },
   body: {
     ...Fonts.body,
     marginBottom: 10,
+    marginTop: 10,
+  },
+  horizontalRule: {
+    borderBottomColor: Colors.lightGray, // Change color as needed
+    borderBottomWidth: 1,
+    width: width - 40, // Adjust width as needed
     marginTop: 10,
   },
 });
