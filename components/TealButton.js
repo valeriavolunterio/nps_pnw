@@ -92,4 +92,12 @@ export const TealButton = {
       {...props}
     />
   ),
+  onboarding: (props) => (
+    <CustomButtonComponent
+      icon={<SVGIcons.buttons.place size={42} color={Colors.darkTeal} />}
+      title="Onboarding"
+      isSafetyGuide={true}
+      {...props}
+    />
+  ),
 };
