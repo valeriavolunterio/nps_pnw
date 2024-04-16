@@ -110,7 +110,7 @@ const PassportSignUpScreen = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.inputCard}>
-            <Text style={styles.inputTitle}>Log In To Account</Text>
+            <Text style={styles.inputTitle}>Create a New Account</Text>
             <View style={styles.inputContainer}>
               <Ionicons name="person" size={24} color={Colors.darkTeal} />
               <TextInput
