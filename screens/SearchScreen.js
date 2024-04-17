@@ -75,6 +75,7 @@ const SearchScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.offWhite,
   },
   searchContainer: {
     width: "100%",
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderBottomColor: Colors.darkestGray,
     borderBottomWidth: 0.5,
-    backgroundColor: Colors.lightOffWhite,
+    backgroundColor: Colors.offWhite,
   },
 });
 
