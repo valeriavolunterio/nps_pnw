@@ -116,7 +116,15 @@ const SettingsScreen = ({ navigation }) => {
 
       {/* Onboarding button*/}
       <View style={styles.onboarding}>
-        <TealButton.onboarding style={{ height: 500 }} />
+        <TealButton.onboarding
+          style={{ height: 500 }}
+          onPress={() =>
+            Linking
+              .openURL
+              // link to pdf here
+              ()
+          }
+        />
       </View>
     </View>
   );
