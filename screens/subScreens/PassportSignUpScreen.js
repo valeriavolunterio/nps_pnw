@@ -170,7 +170,7 @@ const PassportSignUpScreen = ({ navigation }) => {
             />
             <RoundedButton
               type="confirm"
-              text="CreateAccount"
+              text="Create Account"
               onPress={handleSignUp}
               style={{ marginLeft: 20 }}
             />
