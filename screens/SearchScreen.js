@@ -96,11 +96,11 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     justifyContent: "space-between",
-    marginHorizontal: 10,
-    padding: 15,
+    padding: 20,
     borderRadius: 5,
     borderBottomColor: Colors.darkestGray,
     borderBottomWidth: 0.5,
+    backgroundColor: Colors.lightOffWhite,
   },
 });
 
