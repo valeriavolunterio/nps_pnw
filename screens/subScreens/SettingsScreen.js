@@ -119,10 +119,8 @@ const SettingsScreen = ({ navigation }) => {
         <TealButton.onboarding
           style={{ height: 500 }}
           onPress={() =>
-            Linking
-              .openURL
-              // link to pdf here
-              ()
+            Linking.openURL
+              ("https://drive.google.com/file/d/1BfYLfJX92cg7VcgH9llxmV2i0wBS3j5v/view?usp=sharing")
           }
         />
       </View>
