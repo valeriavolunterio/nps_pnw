@@ -6,6 +6,8 @@ import {
   Text,
   Image,
   FlatList,
+  Pressable,
+  Linking,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Fonts } from "../../styles/Fonts";
@@ -14,12 +16,26 @@ import { useParkData } from "../../data_management/parksDataContext.js";
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 23,
+    //marginLeft: 23,
     flex: 1,
     overflow: "hidden",
+    backgroundColor: Colors.lightOffWhite,
   },
-  label: {
-    marginLeft: 10,
+  card: {
+    backgroundColor: Colors.offWhite,
+    width: 350,
+    alignSelf: "center",
+    borderRadius: 8,
+    padding: 15,
+    marginBottom: 25,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
   },
   horizontalRule: {
     borderBottomColor: "black", // Change color as needed
@@ -31,6 +47,7 @@ const styles = StyleSheet.create({
   heading: {
     ...Fonts.header4,
     marginTop: 20,
+    marginLeft: 23,
     color: "#616E73",
   },
   subHeading: {
@@ -72,6 +89,16 @@ const AlertsScreen = ({ route, navigation }) => {
       );
     }
 
+    const handlePress = (url) => {
+      if (url && url !== "") {
+        // Check if the URL is not empty
+        Linking.openURL(url).catch((error) =>
+          console.error("Error opening link:", error)
+        );
+      } else {
+        console.warn("No link available for this alert.");
+      }
+    };
     const alertsByPark = Array.from(
       new Set(filteredAlerts.map((alert) => alert.parkCode))
     );
@@ -95,25 +122,28 @@ const AlertsScreen = ({ route, navigation }) => {
       },
     };
 
+    console.log(alertData);
     const renderAlertItem = ({ item }) => (
       <View style={styles.container}>
-        <View style={styles.alertContainer}>
-          {/* display icon according to type */}
-          <View style={styles.iconContainer}>
-            <Ionicons
-              name={iconMapping[item.category].name}
-              size={30}
-              color={iconMapping[item.category].color}
-            />
+        <Pressable style={styles.card} onPress={() => handlePress(item.link)}>
+          <View style={styles.alertContainer}>
+            {/* display icon according to type */}
+            <View style={styles.iconContainer}>
+              <Ionicons
+                name={iconMapping[item.category].name}
+                size={30}
+                color={iconMapping[item.category].color}
+              />
+            </View>
+            {/*Text content on the right of icon */}
+            <View style={styles.textContainer}>
+              <Text style={styles.subHeading}>{item.title}</Text>
+              <Text style={styles.body} numberOfLines={3} ellipsizeMode="tail">
+                {item.description}
+              </Text>
+            </View>
           </View>
-          {/*Text content on the right of icon */}
-          <View style={styles.textContainer}>
-            <Text style={styles.subHeading}>{item.title}</Text>
-            <Text style={styles.body} numberOfLines={3} ellipsizeMode="tail">
-              {item.description}
-            </Text>
-          </View>
-        </View>
+        </Pressable>
       </View>
     );
 
